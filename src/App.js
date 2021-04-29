@@ -1,60 +1,33 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 
 import './App.css';
 import { useEffect, useState } from 'react';
 import apiCall from './utils/apiCall';
 import axios from 'axios';
 
+import Login from './pages/Login';
+import Register from './pages/Register';
+
 function App() {
   // const [name, setName] = useState('');
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const url = '/ben';
-  //     const options = {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ test: 'hello' }),
-  //     };
-  //     const data = await apiCall(url, options);
-  //     console.log(data);
-  //     setName(data.title);
-  //   };
-
-  //   getData();
-  // }, []);
-
-  const [registerUsername, setRegisterUsername] = useState('');
-  const [registerPassword, setRegisterPassword] = useState('');
-  const [loginUsername, setLoginUsername] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
-  const [data, setData] = useState(null);
-
-  const register = () => {
+  // get user session on page load
+  useEffect(() => {
     axios({
-      method: 'post',
-      data: {
-        username: registerUsername,
-        password: registerPassword,
-      },
-      withCredentials: true,
-      url: `${process.env.REACT_APP_BASE_URL}/register`,
-    }).then((res) => console.log(res));
-  };
+      method: 'get',
 
-  const login = () => {
-    axios({
-      method: 'post',
-      data: {
-        username: loginUsername,
-        password: loginPassword,
-      },
       withCredentials: true,
-      url: `${process.env.REACT_APP_BASE_URL}/login`,
-    }).then((res) => console.log(res));
-  };
+      url: `${process.env.REACT_APP_BASE_URL}/authenticate`,
+    }).then((res) => {
+      // setCurrentUser(res.data);
+      console.log(res.data);
+      if (res.data.username !== undefined) {
+        setCurrentUser(res.data);
+      }
+    });
+  }, []);
+
+  const [currentUser, setCurrentUser] = useState(null);
 
   const getUser = () => {
     axios({
@@ -63,7 +36,7 @@ function App() {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/user`,
     }).then((res) => {
-      setData(res.data);
+      setCurrentUser(res.data);
       console.log(res.data);
     });
   };
@@ -75,47 +48,38 @@ function App() {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/logout`,
     }).then((res) => {
-      setData(null);
+      setCurrentUser(null);
     });
   };
+
+  // if user is not logged in, only allow access to register and log in pages
+  if (currentUser === null) {
+    return (
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/login" />
+            </Route>
+            <Route path="/login">
+              <Login setCurrentUser={setCurrentUser} />
+            </Route>
+            <Route exact path="/register">
+              <Register />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 
   return (
     <div className="App">
       <div>
-        <h1>Register</h1>
-        <input
-          type="text"
-          placeholder="username"
-          onChange={(e) => setRegisterUsername(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="password"
-          onChange={(e) => setRegisterPassword(e.target.value)}
-        />
-        <button onClick={register}>Submit</button>
-      </div>
-
-      <div>
-        <h1>Login</h1>
-        <input
-          type="text"
-          placeholder="username"
-          onChange={(e) => setLoginUsername(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="password"
-          onChange={(e) => setLoginPassword(e.target.value)}
-        />
-        <button onClick={login}>Submit</button>
-      </div>
-
-      <div>
         <h1>Get user</h1>
 
         <button onClick={getUser}>Submit</button>
-        {data ? <h1>Welcome back {data.username}</h1> : null}
+        {/* {data ? <h1>Welcome back {data.username}</h1> : null} */}
       </div>
 
       <div>
