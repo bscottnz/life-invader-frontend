@@ -12,6 +12,10 @@ html {
   box-sizing: border-box;
 
   font-size: 62.5%; // 1 rem = 10 px (browser default is 16)
+
+  @media (max-width: 500px) {
+    font-size: 56.25%;
+  }
 }
 
 body {

@@ -4,20 +4,35 @@
 
 .welcome-wrapper {
   max-width: 1400px;
-  height: 100vh;
+  min-height: 100vh;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10rem;
+
+  @media (max-width: 1200px) {
+    padding: 5rem;
+  }
+
+  @media (max-width: 500px) {
+    padding: 4rem 2rem;
+  }
 }
 
+// container around all content on welcome page
 .welcome-content {
   // border: 1px solid $color-blue;
   width: 1400px;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 950px) {
+    width: 90%;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 }
 
 .welcome-logo {
@@ -37,6 +52,15 @@
     img {
       width: 100%;
     }
+
+    @media (max-width: 1050px) {
+      width: 25rem;
+    }
+
+    @media (max-width: 1050px) {
+      width: 18rem;
+      margin-bottom: 1rem;
+    }
   }
 
   // img text wrapper
@@ -48,6 +72,16 @@
       width: 100%;
       height: 100%;
     }
+
+    @media (max-width: 1050px) {
+      width: 42rem;
+      height: 10rem;
+    }
+
+    @media (max-width: 500px) {
+      width: 30rem;
+      height: 8rem;
+    }
   }
 }
 
@@ -56,6 +90,18 @@
   display: flex;
   flex-direction: column;
 
+  @media (max-width: 950px) {
+    margin-bottom: 6rem;
+  }
+
+  @media (max-width: 620px) {
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 500px) {
+    margin-bottom: 1rem;
+  }
+
   // logo container
   &-img {
     width: 6.5rem;
@@ -63,6 +109,10 @@
 
     img {
       width: 100%;
+    }
+
+    @media (max-width: 500px) {
+      margin-bottom: 2rem;
     }
   }
 }

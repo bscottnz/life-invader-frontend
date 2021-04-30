@@ -4,5 +4,15 @@ allow 5 comments and then require lifeinvader premium or extra liveinvader coins
 
 have made up adds ?
 
+on register, have a no data collection button that cant be checked, moves around etc. ?
 
+
+
+
+
+// todo
+
+make welcome screen responsive
+
+implement login and sign up pages (or modals)
 
