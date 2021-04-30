@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import Welcome from './pages/Welcome';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Loading from './components/Loading';
@@ -60,14 +61,17 @@ function App() {
       <Router>
         <div>
           <Switch>
-            <Route path="/login">
+            <Route exact path="/welcome">
+              <Welcome />
+            </Route>
+            <Route exact path="/login">
               <Login setCurrentUser={setCurrentUser} />
             </Route>
             <Route exact path="/register">
               <Register />
             </Route>
             <Route path="/">
-              <Redirect to="/login" />
+              <Redirect to="/welcome" />
             </Route>
           </Switch>
         </div>

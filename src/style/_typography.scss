@@ -1,0 +1,23 @@
+// ###############################################
+// Welcome Page
+// ###############################################
+
+.welcome {
+  &-heading {
+    // main heading
+    &-large {
+      font-size: 4.5rem;
+      font-weight: 900;
+
+      margin-bottom: 4rem;
+    }
+    // secondary heading
+    &-small {
+      font-size: 2.8rem;
+      font-weight: 700;
+      // letter-spacing: 1px;
+
+      margin-bottom: 3rem;
+    }
+  }
+}

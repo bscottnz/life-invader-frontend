@@ -1,0 +1,29 @@
+.btn {
+  display: block;
+  padding: 14px;
+  margin-bottom: 2rem;
+  max-width: 38rem;
+
+  border: 1px solid $color-blue;
+  border-radius: 50px;
+  background-color: transparent;
+  color: $color-blue;
+
+  font-weight: 700;
+  font-size: 1.4rem;
+
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &-fill {
+    background-color: $color-blue;
+    color: $color-text;
+  }
+}
