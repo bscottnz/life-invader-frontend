@@ -1,14 +1,13 @@
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
-import './App.css';
-import './nprogress.css';
 import { useEffect, useState } from 'react';
-
-import axios from 'axios';
-import nprogress from 'nprogress';
 
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Loading from './components/Loading';
+
+import axios from 'axios';
+import nprogress from 'nprogress';
+import './style/main.scss';
 
 function App() {
   // const [name, setName] = useState('');

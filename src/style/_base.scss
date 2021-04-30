@@ -1,0 +1,25 @@
+$color-text: #363636;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+
+  font-size: 62.5%; // 1 rem = 10 px (browser default is 16)
+}
+
+body {
+  min-height: 100vh;
+  color: $color-text;
+  font-family: montserrat, sans-serif;
+}
+
+li {
+  list-style: none;
+}
