@@ -18,9 +18,16 @@ const Login = ({ setCurrentUser }) => {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/login`,
     }).then((res) => {
-      console.log(res.data);
-      setCurrentUser(res.data);
-      history.push('/');
+      // if a logged in user is returned, set current user.
+      if (res.data.username !== undefined) {
+        console.log(res.data.username);
+        setCurrentUser(res.data);
+        history.push('/');
+      } else {
+        // no user was returned
+        // need to show wrong username / password message
+        console.log(res.data);
+      }
     });
   };
 
