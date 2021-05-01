@@ -8,20 +8,24 @@ import logoIcon from '../images/logo-large.png';
 import logoText from '../images/textlogo-large.png';
 
 const Register = () => {
-  const [registerUsername, setRegisterUsername] = useState('');
-  const [registerPassword, setRegisterPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
 
-  const register = () => {
-    axios({
-      method: 'post',
-      data: {
-        username: registerUsername,
-        password: registerPassword,
-      },
-      withCredentials: true,
-      url: `${process.env.REACT_APP_BASE_URL}/register`,
-    }).then((res) => console.log(res));
-  };
+  // const register = () => {
+  //   axios({
+  //     method: 'post',
+  //     data: {
+  //       username: registerUsername,
+  //       password: registerPassword,
+  //     },
+  //     withCredentials: true,
+  //     url: `${process.env.REACT_APP_BASE_URL}/register`,
+  //   }).then((res) => console.log(res));
+  // };
 
   return (
     // <div>
@@ -71,6 +75,8 @@ const Register = () => {
               type="text"
               name="firstName"
               placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               required
             />
             <input
@@ -78,6 +84,8 @@ const Register = () => {
               type="text"
               name="lastName"
               placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
               required
             />
             <input
@@ -85,6 +93,8 @@ const Register = () => {
               type="text"
               name="username"
               placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
             <input
@@ -92,13 +102,17 @@ const Register = () => {
               type="email"
               name="email"
               placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <input
               className="input__sign-in"
               type="password"
               name="password"
-              placeholder="First Name"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
             <input
@@ -106,10 +120,12 @@ const Register = () => {
               type="password"
               name="passwordConfirm"
               placeholder="Confirm password"
+              value={passwordConfirm}
+              onChange={(e) => setPasswordConfirm(e.target.value)}
               required
             />
             <button className="btn btn-fill">
-              Create account <BsArrowRight style={{ verticalAlign: 'centre' }} />
+              Create account <BsArrowRight style={{ verticalAlign: 'bottom' }} />
             </button>
           </form>
         </div>

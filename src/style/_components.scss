@@ -55,21 +55,30 @@
 
   &:focus {
     outline: none;
+    background-color: rgba($color-blue, 0.15);
   }
 }
 
 // stop the input bg-colour change on autofill
+// the rgb colour is the same as rgba($color-blue, 0.15), but
+// you cant have transperent colours, so this is the absoloute
+// colour of that transperent colour
 .input__sign-in:-webkit-autofill,
 .input__sign-in:-webkit-autofill:hover,
 .input__sign-in:-webkit-autofill:focus,
 .input__sign-in:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px $color-background inset !important;
+  -webkit-box-shadow: 0 0 0 30px rgb(8, 28, 40) inset !important;
 }
 
 // stop the input text colour change on autofil
 .input__sign-in:-webkit-autofill {
   -webkit-text-fill-color: $color-blue !important;
   caret-color: $color-blue !important;
+
+  &::first-line {
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+  }
 }
 
 // input placeholder colour
