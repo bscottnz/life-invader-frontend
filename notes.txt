@@ -17,7 +17,7 @@ on register, have a no data collection button that cant be checked, moves around
 implement login and sign up pages
 -- client side validation to make sure format is correct / use required for now
 -- server side validation to check unique username / email
--- label appears when typing
+
 
 -- tidy up backend / make rout files etc
 

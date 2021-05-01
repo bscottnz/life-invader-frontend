@@ -126,3 +126,11 @@
   display: flex;
   flex-direction: column;
 }
+
+// error displayed by validation
+.register-error {
+  color: $color-blue;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 2px;
+}

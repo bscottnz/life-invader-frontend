@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 import { BsArrowRight } from 'react-icons/bs';
 
+import checkEmail from '../utils/checkEmail';
+
 import logoIcon from '../images/logo-large.png';
 import logoText from '../images/textlogo-large.png';
 
@@ -14,6 +16,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [validationErrors, setValidationErrors] = useState([]);
 
   // const register = () => {
   //   axios({
@@ -26,6 +29,58 @@ const Register = () => {
   //     url: `${process.env.REACT_APP_BASE_URL}/register`,
   //   }).then((res) => console.log(res));
   // };
+
+  const validateRegisterDetails = (e) => {
+    // validate each field and add any errors to the errors array to be displayed.
+    e.preventDefault();
+
+    const errors = [];
+
+    if (firstName.length === 0) {
+      errors.push('Please enter your first name.');
+    }
+
+    if (lastName.length === 0) {
+      errors.push('Please enter your last name.');
+    }
+
+    if (username.length === 0) {
+      errors.push('Please enter a username.');
+    }
+
+    const isValidEmail = checkEmail(email);
+
+    if (email.length === 0 || !isValidEmail) {
+      errors.push('Please enter a valid email address.');
+    }
+
+    if (password.length === 0) {
+      errors.push('Please enter a password.');
+    }
+
+    if (passwordConfirm.length === 0) {
+      errors.push('Please confirm your password.');
+    }
+
+    if (password !== passwordConfirm && password.length > 0 && passwordConfirm.length > 0) {
+      errors.push('Your passwords do not match.');
+      setPassword('');
+      setPasswordConfirm('');
+    }
+
+    if (errors.length === 0) {
+      // information passes client side validation, send to server
+      setValidationErrors([]);
+      alert('registration info has been validated and is being sent to server');
+      const form = document.getElementsByClassName('welcome-register-form')[0];
+      form.submit();
+    } else {
+      // set and display errors
+      setValidationErrors(errors);
+    }
+
+    console.log(errors);
+  };
 
   return (
     // <div>
@@ -124,9 +179,14 @@ const Register = () => {
               onChange={(e) => setPasswordConfirm(e.target.value)}
               required
             />
-            <button className="btn btn-fill">
+            <button className="btn btn-fill" onClick={validateRegisterDetails}>
               Create account <BsArrowRight style={{ verticalAlign: 'bottom' }} />
             </button>
+            {validationErrors.map((err) => (
+              <p className="register-error" key={err}>
+                {err}
+              </p>
+            ))}
           </form>
         </div>
       </div>
