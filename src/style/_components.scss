@@ -63,11 +63,16 @@
 // the rgb colour is the same as rgba($color-blue, 0.15), but
 // you cant have transperent colours, so this is the absoloute
 // colour of that transperent colour
-.input__sign-in:-webkit-autofill,
+
 .input__sign-in:-webkit-autofill:hover,
 .input__sign-in:-webkit-autofill:focus,
 .input__sign-in:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px rgb(8, 28, 40) inset !important;
+}
+
+// this changes the background colour back to normal after no longer focusing an auto filled field
+.input__sign-in:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px $color-background inset !important;
 }
 
 // stop the input text colour change on autofil
