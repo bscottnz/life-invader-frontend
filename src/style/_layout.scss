@@ -1,5 +1,5 @@
 // ######################################################
-// Welcome Page
+// Welcome Page + shared styles for register & login
 // ######################################################
 
 .welcome-wrapper {
@@ -115,4 +115,14 @@
       margin-bottom: 2rem;
     }
   }
+}
+
+// ######################################################
+// Register page
+// ######################################################
+
+// form to enter user information when creating account
+.welcome-register-form {
+  display: flex;
+  flex-direction: column;
 }

@@ -31,3 +31,61 @@
     color: $color-text;
   }
 }
+
+// input for sign in details
+.input__sign-in {
+  display: block;
+  padding: 14px 22px;
+  margin-bottom: 2rem;
+  max-width: 38rem;
+
+  border: 1px solid $color-blue;
+  border-radius: 50px;
+  background-color: transparent;
+  color: $color-blue;
+
+  font-weight: 700;
+  font-size: 1.4rem;
+
+  cursor: pointer;
+
+  @media (max-width: 500px) {
+    padding: 10px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// stop the input bg-colour change on autofill
+.input__sign-in:-webkit-autofill,
+.input__sign-in:-webkit-autofill:hover,
+.input__sign-in:-webkit-autofill:focus,
+.input__sign-in:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px $color-background inset !important;
+}
+
+// stop the input text colour change on autofil
+.input__sign-in:-webkit-autofill {
+  -webkit-text-fill-color: $color-blue !important;
+  caret-color: $color-blue !important;
+}
+
+// input placeholder colour
+.input__sign-in::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: rgba($color-blue, 0.6);
+}
+.input__sign-in::-moz-placeholder {
+  /* Firefox 19+ */
+  color: rgba($color-blue, 0.6);
+}
+.input__sign-in:-ms-input-placeholder {
+  /* IE 10+ */
+  color: rgba($color-blue, 0.6);
+}
+.input__sign-in:-moz-placeholder {
+  /* Firefox 18- */
+  color: rgba($color-blue, 0.6);
+}

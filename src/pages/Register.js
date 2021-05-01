@@ -2,6 +2,11 @@ import { React, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import { BsArrowRight } from 'react-icons/bs';
+
+import logoIcon from '../images/logo-large.png';
+import logoText from '../images/textlogo-large.png';
+
 const Register = () => {
   const [registerUsername, setRegisterUsername] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
@@ -19,25 +24,95 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Register</h1>
-        <input
-          type="text"
-          placeholder="username"
-          onChange={(e) => setRegisterUsername(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="password"
-          onChange={(e) => setRegisterPassword(e.target.value)}
-        />
-        <button onClick={register}>Submit</button>
-      </div>
-      <div>
-        <p>
-          Already have an account? <Link to="/login">Log in here</Link>
-        </p>
+    // <div>
+    //   <div>
+    //     <h1>Register</h1>
+    //     <input
+    //       type="text"
+    //       placeholder="username"
+    //       onChange={(e) => setRegisterUsername(e.target.value)}
+    //     />
+    //     <input
+    //       type="text"
+    //       placeholder="password"
+    //       onChange={(e) => setRegisterPassword(e.target.value)}
+    //     />
+    //     <button onClick={register}>Submit</button>
+    //   </div>
+    //   <div>
+    //     <p>
+    //       Already have an account? <Link to="/login">Log in here</Link>
+    //     </p>
+    //   </div>
+    // </div>
+    <div className="welcome-wrapper">
+      <div className="welcome-content">
+        <div className="welcome-logo-container">
+          <div className="welcome-logo-img">
+            <img src={logoIcon} alt="life invader logo icon" />
+          </div>
+          <div className="welcome-logo-text">
+            <img src={logoText} alt="life invader logo icon" />
+          </div>
+        </div>
+        <div className="welcome-form">
+          <div className="welcome-form-img">
+            <img src={logoIcon} alt="Life invader logo icon - small" />
+          </div>
+          <h2 className="welcome-heading-large">
+            It's not just an app,
+            <br />
+            It's your life
+          </h2>
+          <h3 className="welcome-heading-small">Register with lifeinvader</h3>
+          <form action="" className="welcome-register-form">
+            <input
+              className="input__sign-in"
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              required
+            />
+            <input
+              className="input__sign-in"
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              required
+            />
+            <input
+              className="input__sign-in"
+              type="text"
+              name="username"
+              placeholder="Username"
+              required
+            />
+            <input
+              className="input__sign-in"
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+            />
+            <input
+              className="input__sign-in"
+              type="password"
+              name="password"
+              placeholder="First Name"
+              required
+            />
+            <input
+              className="input__sign-in"
+              type="password"
+              name="passwordConfirm"
+              placeholder="Confirm password"
+              required
+            />
+            <button className="btn btn-fill">
+              Create account <BsArrowRight style={{ verticalAlign: 'centre' }} />
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
