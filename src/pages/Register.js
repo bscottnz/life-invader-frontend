@@ -82,6 +82,11 @@ const Register = () => {
     console.log(errors);
   };
 
+  const linkStyle = {
+    color: 'rgb(29, 161, 242)',
+    textDecoration: 'none',
+  };
+
   return (
     // <div>
     //   <div>
@@ -99,9 +104,9 @@ const Register = () => {
     //     <button onClick={register}>Submit</button>
     //   </div>
     //   <div>
-    //     <p>
-    //       Already have an account? <Link to="/login">Log in here</Link>
-    //     </p>
+    // <p>
+    //   Already have an account? <Link to="/login">Log in here</Link>
+    // </p>
     //   </div>
     // </div>
     <div className="welcome-wrapper">
@@ -124,6 +129,12 @@ const Register = () => {
             It's your life
           </h2>
           <h3 className="welcome-heading-small">Register with lifeinvader</h3>
+          <p className="welcome-text">
+            Already have an account?{' '}
+            <Link style={linkStyle} to="/login">
+              Log in here
+            </Link>
+          </p>
           <form action="" className="welcome-register-form">
             <input
               className="input__sign-in"

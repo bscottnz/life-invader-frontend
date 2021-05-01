@@ -27,10 +27,10 @@ function App() {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/authenticate`,
     }).then((res) => {
-      console.log(1, res.data);
+      console.log('server data: ', res.data);
       if (res.data.username !== undefined) {
         setCurrentUser(res.data);
-        console.log(res.data);
+        console.log('user data: ', res.data);
       }
       //after user data is fetched, remove loading page
       setisLoading(false);

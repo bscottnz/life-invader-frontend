@@ -27,16 +27,35 @@
       font-weight: 700;
       // letter-spacing: 1px;
 
-      margin-bottom: 3rem;
+      margin-bottom: 1rem;
 
       @media (max-width: 620px) {
         font-size: 2.5rem;
-        // margin-bottom: 2.5rem;
       }
 
       @media (max-width: 400px) {
         font-size: 2rem;
       }
+
+      // extra margin for the heading that doesnt have a link underneath
+      &__main {
+        margin-bottom: 3rem;
+
+        @media (max-width: 620px) {
+          margin-bottom: 2rem;
+        }
+
+        @media (max-width: 400px) {
+          margin-bottom: 1.5rem;
+        }
+      }
     }
   }
+}
+
+// small text on welcome page
+.welcome-text {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 2.5rem;
 }
