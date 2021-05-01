@@ -1,54 +1,54 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 
-import { Link, useHistory } from 'react-router-dom';
+import WelcomeMain from '../components/WelcomePage/WelcomeMain';
+import WelcomeRegister from '../components/WelcomePage/WelcomeRegister';
+import WelcomeLogin from '../components/WelcomePage/WelcomeLogin';
 
 import logoIcon from '../images/logo-large.png';
 import logoText from '../images/textlogo-large.png';
 
-const Welcome = () => {
-  const history = useHistory();
-
-  const redirectSignUp = () => {
-    history.push('/register');
-  };
-
-  const redirectLogIn = () => {
-    history.push('/login');
-  };
-
+const Welcome = ({ setCurrentUser }) => {
   return (
-    <div className="welcome-wrapper">
-      <div className="welcome-content">
-        <div className="welcome-logo-container">
-          <div className="welcome-logo-img">
-            <img src={logoIcon} alt="life invader logo icon" />
+    <Router>
+      <div className="welcome-wrapper">
+        <div className="welcome-content">
+          <div className="welcome-logo-container">
+            <div className="welcome-logo-img">
+              <img src={logoIcon} alt="life invader logo icon" />
+            </div>
+            <div className="welcome-logo-text">
+              <img src={logoText} alt="life invader logo icon" />
+            </div>
           </div>
-          <div className="welcome-logo-text">
-            <img src={logoText} alt="life invader logo icon" />
+          <div className="welcome-form">
+            <div className="welcome-form-img">
+              <img src={logoIcon} alt="Life invader logo icon - small" />
+            </div>
+            <h2 className="welcome-heading-large">
+              It's not just an app,
+              <br />
+              It's your life
+            </h2>
+            <Switch>
+              <Route exact path="/welcome">
+                <WelcomeMain />
+              </Route>
+              <Route exact path="/login">
+                <WelcomeLogin setCurrentUser={setCurrentUser} />
+              </Route>
+              <Route exact path="/register">
+                <WelcomeRegister />
+              </Route>
+              <Route path="/">
+                {/* All other urls will redirect to main welcome page */}
+                <Redirect to="/welcome" />
+              </Route>
+            </Switch>
           </div>
-        </div>
-        <div className="welcome-form">
-          <div className="welcome-form-img">
-            <img src={logoIcon} alt="Life invader logo icon - small" />
-          </div>
-          <h2 className="welcome-heading-large">
-            It's not just an app,
-            <br />
-            It's your life
-          </h2>
-          <h3 className="welcome-heading-small welcome-heading-small__main">
-            Join lifeinvader today
-          </h3>
-          <button className="btn btn-fill" onClick={redirectSignUp}>
-            Sign up
-          </button>
-          <button className="btn" onClick={redirectLogIn}>
-            Log in
-          </button>
-          <button className="btn">Log in as guest</button>
         </div>
       </div>
-    </div>
+    </Router>
   );
 };
 

@@ -2,8 +2,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-ro
 import { useEffect, useState } from 'react';
 
 import Welcome from './pages/Welcome';
-import Login from './pages/Login';
-import Register from './pages/Register';
+
 import Loading from './components/Loading';
 
 import axios from 'axios';
@@ -55,28 +54,9 @@ function App() {
     return <Loading />;
   }
 
-  // if user is not logged in, only allow access to register and log in pages
+  // if user is not logged in, only allow access to welcome, register and log in pages
   if (currentUser === null) {
-    return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path="/welcome">
-              <Welcome />
-            </Route>
-            <Route exact path="/login">
-              <Login setCurrentUser={setCurrentUser} />
-            </Route>
-            <Route exact path="/register">
-              <Register />
-            </Route>
-            <Route path="/">
-              <Redirect to="/welcome" />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    );
+    return <Welcome />;
   }
 
   // user is logged in so render main app
