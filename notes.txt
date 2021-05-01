@@ -17,7 +17,19 @@ on register, have a no data collection button that cant be checked, moves around
 implement login and sign up pages
 -- client side validation to make sure format is correct / use required for now
 -- server side validation to check unique username / email
-
+-- refactor welcome page to use login and sign up section as components 
 
 -- tidy up backend / make rout files etc
+
+
+
+
+
+
+// features
+
+- fully mobile responsive
+- client and server side validation
+- seperate rest api
+
 
