@@ -56,14 +56,16 @@ function App() {
 
   // if user is not logged in, only allow access to welcome, register and log in pages
   if (currentUser === null) {
-    return <Welcome />;
+    return <Welcome setCurrentUser={setCurrentUser} />;
   }
 
   // user is logged in so render main app
   return (
     <div className="App">
       <div>
-        <h1>Log Out</h1>
+        <h1>{currentUser.username}</h1>
+        <br />
+        <h2>Log Out</h2>
 
         <button onClick={logOut}>Submit</button>
       </div>

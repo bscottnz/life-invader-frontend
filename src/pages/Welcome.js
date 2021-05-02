@@ -38,7 +38,7 @@ const Welcome = ({ setCurrentUser }) => {
                 <WelcomeLogin setCurrentUser={setCurrentUser} />
               </Route>
               <Route exact path="/register">
-                <WelcomeRegister />
+                <WelcomeRegister setCurrentUser={setCurrentUser} />
               </Route>
               <Route path="/">
                 {/* All other urls will redirect to main welcome page */}

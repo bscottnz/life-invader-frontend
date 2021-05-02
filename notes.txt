@@ -6,6 +6,8 @@ have made up adds ?
 
 on register, have a no data collection button that cant be checked, moves around etc. ?
 
+toast message on successfull registration ?
+
 
 
 
@@ -13,13 +15,10 @@ on register, have a no data collection button that cant be checked, moves around
 // todo
 
 
+-- server side validation to check unique username / email - currently checks username but not email
 
-implement login and sign up pages
--- client side validation to make sure format is correct / use required for now
--- server side validation to check unique username / email
--- refactor welcome page to use login and sign up section as components 
 
--- tidy up backend / make rout files etc
+
 
 
 

@@ -9,30 +9,35 @@ const WelcomeLogin = ({ setCurrentUser }) => {
   const [password, setPassword] = useState('');
   const [validationErrors, setValidationErrors] = useState([]);
 
-  // const history = useHistory();
+  const history = useHistory();
 
-  // const login = () => {
-  //   axios({
-  //     method: 'post',
-  //     data: {
-  //       username: loginUsername,
-  //       password: loginPassword,
-  //     },
-  //     withCredentials: true,
-  //     url: `${process.env.REACT_APP_BASE_URL}/login`,
-  //   }).then((res) => {
-  //     // if a logged in user is returned, set current user.
-  //     if (res.data.username !== undefined) {
-  //       console.log(res.data.username);
-  //       setCurrentUser(res.data);
-  //       history.push('/');
-  //     } else {
-  //       // no user was returned
-  //       // need to show wrong username / password message
-  //       console.log(res.data);
-  //     }
-  //   });
-  // };
+  const login = () => {
+    axios({
+      method: 'post',
+      data: {
+        username,
+        password,
+      },
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/login`,
+    }).then((res) => {
+      // if a logged in user is returned, set current user.
+      // redirect to main app
+      if (res.data.username !== undefined) {
+        console.log(res.data);
+        setCurrentUser(res.data);
+        // setValidationErrors([]);
+        history.push('/');
+      } else {
+        // no user was returned
+        // display wrong username and password message
+        // reset password
+
+        setValidationErrors([res.data]);
+        setPassword('');
+      }
+    });
+  };
 
   const validateLoginDetails = (e) => {
     // validate each field and add any errors to the errors array to be displayed.
@@ -50,16 +55,13 @@ const WelcomeLogin = ({ setCurrentUser }) => {
 
     if (errors.length === 0) {
       // information passes client side validation, send to server
-      setValidationErrors([]);
+
       alert('log in info has been validated and is being sent to server');
-      const form = document.getElementsByClassName('welcome-register-form')[0];
-      form.submit();
+      login();
     } else {
       // set and display errors
       setValidationErrors(errors);
     }
-
-    console.log(errors);
   };
 
   const linkStyle = {
