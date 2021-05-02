@@ -21,7 +21,10 @@ const WelcomeRegister = ({ setCurrentUser }) => {
     axios({
       method: 'post',
       data: {
+        firstName,
+        lastName,
         username,
+        email,
         password,
       },
       withCredentials: true,
@@ -37,7 +40,7 @@ const WelcomeRegister = ({ setCurrentUser }) => {
 
         // email or username is already in use. display appropriate error
       } else {
-        console.log(res.data);
+        setValidationErrors([res.data]);
       }
     });
   };
@@ -82,7 +85,7 @@ const WelcomeRegister = ({ setCurrentUser }) => {
 
     if (errors.length === 0) {
       // information passes client side validation, send to server
-      setValidationErrors([]);
+
       alert('registration info has been validated and is being sent to server');
       register();
     } else {

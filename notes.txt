@@ -17,6 +17,14 @@ toast message on successfull registration ?
 
 -- server side validation to check unique username / email - currently checks username but not email
 
+-- validate username. alphanumerica and _ -
+
+--trim input feilds
+
+-- figure out public images
+
+-- sign in with email or uisernam
+
 
 
 
