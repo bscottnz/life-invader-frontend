@@ -83,7 +83,7 @@ const WelcomeLogin = ({ setCurrentUser }) => {
           className="input__sign-in"
           type="text"
           name="username"
-          placeholder="Username"
+          placeholder="Username or email"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
