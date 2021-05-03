@@ -1,3 +1,5 @@
+// ideas
+
 Use modals for register and log in ?
 
 allow 5 comments and then require lifeinvader premium or extra liveinvader coins ?
@@ -11,19 +13,20 @@ toast message on successfull registration ?
 
 
 
+// just finnished
+
+
+
+
+
 
 // todo
 
-
--- server side validation to check unique username / email - currently checks username but not email
-
--- validate username. alphanumerica and _ -
-
---trim input feilds
+-- main layout grid setup
 
 -- figure out public images
 
--- sign in with email or uisernam
+
 
 
 

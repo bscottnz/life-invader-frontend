@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
 
 import checkEmail from '../../utils/checkEmail';
+import checkUsername from '../../utils/checkUsername';
 
 const WelcomeRegister = ({ setCurrentUser }) => {
   const [firstName, setFirstName] = useState('');
@@ -51,16 +52,21 @@ const WelcomeRegister = ({ setCurrentUser }) => {
 
     const errors = [];
 
-    if (firstName.length === 0) {
+    if (firstName.trim().length === 0) {
       errors.push('Please enter your first name.');
     }
 
-    if (lastName.length === 0) {
+    if (lastName.trim().length === 0) {
       errors.push('Please enter your last name.');
     }
 
+    const isValidUsername = checkUsername(username);
+
     if (username.length === 0) {
       errors.push('Please enter a username.');
+    } else if (!isValidUsername) {
+      errors.push('Username must start with a letter.');
+      errors.push('Username may only contain only contain letters and numbers.');
     }
 
     const isValidEmail = checkEmail(email);
