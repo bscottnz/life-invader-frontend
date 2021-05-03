@@ -1,0 +1,41 @@
+.navbar {
+  width: 100%;
+  height: 60px;
+  background-color: steelblue;
+  position: fixed;
+}
+
+.main-wrapper {
+  padding: 50px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 275px auto 350px;
+  margin: 0 auto;
+  margin-top: 60px;
+  max-width: 1200px;
+}
+
+.layout__right-sidebar {
+  position: fixed;
+  width: 350px;
+  height: 400px;
+  background-color: royalblue;
+}
+.layout__left-sidebar {
+  height: 400px;
+  // background-color: royalblue;
+
+  &-content {
+    background-color: royalblue;
+    position: fixed;
+    width: 275px;
+    height: 400px;
+  }
+}
+
+.layout__main {
+  height: 1000px;
+  background-color: rosybrown;
+}

@@ -62,13 +62,25 @@ function App() {
   // user is logged in so render main app
   return (
     <div className="App">
-      <div>
+      {/* <div>
         <h1>{currentUser.username}</h1>
         <br />
         <h2>Log Out</h2>
 
         <button onClick={logOut}>Submit</button>
-      </div>
+      </div> */}
+      {/* <nav className="navbar">Navbar</nav> */}
+      {/* <div className="main-wrapper"> */}
+      <main className="layout">
+        <nav className="layout__left-sidebar">
+          <div className="layout__left-sidebar-content">sidebar</div>
+        </nav>
+        <section className="layout__main">Main Content</section>
+        <section className="layout__right-sidebar-container">
+          <div className="layout__right-sidebar">right sidebar</div>
+        </section>
+      </main>
+      {/* </div> */}
     </div>
   );
 }
