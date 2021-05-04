@@ -8,10 +8,13 @@ $nav-height: 60px;
 $left-sidebar-width: 275px;
 $left-sidebar-width-small: 100px;
 
+$main-content-width: 600px;
+
 $right-sidebar-width: 325px;
 $right-sidebar-width-sml: 250px;
 
 // top nav bar
+// is hidden until mobile view
 .navbar {
   width: 100%;
   height: $nav-height;
@@ -21,7 +24,7 @@ $right-sidebar-width-sml: 250px;
   display: none;
 
   // show nav at top
-  @media (max-width: 740px) {
+  @media (max-width: 780px) {
     display: block;
   }
 }
@@ -37,20 +40,24 @@ $right-sidebar-width-sml: 250px;
   @media (max-width: 850px) {
     padding: $padding-sml;
   }
+
+  @media (max-width: 500px) {
+    padding: 10px;
+  }
 }
 
 // grid encompassing the 3 columns
 .layout {
   display: grid;
-  grid-template-columns: $left-sidebar-width auto $right-sidebar-width;
+  grid-template-columns: $left-sidebar-width $main-content-width $right-sidebar-width;
   gap: $padding-lrg;
   margin: 0 auto;
 
-  max-width: 1400px;
+  width: fit-content;
 
   // reduce size of first column
-  @media (max-width: 1350px) {
-    grid-template-columns: $left-sidebar-width-small auto $right-sidebar-width;
+  @media (max-width: 1430px) {
+    grid-template-columns: $left-sidebar-width-small $main-content-width $right-sidebar-width;
   }
 
   // reduce grid gap
@@ -59,18 +66,13 @@ $right-sidebar-width-sml: 250px;
   }
 
   // reduce size of third column
-  @media (max-width: 1150px) {
-    grid-template-columns: $left-sidebar-width-small auto $right-sidebar-width-sml;
-  }
-
-  // reduce third column
-  @media (max-width: 1050px) {
-    grid-template-columns: $left-sidebar-width-small auto 100px;
+  @media (max-width: 1200px) {
+    grid-template-columns: $left-sidebar-width-small $main-content-width $right-sidebar-width-sml;
   }
 
   // remove third column
-  @media (max-width: 960px) {
-    grid-template-columns: $left-sidebar-width-small auto;
+  @media (max-width: 1120px) {
+    grid-template-columns: $left-sidebar-width-small $main-content-width;
   }
 
   // reduce grid gap
@@ -79,13 +81,19 @@ $right-sidebar-width-sml: 250px;
   }
 
   // remove first column
-  @media (max-width: 740px) {
-    grid-template-columns: auto;
+  @media (max-width: 780px) {
+    grid-template-columns: $main-content-width;
   }
 
   // make room for new top nav
-  @media (max-width: 740px) {
+  @media (max-width: 780px) {
     margin-top: $nav-height;
+  }
+
+  // make width 100% of whatever current screen width
+  @media (max-width: 660px) {
+    width: 100%;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -99,12 +107,12 @@ $right-sidebar-width-sml: 250px;
   padding: $padding-sml;
 
   // reduce size of first column
-  @media (max-width: 1150px) {
+  @media (max-width: 1200px) {
     width: $right-sidebar-width-sml;
   }
 
   // remove third column
-  @media (max-width: 1050px) {
+  @media (max-width: 1120px) {
     display: none;
   }
 }
@@ -115,7 +123,7 @@ $right-sidebar-width-sml: 250px;
     height: 400px;
 
     // remove first column
-    @media (max-width: 740px) {
+    @media (max-width: 780px) {
       display: none;
     }
   }
@@ -129,12 +137,12 @@ $right-sidebar-width-sml: 250px;
     padding: $padding-sml;
 
     // reduce size of first column
-    @media (max-width: 1350px) {
+    @media (max-width: 1430px) {
       width: $left-sidebar-width-small;
     }
 
     // remove first column
-    @media (max-width: 740px) {
+    @media (max-width: 780px) {
       display: none;
     }
   }
