@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react';
 import Welcome from './pages/Welcome';
 
 import Loading from './components/Loading';
+import TopNav from './components/MainPage/TopNav/TopNav';
+import LeftNav from './components/MainPage/LeftNav/LeftNav';
+import MainContent from './components/MainPage/MainContent/MainContent';
+import RightSidebar from './components/MainPage/RightSidebar/RightSidebar';
 
 import axios from 'axios';
 import nprogress from 'nprogress';
@@ -15,28 +19,28 @@ function App() {
   const [isLoading, setisLoading] = useState(true);
 
   // get user session on page load
-  // useEffect(() => {
-  //   // while fetiching user data, display loading page
-  //   setisLoading(true);
-  //   // loading bar start
-  //   nprogress.start();
-  //   axios({
-  //     method: 'get',
+  useEffect(() => {
+    // while fetiching user data, display loading page
+    setisLoading(true);
+    // loading bar start
+    nprogress.start();
+    axios({
+      method: 'get',
 
-  //     withCredentials: true,
-  //     url: `${process.env.REACT_APP_BASE_URL}/authenticate`,
-  //   }).then((res) => {
-  //     console.log('server data: ', res.data);
-  //     if (res.data.username !== undefined) {
-  //       setCurrentUser(res.data);
-  //       console.log('user data: ', res.data);
-  //     }
-  //     //after user data is fetched, remove loading page
-  //     setisLoading(false);
-  //     //loading bar end
-  //     nprogress.done();
-  //   });
-  // }, []);
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/authenticate`,
+    }).then((res) => {
+      console.log('server data: ', res.data);
+      if (res.data.username !== undefined) {
+        setCurrentUser(res.data);
+        console.log('user data: ', res.data);
+      }
+      //after user data is fetched, remove loading page
+      setisLoading(false);
+      //loading bar end
+      nprogress.done();
+    });
+  }, []);
 
   // destroy user session
   const logOut = () => {
@@ -49,15 +53,15 @@ function App() {
     });
   };
 
-  // // display loading screen while user data is being fetched
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
+  // display loading screen while user data is being fetched
+  if (isLoading) {
+    return <Loading />;
+  }
 
-  // // if user is not logged in, only allow access to welcome, register and log in pages
-  // if (currentUser === null) {
-  //   return <Welcome setCurrentUser={setCurrentUser} />;
-  // }
+  // if user is not logged in, only allow access to welcome, register and log in pages
+  if (currentUser === null) {
+    return <Welcome setCurrentUser={setCurrentUser} />;
+  }
 
   // user is logged in so render main app
   return (
@@ -69,16 +73,12 @@ function App() {
 
         <button onClick={logOut}>Submit</button>
       </div> */}
-      <nav className="navbar">Navbar</nav>
+      <TopNav />
       <div className="main-wrapper">
         <main className="layout">
-          <nav className="layout__left-container">
-            <div className="layout__left-content">sidebar</div>
-          </nav>
-          <section className="layout__main">Main Content</section>
-          <section className="layout__right-sidebar-container">
-            <div className="layout__right-sidebar">right sidebar</div>
-          </section>
+          <LeftNav />
+          <MainContent />
+          <RightSidebar />
         </main>
       </div>
     </div>
