@@ -1,0 +1,38 @@
+// mobile top navbar
+.navbar-container {
+  max-width: 600px;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  margin: 0 auto;
+}
+
+.navbar {
+  padding-left: 35px;
+  padding-right: 35px;
+  z-index: 2;
+  @media (max-width: 660px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @media (max-width: 500px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  // dropdown nav for mobile
+  &-dropdown {
+    transition: all 0.2s;
+    z-index: 1;
+  }
+}
+
+.dropdown-active {
+  transform: translateY(60px);
+}

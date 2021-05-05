@@ -6,12 +6,8 @@ import { BiBell } from 'react-icons/bi';
 import { FiMail } from 'react-icons/fi';
 import { BiSearch } from 'react-icons/bi';
 import { FiLogOut } from 'react-icons/fi';
+import { BiShoppingBag } from 'react-icons/bi';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
-
-const toggleDropdown = () => {
-  const dropDownMenu = document.querySelector('.navbar-dropdown');
-  dropDownMenu.classList.toggle('dropdown-active');
-};
 
 const TopNav = () => {
   const iconStyles = {
@@ -19,19 +15,19 @@ const TopNav = () => {
     cursor: 'pointer',
   };
   return (
-    <nav className="navbar">
+    <nav className="navbar navbar-dropdown">
       <div className="navbar-container">
         <div className="top-nav-group">
-          <BiHomeAlt style={iconStyles} />
+          <BiUser style={iconStyles} />
         </div>
         <div className="top-nav-group">
-          <BiBell style={iconStyles} />
+          <BiSearch style={iconStyles} />
         </div>
         <div className="top-nav-group">
-          <FiMail style={iconStyles} />
+          <BiShoppingBag style={iconStyles} />
         </div>
         <div className="top-nav-group">
-          <HiOutlineMenuAlt3 style={iconStyles} onClick={toggleDropdown} />
+          <FiLogOut style={iconStyles} />
         </div>
       </div>
     </nav>

@@ -5,6 +5,7 @@ import Welcome from './pages/Welcome';
 
 import Loading from './components/Loading';
 import TopNav from './components/MainPage/TopNav/TopNav';
+import TopNavDropdown from './components/MainPage/TopNav/TopNavDropdown';
 import LeftNav from './components/MainPage/LeftNav/LeftNav';
 import MainContent from './components/MainPage/MainContent/MainContent';
 import RightSidebar from './components/MainPage/RightSidebar/RightSidebar';
@@ -74,6 +75,7 @@ function App() {
         <button onClick={logOut}>Submit</button>
       </div> */}
       <TopNav />
+      <TopNavDropdown />
       <div className="main-wrapper">
         <main className="layout">
           <LeftNav />

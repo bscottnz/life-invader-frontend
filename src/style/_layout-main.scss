@@ -21,11 +21,11 @@ $right-sidebar-width-sml: 250px;
   background-color: $color-background-medium;
   position: fixed;
   top: 0;
-  display: none;
+  display: none !important;
 
   // show nav at top
   @media (max-width: 780px) {
-    display: block;
+    display: flex !important;
   }
 }
 

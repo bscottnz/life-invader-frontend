@@ -6,6 +6,7 @@ import { FiMail } from 'react-icons/fi';
 import { BiSearch } from 'react-icons/bi';
 import { FiLogOut } from 'react-icons/fi';
 import { BiPlus } from 'react-icons/bi';
+import { BiShoppingBag } from 'react-icons/bi';
 
 import logoIcon from '../../../images/logo-small.png';
 
@@ -40,6 +41,10 @@ const LeftNav = () => {
         <div className="left-nav-group">
           <BiSearch style={iconStyle} />
           <h2 className="left-nav-heading">Search</h2>
+        </div>
+        <div className="left-nav-group">
+          <BiShoppingBag style={iconStyle} />
+          <h2 className="left-nav-heading">Store</h2>
         </div>
         <div className="left-nav-group">
           <FiLogOut style={iconStyle} />
