@@ -1,0 +1,56 @@
+// container around nav icon and heading
+.left-nav-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-blue;
+  }
+}
+
+.left-nav-logo-container {
+  width: 28px;
+  margin-bottom: 28px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.left-nav-heading {
+  font-size: 20px;
+  margin-left: 20px;
+
+  // remove heading when column size reduces
+  @media (max-width: 1430px) {
+    display: none;
+  }
+}
+
+.new-post {
+  width: 100%;
+  display: block;
+
+  // remove this button and show the mobile button defined in the ruleset below
+  @media (max-width: 1430px) {
+    display: none !important;
+  }
+}
+
+// border / background around mobile new post icon
+.new-post-btn-wrapper {
+  border-radius: 50%;
+  background-color: $color-blue;
+  width: 50px;
+  height: 50px;
+
+  align-items: center;
+  justify-content: center;
+  display: none;
+
+  @media (max-width: 1430px) {
+    display: flex;
+  }
+}

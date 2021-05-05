@@ -120,7 +120,7 @@ $right-sidebar-width-sml: 250px;
 // sidebar. navigation
 .layout__left {
   &-container {
-    height: 400px;
+    // height: 400px;
 
     // remove first column
     @media (max-width: 780px) {
@@ -132,13 +132,16 @@ $right-sidebar-width-sml: 250px;
     background-color: $color-background-medium;
     position: fixed;
     width: $left-sidebar-width;
-    height: 400px;
+    // height: 400px;
     border-radius: 15px;
     padding: $padding-sml;
+    display: flex;
+    flex-direction: column;
 
     // reduce size of first column
     @media (max-width: 1430px) {
       width: $left-sidebar-width-small;
+      align-items: center;
     }
 
     // remove first column

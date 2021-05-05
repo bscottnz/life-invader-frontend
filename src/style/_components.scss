@@ -30,6 +30,10 @@
     background-color: $color-blue;
     color: $color-text;
   }
+  &-block {
+    display: block;
+    width: 100%;
+  }
 }
 
 // input for sign in details
