@@ -13,6 +13,7 @@
 .left-nav-logo-container {
   width: 28px;
   margin-bottom: 28px;
+  cursor: pointer;
 
   img {
     width: 100%;
@@ -49,6 +50,8 @@
   align-items: center;
   justify-content: center;
   display: none;
+
+  cursor: pointer;
 
   @media (max-width: 1430px) {
     display: flex;
