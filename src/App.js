@@ -9,6 +9,7 @@ import TopNavDropdown from './components/MainPage/TopNav/TopNavDropdown';
 import LeftNav from './components/MainPage/LeftNav/LeftNav';
 import MainContent from './components/MainPage/MainContent/MainContent';
 import RightSidebar from './components/MainPage/RightSidebar/RightSidebar';
+import { BiPlus } from 'react-icons/bi';
 
 import axios from 'axios';
 import nprogress from 'nprogress';
@@ -67,21 +68,17 @@ function App() {
   // user is logged in so render main app
   return (
     <div className="App">
-      {/* <div>
-        <h1>{currentUser.username}</h1>
-        <br />
-        <h2>Log Out</h2>
-
-        <button onClick={logOut}>Submit</button>
-      </div> */}
       <TopNav />
-      <TopNavDropdown />
+      <TopNavDropdown logOut={logOut} />
       <div className="main-wrapper">
         <main className="layout">
-          <LeftNav />
+          <LeftNav logOut={logOut} />
           <MainContent />
           <RightSidebar />
         </main>
+      </div>
+      <div className="new-post-btn-wrapper mobile-post-btn">
+        <BiPlus style={{ fontSize: '32px' }} />
       </div>
     </div>
   );

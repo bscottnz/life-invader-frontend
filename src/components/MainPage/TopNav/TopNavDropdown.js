@@ -9,7 +9,7 @@ import { FiLogOut } from 'react-icons/fi';
 import { BiShoppingBag } from 'react-icons/bi';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 
-const TopNav = () => {
+const TopNav = ({ logOut }) => {
   const iconStyles = {
     fontSize: '28px',
     cursor: 'pointer',
@@ -26,7 +26,7 @@ const TopNav = () => {
         <div className="top-nav-group">
           <BiShoppingBag style={iconStyles} />
         </div>
-        <div className="top-nav-group">
+        <div className="top-nav-group" onClick={logOut}>
           <FiLogOut style={iconStyles} />
         </div>
       </div>

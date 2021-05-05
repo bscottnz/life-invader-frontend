@@ -10,7 +10,7 @@ import { BiShoppingBag } from 'react-icons/bi';
 
 import logoIcon from '../../../images/logo-small.png';
 
-const LeftNav = () => {
+const LeftNav = ({ logOut }) => {
   const iconStyle = {
     fontSize: '28px',
   };
@@ -46,7 +46,7 @@ const LeftNav = () => {
           <BiShoppingBag style={iconStyle} />
           <h2 className="left-nav-heading">Store</h2>
         </div>
-        <div className="left-nav-group">
+        <div className="left-nav-group" onClick={logOut}>
           <FiLogOut style={iconStyle} />
           <h2 className="left-nav-heading">Logout</h2>
         </div>
