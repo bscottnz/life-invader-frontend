@@ -22,7 +22,7 @@ toast message on successfull registration ?
 
 // todo
 
--- main layout grid setup
+-- page title at top of main content area
 
 -- figure out public images
 

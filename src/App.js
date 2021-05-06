@@ -73,7 +73,7 @@ function App() {
       <div className="main-wrapper">
         <main className="layout">
           <LeftNav logOut={logOut} />
-          <MainContent />
+          <MainContent currentUser={currentUser} />
           <RightSidebar />
         </main>
       </div>
