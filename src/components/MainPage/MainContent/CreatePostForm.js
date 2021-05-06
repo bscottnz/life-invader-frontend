@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 
-const CreatePostForm = ({ currentUser }) => {
+import axios from 'axios';
+
+const CreatePostForm = ({ currentUser, setPosts, posts }) => {
   const [postText, setPostText] = useState('');
 
   // resize post form text area to avoid text scroll
@@ -9,6 +11,22 @@ const CreatePostForm = ({ currentUser }) => {
     const textarea = document.querySelector('#post-textarea');
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
+  };
+
+  const submitPost = () => {
+    axios({
+      method: 'post',
+      data: {
+        content: postText,
+      },
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/api/posts`,
+    }).then((res) => {
+      console.log(res.data);
+      // prepend new post to post state array
+      setPosts((posts) => [res.data, ...posts]);
+      setPostText('');
+    });
   };
 
   return (
@@ -29,7 +47,12 @@ const CreatePostForm = ({ currentUser }) => {
           value={postText}
         ></textarea>
         <div className="buttons-container">
-          <button id="submit-post-button" disabled={true}>
+          {/* only allow pressing of button if there is actually text in the textarea */}
+          <button
+            id="submit-post-button"
+            disabled={postText.trim().length ? false : true}
+            onClick={submitPost}
+          >
             Invade
           </button>
         </div>
