@@ -60,8 +60,18 @@
   margin-bottom: 2.5rem;
 }
 
+// home page ###########################################
+
 // heading on middle column
 .main-content-heading {
   font-size: 20px;
   margin-bottom: 20px;
+}
+
+.number-dislikes {
+  font-size: 16px;
+  margin-left: 3px;
+  &-active {
+    color: rgb(226, 34, 94);
+  }
 }

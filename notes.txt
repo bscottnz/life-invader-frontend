@@ -28,6 +28,8 @@ workin on single post componenet
 
 -- new lines are not preserved in submited post
 
+-- might need to update current user after disliking something etc
+
 
 
 

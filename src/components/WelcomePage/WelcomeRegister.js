@@ -92,7 +92,7 @@ const WelcomeRegister = ({ setCurrentUser }) => {
     if (errors.length === 0) {
       // information passes client side validation, send to server
 
-      alert('registration info has been validated and is being sent to server');
+      // alert('registration info has been validated and is being sent to server');
       register();
     } else {
       // set and display errors

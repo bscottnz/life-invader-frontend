@@ -31,7 +31,9 @@ const Home = ({ currentUser }) => {
     getPosts();
   }, []);
 
-  const postItems = posts.map((post) => <Post postData={post} key={post._id} />);
+  const postItems = posts.map((post) => (
+    <Post postData={post} currentUser={currentUser} key={post._id} />
+  ));
   return (
     <div>
       <h1 className="main-content-heading">Home</h1>

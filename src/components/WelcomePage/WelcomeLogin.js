@@ -56,7 +56,7 @@ const WelcomeLogin = ({ setCurrentUser }) => {
     if (errors.length === 0) {
       // information passes client side validation, send to server
 
-      alert('log in info has been validated and is being sent to server');
+      // alert('log in info has been validated and is being sent to server');
       login();
     } else {
       // set and display errors

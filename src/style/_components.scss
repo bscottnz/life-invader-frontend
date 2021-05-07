@@ -147,6 +147,30 @@
   }
 }
 
+// text area
+
+textarea::-webkit-input-placeholder {
+  color: $color-text-grey;
+}
+
+textarea:-moz-placeholder {
+  /* Firefox 18- */
+  color: $color-text-grey;
+}
+
+textarea::-moz-placeholder {
+  /* Firefox 19+ */
+  color: $color-text-grey;
+}
+
+textarea:-ms-input-placeholder {
+  color: $color-text-grey;
+}
+
+textarea::placeholder {
+  color: $color-text-grey;
+}
+
 #submit-post-button {
   background-color: $color-blue;
   color: inherit;
