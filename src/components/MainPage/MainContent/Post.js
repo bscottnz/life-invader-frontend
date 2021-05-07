@@ -10,8 +10,13 @@ import relativeTime from '../../../utils/relativeTime';
 import axios from 'axios';
 
 const Post = ({ postData, currentUser }) => {
+  // total number of dislikes for the post
   const [numDislikes, setNumDislikes] = useState(0);
+  // if the current user has disliked the post
   const [isDisliked, setIsDisliked] = useState(false);
+
+  const [numShares, setNumShares] = useState(0);
+  const [isShared, setIsShared] = useState(false);
 
   useEffect(() => {
     // set num dislikes
@@ -19,20 +24,34 @@ const Post = ({ postData, currentUser }) => {
 
     // set if the current user has disliked the post
     setIsDisliked(postData.dislikes.includes(currentUser._id));
+
+    setNumShares(postData.sharedBy.length);
+    setIsShared(postData.sharedBy.includes(currentUser._id));
   }, []);
 
   const dislikePost = () => {
     axios({
       method: 'put',
-      data: {
-        content: 'postText',
-      },
+
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${postData._id}/dislike`,
     }).then((res) => {
       console.log(res.data);
       setNumDislikes(res.data.dislikes.length);
       setIsDisliked((isDisliked) => !isDisliked);
+    });
+  };
+
+  const sharePost = () => {
+    axios({
+      method: 'post',
+
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/api/posts/${postData._id}/share`,
+    }).then((res) => {
+      console.log(res.data);
+      setNumShares(res.data.sharedBy.length);
+      setIsShared((isShared) => !isShared);
     });
   };
 
@@ -46,6 +65,11 @@ const Post = ({ postData, currentUser }) => {
 
   const dislikeActiveStyle = {
     color: 'rgb(226, 34, 94)',
+    fontSize: '22px',
+  };
+
+  const shareActiveStyle = {
+    color: 'rgb(22, 191, 99)',
     fontSize: '22px',
   };
 
@@ -71,8 +95,11 @@ const Post = ({ postData, currentUser }) => {
               </button>
             </div>
             <div className="post-button-container">
-              <button>
-                <AiOutlineRetweet style={buttonIconStyle} />
+              <button onClick={sharePost}>
+                <AiOutlineRetweet style={isShared ? shareActiveStyle : buttonIconStyle} />
+                <span className={`number-shares ${isShared ? 'number-shares-active' : ''}`}>
+                  {numShares || ''}
+                </span>
               </button>
             </div>
             <div className="post-button-container">

@@ -75,3 +75,11 @@
     color: rgb(226, 34, 94);
   }
 }
+
+.number-shares {
+  font-size: 16px;
+  margin-left: 3px;
+  &-active {
+    color: rgb(22, 191, 99);
+  }
+}

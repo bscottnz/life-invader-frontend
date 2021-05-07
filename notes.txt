@@ -30,6 +30,9 @@ workin on single post componenet
 
 -- might need to update current user after disliking something etc
 
+-- if you dislike a post above an older post, the new post time will update, 
+and can be older than the previous post
+
 
 
 
