@@ -153,10 +153,29 @@ $right-sidebar-width-sml: 250px;
 
 // middle column. feed / profile area
 .layout__main {
-  // height: 1000px;
   background-color: $color-background-medium;
   border-radius: 15px;
   padding: $padding-sml;
+
+  // make min height take up 100 vh - 2 * page padding,
+  //  then - nav height too in mobile view
+  min-height: calc(100vh - (2 * 50px));
+
+  @media (max-width: 1300px) {
+    min-height: calc(100vh - (2 * 35px));
+  }
+
+  @media (max-width: 850px) {
+    min-height: calc(100vh - (2 * 20px));
+  }
+
+  @media (max-width: 780px) {
+    min-height: calc(100vh - (2 * 20px) - 60px);
+  }
+
+  @media (max-width: 500px) {
+    min-height: calc(100vh - (2 * 10px) - 60px);
+  }
 }
 
 // fixed post position button that only appears on mobile

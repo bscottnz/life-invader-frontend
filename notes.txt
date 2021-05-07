@@ -26,6 +26,8 @@ workin on single post componenet
 
 -- maybe have a no posts to show messageon empty feed ?
 
+-- new lines are not preserved in submited post
+
 
 
 

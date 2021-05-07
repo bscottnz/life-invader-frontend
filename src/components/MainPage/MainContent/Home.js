@@ -15,9 +15,9 @@ const Home = ({ currentUser }) => {
       url: `${process.env.REACT_APP_BASE_URL}/api/posts`,
     }).then((res) => {
       console.log(res.data);
-      // prepend new post to post state array
-      // setPosts((posts) => [res.data, ...posts]);
-      if (res.data[0].author.firstName === undefined) {
+      // set retrieved posts to post state array
+
+      if (res.data.length > 0 && res.data[0].author.firstName === undefined) {
         return alert('author data not populated ');
       }
 
