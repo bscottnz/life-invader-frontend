@@ -9,7 +9,7 @@ const Home = ({ currentUser }) => {
   const postItems = posts.map((post) => <Post postData={post} key={post._id} />);
   return (
     <div>
-      <h1>Home</h1>
+      <h1 className="main-content-heading">Home</h1>
       <CreatePostForm currentUser={currentUser} setPosts={setPosts} posts={posts} />
       <div className="posts-container">{postItems}</div>
     </div>

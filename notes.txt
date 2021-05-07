@@ -15,16 +15,14 @@ toast message on successfull registration ?
 
 // just finnished
 
-
+workin on single post componenet 
 
 
 
 
 // todo
 
--- page title at top of main content area
-
--- figure out public images
+-- up to doing the like / comment / retweet button on single post compoonenet 
 
 
 

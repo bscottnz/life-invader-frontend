@@ -110,7 +110,7 @@
 
 .post-form-container {
   display: flex;
-  border-bottom: 10px solid rgb(230, 236, 240);
+  border-bottom: 1px solid $color-background-light;
   flex-shrink: 0;
   padding-bottom: 20px;
 }
@@ -138,7 +138,7 @@
     font-family: inherit;
     background-color: transparent;
     color: inherit;
-    min-height: 80px;
+    min-height: 60px;
     margin-bottom: 20px;
 
     &:focus {
@@ -171,11 +171,20 @@
 // #############################################
 .post {
   display: flex;
+  font-size: 16px;
   flex-direction: column;
   padding: 20px 0;
   cursor: pointer;
-  border-bottom: 1px solid rgb(230, 236, 240);
+  border-bottom: 1px solid $color-background-light;
   flex-shrink: 0;
+
+  &-header {
+    margin-bottom: 5px;
+  }
+
+  &-body {
+    margin-bottom: 10px;
+  }
 }
 
 .main-content-container {
@@ -192,8 +201,10 @@
 .username,
 .date {
   color: $color-text-grey;
+  margin-left: 10px;
 }
 
+// styling the react router link
 .display-name {
   font-weight: 700;
 
@@ -203,5 +214,36 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+.post-footer {
+  display: flex;
+  align-items: center;
+
+  & .post-button-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+
+    & button {
+      padding: 0 3px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      color: $color-text-grey;
+      cursor: pointer;
+    }
+  }
+}
+
+.post-button-container {
+  & button:hover {
+    // background-color: #d4edff;
+    color: $color-blue;
   }
 }

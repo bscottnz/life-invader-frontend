@@ -50,7 +50,7 @@ $right-sidebar-width-sml: 250px;
 .layout {
   display: grid;
   grid-template-columns: $left-sidebar-width $main-content-width $right-sidebar-width;
-  gap: $padding-lrg;
+  column-gap: $padding-lrg;
   margin: 0 auto;
 
   width: fit-content;
@@ -62,7 +62,7 @@ $right-sidebar-width-sml: 250px;
 
   // reduce grid gap
   @media (max-width: 1300px) {
-    gap: $padding-med;
+    column-gap: $padding-med;
   }
 
   // reduce size of third column
@@ -77,7 +77,7 @@ $right-sidebar-width-sml: 250px;
 
   // reduce grid gap
   @media (max-width: 850px) {
-    gap: $padding-sml;
+    column-gap: $padding-sml;
   }
 
   // remove first column

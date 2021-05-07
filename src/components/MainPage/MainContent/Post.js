@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { MdChatBubbleOutline } from 'react-icons/md';
+import { AiOutlineRetweet } from 'react-icons/ai';
+import { AiOutlineDislike } from 'react-icons/ai';
+
 const Post = ({ postData }) => {
   const postImage = `${process.env.REACT_APP_BASE_URL}${postData.author.profilePic}`;
   const userFullName = `${postData.author.firstName} ${postData.author.lastName}`;
   const timestamp = 'to do later';
+  const buttonIconStyle = {
+    fontSize: '20px',
+  };
   return (
     <div className="post">
       <div className="main-content-container">
@@ -22,7 +29,19 @@ const Post = ({ postData }) => {
           <div className="post-body">{postData.content}</div>
           <div className="post-footer">
             <div className="post-button-container">
-              <button></button>
+              <button>
+                <MdChatBubbleOutline style={buttonIconStyle} />
+              </button>
+            </div>
+            <div className="post-button-container">
+              <button>
+                <AiOutlineRetweet style={buttonIconStyle} />
+              </button>
+            </div>
+            <div className="post-button-container">
+              <button>
+                <AiOutlineDislike style={buttonIconStyle} />
+              </button>
             </div>
           </div>
         </div>
