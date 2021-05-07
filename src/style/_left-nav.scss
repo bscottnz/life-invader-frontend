@@ -12,6 +12,9 @@
 
 .left-nav-logo-container {
   width: 28px;
+  // only specifying this height so the space is reserved as the image loads/ other wise
+  // the content moves down a slit second after the image loads
+  height: 22.8px;
   margin-bottom: 28px;
   cursor: pointer;
 

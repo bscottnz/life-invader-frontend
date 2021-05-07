@@ -24,6 +24,8 @@ workin on single post componenet
 
 -- up to doing the like / comment / retweet button on single post compoonenet 
 
+-- maybe have a no posts to show messageon empty feed ?
+
 
 
 

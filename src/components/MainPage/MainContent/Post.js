@@ -5,10 +5,12 @@ import { MdChatBubbleOutline } from 'react-icons/md';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { AiOutlineDislike } from 'react-icons/ai';
 
+import relativeTime from '../../../utils/relativeTime';
+
 const Post = ({ postData }) => {
   const postImage = `${process.env.REACT_APP_BASE_URL}${postData.author.profilePic}`;
   const userFullName = `${postData.author.firstName} ${postData.author.lastName}`;
-  const timestamp = 'to do later';
+  const timestamp = relativeTime(new Date(), new Date(postData.createdAt));
   const buttonIconStyle = {
     fontSize: '20px',
   };

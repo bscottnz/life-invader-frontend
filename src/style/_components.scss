@@ -110,7 +110,7 @@
 
 .post-form-container {
   display: flex;
-  border-bottom: 1px solid $color-background-light;
+  // border-bottom: 1px solid $color-background-light;
   flex-shrink: 0;
   padding-bottom: 20px;
 }
@@ -175,7 +175,7 @@
   flex-direction: column;
   padding: 20px 0;
   cursor: pointer;
-  border-bottom: 1px solid $color-background-light;
+  border-top: 1px solid $color-background-light;
   flex-shrink: 0;
 
   &-header {

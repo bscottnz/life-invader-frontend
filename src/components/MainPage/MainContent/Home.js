@@ -1,10 +1,35 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CreatePostForm from './CreatePostForm';
 import Post from './Post';
 
+import axios from 'axios';
+
 const Home = ({ currentUser }) => {
   const [posts, setPosts] = useState([]);
+
+  const getPosts = () => {
+    axios({
+      method: 'get',
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/api/posts`,
+    }).then((res) => {
+      console.log(res.data);
+      // prepend new post to post state array
+      // setPosts((posts) => [res.data, ...posts]);
+      if (res.data[0].author.firstName === undefined) {
+        return alert('author data not populated ');
+      }
+
+      // console.log(res.data);
+      setPosts(res.data);
+    });
+  };
+
+  // fetch posts on page load
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   const postItems = posts.map((post) => <Post postData={post} key={post._id} />);
   return (
