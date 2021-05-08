@@ -15,23 +15,22 @@ toast message on successfull registration ?
 
 // just finnished
 
-workin on single post componenet 
+refactoring post component to not use state, and instead refresh the posts array
+which grabs teh data from server again. this saved a lot of headaches and made my code a lot more simple
 
 
 
 
 // todo
 
--- need to auto update dom on share / unshare. right now i have to refresh
+-- change post icon hover to the active styles
 
 -- maybe have a no posts to show message on empty feed ?
 
 -- new lines are not preserved in submited post
 
--- might need to update current user after disliking something etc
 
--- if you dislike a post above an older post, the new post time will update, 
-and can be older than the previous post
+
 
 
 

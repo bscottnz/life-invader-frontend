@@ -9,15 +9,7 @@ import { AiOutlineDislike } from 'react-icons/ai';
 import relativeTime from '../../../utils/relativeTime';
 import axios from 'axios';
 
-const Post = ({ postData, currentUser, allPosts, setAllPosts }) => {
-  // total number of dislikes for the post
-  const [numDislikes, setNumDislikes] = useState(0);
-  // if the current user has disliked the post
-  const [isDisliked, setIsDisliked] = useState(false);
-
-  const [numShares, setNumShares] = useState(0);
-  const [isShared, setIsShared] = useState(false);
-
+const Post = ({ postData, currentUser, forceUpdate }) => {
   // store if the current post is a shared post or original post
   const isRepost = postData.sharedPostData !== undefined;
 
@@ -27,16 +19,20 @@ const Post = ({ postData, currentUser, allPosts, setAllPosts }) => {
   // if post is a repost, set post data to be the data of the original post
   postData = isRepost ? postData.sharedPostData : postData;
 
-  useEffect(() => {
-    // set num dislikes
-    setNumDislikes(postData.dislikes.length);
+  // if the current user dislikes the post or not
+  const isDisliked = postData.dislikes.includes(currentUser._id);
 
-    // set if the current user has disliked the post
-    setIsDisliked(postData.dislikes.includes(currentUser._id));
+  // if the current user has shared the post or not
+  const isShared = postData.sharedBy.includes(currentUser._id);
 
-    setNumShares(postData.sharedBy.length);
-    setIsShared(postData.sharedBy.includes(currentUser._id));
-  }, []);
+  // url of the post author display picture
+  const postImage = `${process.env.REACT_APP_BASE_URL}${postData.author.profilePic}`;
+
+  // combine author names into full name
+  const userFullName = `${postData.author.firstName} ${postData.author.lastName}`;
+
+  // convert the post date to a relative time, eg '2 hours ago'
+  const timestamp = relativeTime(new Date(), new Date(postData.createdAt));
 
   const dislikePost = () => {
     axios({
@@ -45,9 +41,8 @@ const Post = ({ postData, currentUser, allPosts, setAllPosts }) => {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${postData._id}/dislike`,
     }).then((res) => {
-      // console.log(res.data);
-      setNumDislikes(res.data.dislikes.length);
-      setIsDisliked((isDisliked) => !isDisliked);
+      //rerender posts
+      forceUpdate();
     });
   };
 
@@ -58,33 +53,10 @@ const Post = ({ postData, currentUser, allPosts, setAllPosts }) => {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${postData._id}/share`,
     }).then((res) => {
-      // this returns whether a shared or unshared
-      const option = res.data.option;
-      // this returns the original post that was shared object
-      const originalPost = res.data.post;
-      // this returns the new repost post object
-      const repost = res.data.repost;
-      // updates the amount of shares on original post
-      setNumShares(originalPost.sharedBy.length);
-      // updates visual indicator of having shared a post or not
-      setIsShared((isShared) => !isShared);
-      // adds new repost post to the array state of posts
-      if (option === '$addToSet') {
-        setAllPosts((allPosts) => [
-          { ...repost, sharedBy: [...originalPost.sharedBy, currentUser._id] },
-          ...allPosts,
-        ]);
-        // remove the un shared post from the post state
-      } else if (option === '$pull') {
-        console.log(repost);
-        setAllPosts((allPosts) => allPosts.filter((post) => post._id !== repost._id));
-      }
+      // rerender posts
+      forceUpdate();
     });
   };
-
-  const postImage = `${process.env.REACT_APP_BASE_URL}${postData.author.profilePic}`;
-  const userFullName = `${postData.author.firstName} ${postData.author.lastName}`;
-  const timestamp = relativeTime(new Date(), new Date(postData.createdAt));
 
   const buttonIconStyle = {
     fontSize: '22px',
@@ -131,7 +103,7 @@ const Post = ({ postData, currentUser, allPosts, setAllPosts }) => {
               <button onClick={sharePost}>
                 <AiOutlineRetweet style={isShared ? shareActiveStyle : buttonIconStyle} />
                 <span className={`number-shares ${isShared ? 'number-shares-active' : ''}`}>
-                  {numShares || ''}
+                  {postData.sharedBy.length || ''}
                 </span>
               </button>
             </div>
@@ -139,7 +111,7 @@ const Post = ({ postData, currentUser, allPosts, setAllPosts }) => {
               <button className="dislike-button" onClick={dislikePost}>
                 <AiOutlineDislike style={isDisliked ? dislikeActiveStyle : buttonIconStyle} />
                 <span className={`number-dislikes ${isDisliked ? 'number-dislikes-active' : ''}`}>
-                  {numDislikes || ''}
+                  {postData.dislikes.length || ''}
                 </span>
               </button>
             </div>
