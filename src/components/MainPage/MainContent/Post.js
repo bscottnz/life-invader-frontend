@@ -18,6 +18,13 @@ const Post = ({ postData, currentUser }) => {
   const [numShares, setNumShares] = useState(0);
   const [isShared, setIsShared] = useState(false);
 
+  // store if the current post is a shared post or original post
+  const isRepost = postData.sharedPostData !== undefined;
+  // store name of reposter if the post is a repost
+  const repostedBy = isRepost ? postData.author.username : null;
+  // if post is a repost, set post data to be the data of the original post
+  postData = isRepost ? postData.sharedPostData : postData;
+
   useEffect(() => {
     // set num dislikes
     setNumDislikes(postData.dislikes.length);
@@ -75,6 +82,12 @@ const Post = ({ postData, currentUser }) => {
 
   return (
     <div className="post">
+      {isRepost && (
+        <div className="shared-by-heading">
+          <AiOutlineRetweet style={{ marginRight: '4px', transform: 'translateY(2px)' }} />
+          Shared by <Link to={`/profile/${repostedBy}`}>@{repostedBy}</Link>
+        </div>
+      )}
       <div className="main-content-container">
         <div className="user-image-container">
           <img src={postImage} alt="post author profile pic" />

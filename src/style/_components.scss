@@ -271,3 +271,15 @@ textarea::placeholder {
     color: $color-blue;
   }
 }
+
+.shared-by-heading {
+  margin-left: 69px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: $color-text-grey;
+
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
