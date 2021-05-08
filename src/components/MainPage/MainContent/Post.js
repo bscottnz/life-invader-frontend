@@ -9,7 +9,7 @@ import { AiOutlineDislike } from 'react-icons/ai';
 import relativeTime from '../../../utils/relativeTime';
 import axios from 'axios';
 
-const Post = ({ postData, currentUser }) => {
+const Post = ({ postData, currentUser, allPosts, setAllPosts }) => {
   // total number of dislikes for the post
   const [numDislikes, setNumDislikes] = useState(0);
   // if the current user has disliked the post
@@ -20,8 +20,10 @@ const Post = ({ postData, currentUser }) => {
 
   // store if the current post is a shared post or original post
   const isRepost = postData.sharedPostData !== undefined;
+
   // store name of reposter if the post is a repost
   const repostedBy = isRepost ? postData.author.username : null;
+
   // if post is a repost, set post data to be the data of the original post
   postData = isRepost ? postData.sharedPostData : postData;
 
@@ -43,7 +45,7 @@ const Post = ({ postData, currentUser }) => {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${postData._id}/dislike`,
     }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setNumDislikes(res.data.dislikes.length);
       setIsDisliked((isDisliked) => !isDisliked);
     });
@@ -56,9 +58,27 @@ const Post = ({ postData, currentUser }) => {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${postData._id}/share`,
     }).then((res) => {
-      console.log(res.data);
-      setNumShares(res.data.sharedBy.length);
+      // this returns whether a shared or unshared
+      const option = res.data.option;
+      // this returns the original post that was shared object
+      const originalPost = res.data.post;
+      // this returns the new repost post object
+      const repost = res.data.repost;
+      // updates the amount of shares on original post
+      setNumShares(originalPost.sharedBy.length);
+      // updates visual indicator of having shared a post or not
       setIsShared((isShared) => !isShared);
+      // adds new repost post to the array state of posts
+      if (option === '$addToSet') {
+        setAllPosts((allPosts) => [
+          { ...repost, sharedBy: [...originalPost.sharedBy, currentUser._id] },
+          ...allPosts,
+        ]);
+        // remove the un shared post from the post state
+      } else if (option === '$pull') {
+        console.log(repost);
+        setAllPosts((allPosts) => allPosts.filter((post) => post._id !== repost._id));
+      }
     });
   };
 

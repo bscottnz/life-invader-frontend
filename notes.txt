@@ -22,9 +22,9 @@ workin on single post componenet
 
 // todo
 
--- up to doing the like / comment / retweet button on single post compoonenet 
+-- need to auto update dom on share / unshare. right now i have to refresh
 
--- maybe have a no posts to show messageon empty feed ?
+-- maybe have a no posts to show message on empty feed ?
 
 -- new lines are not preserved in submited post
 

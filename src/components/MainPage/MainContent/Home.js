@@ -32,7 +32,13 @@ const Home = ({ currentUser }) => {
   }, []);
 
   const postItems = posts.map((post) => (
-    <Post postData={post} currentUser={currentUser} key={post._id} />
+    <Post
+      postData={post}
+      currentUser={currentUser}
+      allPosts={posts}
+      setAllPosts={setPosts}
+      key={post._id}
+    />
   ));
   return (
     <div>
