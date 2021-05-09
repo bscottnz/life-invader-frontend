@@ -69,6 +69,7 @@ const Home = ({ currentUser }) => {
     content: {
       backgroundColor: 'rgb(21, 24, 28)',
       maxWidth: '600px',
+      height: 'fit-content',
       zIndex: 3,
       marginLeft: 'auto',
       marginRight: 'auto',
@@ -129,6 +130,7 @@ const Home = ({ currentUser }) => {
           posts={posts}
           textPlaceholder={replyTextPlaceholder}
           buttonText={'Reply'}
+          setModalIsOpen={setModalIsOpen}
         />
       </Modal>
       <h1 className="main-content-heading">Home</h1>

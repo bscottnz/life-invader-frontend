@@ -3,7 +3,14 @@ import { useState } from 'react';
 
 import axios from 'axios';
 
-const CreatePostForm = ({ currentUser, setPosts, posts, textPlaceholder, buttonText }) => {
+const CreatePostForm = ({
+  currentUser,
+  setPosts,
+  posts,
+  textPlaceholder,
+  buttonText,
+  setModalIsOpen,
+}) => {
   const [postText, setPostText] = useState('');
 
   // resize post form text area to avoid text scroll
@@ -26,6 +33,11 @@ const CreatePostForm = ({ currentUser, setPosts, posts, textPlaceholder, buttonT
       // prepend new post to post state array
       setPosts((posts) => [res.data, ...posts]);
       setPostText('');
+
+      // this will close the reply modal when submitting a comment reply
+      if (setModalIsOpen !== false) {
+        setModalIsOpen(false);
+      }
     });
   };
 
@@ -64,6 +76,7 @@ const CreatePostForm = ({ currentUser, setPosts, posts, textPlaceholder, buttonT
 CreatePostForm.defaultProps = {
   textPlaceholder: "What's going on?",
   buttonText: 'Invade',
+  setModalIsOpen: false,
 };
 
 export default CreatePostForm;
