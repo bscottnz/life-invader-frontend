@@ -23,14 +23,19 @@ which grabs teh data from server again. this saved a lot of headaches and made m
 
 // todo
 
--- change post icon hover to the active styles
-
 -- maybe have a no posts to show message on empty feed ?
 
--- new lines are not preserved in submited post
 
--- change mobile dropdown so that it is all in the main nave but with overflow hidden, then
-   the nav just grows down on click
+
+
+-- limit post length in news feed. make them view the full comment if th post is too long
+
+-- add the same modal scroll to the side bars. make the top and bottom margin responsive so it is the 
+   matches whatever screen size it is
+
+-- custom scroll bars ?
+
+
 
 
 

@@ -122,6 +122,7 @@ const Home = ({ currentUser }) => {
           key={uuidv4()}
           forceUpdate={getPosts}
           setModalIsOpen={setModalIsOpen}
+          allowComments={false}
         />
 
         <CreatePostForm

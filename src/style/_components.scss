@@ -149,6 +149,10 @@
 
 // text area
 
+textarea {
+  white-space: pre-wrap;
+}
+
 textarea::-webkit-input-placeholder {
   color: $color-text-grey;
 }
@@ -318,6 +322,8 @@ textarea::placeholder {
 // since it looks weird when they are only 24 px apart
 .ReactModal__Content--after-open {
   transform: translateX(-24px) translateY(-50%);
+  max-height: calc(100vh - 20px);
+  overflow-y: scroll;
 
   @media (max-width: 1430px) {
     transform: translateY(-50%);
@@ -326,6 +332,8 @@ textarea::placeholder {
 
 .ReactModal__Content {
   transform: translateX(-24px) translateY(-50%);
+  max-height: calc(100vh - 20px);
+  overflow-y: scroll;
 
   @media (max-width: 1430px) {
     transform: translateY(-50%);

@@ -9,7 +9,14 @@ import { AiOutlineDislike } from 'react-icons/ai';
 import relativeTime from '../../../utils/relativeTime';
 import axios from 'axios';
 
-const Post = ({ postData, currentUser, forceUpdate, setModalIsOpen, setReplyComment }) => {
+const Post = ({
+  postData,
+  currentUser,
+  forceUpdate,
+  setModalIsOpen,
+  setReplyComment,
+  allowComments,
+}) => {
   // store if the current post is a shared post or original post
   const isRepost = postData.sharedPostData !== undefined;
 
@@ -59,8 +66,14 @@ const Post = ({ postData, currentUser, forceUpdate, setModalIsOpen, setReplyComm
   };
 
   const openReplyModal = (postData) => {
-    setReplyComment(postData);
-    setModalIsOpen(true);
+    // only open modal if the modal is not already open.
+    // otherwise close the modal
+    if (allowComments) {
+      setReplyComment(postData);
+      setModalIsOpen(true);
+    } else {
+      setModalIsOpen(false);
+    }
   };
 
   const buttonIconStyle = {
@@ -97,7 +110,9 @@ const Post = ({ postData, currentUser, forceUpdate, setModalIsOpen, setReplyComm
             <span className="username">@{postData.author.username}</span>
             <span className="date">{timestamp}</span>
           </div>
-          <div className="post-body">{postData.content}</div>
+          <div className="post-body" style={{ whiteSpace: 'pre-wrap' }}>
+            {postData.content}
+          </div>
           <div className="post-footer">
             <div className="post-button-container">
               <button onClick={(e) => openReplyModal(postData)}>
@@ -125,6 +140,10 @@ const Post = ({ postData, currentUser, forceUpdate, setModalIsOpen, setReplyComm
       </div>
     </div>
   );
+};
+
+Post.defaultProps = {
+  allowComments: true,
 };
 
 export default Post;
