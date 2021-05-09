@@ -62,7 +62,7 @@ const Home = ({ currentUser }) => {
 
   const modalStyle = {
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, .75)',
+      backgroundColor: 'rgba(0, 0, 0, .9)',
       height: 'calc(100vh + 100px)',
       zIndex: 3,
     },
@@ -76,7 +76,7 @@ const Home = ({ currentUser }) => {
       top: 'calc(50% - 50px)',
       left: '10px',
       right: '10px',
-      transform: 'translateY(-50%)',
+      // transform: 'translateY(-50%)',
       borderRadius: '15px',
       border: '1px solid #3a3a3a',
       border: 'none',

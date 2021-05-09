@@ -104,7 +104,7 @@ const Post = ({ postData, currentUser, forceUpdate, setModalIsOpen, setReplyComm
                 <FaRegComment style={{ fontSize: '18px' }} />
               </button>
             </div>
-            <div className="post-button-container">
+            <div className="post-button-container post-button-container-share">
               <button onClick={sharePost}>
                 <AiOutlineRetweet style={isShared ? shareActiveStyle : buttonIconStyle} />
                 <span className={`number-shares ${isShared ? 'number-shares-active' : ''}`}>
@@ -112,7 +112,7 @@ const Post = ({ postData, currentUser, forceUpdate, setModalIsOpen, setReplyComm
                 </span>
               </button>
             </div>
-            <div className="post-button-container">
+            <div className="post-button-container post-button-container-dislike">
               <button className="dislike-button" onClick={dislikePost}>
                 <AiOutlineDislike style={isDisliked ? dislikeActiveStyle : buttonIconStyle} />
                 <span className={`number-dislikes ${isDisliked ? 'number-dislikes-active' : ''}`}>

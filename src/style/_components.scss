@@ -270,6 +270,18 @@ textarea::placeholder {
     // background-color: #d4edff;
     color: $color-blue;
   }
+
+  &-share {
+    & button:hover {
+      color: rgb(22, 191, 99);
+    }
+  }
+
+  &-dislike {
+    & button:hover {
+      color: rgb(226, 34, 94);
+    }
+  }
 }
 
 .shared-by-heading {
@@ -300,4 +312,22 @@ textarea::placeholder {
 .ReactModal__Overlay--before-close {
   opacity: 0;
   transform: translateY(-100px);
+}
+
+// these styles just align the modal with the main content on full screen,
+// since it looks weird when they are only 24 px apart
+.ReactModal__Content--after-open {
+  transform: translateX(-24px) translateY(-50%);
+
+  @media (max-width: 1430px) {
+    transform: translateY(-50%);
+  }
+}
+
+.ReactModal__Content {
+  transform: translateX(-24px) translateY(-50%);
+
+  @media (max-width: 1430px) {
+    transform: translateY(-50%);
+  }
 }
