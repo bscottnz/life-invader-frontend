@@ -9,7 +9,7 @@ import { AiOutlineDislike } from 'react-icons/ai';
 import relativeTime from '../../../utils/relativeTime';
 import axios from 'axios';
 
-const Post = ({ postData, currentUser, forceUpdate }) => {
+const Post = ({ postData, currentUser, forceUpdate, setModalIsOpen }) => {
   // store if the current post is a shared post or original post
   const isRepost = postData.sharedPostData !== undefined;
 
@@ -58,6 +58,10 @@ const Post = ({ postData, currentUser, forceUpdate }) => {
     });
   };
 
+  const openReplyModal = () => {
+    setModalIsOpen(true);
+  };
+
   const buttonIconStyle = {
     fontSize: '22px',
   };
@@ -95,7 +99,7 @@ const Post = ({ postData, currentUser, forceUpdate }) => {
           <div className="post-body">{postData.content}</div>
           <div className="post-footer">
             <div className="post-button-container">
-              <button>
+              <button onClick={openReplyModal}>
                 <FaRegComment style={{ fontSize: '18px' }} />
               </button>
             </div>

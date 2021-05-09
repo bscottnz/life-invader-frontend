@@ -29,6 +29,9 @@ which grabs teh data from server again. this saved a lot of headaches and made m
 
 -- new lines are not preserved in submited post
 
+-- change mobile dropdown so that it is all in the main nave but with overflow hidden, then
+   the nav just grows down on click
+
 
 
 
