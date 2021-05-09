@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 import Modal from 'react-modal';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import CreatePostForm from './CreatePostForm';
 import Post from './Post';
@@ -68,7 +69,6 @@ const Home = ({ currentUser }) => {
     content: {
       backgroundColor: 'rgb(21, 24, 28)',
       maxWidth: '600px',
-      height: '500px',
       zIndex: 3,
       marginLeft: 'auto',
       marginRight: 'auto',
@@ -82,6 +82,19 @@ const Home = ({ currentUser }) => {
     },
   };
 
+  let replyHeading = '';
+  let replyTextPlaceholder = '';
+
+  // generates custom reply popup message depending on who you reply to
+  if (replyComment !== null) {
+    if (replyComment.author.username === currentUser.username) {
+      replyHeading = 'Reply to... yourself?';
+      replyTextPlaceholder = 'Replying to yourself huh? You must have a lot of friends...';
+    } else {
+      replyHeading = `Reply to ${replyComment.author.username}`;
+      replyTextPlaceholder = `Give ${replyComment.author.username} a piece of your mind..`;
+    }
+  }
   return (
     <div>
       <Modal
@@ -90,7 +103,17 @@ const Home = ({ currentUser }) => {
         closeTimeoutMS={300}
         onRequestClose={() => setModalIsOpen(false)}
       >
-        <h2 className="main-content-heading">Reply</h2>
+        <div
+          className="heading-container"
+          style={{ display: 'flex', justifyContent: 'space-between' }}
+        >
+          <h2 className="main-content-heading">{replyHeading}</h2>
+
+          <AiOutlineCloseCircle
+            style={{ fontSize: '22px', cursor: 'pointer' }}
+            onClick={() => setModalIsOpen(false)}
+          />
+        </div>
 
         <Post
           postData={replyComment}
@@ -100,8 +123,13 @@ const Home = ({ currentUser }) => {
           setModalIsOpen={setModalIsOpen}
         />
 
-        <CreatePostForm currentUser={currentUser} setPosts={setPosts} posts={posts} />
-        <button onClick={() => setModalIsOpen(false)}>Close</button>
+        <CreatePostForm
+          currentUser={currentUser}
+          setPosts={setPosts}
+          posts={posts}
+          textPlaceholder={replyTextPlaceholder}
+          buttonText={'Reply'}
+        />
       </Modal>
       <h1 className="main-content-heading">Home</h1>
       <CreatePostForm currentUser={currentUser} setPosts={setPosts} posts={posts} />

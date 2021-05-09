@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import axios from 'axios';
 
-const CreatePostForm = ({ currentUser, setPosts, posts }) => {
+const CreatePostForm = ({ currentUser, setPosts, posts, textPlaceholder, buttonText }) => {
   const [postText, setPostText] = useState('');
 
   // resize post form text area to avoid text scroll
@@ -40,7 +40,7 @@ const CreatePostForm = ({ currentUser, setPosts, posts }) => {
       <div className="textarea-container">
         <textarea
           id="post-textarea"
-          placeholder="What's going on?"
+          placeholder={textPlaceholder}
           onInput={resizeTextarea}
           onChange={(e) => setPostText(e.target.value)}
           maxLength="400"
@@ -53,12 +53,17 @@ const CreatePostForm = ({ currentUser, setPosts, posts }) => {
             disabled={postText.trim().length ? false : true}
             onClick={submitPost}
           >
-            Invade
+            {buttonText}
           </button>
         </div>
       </div>
     </div>
   );
+};
+
+CreatePostForm.defaultProps = {
+  textPlaceholder: "What's going on?",
+  buttonText: 'Invade',
 };
 
 export default CreatePostForm;
