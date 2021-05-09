@@ -61,6 +61,8 @@ const Home = ({ currentUser }) => {
       left: '10px',
       right: '10px',
       transform: 'translateY(-50%)',
+      borderRadius: '15px',
+      border: '1px solid #3a3a3a',
     },
   };
 
