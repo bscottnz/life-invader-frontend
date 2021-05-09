@@ -325,6 +325,17 @@ textarea::placeholder {
   max-height: calc(100vh - 20px);
   overflow-y: scroll;
 
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
   @media (max-width: 1430px) {
     transform: translateY(-50%);
   }
@@ -338,4 +349,15 @@ textarea::placeholder {
   @media (max-width: 1430px) {
     transform: translateY(-50%);
   }
+}
+
+.custom-scroll {
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+}
+.custom-scroll::-webkit-scrollbar {
+  width: 0px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
 }

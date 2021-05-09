@@ -16,8 +16,8 @@ const LeftNav = ({ logOut }) => {
   };
 
   return (
-    <nav className="layout__left-container">
-      <div className="layout__left-content">
+    <nav className="layout__left-container custom-scroll">
+      <div className="layout__left-content custom-scroll">
         <div className="left-nav-logo-container">
           <img src={logoIcon} alt="" />
         </div>

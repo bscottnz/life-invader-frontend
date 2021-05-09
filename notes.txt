@@ -15,8 +15,7 @@ toast message on successfull registration ?
 
 // just finnished
 
-refactoring post component to not use state, and instead refresh the posts array
-which grabs teh data from server again. this saved a lot of headaches and made my code a lot more simple
+comments modal
 
 
 
@@ -24,9 +23,6 @@ which grabs teh data from server again. this saved a lot of headaches and made m
 // todo
 
 -- maybe have a no posts to show message on empty feed ?
-
-
-
 
 -- limit post length in news feed. make them view the full comment if th post is too long
 

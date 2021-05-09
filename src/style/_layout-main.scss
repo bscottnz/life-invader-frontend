@@ -101,10 +101,15 @@ $right-sidebar-width-sml: 250px;
 .layout__right-sidebar {
   position: fixed;
   width: $right-sidebar-width;
-  height: 400px;
+
   background-color: $color-background-medium;
   border-radius: 15px;
   padding: $padding-sml;
+
+  max-height: calc(100vh - 70px);
+  height: 400px;
+
+  overflow-y: auto;
 
   // reduce size of first column
   @media (max-width: 1200px) {
@@ -132,11 +137,15 @@ $right-sidebar-width-sml: 250px;
     background-color: $color-background-medium;
     position: fixed;
     width: $left-sidebar-width;
-    // height: 400px;
+    height: fit-content;
     border-radius: 15px;
     padding: $padding-sml;
     display: flex;
     flex-direction: column;
+
+    max-height: calc(100vh - 70px);
+
+    overflow-y: auto;
 
     // reduce size of first column
     @media (max-width: 1430px) {
