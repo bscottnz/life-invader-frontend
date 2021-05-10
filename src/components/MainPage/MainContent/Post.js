@@ -20,6 +20,8 @@ const Post = ({
   // store if the current post is a shared post or original post
   const isRepost = postData.sharedPostData !== undefined;
 
+  const isReply = postData.replyTo !== undefined;
+
   // store name of reposter if the post is a repost
   const repostedBy = isRepost ? postData.author.username : null;
 
@@ -96,6 +98,16 @@ const Post = ({
         <div className="shared-by-heading">
           <AiOutlineRetweet style={{ marginRight: '4px', transform: 'translateY(2px)' }} />
           Shared by <Link to={`/profile/${repostedBy}`}>@{repostedBy}</Link>
+        </div>
+      )}
+
+      {isReply && (
+        <div className="shared-by-heading">
+          <FaRegComment style={{ marginRight: '4px', transform: 'translateY(2px)' }} />
+          Replying to{' '}
+          <Link to={`/profile/${postData.replyTo.author.username}`}>
+            @{postData.replyTo.author.username}
+          </Link>
         </div>
       )}
       <div className="main-content-container">

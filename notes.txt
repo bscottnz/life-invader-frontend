@@ -8,7 +8,7 @@ have made up adds ?
 
 on register, have a no data collection button that cant be checked, moves around etc. ?
 
-toast message on successfull registration ?
+toast message on successfull registration and reply?
 
 
 
@@ -25,6 +25,8 @@ comments modal
 -- maybe have a no posts to show message on empty feed ?
 
 -- limit post length in news feed. make them view the full comment if th post is too long
+
+-- change replyto comment link to the post and not the profile page of op
 
 
 
