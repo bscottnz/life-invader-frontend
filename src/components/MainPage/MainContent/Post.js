@@ -1,6 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+} from 'react-router-dom';
 
 import { FaRegComment } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
@@ -43,7 +50,10 @@ const Post = ({
   // convert the post date to a relative time, eg '2 hours ago'
   const timestamp = relativeTime(new Date(), new Date(postData.createdAt));
 
-  const dislikePost = () => {
+  const history = useHistory();
+
+  const dislikePost = (e) => {
+    e.stopPropagation();
     axios({
       method: 'put',
 
@@ -55,7 +65,8 @@ const Post = ({
     });
   };
 
-  const sharePost = () => {
+  const sharePost = (e) => {
+    e.stopPropagation();
     axios({
       method: 'post',
 
@@ -78,6 +89,14 @@ const Post = ({
     }
   };
 
+  const viewPost = (e) => {
+    // only redirect to post page if the user is not clicking a link.
+    // buttons are handled in their own click events with stopPropogation()
+    if (postData._id !== undefined && e.target.tagName != 'A') {
+      history.push(`/post/${postData._id}`);
+    }
+  };
+
   const buttonIconStyle = {
     fontSize: '22px',
   };
@@ -93,7 +112,7 @@ const Post = ({
   };
 
   return (
-    <div className="post">
+    <div className="post" onClick={viewPost}>
       {isRepost && (
         <div className="shared-by-heading">
           <AiOutlineRetweet style={{ marginRight: '4px', transform: 'translateY(2px)' }} />
@@ -127,7 +146,12 @@ const Post = ({
           </div>
           <div className="post-footer">
             <div className="post-button-container">
-              <button onClick={(e) => openReplyModal(postData)}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openReplyModal(postData);
+                }}
+              >
                 <FaRegComment style={{ fontSize: '18px' }} />
               </button>
             </div>

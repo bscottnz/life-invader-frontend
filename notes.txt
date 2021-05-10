@@ -28,6 +28,11 @@ comments modal
 
 -- change replyto comment link to the post and not the profile page of op
 
+-- after view posts and delete posts, need to handle sharing / replying to deleted posts
+   and handle the comment button number + active style
+
+-- have message when a post isnt retruned for view post page
+
 
 
 

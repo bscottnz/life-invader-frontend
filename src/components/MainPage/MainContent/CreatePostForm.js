@@ -37,8 +37,13 @@ const CreatePostForm = ({
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts`,
     }).then((res) => {
-      // prepend new post to post state array
-      setPosts((posts) => [res.data, ...posts]);
+      // prepend new post to post state array.
+      // when replying to posts on a view post page, i dont want to set any posts,
+      // so when using createPostForm from these pages. setPosts will be null
+      if (setPosts !== null) {
+        setPosts((posts) => [res.data, ...posts]);
+      }
+
       setPostText('');
 
       // this will close the reply modal when submitting a comment reply
@@ -87,6 +92,7 @@ CreatePostForm.defaultProps = {
   setModalIsOpen: false,
   isReply: false,
   replyComment: null,
+  setPosts: null,
 };
 
 export default CreatePostForm;
