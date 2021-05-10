@@ -16,12 +16,20 @@ const ViewPost = ({ currentUser }) => {
   // than a nice solution
   const id = useParams().id;
 
+  // the post we are currently viewing
   const [post, setPost] = useState([]);
+
+  // the post this post is replying to, if this post is a reply
+  const [replyingTo, setReplyingTo] = useState(null);
+
+  // the replies to this post we are viewing
+  const [postReplies, setPostReplies] = useState(null);
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   // show error message if no post is returned
   const [showError, setShowError] = useState(false);
 
-  // keep track of which comment is being replied to
+  // keep track of which comment is being replied to in the modal
   const [replyComment, setReplyComment] = useState(null);
 
   // get specific post
@@ -32,7 +40,19 @@ const ViewPost = ({ currentUser }) => {
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${id}`,
     })
       .then((res) => {
-        setPost([res.data]);
+        console.log(res.data);
+        // set the post we are viewing
+        setPost([res.data.post]);
+
+        // set the post we are viewing is replying to
+        if (res.data.replyTo !== undefined && res.data.replyTo._id !== undefined) {
+          setReplyingTo(res.data.replyTo);
+        }
+
+        // set any replies to the post we are viewing
+        setPostReplies(res.data.replies);
+
+        // turn off the error
         setShowError(false);
       })
       .catch((err) => setShowError(true));
@@ -53,7 +73,7 @@ const ViewPost = ({ currentUser }) => {
     }
   }, [post]);
 
-  const postItems = post.map((post_) => (
+  const postItem = post.map((post_) => (
     <Post
       postData={post[0]}
       currentUser={currentUser}
@@ -63,6 +83,18 @@ const ViewPost = ({ currentUser }) => {
       setReplyComment={setReplyComment}
     />
   ));
+
+  const replyToItem =
+    replyingTo !== null ? (
+      <Post
+        postData={replyingTo}
+        currentUser={currentUser}
+        key={uuidv4()}
+        forceUpdate={getPost}
+        setModalIsOpen={setModalIsOpen}
+        setReplyComment={setReplyComment}
+      />
+    ) : null;
 
   const modalStyle = {
     overlay: {
@@ -142,7 +174,8 @@ const ViewPost = ({ currentUser }) => {
       <h1 className="main-content-heading">View Post</h1>
 
       <div className="posts-container">
-        {postItems.length > 0 && postItems[0]}
+        {replyToItem}
+        {postItem.length > 0 && postItem[0]}
         {showError && (
           <div>
             <h2>Post not found</h2>

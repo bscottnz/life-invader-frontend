@@ -15,7 +15,8 @@ toast message on successfull registration and reply?
 
 // just finnished
 
-comments modal
+outputting the reply to coment when viewing a post page. there is bug when viewing a reply to a reply.
+also clicking on the replying to post of a post in its post page, the page doesnt change unless refreshing
 
 
 
