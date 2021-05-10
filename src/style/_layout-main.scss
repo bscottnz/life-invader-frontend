@@ -106,10 +106,15 @@ $right-sidebar-width-sml: 250px;
   border-radius: 15px;
   padding: $padding-sml;
 
-  max-height: calc(100vh - 70px);
+  max-height: calc(100vh - 100px);
   height: 400px;
 
   overflow-y: auto;
+
+  // reduce max height to match page padding
+  @media (max-width: 1300px) {
+    max-height: calc(100vh - 70px);
+  }
 
   // reduce size of first column
   @media (max-width: 1200px) {
@@ -143,9 +148,19 @@ $right-sidebar-width-sml: 250px;
     display: flex;
     flex-direction: column;
 
-    max-height: calc(100vh - 70px);
+    max-height: calc(100vh - 100px);
 
     overflow-y: auto;
+
+    // reduce max height to match page padding
+    @media (max-width: 1300px) {
+      max-height: calc(100vh - 70px);
+    }
+
+    // reduce max height to match page padding
+    @media (max-width: 850px) {
+      max-height: calc(100vh - 40px);
+    }
 
     // reduce size of first column
     @media (max-width: 1430px) {

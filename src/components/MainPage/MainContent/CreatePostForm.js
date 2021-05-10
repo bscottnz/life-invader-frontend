@@ -10,6 +10,8 @@ const CreatePostForm = ({
   textPlaceholder,
   buttonText,
   setModalIsOpen,
+  isReply,
+  replyComment,
 }) => {
   const [postText, setPostText] = useState('');
 
@@ -21,21 +23,27 @@ const CreatePostForm = ({
   };
 
   const submitPost = () => {
+    const payload = {
+      content: postText,
+    };
+
+    if (isReply) {
+      payload.replyTo = replyComment._id;
+    }
+
     axios({
       method: 'post',
-      data: {
-        content: postText,
-      },
+      data: payload,
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts`,
     }).then((res) => {
-      console.log(res.data);
       // prepend new post to post state array
       setPosts((posts) => [res.data, ...posts]);
       setPostText('');
 
       // this will close the reply modal when submitting a comment reply
-      if (setModalIsOpen !== false) {
+
+      if (isReply) {
         setModalIsOpen(false);
       }
     });
@@ -77,6 +85,8 @@ CreatePostForm.defaultProps = {
   textPlaceholder: "What's going on?",
   buttonText: 'Invade',
   setModalIsOpen: false,
+  isReply: false,
+  replyComment: null,
 };
 
 export default CreatePostForm;

@@ -132,6 +132,8 @@ const Home = ({ currentUser }) => {
           textPlaceholder={replyTextPlaceholder}
           buttonText={'Reply'}
           setModalIsOpen={setModalIsOpen}
+          isReply={true}
+          replyComment={replyComment}
         />
       </Modal>
       <h1 className="main-content-heading">Home</h1>

@@ -26,10 +26,7 @@ comments modal
 
 -- limit post length in news feed. make them view the full comment if th post is too long
 
--- add the same modal scroll to the side bars. make the top and bottom margin responsive so it is the 
-   matches whatever screen size it is
 
--- custom scroll bars ?
 
 
 
