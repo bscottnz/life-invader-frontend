@@ -47,6 +47,11 @@ const ViewPost = ({ currentUser }) => {
         // set the post we are viewing is replying to
         if (res.data.replyTo !== undefined && res.data.replyTo._id !== undefined) {
           setReplyingTo(res.data.replyTo);
+        } else {
+          // in the case when switching between view post pages,
+          // we need to reset this so if we view a comment that is not a reply,
+          // it wont still show the previous reply that was loaded
+          setReplyingTo(null);
         }
 
         // set any replies to the post we are viewing
@@ -61,7 +66,7 @@ const ViewPost = ({ currentUser }) => {
   // fetch post on page load
   useEffect(() => {
     getPost();
-  }, []);
+  }, [id]);
 
   // update the reply comment to its new data after being disliked or shared.
   // this allows the dislike and share button to update within the reply modal.
