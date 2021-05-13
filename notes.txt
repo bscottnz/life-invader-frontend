@@ -15,9 +15,10 @@ toast message on successfull registration and reply?
 
 // just finnished
 
-can now view reply to reply
+making the subject of the view post page big, and displaying replies oldest to newest underneath.
+i need to now allow deleting of posts, and handle any issues that may cause with shares / replies etc
 
-
+there is a bug when i reply to anything other than the subject of a view post page. need to sort this asap
 
 
 
