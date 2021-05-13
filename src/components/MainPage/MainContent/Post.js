@@ -120,7 +120,7 @@ const Post = ({
         </div>
       )}
 
-      {isReply && (
+      {isReply && postData.replyTo._id && (
         <div className="shared-by-heading">
           <FaRegComment style={{ marginRight: '4px', transform: 'translateY(2px)' }} />
           Replying to{' '}

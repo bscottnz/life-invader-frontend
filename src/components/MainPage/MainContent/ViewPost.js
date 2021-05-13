@@ -66,6 +66,8 @@ const ViewPost = ({ currentUser }) => {
   // fetch post on page load
   useEffect(() => {
     getPost();
+    // need to update on id because the page doesnt refresh when
+    // you view a new post from the view post page
   }, [id]);
 
   // update the reply comment to its new data after being disliked or shared.
