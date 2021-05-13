@@ -23,7 +23,7 @@ const ViewPost = ({ currentUser }) => {
   const [replyingTo, setReplyingTo] = useState(null);
 
   // the replies to this post we are viewing
-  const [postReplies, setPostReplies] = useState(null);
+  const [postReplies, setPostReplies] = useState([]);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   // show error message if no post is returned
@@ -91,6 +91,18 @@ const ViewPost = ({ currentUser }) => {
       makeBig={true}
     />
   ));
+
+  const postReplyItems = postReplies.map((post) => (
+    <Post
+      postData={post}
+      currentUser={currentUser}
+      key={uuidv4()}
+      forceUpdate={getPost}
+      setModalIsOpen={setModalIsOpen}
+      setReplyComment={setReplyComment}
+    />
+  ));
+  postReplyItems.reverse();
 
   const replyToItem =
     replyingTo !== null ? (
@@ -177,6 +189,7 @@ const ViewPost = ({ currentUser }) => {
           setModalIsOpen={setModalIsOpen}
           isReply={true}
           replyComment={replyComment}
+          forceUpdate={getPost}
         />
       </Modal>
       <h1 className="main-content-heading">View Post</h1>
@@ -184,6 +197,7 @@ const ViewPost = ({ currentUser }) => {
       <div className="posts-container">
         {replyToItem}
         {postItem.length > 0 && postItem[0]}
+        {postReplies.length > 0 && postReplyItems}
         {showError && (
           <div>
             <h2>Post not found</h2>

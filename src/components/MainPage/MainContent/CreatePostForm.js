@@ -12,6 +12,7 @@ const CreatePostForm = ({
   setModalIsOpen,
   isReply,
   replyComment,
+  forceUpdate,
 }) => {
   const [postText, setPostText] = useState('');
 
@@ -45,6 +46,11 @@ const CreatePostForm = ({
       }
 
       setPostText('');
+
+      // on a view post page, this will refresh the page
+      if (forceUpdate) {
+        forceUpdate();
+      }
 
       // this will close the reply modal when submitting a comment reply
 
@@ -93,6 +99,7 @@ CreatePostForm.defaultProps = {
   isReply: false,
   replyComment: null,
   setPosts: null,
+  forceUpdate: null,
 };
 
 export default CreatePostForm;
