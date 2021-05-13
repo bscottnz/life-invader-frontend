@@ -23,6 +23,7 @@ const Post = ({
   setModalIsOpen,
   setReplyComment,
   allowComments,
+  makeBig,
 }) => {
   // store if the current post is a shared post or original post
   const isRepost = postData.sharedPostData !== undefined;
@@ -98,17 +99,17 @@ const Post = ({
   };
 
   const buttonIconStyle = {
-    fontSize: '22px',
+    fontSize: makeBig ? '30px' : '22px',
   };
 
   const dislikeActiveStyle = {
     color: 'rgb(226, 34, 94)',
-    fontSize: '22px',
+    fontSize: makeBig ? '30px' : '22px',
   };
 
   const shareActiveStyle = {
     color: 'rgb(22, 191, 99)',
-    fontSize: '22px',
+    fontSize: makeBig ? '30px' : '22px',
   };
 
   return (
@@ -141,7 +142,10 @@ const Post = ({
             <span className="username">@{postData.author.username}</span>
             <span className="date">{timestamp}</span>
           </div>
-          <div className="post-body" style={{ whiteSpace: 'pre-wrap' }}>
+          <div
+            className="post-body"
+            style={{ whiteSpace: 'pre-wrap', fontSize: makeBig ? '24px' : '16px' }}
+          >
             {postData.content}
           </div>
           <div className="post-footer">
@@ -152,13 +156,16 @@ const Post = ({
                   openReplyModal(postData);
                 }}
               >
-                <FaRegComment style={{ fontSize: '18px' }} />
+                <FaRegComment style={{ fontSize: makeBig ? '26px' : '18px' }} />
               </button>
             </div>
             <div className="post-button-container post-button-container-share">
               <button onClick={sharePost}>
                 <AiOutlineRetweet style={isShared ? shareActiveStyle : buttonIconStyle} />
-                <span className={`number-shares ${isShared ? 'number-shares-active' : ''}`}>
+                <span
+                  className={`number-shares ${isShared ? 'number-shares-active' : ''}`}
+                  style={{ fontSize: makeBig ? '24px' : '16px' }}
+                >
                   {postData.sharedBy.length || ''}
                 </span>
               </button>
@@ -166,7 +173,10 @@ const Post = ({
             <div className="post-button-container post-button-container-dislike">
               <button className="dislike-button" onClick={dislikePost}>
                 <AiOutlineDislike style={isDisliked ? dislikeActiveStyle : buttonIconStyle} />
-                <span className={`number-dislikes ${isDisliked ? 'number-dislikes-active' : ''}`}>
+                <span
+                  className={`number-dislikes ${isDisliked ? 'number-dislikes-active' : ''}`}
+                  style={{ fontSize: makeBig ? '24px' : '16px' }}
+                >
                   {postData.dislikes.length || ''}
                 </span>
               </button>
@@ -180,6 +190,7 @@ const Post = ({
 
 Post.defaultProps = {
   allowComments: true,
+  makeBig: false, // this is to make the text and buttons of a post bigger
 };
 
 export default Post;

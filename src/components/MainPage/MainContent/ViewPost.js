@@ -88,6 +88,7 @@ const ViewPost = ({ currentUser }) => {
       forceUpdate={getPost}
       setModalIsOpen={setModalIsOpen}
       setReplyComment={setReplyComment}
+      makeBig={true}
     />
   ));
 

@@ -15,7 +15,7 @@ toast message on successfull registration and reply?
 
 // just finnished
 
-can now view new posts from post page. need to fix bug when viewing a reply to a reply
+can now view reply to reply
 
 
 
