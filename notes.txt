@@ -24,6 +24,15 @@ i need to now allow deleting of posts, and handle any issues that may cause with
 
 // todo
 
+-- learn context and refactor modals to not have to re use them between so many components
+-- refactor stuff to take advantage of context api
+-- what happens when opening modal from another modal? eg delete post from comment post modal
+-- finish delete modal
+
+
+
+
+
 -- maybe have a no posts to show message on empty feed ?
 
 -- limit post length in news feed. make them view the full comment if th post is too long
