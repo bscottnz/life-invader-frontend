@@ -208,10 +208,20 @@ textarea::placeholder {
 
   &-header {
     margin-bottom: 10px;
+    display: flex;
   }
 
   &-body {
     margin-bottom: 20px;
+  }
+}
+
+.delete-post-btn {
+  color: $color-text-grey;
+  margin-left: auto;
+
+  &:hover {
+    color: rgb(226, 34, 94);
   }
 }
 

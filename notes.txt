@@ -18,7 +18,7 @@ toast message on successfull registration and reply?
 making the subject of the view post page big, and displaying replies oldest to newest underneath.
 i need to now allow deleting of posts, and handle any issues that may cause with shares / replies etc
 
-there is a bug when i reply to anything other than the subject of a view post page. need to sort this asap
+
 
 
 
@@ -28,10 +28,12 @@ there is a bug when i reply to anything other than the subject of a view post pa
 
 -- limit post length in news feed. make them view the full comment if th post is too long
 
--- change replyto comment link to the post and not the profile page of op
+
 
 -- after view posts and delete posts, need to handle sharing / replying to deleted posts
    and handle the comment button number + active style
+
+-- refactor post modal into its own component
 
 
 

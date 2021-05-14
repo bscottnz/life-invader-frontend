@@ -12,6 +12,7 @@ import {
 import { FaRegComment } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { AiOutlineDislike } from 'react-icons/ai';
+import { RiDeleteBin2Fill } from 'react-icons/ri';
 
 import relativeTime from '../../../utils/relativeTime';
 import axios from 'axios';
@@ -21,10 +22,14 @@ const Post = ({
   currentUser,
   forceUpdate,
   setModalIsOpen,
+  setDeleteModalIsOpen,
   setReplyComment,
   allowComments,
   makeBig,
 }) => {
+  // is the post written by the current user
+  const isCurrentUsersPost = postData.author._id === currentUser._id;
+
   // store if the current post is a shared post or original post
   const isRepost = postData.sharedPostData !== undefined;
 
@@ -98,6 +103,12 @@ const Post = ({
     }
   };
 
+  const deletePost = (e) => {
+    e.stopPropagation();
+    // alert('delete post');
+    setDeleteModalIsOpen(true);
+  };
+
   const buttonIconStyle = {
     fontSize: makeBig ? '30px' : '22px',
   };
@@ -110,6 +121,10 @@ const Post = ({
   const shareActiveStyle = {
     color: 'rgb(22, 191, 99)',
     fontSize: makeBig ? '30px' : '22px',
+  };
+
+  const deleteBtnStyle = {
+    color: 'inherit',
   };
 
   return (
@@ -141,6 +156,11 @@ const Post = ({
             </span>
             <span className="username">@{postData.author.username}</span>
             <span className="date">{timestamp}</span>
+            {isCurrentUsersPost && (
+              <div className="delete-post-btn">
+                <RiDeleteBin2Fill style={deleteBtnStyle} onClick={deletePost} />{' '}
+              </div>
+            )}
           </div>
           <div
             className="post-body"
@@ -190,6 +210,7 @@ const Post = ({
 
 Post.defaultProps = {
   allowComments: true,
+  setDeleteModalIsOpen: null,
   makeBig: false, // this is to make the text and buttons of a post bigger
 };
 

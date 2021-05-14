@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Modal from 'react-modal';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { HiOutlineEmojiSad } from 'react-icons/hi';
+import DeletePostModal from './Modals/DeletePostModal';
 
 import Post from './Post';
 import CreatePostForm from './CreatePostForm';
@@ -25,7 +26,12 @@ const ViewPost = ({ currentUser }) => {
   // the replies to this post we are viewing
   const [postReplies, setPostReplies] = useState([]);
 
+  // modal for comenting
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  // modal for delete
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+
   // show error message if no post is returned
   const [showError, setShowError] = useState(false);
 
@@ -87,6 +93,7 @@ const ViewPost = ({ currentUser }) => {
       key={uuidv4()}
       forceUpdate={getPost}
       setModalIsOpen={setModalIsOpen}
+      setDeleteModalIsOpen={setDeleteModalIsOpen}
       setReplyComment={setReplyComment}
       makeBig={true}
     />
@@ -99,6 +106,7 @@ const ViewPost = ({ currentUser }) => {
       key={uuidv4()}
       forceUpdate={getPost}
       setModalIsOpen={setModalIsOpen}
+      setDeleteModalIsOpen={setDeleteModalIsOpen}
       setReplyComment={setReplyComment}
     />
   ));
@@ -112,6 +120,7 @@ const ViewPost = ({ currentUser }) => {
         key={uuidv4()}
         forceUpdate={getPost}
         setModalIsOpen={setModalIsOpen}
+        setDeleteModalIsOpen={setDeleteModalIsOpen}
         setReplyComment={setReplyComment}
       />
     ) : null;
@@ -180,6 +189,7 @@ const ViewPost = ({ currentUser }) => {
           key={uuidv4()}
           forceUpdate={getPost}
           setModalIsOpen={setModalIsOpen}
+          setDeleteModalIsOpen={setDeleteModalIsOpen}
           allowComments={false}
         />
 
@@ -194,6 +204,10 @@ const ViewPost = ({ currentUser }) => {
           forceUpdate={getPost}
         />
       </Modal>
+      <DeletePostModal
+        deleteModalIsOpen={deleteModalIsOpen}
+        setDeleteModalIsOpen={setDeleteModalIsOpen}
+      />
       <h1 className="main-content-heading">View Post</h1>
 
       <div className="posts-container">

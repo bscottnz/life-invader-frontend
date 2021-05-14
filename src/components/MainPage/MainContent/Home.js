@@ -6,6 +6,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import CreatePostForm from './CreatePostForm';
 import Post from './Post';
+import DeletePostModal from './Modals/DeletePostModal';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,6 +16,7 @@ Modal.setAppElement('#root');
 const Home = ({ currentUser }) => {
   const [posts, setPosts] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
   // keep track of which comment is being replied to
   const [replyComment, setReplyComment] = useState(null);
@@ -56,6 +58,7 @@ const Home = ({ currentUser }) => {
       key={uuidv4()}
       forceUpdate={getPosts}
       setModalIsOpen={setModalIsOpen}
+      setDeleteModalIsOpen={setDeleteModalIsOpen}
       setReplyComment={setReplyComment}
     />
   ));
@@ -136,6 +139,11 @@ const Home = ({ currentUser }) => {
           replyComment={replyComment}
         />
       </Modal>
+      <DeletePostModal
+        deleteModalIsOpen={deleteModalIsOpen}
+        setDeleteModalIsOpen={setDeleteModalIsOpen}
+      />
+      <deleteModalIsOpen />
       <h1 className="main-content-heading">Home</h1>
       <CreatePostForm currentUser={currentUser} setPosts={setPosts} posts={posts} />
       <div className="posts-container">{postItems}</div>
