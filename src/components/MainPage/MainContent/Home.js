@@ -6,7 +6,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import CreatePostForm from './CreatePostForm';
 import Post from './Post';
-import DeletePostModal from './Modals/DeletePostModal';
+import DeletePostModal from '../../Modals/DeletePostModal';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';

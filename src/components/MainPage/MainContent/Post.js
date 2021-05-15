@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,6 +8,8 @@ import {
   Redirect,
   useHistory,
 } from 'react-router-dom';
+
+import { ModalContext } from '../../Modals/ModalContext';
 
 import { FaRegComment } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
@@ -22,11 +24,13 @@ const Post = ({
   currentUser,
   forceUpdate,
   setModalIsOpen,
-  setDeleteModalIsOpen,
+  // setDeleteModalIsOpen,
   setReplyComment,
   allowComments,
   makeBig,
 }) => {
+  const { setDeleteModalIsOpen } = useContext(ModalContext);
+
   // is the post written by the current user
   const isCurrentUsersPost = postData.author._id === currentUser._id;
 

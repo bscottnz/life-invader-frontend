@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-ro
 import { useEffect, useState } from 'react';
 
 import Welcome from './pages/Welcome';
+import { ModalProvider } from './components/Modals/ModalContext';
 
 import Loading from './components/Loading';
 import TopNav from './components/MainPage/TopNav/TopNav';
@@ -31,15 +32,17 @@ function App() {
 
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/authenticate`,
-    }).then((res) => {
-      if (res.data.username !== undefined) {
-        setCurrentUser(res.data);
-      }
-      //after user data is fetched, remove loading page
-      setisLoading(false);
-      //loading bar end
-      nprogress.done();
-    });
+    })
+      .then((res) => {
+        if (res.data.username !== undefined) {
+          setCurrentUser(res.data);
+        }
+        //after user data is fetched, remove loading page
+        setisLoading(false);
+        //loading bar end
+        nprogress.done();
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   // destroy user session
@@ -65,20 +68,22 @@ function App() {
 
   // user is logged in so render main app
   return (
-    <div className="App">
-      <TopNav />
-      <TopNavDropdown logOut={logOut} />
-      <div className="main-wrapper">
-        <main className="layout">
-          <LeftNav logOut={logOut} />
-          <MainContent currentUser={currentUser} />
-          <RightSidebar />
-        </main>
+    <ModalProvider>
+      <div className="App">
+        <TopNav />
+        <TopNavDropdown logOut={logOut} />
+        <div className="main-wrapper">
+          <main className="layout">
+            <LeftNav logOut={logOut} />
+            <MainContent currentUser={currentUser} />
+            <RightSidebar />
+          </main>
+        </div>
+        <div className="new-post-btn-wrapper mobile-post-btn">
+          <BiPlus style={{ fontSize: '32px' }} />
+        </div>
       </div>
-      <div className="new-post-btn-wrapper mobile-post-btn">
-        <BiPlus style={{ fontSize: '32px' }} />
-      </div>
-    </div>
+    </ModalProvider>
   );
 }
 

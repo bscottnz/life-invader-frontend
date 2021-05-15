@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Modal from 'react-modal';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { HiOutlineEmojiSad } from 'react-icons/hi';
-import DeletePostModal from './Modals/DeletePostModal';
+import DeletePostModal from '../../Modals/DeletePostModal';
+
+import { ModalContext } from '../../Modals/ModalContext';
 
 import Post from './Post';
 import CreatePostForm from './CreatePostForm';
@@ -26,17 +28,14 @@ const ViewPost = ({ currentUser }) => {
   // the replies to this post we are viewing
   const [postReplies, setPostReplies] = useState([]);
 
-  // modal for comenting
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  // modal for delete
-  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
-
   // show error message if no post is returned
   const [showError, setShowError] = useState(false);
 
   // keep track of which comment is being replied to in the modal
   const [replyComment, setReplyComment] = useState(null);
+
+  // get comment modal state from context
+  const { modalIsOpen, setModalIsOpen } = useContext(ModalContext);
 
   // get specific post
   const getPost = () => {
@@ -93,7 +92,6 @@ const ViewPost = ({ currentUser }) => {
       key={uuidv4()}
       forceUpdate={getPost}
       setModalIsOpen={setModalIsOpen}
-      setDeleteModalIsOpen={setDeleteModalIsOpen}
       setReplyComment={setReplyComment}
       makeBig={true}
     />
@@ -106,7 +104,6 @@ const ViewPost = ({ currentUser }) => {
       key={uuidv4()}
       forceUpdate={getPost}
       setModalIsOpen={setModalIsOpen}
-      setDeleteModalIsOpen={setDeleteModalIsOpen}
       setReplyComment={setReplyComment}
     />
   ));
@@ -120,7 +117,6 @@ const ViewPost = ({ currentUser }) => {
         key={uuidv4()}
         forceUpdate={getPost}
         setModalIsOpen={setModalIsOpen}
-        setDeleteModalIsOpen={setDeleteModalIsOpen}
         setReplyComment={setReplyComment}
       />
     ) : null;
@@ -189,7 +185,6 @@ const ViewPost = ({ currentUser }) => {
           key={uuidv4()}
           forceUpdate={getPost}
           setModalIsOpen={setModalIsOpen}
-          setDeleteModalIsOpen={setDeleteModalIsOpen}
           allowComments={false}
         />
 
@@ -204,10 +199,7 @@ const ViewPost = ({ currentUser }) => {
           forceUpdate={getPost}
         />
       </Modal>
-      <DeletePostModal
-        deleteModalIsOpen={deleteModalIsOpen}
-        setDeleteModalIsOpen={setDeleteModalIsOpen}
-      />
+      <DeletePostModal />
       <h1 className="main-content-heading">View Post</h1>
 
       <div className="posts-container">
