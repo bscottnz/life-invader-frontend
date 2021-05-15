@@ -1,15 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Modal from 'react-modal';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { HiOutlineEmojiSad } from 'react-icons/hi';
 import DeletePostModal from '../../Modals/DeletePostModal';
-
-import { ModalContext } from '../../Modals/ModalContext';
+import CreatePostModal from '../../Modals/CreatePostModal';
 
 import Post from './Post';
-import CreatePostForm from './CreatePostForm';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -34,11 +30,13 @@ const ViewPost = ({ currentUser }) => {
   // keep track of which comment is being replied to in the modal
   const [replyComment, setReplyComment] = useState(null);
 
-  // get comment modal state from context
-  const { modalIsOpen, setModalIsOpen } = useContext(ModalContext);
+  // // get comment modal state from context
+  // const { modalIsOpen, setModalIsOpen } = useContext(ModalContext);
 
   // get specific post
   const getPost = () => {
+    console.log('getting post');
+    console.log(id);
     axios({
       method: 'get',
       withCredentials: true,
@@ -71,6 +69,11 @@ const ViewPost = ({ currentUser }) => {
   // fetch post on page load
   useEffect(() => {
     getPost();
+
+    return () => {
+      setPost([]);
+    };
+
     // need to update on id because the page doesnt refresh when
     // you view a new post from the view post page
   }, [id]);
@@ -78,6 +81,7 @@ const ViewPost = ({ currentUser }) => {
   // update the reply comment to its new data after being disliked or shared.
   // this allows the dislike and share button to update within the reply modal.
   useEffect(() => {
+    console.log(id);
     if (replyComment) {
       const updatedReplyComment = post.filter((post_) => post_._id === replyComment._id);
 
@@ -91,7 +95,7 @@ const ViewPost = ({ currentUser }) => {
       currentUser={currentUser}
       key={uuidv4()}
       forceUpdate={getPost}
-      setModalIsOpen={setModalIsOpen}
+      // setModalIsOpen={setModalIsOpen}
       setReplyComment={setReplyComment}
       makeBig={true}
     />
@@ -103,7 +107,7 @@ const ViewPost = ({ currentUser }) => {
       currentUser={currentUser}
       key={uuidv4()}
       forceUpdate={getPost}
-      setModalIsOpen={setModalIsOpen}
+      // setModalIsOpen={setModalIsOpen}
       setReplyComment={setReplyComment}
     />
   ));
@@ -116,33 +120,10 @@ const ViewPost = ({ currentUser }) => {
         currentUser={currentUser}
         key={uuidv4()}
         forceUpdate={getPost}
-        setModalIsOpen={setModalIsOpen}
+        // setModalIsOpen={setModalIsOpen}
         setReplyComment={setReplyComment}
       />
     ) : null;
-
-  const modalStyle = {
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, .9)',
-      height: 'calc(100vh + 100px)',
-      zIndex: 3,
-    },
-    content: {
-      backgroundColor: 'rgb(21, 24, 28)',
-      maxWidth: '600px',
-      height: 'fit-content',
-      zIndex: 3,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      top: 'calc(50% - 50px)',
-      left: '10px',
-      right: '10px',
-      // transform: 'translateY(-50%)',
-      borderRadius: '15px',
-      border: '1px solid #3a3a3a',
-      border: 'none',
-    },
-  };
 
   let replyHeading = '';
   let replyTextPlaceholder = '';
@@ -161,44 +142,14 @@ const ViewPost = ({ currentUser }) => {
   }
   return (
     <div>
-      <Modal
-        style={modalStyle}
-        isOpen={modalIsOpen}
-        closeTimeoutMS={300}
-        onRequestClose={() => setModalIsOpen(false)}
-      >
-        <div
-          className="heading-container"
-          style={{ display: 'flex', justifyContent: 'space-between' }}
-        >
-          <h2 className="main-content-heading">{replyHeading}</h2>
-
-          <AiOutlineCloseCircle
-            style={{ fontSize: '22px', cursor: 'pointer' }}
-            onClick={() => setModalIsOpen(false)}
-          />
-        </div>
-
-        <Post
-          postData={replyComment}
-          currentUser={currentUser}
-          key={uuidv4()}
-          forceUpdate={getPost}
-          setModalIsOpen={setModalIsOpen}
-          allowComments={false}
-        />
-
-        <CreatePostForm
-          currentUser={currentUser}
-          posts={post}
-          textPlaceholder={replyTextPlaceholder}
-          buttonText={'Reply'}
-          setModalIsOpen={setModalIsOpen}
-          isReply={true}
-          replyComment={replyComment}
-          forceUpdate={getPost}
-        />
-      </Modal>
+      <CreatePostModal
+        currentUser={currentUser}
+        replyComment={replyComment}
+        replyHeading={replyHeading}
+        replyTextPlaceholder={replyTextPlaceholder}
+        getPost={getPost}
+        post={post}
+      />
       <DeletePostModal />
       <h1 className="main-content-heading">View Post</h1>
 

@@ -19,17 +19,8 @@ import { RiDeleteBin2Fill } from 'react-icons/ri';
 import relativeTime from '../../../utils/relativeTime';
 import axios from 'axios';
 
-const Post = ({
-  postData,
-  currentUser,
-  forceUpdate,
-  setModalIsOpen,
-  // setDeleteModalIsOpen,
-  setReplyComment,
-  allowComments,
-  makeBig,
-}) => {
-  const { setDeleteModalIsOpen } = useContext(ModalContext);
+const Post = ({ postData, currentUser, forceUpdate, setReplyComment, allowComments, makeBig }) => {
+  const { setDeleteModalIsOpen, setModalIsOpen } = useContext(ModalContext);
 
   // is the post written by the current user
   const isCurrentUsersPost = postData.author._id === currentUser._id;
@@ -103,6 +94,7 @@ const Post = ({
     // only redirect to post page if the user is not clicking a link.
     // buttons are handled in their own click events with stopPropogation()
     if (postData._id !== undefined && e.target.tagName != 'A') {
+      setModalIsOpen(false);
       history.push(`/post/${postData._id}`);
     }
   };
@@ -136,7 +128,10 @@ const Post = ({
       {isRepost && (
         <div className="shared-by-heading">
           <AiOutlineRetweet style={{ marginRight: '4px', transform: 'translateY(2px)' }} />
-          Shared by <Link to={`/profile/${repostedBy}`}>@{repostedBy}</Link>
+          Shared by{' '}
+          <Link to={`/profile/${repostedBy}`} onClick={(e) => setModalIsOpen(false)}>
+            @{repostedBy}
+          </Link>
         </div>
       )}
 
@@ -144,7 +139,10 @@ const Post = ({
         <div className="shared-by-heading">
           <FaRegComment style={{ marginRight: '4px', transform: 'translateY(2px)' }} />
           Replying to{' '}
-          <Link to={`/profile/${postData.replyTo.author.username}`}>
+          <Link
+            to={`/profile/${postData.replyTo.author.username}`}
+            onClick={(e) => setModalIsOpen(false)}
+          >
             @{postData.replyTo.author.username}
           </Link>
         </div>
@@ -155,7 +153,7 @@ const Post = ({
         </div>
         <div className="post-content-container">
           <div className="post-header">
-            <span className="display-name">
+            <span className="display-name" onClick={(e) => setModalIsOpen(false)}>
               <Link to={`/profile/${postData.author.username}`}>{userFullName}</Link>
             </span>
             <span className="username">@{postData.author.username}</span>
@@ -214,7 +212,6 @@ const Post = ({
 
 Post.defaultProps = {
   allowComments: true,
-  setDeleteModalIsOpen: null,
   makeBig: false, // this is to make the text and buttons of a post bigger
 };
 

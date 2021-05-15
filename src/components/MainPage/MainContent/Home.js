@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import Modal from 'react-modal';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
@@ -7,16 +7,18 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import CreatePostForm from './CreatePostForm';
 import Post from './Post';
 import DeletePostModal from '../../Modals/DeletePostModal';
+import { ModalContext } from '../../Modals/ModalContext';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import modalStyle from '../../Modals/modalStyle';
 
 Modal.setAppElement('#root');
 
 const Home = ({ currentUser }) => {
   const [posts, setPosts] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+
+  const { modalIsOpen, setModalIsOpen } = useContext(ModalContext);
 
   // keep track of which comment is being replied to
   const [replyComment, setReplyComment] = useState(null);
@@ -57,34 +59,9 @@ const Home = ({ currentUser }) => {
       currentUser={currentUser}
       key={uuidv4()}
       forceUpdate={getPosts}
-      setModalIsOpen={setModalIsOpen}
-      setDeleteModalIsOpen={setDeleteModalIsOpen}
       setReplyComment={setReplyComment}
     />
   ));
-
-  const modalStyle = {
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, .9)',
-      height: 'calc(100vh + 100px)',
-      zIndex: 3,
-    },
-    content: {
-      backgroundColor: 'rgb(21, 24, 28)',
-      maxWidth: '600px',
-      height: 'fit-content',
-      zIndex: 3,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      top: 'calc(50% - 50px)',
-      left: '10px',
-      right: '10px',
-      // transform: 'translateY(-50%)',
-      borderRadius: '15px',
-      border: '1px solid #3a3a3a',
-      border: 'none',
-    },
-  };
 
   let replyHeading = '';
   let replyTextPlaceholder = '';
@@ -139,11 +116,9 @@ const Home = ({ currentUser }) => {
           replyComment={replyComment}
         />
       </Modal>
-      <DeletePostModal
-        deleteModalIsOpen={deleteModalIsOpen}
-        setDeleteModalIsOpen={setDeleteModalIsOpen}
-      />
-      <deleteModalIsOpen />
+
+      <DeletePostModal />
+
       <h1 className="main-content-heading">Home</h1>
       <CreatePostForm currentUser={currentUser} setPosts={setPosts} posts={posts} />
       <div className="posts-container">{postItems}</div>
