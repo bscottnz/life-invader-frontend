@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { HiOutlineEmojiSad } from 'react-icons/hi';
 import DeletePostModal from '../../Modals/DeletePostModal';
-import CreatePostModal from '../../Modals/CreatePostModal';
+import ReplyModal from '../../Modals/ReplyModal';
 
 import Post from './Post';
 
@@ -172,13 +172,12 @@ const ViewPost = ({ currentUser }) => {
   }
   return (
     <div>
-      <CreatePostModal
+      <ReplyModal
         currentUser={currentUser}
         replyComment={replyComment}
         replyHeading={replyHeading}
         replyTextPlaceholder={replyTextPlaceholder}
         getPost={getPost}
-        post={post}
       />
       <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
       <h1 className="main-content-heading">View Post</h1>

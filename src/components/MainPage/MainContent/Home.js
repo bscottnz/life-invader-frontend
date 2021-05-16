@@ -7,6 +7,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import CreatePostForm from './CreatePostForm';
 import Post from './Post';
 import DeletePostModal from '../../Modals/DeletePostModal';
+import ReplyModal from '../../Modals/ReplyModal';
 import { ModalContext } from '../../Modals/ModalContext';
 
 import axios from 'axios';
@@ -87,48 +88,13 @@ const Home = ({ currentUser }) => {
   }
   return (
     <div>
-      {/* this modal behaves differently to the other create post modals so i left it 
-      here like this */}
-      <Modal
-        style={modalStyle}
-        isOpen={modalIsOpen}
-        closeTimeoutMS={300}
-        onRequestClose={() => setModalIsOpen(false)}
-      >
-        <div
-          className="heading-container"
-          style={{ display: 'flex', justifyContent: 'space-between' }}
-        >
-          <h2 className="main-content-heading">{replyHeading}</h2>
-
-          <AiOutlineCloseCircle
-            style={{ fontSize: '22px', cursor: 'pointer' }}
-            onClick={() => setModalIsOpen(false)}
-          />
-        </div>
-
-        <Post
-          postData={replyComment}
-          currentUser={currentUser}
-          key={uuidv4()}
-          forceUpdate={getPosts}
-          setModalIsOpen={setModalIsOpen}
-          allowComments={false}
-          isDeletable={false}
-        />
-
-        <CreatePostForm
-          currentUser={currentUser}
-          setPosts={setPosts}
-          posts={posts}
-          textPlaceholder={replyTextPlaceholder}
-          buttonText={'Reply'}
-          setModalIsOpen={setModalIsOpen}
-          isReply={true}
-          replyComment={replyComment}
-          forceUpdate={getPosts}
-        />
-      </Modal>
+      <ReplyModal
+        currentUser={currentUser}
+        replyComment={replyComment}
+        replyHeading={replyHeading}
+        replyTextPlaceholder={replyTextPlaceholder}
+        getPost={getPosts}
+      />
 
       <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
 
