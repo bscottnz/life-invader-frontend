@@ -86,6 +86,11 @@ const ViewPost = ({ currentUser }) => {
     }
   }, [post]);
 
+  // delete post
+  const deletePost = (id) => {
+    console.log(id);
+  };
+
   const postItem = post.map((post_) => (
     <Post
       postData={post[0]}
@@ -147,7 +152,7 @@ const ViewPost = ({ currentUser }) => {
         getPost={getPost}
         post={post}
       />
-      <DeletePostModal deleteComment={deleteComment} />
+      <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
       <h1 className="main-content-heading">View Post</h1>
 
       <div className="posts-container">

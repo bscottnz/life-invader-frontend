@@ -371,3 +371,20 @@ textarea::placeholder {
 .custom-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
+
+// buttons in delete modal
+.modal-delete-btn {
+  background-color: $color-blue;
+  height: 32px;
+  color: inherit;
+  border: none;
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:active {
+    transform: translateY(1px);
+  }
+}

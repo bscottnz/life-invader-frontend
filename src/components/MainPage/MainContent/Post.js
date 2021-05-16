@@ -108,7 +108,7 @@ const Post = ({
     }
   };
 
-  const deletePost = (e) => {
+  const openDeleteModal = (e) => {
     e.stopPropagation();
     setDeleteComment(postData._id);
     setDeleteModalIsOpen(true);
@@ -176,7 +176,7 @@ const Post = ({
             post as the repost data is copied over to the repost */}
             {isCurrentUsersPost && !isRepost && isDeletable && (
               <div className="delete-post-btn">
-                <RiDeleteBin2Fill style={deleteBtnStyle} onClick={deletePost} />{' '}
+                <RiDeleteBin2Fill style={deleteBtnStyle} onClick={openDeleteModal} />{' '}
               </div>
             )}
           </div>
