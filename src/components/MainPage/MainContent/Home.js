@@ -126,13 +126,14 @@ const Home = ({ currentUser }) => {
           setModalIsOpen={setModalIsOpen}
           isReply={true}
           replyComment={replyComment}
+          forceUpdate={getPosts}
         />
       </Modal>
 
       <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
 
       <h1 className="main-content-heading">Home</h1>
-      <CreatePostForm currentUser={currentUser} setPosts={setPosts} posts={posts} />
+      <CreatePostForm currentUser={currentUser} forceUpdate={getPosts} />
       <div className="posts-container">{postItems}</div>
     </div>
   );

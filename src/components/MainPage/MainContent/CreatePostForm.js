@@ -5,8 +5,6 @@ import axios from 'axios';
 
 const CreatePostForm = ({
   currentUser,
-  setPosts,
-  posts,
   textPlaceholder,
   buttonText,
   setModalIsOpen,
@@ -38,22 +36,12 @@ const CreatePostForm = ({
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts`,
     }).then((res) => {
-      // prepend new post to post state array.
-      // when replying to posts on a view post page, i dont want to set any posts,
-      // so when using createPostForm from these pages. setPosts will be null
-      if (setPosts !== null) {
-        setPosts((posts) => [res.data, ...posts]);
-      }
-
+      // clear the text area
       setPostText('');
-
-      // on a view post page, this will refresh the page
-      if (forceUpdate) {
-        forceUpdate();
-      }
+      // refresh posts
+      forceUpdate();
 
       // this will close the reply modal when submitting a comment reply
-
       if (isReply) {
         setModalIsOpen(false);
       }

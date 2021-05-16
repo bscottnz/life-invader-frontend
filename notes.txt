@@ -13,7 +13,7 @@ toast message on successfull registration and reply?
 
 fixing tht second godforsaken bug 
 i need to now allow deleting of posts, and handle any issues that may cause with shares / replies etc.
-the delete button just logs the id of the post. i have put the delete function into a contailed util file.
+the delete button just logs the id of the post. i have put the delete function into a contained util file.
 
 
 
