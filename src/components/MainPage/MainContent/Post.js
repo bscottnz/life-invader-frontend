@@ -104,6 +104,7 @@ const Post = ({
     // buttons are handled in their own click events with stopPropogation()
     if (postData._id !== undefined && e.target.tagName != 'A') {
       setModalIsOpen(false);
+      console.log(6);
       history.push(`/post/${postData._id}`);
     }
   };

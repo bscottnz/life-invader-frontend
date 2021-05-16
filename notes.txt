@@ -11,8 +11,9 @@ toast message on successfull registration and reply?
 
 // just finnished
 
-fixing tht godforsaken bug 
-i need to now allow deleting of posts, and handle any issues that may cause with shares / replies etc
+fixing tht second godforsaken bug 
+i need to now allow deleting of posts, and handle any issues that may cause with shares / replies etc.
+the delete button just logs the id of the post. i have put the delete function into a contailed util file.
 
 
 
@@ -22,8 +23,15 @@ i need to now allow deleting of posts, and handle any issues that may cause with
 
 
 
--- finish delete modal
--- maybr make shared by / replying to username blue ?
+-- finish delete functionality
+
+-- refactor new post function into a seperate utility file, like how im doing the delete post
+-- refactor makeing post on home page to funtino liek the other new posts. ie dont prepend to state 
+   and instead just reload. this will be slower but allow me to use the create post modal in home and 
+   seperate out the make post function into utils
+
+
+-- mayve change the bin icon to a cross
 
 
 
@@ -35,7 +43,7 @@ i need to now allow deleting of posts, and handle any issues that may cause with
 
 
 
--- after view posts and delete posts, need to handle sharing / replying to deleted posts
+--  need to handle sharing / replying to deleted posts
    and handle the comment button number + active style
 
 -- refactor post modal into its own component

@@ -41,7 +41,7 @@ const ViewPost = ({ currentUser }) => {
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${id}`,
     })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         // set the post we are viewing
         setPost([res.data.post]);
 
@@ -78,11 +78,30 @@ const ViewPost = ({ currentUser }) => {
 
   // update the reply comment to its new data after being disliked or shared.
   // this allows the dislike and share button to update within the reply modal.
+  // need to check replyTo, post and post replies for the right comment.
   useEffect(() => {
     if (replyComment) {
-      const updatedReplyComment = post.filter((post_) => post_._id === replyComment._id);
+      // check the comment the subject post is replying to
+      if (replyingTo) {
+        // if this was the comment we are interacting with in reply modal
+        if (replyingTo._id === replyComment._id) {
+          setReplyComment(replyingTo);
+        }
+      }
 
-      setReplyComment(updatedReplyComment[0]);
+      // check the subject post
+      if (post._id === replyComment._id) {
+        setReplyComment(post);
+      }
+
+      // check subject post replies
+      if (postReplies.length > 0) {
+        postReplies.map((reply) => {
+          if (reply._id === replyComment._id) {
+            setReplyComment(reply);
+          }
+        });
+      }
     }
   }, [post]);
 
