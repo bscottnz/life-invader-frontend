@@ -78,7 +78,8 @@ const ViewPost = ({ currentUser }) => {
 
   // update the reply comment to its new data after being disliked or shared.
   // this allows the dislike and share button to update within the reply modal.
-  // need to check replyTo, post and post replies for the right comment.
+  // need to seperatley check replyTo, post and post replies for the right comment.
+
   useEffect(() => {
     if (replyComment) {
       // check the subject post
