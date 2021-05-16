@@ -1,12 +1,8 @@
 // ideas
 
-Use modals for register and log in ?
 
 allow 5 comments and then require lifeinvader premium or extra liveinvader coins ?
 
-have made up adds ?
-
-on register, have a no data collection button that cant be checked, moves around etc. ?
 
 toast message on successfull registration and reply?
 
@@ -15,7 +11,7 @@ toast message on successfull registration and reply?
 
 // just finnished
 
-making the subject of the view post page big, and displaying replies oldest to newest underneath.
+fixing tht godforsaken bug 
 i need to now allow deleting of posts, and handle any issues that may cause with shares / replies etc
 
 
@@ -24,10 +20,10 @@ i need to now allow deleting of posts, and handle any issues that may cause with
 
 // todo
 
--- learn context and refactor modals to not have to re use them between so many components
--- refactor stuff to take advantage of context api
--- what happens when opening modal from another modal? eg delete post from comment post modal
+
+
 -- finish delete modal
+-- maybr make shared by / replying to username blue ?
 
 
 

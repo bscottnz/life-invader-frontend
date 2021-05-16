@@ -6,7 +6,7 @@ import { ModalContext } from './ModalContext';
 
 import modalStyle from './modalStyle';
 
-const DeletePostModal = () => {
+const DeletePostModal = ({ deleteComment }) => {
   // get delete modal state from context
   const { deleteModalIsOpen, setDeleteModalIsOpen } = useContext(ModalContext);
 
@@ -19,6 +19,7 @@ const DeletePostModal = () => {
     >
       <div>
         <h2>Delete post?</h2>
+        <p>{deleteComment}</p>
       </div>
     </Modal>
   );

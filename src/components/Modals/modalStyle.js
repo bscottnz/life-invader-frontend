@@ -1,4 +1,4 @@
-// to save my copying this into each modal
+// to save me copying this into each modal
 
 const modalStyle = {
   overlay: {

@@ -23,6 +23,9 @@ const Home = ({ currentUser }) => {
   // keep track of which comment is being replied to
   const [replyComment, setReplyComment] = useState(null);
 
+  // keep track of the id of which comment is being deleted
+  const [deleteComment, setDeleteComment] = useState(null);
+
   const getPosts = () => {
     axios({
       method: 'get',
@@ -60,6 +63,7 @@ const Home = ({ currentUser }) => {
       key={uuidv4()}
       forceUpdate={getPosts}
       setReplyComment={setReplyComment}
+      setDeleteComment={setDeleteComment}
     />
   ));
 
@@ -78,6 +82,8 @@ const Home = ({ currentUser }) => {
   }
   return (
     <div>
+      {/* this modal behaves differently to the other create post modals so i left it 
+      here like this */}
       <Modal
         style={modalStyle}
         isOpen={modalIsOpen}
@@ -103,6 +109,7 @@ const Home = ({ currentUser }) => {
           forceUpdate={getPosts}
           setModalIsOpen={setModalIsOpen}
           allowComments={false}
+          isDeletable={false}
         />
 
         <CreatePostForm
@@ -117,7 +124,7 @@ const Home = ({ currentUser }) => {
         />
       </Modal>
 
-      <DeletePostModal />
+      <DeletePostModal deleteComment={deleteComment} />
 
       <h1 className="main-content-heading">Home</h1>
       <CreatePostForm currentUser={currentUser} setPosts={setPosts} posts={posts} />

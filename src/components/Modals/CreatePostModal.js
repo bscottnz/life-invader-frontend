@@ -47,6 +47,7 @@ const CreatePostModal = ({
         forceUpdate={getPost}
         setModalIsOpen={setModalIsOpen}
         allowComments={false}
+        isDeletable={false}
       />
 
       <CreatePostForm

@@ -30,20 +30,18 @@ const ViewPost = ({ currentUser }) => {
   // keep track of which comment is being replied to in the modal
   const [replyComment, setReplyComment] = useState(null);
 
-  // // get comment modal state from context
-  // const { modalIsOpen, setModalIsOpen } = useContext(ModalContext);
+  // keep track of which comment is being deleted
+  const [deleteComment, setDeleteComment] = useState(null);
 
   // get specific post
   const getPost = () => {
-    console.log('getting post');
-    console.log(id);
     axios({
       method: 'get',
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${id}`,
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         // set the post we are viewing
         setPost([res.data.post]);
 
@@ -81,7 +79,6 @@ const ViewPost = ({ currentUser }) => {
   // update the reply comment to its new data after being disliked or shared.
   // this allows the dislike and share button to update within the reply modal.
   useEffect(() => {
-    console.log(id);
     if (replyComment) {
       const updatedReplyComment = post.filter((post_) => post_._id === replyComment._id);
 
@@ -95,8 +92,8 @@ const ViewPost = ({ currentUser }) => {
       currentUser={currentUser}
       key={uuidv4()}
       forceUpdate={getPost}
-      // setModalIsOpen={setModalIsOpen}
       setReplyComment={setReplyComment}
+      setDeleteComment={setDeleteComment}
       makeBig={true}
     />
   ));
@@ -107,8 +104,8 @@ const ViewPost = ({ currentUser }) => {
       currentUser={currentUser}
       key={uuidv4()}
       forceUpdate={getPost}
-      // setModalIsOpen={setModalIsOpen}
       setReplyComment={setReplyComment}
+      setDeleteComment={setDeleteComment}
     />
   ));
   postReplyItems.reverse();
@@ -120,8 +117,8 @@ const ViewPost = ({ currentUser }) => {
         currentUser={currentUser}
         key={uuidv4()}
         forceUpdate={getPost}
-        // setModalIsOpen={setModalIsOpen}
         setReplyComment={setReplyComment}
+        setDeleteComment={setDeleteComment}
       />
     ) : null;
 
@@ -150,7 +147,7 @@ const ViewPost = ({ currentUser }) => {
         getPost={getPost}
         post={post}
       />
-      <DeletePostModal />
+      <DeletePostModal deleteComment={deleteComment} />
       <h1 className="main-content-heading">View Post</h1>
 
       <div className="posts-container">

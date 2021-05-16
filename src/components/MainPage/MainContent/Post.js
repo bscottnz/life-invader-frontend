@@ -19,7 +19,16 @@ import { RiDeleteBin2Fill } from 'react-icons/ri';
 import relativeTime from '../../../utils/relativeTime';
 import axios from 'axios';
 
-const Post = ({ postData, currentUser, forceUpdate, setReplyComment, allowComments, makeBig }) => {
+const Post = ({
+  postData,
+  currentUser,
+  forceUpdate,
+  setReplyComment,
+  setDeleteComment,
+  allowComments,
+  makeBig,
+  isDeletable,
+}) => {
   const { setDeleteModalIsOpen, setModalIsOpen } = useContext(ModalContext);
 
   // is the post written by the current user
@@ -101,7 +110,7 @@ const Post = ({ postData, currentUser, forceUpdate, setReplyComment, allowCommen
 
   const deletePost = (e) => {
     e.stopPropagation();
-    // alert('delete post');
+    setDeleteComment(postData._id);
     setDeleteModalIsOpen(true);
   };
 
@@ -129,7 +138,11 @@ const Post = ({ postData, currentUser, forceUpdate, setReplyComment, allowCommen
         <div className="shared-by-heading">
           <AiOutlineRetweet style={{ marginRight: '4px', transform: 'translateY(2px)' }} />
           Shared by{' '}
-          <Link to={`/profile/${repostedBy}`} onClick={(e) => setModalIsOpen(false)}>
+          <Link
+            to={`/profile/${repostedBy}`}
+            onClick={(e) => setModalIsOpen(false)}
+            style={{ color: 'rgb(29, 161, 242)' }}
+          >
             @{repostedBy}
           </Link>
         </div>
@@ -142,6 +155,7 @@ const Post = ({ postData, currentUser, forceUpdate, setReplyComment, allowCommen
           <Link
             to={`/profile/${postData.replyTo.author.username}`}
             onClick={(e) => setModalIsOpen(false)}
+            style={{ color: 'rgb(29, 161, 242)' }}
           >
             @{postData.replyTo.author.username}
           </Link>
@@ -158,7 +172,9 @@ const Post = ({ postData, currentUser, forceUpdate, setReplyComment, allowCommen
             </span>
             <span className="username">@{postData.author.username}</span>
             <span className="date">{timestamp}</span>
-            {isCurrentUsersPost && (
+            {/* only show delete if it is not a repost, since that would delete the original
+            post as the repost data is copied over to the repost */}
+            {isCurrentUsersPost && !isRepost && isDeletable && (
               <div className="delete-post-btn">
                 <RiDeleteBin2Fill style={deleteBtnStyle} onClick={deletePost} />{' '}
               </div>
@@ -211,8 +227,9 @@ const Post = ({ postData, currentUser, forceUpdate, setReplyComment, allowCommen
 };
 
 Post.defaultProps = {
-  allowComments: true,
+  allowComments: true, // i cant remember what this is for, but it is important. i think its to do with commenting from within a modal
   makeBig: false, // this is to make the text and buttons of a post bigger
+  isDeletable: true, // this is to not allow deleting from within a modal. i could have multiple modals up but this is easier
 };
 
 export default Post;
