@@ -81,6 +81,15 @@ const ViewPost = ({ currentUser }) => {
   // need to check replyTo, post and post replies for the right comment.
   useEffect(() => {
     if (replyComment) {
+      // check the subject post
+      if (post._id === replyComment._id) {
+        setReplyComment(post);
+      }
+    }
+  }, [post]);
+
+  useEffect(() => {
+    if (replyComment) {
       // check the comment the subject post is replying to
       if (replyingTo) {
         // if this was the comment we are interacting with in reply modal
@@ -88,12 +97,11 @@ const ViewPost = ({ currentUser }) => {
           setReplyComment(replyingTo);
         }
       }
+    }
+  }, [replyingTo]);
 
-      // check the subject post
-      if (post._id === replyComment._id) {
-        setReplyComment(post);
-      }
-
+  useEffect(() => {
+    if (replyComment) {
       // check subject post replies
       if (postReplies.length > 0) {
         postReplies.map((reply) => {
@@ -103,7 +111,7 @@ const ViewPost = ({ currentUser }) => {
         });
       }
     }
-  }, [post]);
+  }, [postReplies]);
 
   // delete post
   const deletePost = (id) => {
