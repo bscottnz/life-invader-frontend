@@ -1,25 +1,21 @@
 import React from 'react';
 import { useState, useEffect, useContext } from 'react';
-
 import Modal from 'react-modal';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import CreatePostForm from './CreatePostForm';
 import Post from './Post';
 import DeletePostModal from '../../Modals/DeletePostModal';
 import ReplyModal from '../../Modals/ReplyModal';
-import { ModalContext } from '../../Modals/ModalContext';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import modalStyle from '../../Modals/modalStyle';
+
+import deletePostRequest from '../../../utils/deletePostRequest';
 
 Modal.setAppElement('#root');
 
 const Home = ({ currentUser }) => {
   const [posts, setPosts] = useState([]);
-
-  const { modalIsOpen, setModalIsOpen } = useContext(ModalContext);
 
   // keep track of which comment is being replied to
   const [replyComment, setReplyComment] = useState(null);
@@ -67,7 +63,7 @@ const Home = ({ currentUser }) => {
 
   // delete post
   const deletePost = (id) => {
-    console.log(id);
+    deletePostRequest(id, getPosts);
   };
 
   const postItems = posts.map((post) => (

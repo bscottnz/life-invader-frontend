@@ -9,6 +9,7 @@ import Post from './Post';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import deletePostRequest from '../../../utils/deletePostRequest';
 
 const ViewPost = ({ currentUser }) => {
   // this entire component needs to be re written, this feels like a hack to get it working rather
@@ -122,7 +123,7 @@ const ViewPost = ({ currentUser }) => {
 
   // delete post
   const deletePost = (id) => {
-    console.log(id);
+    deletePostRequest(id);
   };
 
   const postItem = post.map((post_) => (
