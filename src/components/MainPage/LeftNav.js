@@ -8,7 +8,7 @@ import { FiLogOut } from 'react-icons/fi';
 import { BiPlus } from 'react-icons/bi';
 import { BiShoppingBag } from 'react-icons/bi';
 
-import logoIcon from '../../../images/logo-small.png';
+import logoIcon from '../../images/logo-small.png';
 
 const LeftNav = ({ logOut }) => {
   const iconStyle = {

@@ -26,9 +26,7 @@ the delete button just logs the id of the post. i have put the delete function i
 -- finish delete functionality
 
 -- refactor new post function into a seperate utility file, like how im doing the delete post
--- refactor makeing post on home page to funtino liek the other new posts. ie dont prepend to state 
-   and instead just reload. this will be slower but allow me to use the create post modal in home and 
-   seperate out the make post function into utils
+
 
 
 -- mayve change the bin icon to a cross

@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 
-import WelcomeMain from '../components/WelcomePage/WelcomeMain';
-import WelcomeRegister from '../components/WelcomePage/WelcomeRegister';
-import WelcomeLogin from '../components/WelcomePage/WelcomeLogin';
+import WelcomeMain from './WelcomeMain';
+import WelcomeRegister from './WelcomeRegister';
+import WelcomeLogin from './WelcomeLogin';
 
-import logoIcon from '../images/logo-large.png';
-import logoText from '../images/textlogo-large.png';
+import logoIcon from '../../images/logo-large.png';
+import logoText from '../../images/textlogo-large.png';
 
 const Welcome = ({ setCurrentUser }) => {
   return (

@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import Welcome from './pages/Welcome';
+import Welcome from './components/WelcomePage/Welcome';
 import { ModalProvider } from './components/Modals/ModalContext';
 
 import Loading from './components/Loading';
-import TopNav from './components/MainPage/TopNav/TopNav';
-import TopNavDropdown from './components/MainPage/TopNav/TopNavDropdown';
-import LeftNav from './components/MainPage/LeftNav/LeftNav';
+import TopNav from './components/MainPage/TopNav';
+import TopNavDropdown from './components/MainPage/TopNavDropdown';
+import LeftNav from './components/MainPage/LeftNav';
 import MainContent from './components/MainPage/MainContent/MainContent';
-import RightSidebar from './components/MainPage/RightSidebar/RightSidebar';
+import RightSidebar from './components/MainPage/RightSidebar';
 import { BiPlus } from 'react-icons/bi';
 
 import axios from 'axios';
