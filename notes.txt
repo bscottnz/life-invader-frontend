@@ -25,26 +25,15 @@ the delete button just logs the id of the post. i have put the delete function i
 
 -- finish delete functionality
 
--- refactor new post function into a seperate utility file, like how im doing the delete post
-
-
-
 -- mayve change the bin icon to a cross
-
-
-
-
 
 -- maybe have a no posts to show message on empty feed ?
 
 -- limit post length in news feed. make them view the full comment if th post is too long
 
-
-
 --  need to handle sharing / replying to deleted posts
    and handle the comment button number + active style
 
--- refactor post modal into its own component
 
 
 

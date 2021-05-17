@@ -41,7 +41,7 @@ const ViewPost = ({ currentUser }) => {
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${id}`,
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         // set the post we are viewing
         setPost([res.data.post]);
 
@@ -61,7 +61,13 @@ const ViewPost = ({ currentUser }) => {
         // turn off the error
         setShowError(false);
       })
-      .catch((err) => setShowError(true));
+      .catch((err) => {
+        setShowError(true);
+        // user has been signed out. redirect to home page
+        if (err.response.status == 401) {
+          window.location.reload();
+        }
+      });
   };
 
   // fetch post on page load

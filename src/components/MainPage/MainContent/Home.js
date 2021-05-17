@@ -32,14 +32,22 @@ const Home = ({ currentUser }) => {
       method: 'get',
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts`,
-    }).then((res) => {
-      // set retrieved posts to post state array
-      if (res.data.length > 0 && res.data[0].author.firstName === undefined) {
-        return alert('author data not populated ');
-      }
+    })
+      .then((res) => {
+        // set retrieved posts to post state array
+        if (res.data.length > 0 && res.data[0].author.firstName === undefined) {
+          return alert('author data not populated ');
+        }
 
-      setPosts(res.data);
-    });
+        setPosts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        // user has been signed out. redirect to home page
+        if (err.response.status == 401) {
+          window.location.reload();
+        }
+      });
   };
 
   // update the reply comment to its new data after being disliked or shared.

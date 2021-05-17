@@ -24,9 +24,9 @@ const WelcomeLogin = ({ setCurrentUser }) => {
       // if a logged in user is returned, set current user.
       // redirect to main app
       if (res.data.username !== undefined) {
-        console.log(res.data);
+        // console.log(res.data);
         setCurrentUser(res.data);
-        // setValidationErrors([]);
+
         history.push('/');
       } else {
         // no user was returned

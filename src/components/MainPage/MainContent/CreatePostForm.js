@@ -35,17 +35,25 @@ const CreatePostForm = ({
       data: payload,
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts`,
-    }).then((res) => {
-      // clear the text area
-      setPostText('');
-      // refresh posts
-      forceUpdate();
+    })
+      .then((res) => {
+        // clear the text area
+        setPostText('');
+        // refresh posts
+        forceUpdate();
 
-      // this will close the reply modal when submitting a comment reply
-      if (isReply) {
-        setModalIsOpen(false);
-      }
-    });
+        // this will close the reply modal when submitting a comment reply
+        if (isReply) {
+          setModalIsOpen(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        // user has been signed out. redirect to home page
+        if (err.response.status == 401) {
+          window.location.reload();
+        }
+      });
   };
 
   return (
