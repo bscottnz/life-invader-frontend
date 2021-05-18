@@ -11,9 +11,8 @@ toast message on successfull registration and reply?
 
 // just finnished
 
-fixing tht second godforsaken bug 
-i need to now allow deleting of posts, and handle any issues that may cause with shares / replies etc.
-the delete button just logs the id of the post. i have put the delete function into a contained util file.
+can now delete posts. shared posts are also deleted, need to now handle comments that 
+reference a deleted pose
 
 
 

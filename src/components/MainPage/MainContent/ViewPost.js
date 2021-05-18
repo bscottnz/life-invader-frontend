@@ -46,8 +46,13 @@ const ViewPost = ({ currentUser }) => {
         // set the post we are viewing
         setPost([res.data.post]);
 
-        // set the post we are viewing is replying to
-        if (res.data.replyTo !== undefined && res.data.replyTo._id !== undefined) {
+        // set the post we are viewing is replying to.
+        // the null check is for when we are replying to a deleted post.
+        if (
+          res.data.replyTo !== undefined &&
+          res.data.replyTo !== null &&
+          res.data.replyTo._id !== undefined
+        ) {
           setReplyingTo(res.data.replyTo);
         } else {
           // in the case when switching between view post pages,
@@ -63,9 +68,17 @@ const ViewPost = ({ currentUser }) => {
         setShowError(false);
       })
       .catch((err) => {
+        console.log(err);
+
+        // need to reset post data, so that when you delete the subject of a view post page,
+        // it doesnt still show the posts as well as the error message.
+        setPost([]);
+        setReplyingTo(null);
+        setPostReplies([]);
+
         setShowError(true);
         // user has been signed out. redirect to home page
-        if (err.response.status == 401) {
+        if (err.response && err.response.status == 401) {
           window.location.reload();
         }
       });
@@ -123,7 +136,7 @@ const ViewPost = ({ currentUser }) => {
 
   // delete post
   const deletePost = (id) => {
-    deletePostRequest(id);
+    deletePostRequest(id, getPost);
   };
 
   const postItem = post.map((post_) => (

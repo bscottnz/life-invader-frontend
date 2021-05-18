@@ -148,7 +148,7 @@ const Post = ({
         </div>
       )}
 
-      {isReply && postData.replyTo._id && (
+      {isReply && postData.replyTo !== null && postData.replyTo._id && (
         <div className="shared-by-heading">
           <FaRegComment style={{ marginRight: '4px', transform: 'translateY(2px)' }} />
           Replying to{' '}
@@ -159,6 +159,13 @@ const Post = ({
           >
             @{postData.replyTo.author.username}
           </Link>
+        </div>
+      )}
+      {/* this is for when the post is a reply to a deleted post */}
+      {isReply && postData.replyTo === null && (
+        <div className="shared-by-heading">
+          <FaRegComment style={{ marginRight: '4px', transform: 'translateY(2px)' }} />
+          Replying to DELETED POST{' '}
         </div>
       )}
       <div className="main-content-container">
