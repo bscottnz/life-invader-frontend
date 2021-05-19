@@ -11,8 +11,9 @@ toast message on successfull registration and reply?
 
 // just finnished
 
-can now delete posts. shared posts are also deleted, need to now handle comments that 
-reference a deleted pose
+handling rendering posts that reply to a deleted post.
+need to now work on the comment button. make it show number of replies and have an 
+active status like the other post buttons
 
 
 
@@ -22,7 +23,7 @@ reference a deleted pose
 
 
 
--- finish delete functionality
+
 
 -- mayve change the bin icon to a cross
 
@@ -30,8 +31,8 @@ reference a deleted pose
 
 -- limit post length in news feed. make them view the full comment if th post is too long
 
---  need to handle sharing / replying to deleted posts
-   and handle the comment button number + active style
+-- handle the comment button number + active style
+
 
 
 

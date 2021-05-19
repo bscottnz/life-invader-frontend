@@ -43,6 +43,7 @@ const Post = ({
   const repostedBy = isRepost ? postData.author.username : null;
 
   // if post is a repost, set post data to be the data of the original post
+
   postData = isRepost ? postData.sharedPostData : postData;
 
   // if the current user dislikes the post or not
@@ -50,6 +51,11 @@ const Post = ({
 
   // if the current user has shared the post or not
   const isShared = postData.sharedBy.includes(currentUser._id);
+
+  // if the current user has commented on the post
+  // let isCommentedOn = false;
+  const isCommentedOn = postData.replies.some((reply) => reply.author === currentUser._id);
+  // const isCommentedOn = false;
 
   // url of the post author display picture
   const postImage = `${process.env.REACT_APP_BASE_URL}${postData.author.profilePic}`;
@@ -116,6 +122,16 @@ const Post = ({
 
   const buttonIconStyle = {
     fontSize: makeBig ? '30px' : '22px',
+  };
+
+  // comment button needs to be smaller since the icon is larger than the others
+  const commentIconStyle = {
+    fontSize: makeBig ? '24px' : '18px',
+  };
+
+  const commentActiveStyle = {
+    color: 'rgb(29, 161, 242)',
+    fontSize: makeBig ? '24px' : '18px',
   };
 
   const dislikeActiveStyle = {
@@ -201,7 +217,13 @@ const Post = ({
                   openReplyModal(postData);
                 }}
               >
-                <FaRegComment style={{ fontSize: makeBig ? '26px' : '18px' }} />
+                <FaRegComment style={isCommentedOn ? commentActiveStyle : commentIconStyle} />
+                <span
+                  className={`number-comments ${isCommentedOn ? 'number-comments-active' : ''}`}
+                  style={{ fontSize: makeBig ? '24px' : '16px', marginLeft: '5px' }}
+                >
+                  {postData.replies.length || ''}
+                </span>
               </button>
             </div>
             <div className="post-button-container post-button-container-share">
