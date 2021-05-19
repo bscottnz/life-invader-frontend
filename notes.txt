@@ -11,9 +11,11 @@ toast message on successfull registration and reply?
 
 // just finnished
 
-handling rendering posts that reply to a deleted post.
-need to now work on the comment button. make it show number of replies and have an 
-active status like the other post buttons
+fixing the modal not updating when likign the subject of a view post page
+
+time to get started on the profile page
+
+
 
 
 
@@ -30,8 +32,6 @@ active status like the other post buttons
 -- maybe have a no posts to show message on empty feed ?
 
 -- limit post length in news feed. make them view the full comment if th post is too long
-
--- handle the comment button number + active style
 
 
 

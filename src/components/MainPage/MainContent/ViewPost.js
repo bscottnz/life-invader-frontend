@@ -103,8 +103,9 @@ const ViewPost = ({ currentUser }) => {
   useEffect(() => {
     if (replyComment) {
       // check the subject post
-      if (post._id === replyComment._id) {
-        setReplyComment(post);
+      // console.log(post[0]);
+      if (post.length > 0 && post[0]._id === replyComment._id) {
+        setReplyComment(post[0]);
       }
     }
   }, [post]);
