@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { useHistory } from 'react-router-dom';
+
 import { BiHomeAlt } from 'react-icons/bi';
 import { BiUser } from 'react-icons/bi';
 import { BiBell } from 'react-icons/bi';
@@ -10,23 +13,33 @@ import { BiShoppingBag } from 'react-icons/bi';
 
 import logoIcon from '../../images/logo-small.png';
 
-const LeftNav = ({ logOut }) => {
+const LeftNav = ({ logOut, currentUser }) => {
   const iconStyle = {
     fontSize: '28px',
+  };
+
+  const history = useHistory();
+
+  const goToProfilePage = () => {
+    history.push(`/profile/${currentUser.username}`);
+  };
+
+  const goToHomePage = () => {
+    history.push('/');
   };
 
   return (
     <nav className="layout__left-container custom-scroll">
       <div className="layout__left-content custom-scroll">
-        <div className="left-nav-logo-container">
+        <div className="left-nav-logo-container" onClick={goToHomePage}>
           <img src={logoIcon} alt="" />
         </div>
 
-        <div className="left-nav-group">
+        <div className="left-nav-group" onClick={goToHomePage}>
           <BiHomeAlt style={iconStyle} />
           <h2 className="left-nav-heading">Home</h2>
         </div>
-        <div className="left-nav-group">
+        <div className="left-nav-group" onClick={goToProfilePage}>
           <BiUser style={iconStyle} />
           <h2 className="left-nav-heading">Profile</h2>
         </div>

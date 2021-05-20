@@ -6,6 +6,8 @@ allow 5 comments and then require lifeinvader premium or extra liveinvader coins
 
 toast message on successfull registration and reply?
 
+custom main scroll bar
+
 
 
 

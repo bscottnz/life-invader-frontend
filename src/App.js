@@ -1,4 +1,11 @@
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import Welcome from './components/WelcomePage/Welcome';
@@ -20,6 +27,17 @@ function App() {
   // const [name, setName] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setisLoading] = useState(true);
+  const history = useHistory();
+
+  // mobile nav
+  const toggleDropdown = (close = false) => {
+    const dropDownMenu = document.querySelector('.navbar-dropdown');
+    if (close) {
+      dropDownMenu.classList.remove('dropdown-active');
+    } else {
+      dropDownMenu.classList.toggle('dropdown-active');
+    }
+  };
 
   // get user session on page load
   useEffect(() => {
@@ -69,20 +87,26 @@ function App() {
   // user is logged in so render main app
   return (
     <ModalProvider>
-      <div className="App">
-        <TopNav />
-        <TopNavDropdown logOut={logOut} />
-        <div className="main-wrapper">
-          <main className="layout">
-            <LeftNav logOut={logOut} />
-            <MainContent currentUser={currentUser} />
-            <RightSidebar />
-          </main>
+      <Router history={history}>
+        <div className="App">
+          <TopNav toggleDropdown={toggleDropdown} />
+          <TopNavDropdown
+            logOut={logOut}
+            currentUser={currentUser}
+            toggleDropdown={toggleDropdown}
+          />
+          <div className="main-wrapper">
+            <main className="layout">
+              <LeftNav logOut={logOut} currentUser={currentUser} />
+              <MainContent currentUser={currentUser} />
+              <RightSidebar />
+            </main>
+          </div>
+          <div className="new-post-btn-wrapper mobile-post-btn">
+            <BiPlus style={{ fontSize: '32px' }} />
+          </div>
         </div>
-        <div className="new-post-btn-wrapper mobile-post-btn">
-          <BiPlus style={{ fontSize: '32px' }} />
-        </div>
-      </div>
+      </Router>
     </ModalProvider>
   );
 }
