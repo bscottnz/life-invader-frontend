@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import Post from './Post';
+import DeletePostModal from '../../Modals/DeletePostModal';
+import ReplyModal from '../../Modals/ReplyModal';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import { HiOutlineEmojiSad } from 'react-icons/hi';
 import { FiMail } from 'react-icons/fi';
+
+import deletePostRequest from '../../../utils/deletePostRequest';
 
 const ProfilePage = ({ currentUser }) => {
   // const [profileUsername, setProfileUsername] = useState('');
@@ -107,6 +111,11 @@ const ProfilePage = ({ currentUser }) => {
     setActiveTab('Replies');
   };
 
+  // delete post
+  const deletePost = (id) => {
+    deletePostRequest(id, getProfilePosts);
+  };
+
   const postItems = posts.map((post) => (
     <Post
       postData={post}
@@ -129,10 +138,34 @@ const ProfilePage = ({ currentUser }) => {
     />
   ));
 
+  let replyHeading = '';
+  let replyTextPlaceholder = '';
+
+  // generates custom reply popup message depending on who you reply to
+  // the check for undefined stops the app from crashing when you reply to a reply from within
+  // the view post page. i dont really understand why it crashes without it.
+  if (replyComment !== null && replyComment !== undefined) {
+    if (replyComment.author.username === currentUser.username) {
+      replyHeading = 'Reply to... yourself?';
+      replyTextPlaceholder = 'Replying to yourself huh? You must have a lot of friends...';
+    } else {
+      replyHeading = `Reply to ${replyComment.author.username}`;
+      replyTextPlaceholder = `Give ${replyComment.author.username} a piece of your mind..`;
+    }
+  }
+
   return (
     <div>
       {profileUser !== null && (
         <>
+          <ReplyModal
+            currentUser={currentUser}
+            replyComment={replyComment}
+            replyHeading={replyHeading}
+            replyTextPlaceholder={replyTextPlaceholder}
+            getPost={getProfilePosts}
+          />
+          <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
           <div className="profile-header-container">
             <div className="cover-photo-container">
               <div className="user-image-container">

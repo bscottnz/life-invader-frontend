@@ -13,9 +13,8 @@ custom main scroll bar
 
 // just finnished
 
-fixing the modal not updating when likign the subject of a view post page
-
-time to get started on the profile page
+profile page post / reply tabs.
+need to add modals to pro page
 
 
 
@@ -35,6 +34,7 @@ time to get started on the profile page
 
 -- limit post length in news feed. make them view the full comment if th post is too long
 
+-- make loading page / component look better
 
 
 
