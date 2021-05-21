@@ -111,6 +111,21 @@ const ProfilePage = ({ currentUser }) => {
     setActiveTab('Replies');
   };
 
+  const followUser = () => {
+    axios({
+      method: 'put',
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/api/users/${profileUser._id}/follow`,
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        // setShowError(true);
+        console.log(err);
+      });
+  };
+
   // delete post
   const deletePost = (id) => {
     deletePostRequest(id, getProfilePosts);
@@ -137,6 +152,12 @@ const ProfilePage = ({ currentUser }) => {
       setDeleteComment={setDeleteComment}
     />
   ));
+
+  // special gold name styling just for my profile
+  const displayNameStyle = {};
+  if (profileUser && profileUser.goldenName) {
+    displayNameStyle.color = 'goldenrod';
+  }
 
   let replyHeading = '';
   let replyTextPlaceholder = '';
@@ -181,14 +202,17 @@ const ProfilePage = ({ currentUser }) => {
                   <Link to={`/messages/${profileUser._id}`}>
                     <FiMail />
                   </Link>
-                  <button className={isFollowing ? 'follow-btn following' : 'follow-btn'}>
+                  <button
+                    className={isFollowing ? 'follow-btn following' : 'follow-btn'}
+                    onClick={followUser}
+                  >
                     {isFollowing ? 'Following' : 'Follow'}
                   </button>
                 </>
               )}
             </div>
             <div className="user-details-container">
-              <span className="display-name">
+              <span className="display-name" style={displayNameStyle}>
                 {`${profileUser.firstName} ${profileUser.lastName}`}
               </span>
               <span className="username">{`@${profileUser.username}`}</span>

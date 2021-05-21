@@ -148,6 +148,12 @@ const Post = ({
     color: 'inherit',
   };
 
+  // special gold name styling just for my profile
+  const displayNameStyle = {};
+  if (postData.author.goldenName) {
+    displayNameStyle.color = 'goldenrod';
+  }
+
   return (
     <div className="post" onClick={viewPost}>
       {isRepost && (
@@ -191,7 +197,9 @@ const Post = ({
         <div className="post-content-container">
           <div className="post-header">
             <span className="display-name" onClick={(e) => setModalIsOpen(false)}>
-              <Link to={`/profile/${postData.author.username}`}>{userFullName}</Link>
+              <Link to={`/profile/${postData.author.username}`} style={displayNameStyle}>
+                {userFullName}
+              </Link>
             </span>
             <span className="username">@{postData.author.username}</span>
             <span className="date">{timestamp}</span>
