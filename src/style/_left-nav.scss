@@ -36,6 +36,7 @@
 .new-post {
   width: 100%;
   display: block;
+  margin-bottom: 5px !important;
 
   // remove this button and show the mobile button defined in the ruleset below
   @media (max-width: 1430px) {
