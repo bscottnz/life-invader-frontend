@@ -13,7 +13,7 @@ import { FiMail } from 'react-icons/fi';
 
 import deletePostRequest from '../../../utils/deletePostRequest';
 
-const ProfilePage = ({ currentUser }) => {
+const ProfilePage = ({ currentUser, setCurrentUser }) => {
   // const [profileUsername, setProfileUsername] = useState('');
 
   const profileName = useParams().username;
@@ -42,6 +42,12 @@ const ProfilePage = ({ currentUser }) => {
   // keep track of which comment is being deleted
   const [deleteComment, setDeleteComment] = useState(null);
 
+  // the number of followers the profile has
+  const [numFollowers, setNumFollowers] = useState(0);
+
+  // the number of people the profile is following
+  const [numFollowing, setNumFollowing] = useState(0);
+
   const getProfileUser = () => {
     axios({
       method: 'get',
@@ -51,7 +57,23 @@ const ProfilePage = ({ currentUser }) => {
       .then((res) => {
         setShowError(false);
         setProfileUser(res.data);
-        // console.log(res.data);
+        console.log(res.data);
+
+        // set the amount of profile followers
+        if (res.data.followers) {
+          setNumFollowers(res.data.followers.length);
+        }
+
+        // set the amount of people the profile is following
+        if (res.data.following) {
+          setNumFollowing(res.data.following.length);
+        }
+
+        // check to see if the logged in user is following the user profile
+        // we are viewing
+        if (currentUser.following && currentUser.following.includes(res.data._id)) {
+          setIsFollowing(true);
+        }
       })
       .catch((err) => {
         setShowError(true);
@@ -118,7 +140,21 @@ const ProfilePage = ({ currentUser }) => {
       url: `${process.env.REACT_APP_BASE_URL}/api/users/${profileUser._id}/follow`,
     })
       .then((res) => {
-        console.log(res.data);
+        //res.data contains the updated currentUser with the updated following array
+
+        // need to update current user or the following button information doesnt persist
+        // when changing pages unless you refresh
+        setCurrentUser(res.data);
+
+        if (res.data.following && res.data.following.includes(profileUser._id)) {
+          // we are now following
+          setIsFollowing(true);
+          setNumFollowers((numFollowers) => numFollowers + 1);
+        } else {
+          // we are now unfollowing
+          setIsFollowing(false);
+          setNumFollowers((numFollowers) => numFollowers - 1);
+        }
       })
       .catch((err) => {
         // setShowError(true);
@@ -219,11 +255,11 @@ const ProfilePage = ({ currentUser }) => {
               {/* <span className="description">{`${profileUser.description}`}</span> */}
               <div className="followers-container">
                 <Link to={`${profileUser.username}/following`}>
-                  <span className="value">{0}</span>
+                  <span className="value">{numFollowing}</span>
                   <span>Following</span>
                 </Link>
                 <Link to={`${profileUser.username}/followers`}>
-                  <span className="value">{0}</span>
+                  <span className="value">{numFollowers}</span>
                   <span>Followers</span>
                 </Link>
               </div>

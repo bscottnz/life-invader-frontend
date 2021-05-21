@@ -12,7 +12,7 @@ import Home from './Home';
 import ViewPost from './ViewPost';
 import ProfilePage from './ProfilePage';
 
-const MainContent = ({ currentUser }) => {
+const MainContent = ({ currentUser, setCurrentUser }) => {
   const history = useHistory();
   return (
     <section className="layout__main">
@@ -21,7 +21,7 @@ const MainContent = ({ currentUser }) => {
           <ViewPost currentUser={currentUser} />
         </Route>
         <Route exact path="/profile/:username">
-          <ProfilePage currentUser={currentUser} />
+          <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
         <Route path="/">
           <Home currentUser={currentUser} />

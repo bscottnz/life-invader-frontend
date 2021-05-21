@@ -98,7 +98,7 @@ function App() {
           <div className="main-wrapper">
             <main className="layout">
               <LeftNav logOut={logOut} currentUser={currentUser} />
-              <MainContent currentUser={currentUser} />
+              <MainContent currentUser={currentUser} setCurrentUser={setCurrentUser} />
               <RightSidebar />
             </main>
           </div>
