@@ -1,8 +1,14 @@
 .profile-header-container {
   & .cover-photo-container {
     height: 180px;
+    width: calc(100% + 40px);
     background-color: $color-blue;
     position: relative;
+    transform: translateX(-20px);
+    margin-top: -20px;
+
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
   }
 
   & .user-image-container {
@@ -21,6 +27,7 @@
     display: flex;
     height: 66px;
     padding: 20px;
+    padding-right: 0;
 
     & a {
       color: $color-blue;

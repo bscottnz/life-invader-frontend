@@ -87,6 +87,8 @@ const ProfilePage = ({ currentUser }) => {
     // need to clear posts, otherwise the previous profiles posts will still show until the new
     // profile posts load when switching between profile pages
     setPosts([]);
+    // same deal with the error
+    setShowError(false);
     getProfileUser();
   }, [profileName]);
 
@@ -129,7 +131,6 @@ const ProfilePage = ({ currentUser }) => {
 
   return (
     <div>
-      <h1 className="main-content-heading">{profileName}</h1>
       {profileUser !== null && (
         <>
           <div className="profile-header-container">
@@ -190,7 +191,7 @@ const ProfilePage = ({ currentUser }) => {
       )}
       {showError && (
         <div>
-          <h2>User not found</h2>
+          <h2>User {profileName} not found</h2>
           <HiOutlineEmojiSad style={{ fontSize: '50px', marginTop: '15px' }} />
         </div>
       )}
