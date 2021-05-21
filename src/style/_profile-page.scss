@@ -66,4 +66,65 @@
       }
     }
   }
+
+  & .user-details-container {
+    margin-top: 5px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+
+    & .username {
+      margin-left: 0;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.followers-container {
+  & .value {
+    font-weight: bold;
+    margin-right: 5px;
+    color: white;
+  }
+
+  & span:not(.value) {
+    color: $color-text-grey;
+  }
+
+  & a {
+    margin-right: 15px;
+    text-decoration: none;
+
+    &:hover {
+      border-bottom: 1px solid white;
+    }
+  }
+}
+.tabs-container {
+  display: flex;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.tab {
+  flex: 1;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $color-text-grey;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+
+  &.active {
+    color: $color-blue;
+    border-bottom: 2px solid $color-blue;
+  }
+
+  &:hover {
+    color: $color-blue;
+    // background-color: $color-blue-light;
+  }
 }
