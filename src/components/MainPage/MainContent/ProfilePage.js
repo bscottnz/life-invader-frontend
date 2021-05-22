@@ -242,7 +242,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
                     className={isFollowing ? 'follow-btn following' : 'follow-btn'}
                     onClick={followUser}
                   >
-                    {isFollowing ? 'Following' : 'Follow'}
+                    {isFollowing ? 'Stalking' : 'Stalk'}
                   </button>
                 </>
               )}
@@ -256,11 +256,11 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
               <div className="followers-container">
                 <Link to={`${profileUser.username}/following`}>
                   <span className="value">{numFollowing}</span>
-                  <span>Following</span>
+                  <span>Stalking</span>
                 </Link>
                 <Link to={`${profileUser.username}/followers`}>
                   <span className="value">{numFollowers}</span>
-                  <span>Followers</span>
+                  <span>Stalkers</span>
                 </Link>
               </div>
             </div>
