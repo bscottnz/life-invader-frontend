@@ -13,8 +13,10 @@ custom main scroll bar
 
 // just finnished
 
-profile page post / reply tabs.
-need to add modals to pro page
+following button + updated followers count
+
+jsut found a bug when i delete a post on the homepage that has a reply
+somethig to do with the checks for undefined aobve the modal reply heading
 
 
 

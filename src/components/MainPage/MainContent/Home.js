@@ -81,7 +81,9 @@ const Home = ({ currentUser }) => {
   let replyTextPlaceholder = '';
 
   // generates custom reply popup message depending on who you reply to
-  if (replyComment !== null) {
+  // the check for undefined stops the app from crashing when you reply to a reply from within
+  // the view post page. i dont really understand why it crashes without it.
+  if (replyComment !== null && replyComment !== undefined) {
     if (replyComment.author.username === currentUser.username) {
       replyHeading = 'Reply to... yourself?';
       replyTextPlaceholder = 'Replying to yourself huh? You must have a lot of friends...';
