@@ -388,3 +388,49 @@ textarea::placeholder {
     transform: translateY(1px);
   }
 }
+
+// user preview component
+.user-preview {
+  padding: 20px 0;
+  display: flex;
+  border-top: 1px solid $color-background-light;
+  font-size: 16px;
+
+  & a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+  }
+
+  & .user-details-container {
+    flex: 1;
+    padding: 0 20px;
+  }
+}
+
+// follow btn in user preview
+
+.follow-btn {
+  color: $color-blue;
+  border: 1px solid $color-blue;
+  background-color: $color-background-medium;
+  margin-left: 20px;
+  font-size: 20px;
+  padding: 8px 15px;
+  border-radius: 100px;
+  height: 37px;
+  line-height: 1;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+
+  &:hover {
+    background-color: $color-blue;
+    color: $color-background-medium;
+  }
+
+  &.following {
+    background-color: $color-blue;
+    color: $color-background-medium;
+  }
+}

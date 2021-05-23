@@ -25,10 +25,18 @@ const MainContent = ({ currentUser, setCurrentUser }) => {
           <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
         <Route exact path={'/profile/:username/followers'}>
-          <FollowerPage selectedTab={'Followers'} />
+          <FollowerPage
+            selectedTab={'Followers'}
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+          />
         </Route>
         <Route exact path={'/profile/:username/following'}>
-          <FollowerPage selectedTab={'Following'} />
+          <FollowerPage
+            selectedTab={'Following'}
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+          />
         </Route>
         <Route path="/">
           <Home currentUser={currentUser} />

@@ -6,7 +6,7 @@ import UserPreview from './UserPreview';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-const FollowerPage = ({ selectedTab }) => {
+const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
   const profileName = useParams().username;
 
   // the active tab the user is viewing. eg followers or following
@@ -17,6 +17,13 @@ const FollowerPage = ({ selectedTab }) => {
 
   // array of users that the profile user is following
   const [usersFollowing, setUsersFollowing] = useState([]);
+
+  // when unfollowing someone from the followers or following tab, I want the user preview
+  // to still show with the follow button style changed, but when i click beteen tabs i want
+  // the followers / following list to update. after following/ unfollowing, store the
+  // newly returned user data in this varaible, then when swapping tabs update profile user
+  // to this intermediate user variable.
+  const [userData, setUserData] = useState([]);
 
   const setActiveTabFollowing = () => {
     setActiveTab('Following');
@@ -36,7 +43,23 @@ const FollowerPage = ({ selectedTab }) => {
         // res.data is the entire profile user data
         setUsersFollowers(res.data.followers);
         setUsersFollowing(res.data.following);
-        // console.log(res.data);
+        setUserData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // this is for the intermediate user variable
+  const getUserData = () => {
+    axios({
+      method: 'get',
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/api/users/${profileName}/followers`,
+    })
+      .then((res) => {
+        // res.data is the entire profile user data
+        setUserData(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -44,12 +67,43 @@ const FollowerPage = ({ selectedTab }) => {
   };
 
   useEffect(() => {
+    if (userData.followers) {
+      setUsersFollowers(userData.followers);
+    } else {
+      setUsersFollowers([]);
+    }
+
+    if (userData.following) {
+      setUsersFollowing(userData.following);
+    } else {
+      setUsersFollowing([]);
+    }
+  }, [activeTab]);
+
+  useEffect(() => {
     getProfileData();
   }, []);
 
-  const followersList = usersFollowers.map((user) => <UserPreview user={user} key={uuidv4()} />);
+  const followersList = usersFollowers.map((user) => (
+    <UserPreview
+      currentUser={currentUser}
+      user={user}
+      key={uuidv4()}
+      setCurrentUser={setCurrentUser}
+      getProfileData={getProfileData}
+      getUserData={getUserData}
+    />
+  ));
 
-  const followingList = usersFollowing.map((user) => <UserPreview user={user} key={uuidv4()} />);
+  const followingList = usersFollowing.map((user) => (
+    <UserPreview
+      currentUser={currentUser}
+      user={user}
+      key={uuidv4()}
+      setCurrentUser={setCurrentUser}
+      getUserData={getUserData}
+    />
+  ));
 
   return (
     <div>
