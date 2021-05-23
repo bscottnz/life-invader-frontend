@@ -19,7 +19,7 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
   const [usersFollowing, setUsersFollowing] = useState([]);
 
   // when unfollowing someone from the followers or following tab, I want the user preview
-  // to still show with the follow button style changed, but when i click beteen tabs i want
+  // to still show but with the follow button style changed, then when i click between tabs i want
   // the followers / following list to update. after following/ unfollowing, store the
   // newly returned user data in this varaible, then when swapping tabs update profile user
   // to this intermediate user variable.
@@ -40,9 +40,18 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
       url: `${process.env.REACT_APP_BASE_URL}/api/users/${profileName}/followers`,
     })
       .then((res) => {
-        // res.data is the entire profile user data
-        setUsersFollowers(res.data.followers);
-        setUsersFollowing(res.data.following);
+        // res.data is the entire profile user data.
+        // sort users alphabeticaly
+        setUsersFollowers(
+          res.data.followers.sort((a, b) =>
+            a.firstName + a.lastName > b.firstName + b.lastName ? 1 : -1
+          )
+        );
+        setUsersFollowing(
+          res.data.following.sort((a, b) =>
+            a.firstName + a.lastName > b.firstName + b.lastName ? 1 : -1
+          )
+        );
         setUserData(res.data);
       })
       .catch((err) => {
@@ -68,13 +77,21 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
 
   useEffect(() => {
     if (userData.followers) {
-      setUsersFollowers(userData.followers);
+      setUsersFollowers(
+        userData.followers.sort((a, b) =>
+          a.firstName + a.lastName > b.firstName + b.lastName ? 1 : -1
+        )
+      );
     } else {
       setUsersFollowers([]);
     }
 
     if (userData.following) {
-      setUsersFollowing(userData.following);
+      setUsersFollowing(
+        userData.following.sort((a, b) =>
+          a.firstName + a.lastName > b.firstName + b.lastName ? 1 : -1
+        )
+      );
     } else {
       setUsersFollowing([]);
     }
