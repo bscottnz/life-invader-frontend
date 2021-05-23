@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import UserPreview from './UserPreview';
+
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const FollowerPage = ({ selectedTab }) => {
   const profileName = useParams().username;
@@ -33,6 +36,7 @@ const FollowerPage = ({ selectedTab }) => {
         // res.data is the entire profile user data
         setUsersFollowers(res.data.followers);
         setUsersFollowing(res.data.following);
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -42,6 +46,10 @@ const FollowerPage = ({ selectedTab }) => {
   useEffect(() => {
     getProfileData();
   }, []);
+
+  const followersList = usersFollowers.map((user) => <UserPreview user={user} key={uuidv4()} />);
+
+  const followingList = usersFollowing.map((user) => <UserPreview user={user} key={uuidv4()} />);
 
   return (
     <div>
@@ -60,6 +68,8 @@ const FollowerPage = ({ selectedTab }) => {
           Stalkers
         </div>
       </div>
+      {usersFollowers.length > 0 && activeTab === 'Followers' && followersList}
+      {usersFollowing.length > 0 && activeTab === 'Following' && followingList}
     </div>
   );
 };
