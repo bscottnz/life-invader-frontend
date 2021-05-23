@@ -28,6 +28,7 @@ const Home = ({ currentUser }) => {
       method: 'get',
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts`,
+      params: { followingPostsOnly: true },
     })
       .then((res) => {
         // set retrieved posts to post state array
