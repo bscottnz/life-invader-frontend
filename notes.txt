@@ -9,6 +9,12 @@ toast message on successfull registration and reply?
 custom main scroll bar
 
 
+admin user (me) can delete any post / account
+
+on empty news feed  (new account) have link to search page and a few recomended ppl to follow
+
+get rid of side bar post button. this will be a nightmare to hook up with all the different post
+  / get post functions of each page. instead have a make post area at top of profile page.
 
 
 // just finnished

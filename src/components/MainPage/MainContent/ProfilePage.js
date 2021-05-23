@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { HiOutlineEmojiSad } from 'react-icons/hi';
 import { FiMail } from 'react-icons/fi';
+import { FaCameraRetro } from 'react-icons/fa';
 
 import deletePostRequest from '../../../utils/deletePostRequest';
 
@@ -229,6 +230,11 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
                   src={process.env.REACT_APP_BASE_URL + profileUser.profilePic}
                   alt="profile pic"
                 />
+                {profileUser && profileUser._id === currentUser._id && (
+                  <button className="profile-pic-btn">
+                    <FaCameraRetro />
+                  </button>
+                )}
               </div>
             </div>
             <div className="profile-btns-container">

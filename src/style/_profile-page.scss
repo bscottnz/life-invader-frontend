@@ -17,9 +17,16 @@
     margin-left: 20px;
     position: absolute;
     bottom: -66px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     & img {
       border: 3px solid $color-background-medium;
+    }
+
+    &:hover .profile-pic-btn {
+      display: block;
     }
   }
 
@@ -134,4 +141,17 @@
     color: $color-blue;
     // background-color: $color-blue-light;
   }
+}
+
+// profile picture button
+.profile-pic-btn {
+  position: absolute;
+  background-color: transparent;
+  height: 65px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 65px;
+  color: rgba(0, 0, 0, 0.75);
+  display: none;
 }
