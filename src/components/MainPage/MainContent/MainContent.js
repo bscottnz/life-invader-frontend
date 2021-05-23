@@ -11,6 +11,7 @@ import {
 import Home from './Home';
 import ViewPost from './ViewPost';
 import ProfilePage from './ProfilePage';
+import FollowerPage from './FollowerPage';
 
 const MainContent = ({ currentUser, setCurrentUser }) => {
   const history = useHistory();
@@ -22,6 +23,12 @@ const MainContent = ({ currentUser, setCurrentUser }) => {
         </Route>
         <Route exact path="/profile/:username">
           <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        </Route>
+        <Route exact path={'/profile/:username/followers'}>
+          <FollowerPage selectedTab={'Followers'} />
+        </Route>
+        <Route exact path={'/profile/:username/following'}>
+          <FollowerPage selectedTab={'Following'} />
         </Route>
         <Route path="/">
           <Home currentUser={currentUser} />

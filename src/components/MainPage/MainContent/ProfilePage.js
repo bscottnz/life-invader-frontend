@@ -57,7 +57,6 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
       .then((res) => {
         setShowError(false);
         setProfileUser(res.data);
-        console.log(res.data);
 
         // set the amount of profile followers
         if (res.data.followers) {
@@ -260,7 +259,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
                 </Link>
                 <Link to={`${profileUser.username}/followers`}>
                   <span className="value">{numFollowers}</span>
-                  <span>Stalkers</span>
+                  <span>{`Stalker${numFollowers === 1 ? '' : 's'}`}</span>
                 </Link>
               </div>
             </div>
