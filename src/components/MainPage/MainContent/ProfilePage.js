@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import Post from './Post';
 import DeletePostModal from '../../Modals/DeletePostModal';
 import ReplyModal from '../../Modals/ReplyModal';
+import ProfilePictureModal from '../../Modals/ProfilePictureModal';
+import { ModalContext } from '../../Modals/ModalContext';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,7 +17,7 @@ import { FaCameraRetro } from 'react-icons/fa';
 import deletePostRequest from '../../../utils/deletePostRequest';
 
 const ProfilePage = ({ currentUser, setCurrentUser }) => {
-  // const [profileUsername, setProfileUsername] = useState('');
+  const { profilePicModalIsOpen, setProfilePicModalIsOpen } = useContext(ModalContext);
 
   const profileName = useParams().username;
 
@@ -223,6 +225,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
             getPost={getProfilePosts}
           />
           <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
+          <ProfilePictureModal />
           <div className="profile-header-container">
             <div className="cover-photo-container">
               <div className="user-image-container">
@@ -231,7 +234,10 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
                   alt="profile pic"
                 />
                 {profileUser && profileUser._id === currentUser._id && (
-                  <button className="profile-pic-btn">
+                  <button
+                    className="profile-pic-btn"
+                    onClick={(e) => setProfilePicModalIsOpen(true)}
+                  >
                     <FaCameraRetro />
                   </button>
                 )}
