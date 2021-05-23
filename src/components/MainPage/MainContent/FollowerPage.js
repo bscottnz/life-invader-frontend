@@ -124,7 +124,9 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
 
   return (
     <div>
-      <h1 className="main-content-heading">{profileName}</h1>
+      <Link to={`/profile/${profileName}`} style={{ color: 'white', textDecoration: 'none' }}>
+        <h1 className="main-content-heading">{profileName}</h1>
+      </Link>
       <div className="tabs-container">
         <div
           className={`tab ${activeTab === 'Following' ? 'active' : ''}`}
