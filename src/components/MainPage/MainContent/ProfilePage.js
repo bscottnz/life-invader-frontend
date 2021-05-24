@@ -17,7 +17,7 @@ import { FaCameraRetro } from 'react-icons/fa';
 import deletePostRequest from '../../../utils/deletePostRequest';
 
 const ProfilePage = ({ currentUser, setCurrentUser }) => {
-  const { profilePicModalIsOpen, setProfilePicModalIsOpen } = useContext(ModalContext);
+  const { setProfilePicModalIsOpen } = useContext(ModalContext);
 
   const profileName = useParams().username;
 

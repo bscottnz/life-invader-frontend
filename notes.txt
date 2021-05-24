@@ -16,6 +16,8 @@ on empty news feed  (new account) have link to search page and a few recomended 
 get rid of side bar post button. this will be a nightmare to hook up with all the different post
   / get post functions of each page. instead have a make post area at top of profile page.
 
+allow images on posts?
+
 
 // just finnished
 
