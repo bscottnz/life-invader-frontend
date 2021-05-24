@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { ModalContext } from '../../Modals/ModalContext';
 
 import ImageCropper from './ImageCropper';
 
-const ImageUpload = () => {
+import axios from 'axios';
+
+const ImageUpload = ({ setCurrentUser }) => {
   const [blob, setBlob] = useState(null);
   const [inputImg, setInputImg] = useState('');
+
+  const { setProfilePicModalIsOpen } = useContext(ModalContext);
 
   const getBlob = (blob) => {
     // pass blob up from the ImageCropper component
@@ -30,17 +35,28 @@ const ImageUpload = () => {
   };
 
   const handleSubmitImage = (e) => {
-    // upload blob to firebase 'images' folder with filename 'image'
     e.preventDefault();
-    console.log(blob);
-    // firebase
-    //     .storage()
-    //     .ref('images')
-    //     .child('image')
-    //     .put(blob, { contentType: blob.type })
-    //     .then(() => {
-    //         // redirect user
-    //     })
+    const formData = new FormData();
+    formData.append('profilePic', blob);
+
+    axios({
+      method: 'post',
+      data: formData,
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/api/users/profilePicture`,
+      headers: {
+        contentType: false,
+        processData: false,
+      },
+    })
+      .then((res) => {
+        // set current user to be the updated user with new picture
+        setCurrentUser(res.data);
+        setProfilePicModalIsOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

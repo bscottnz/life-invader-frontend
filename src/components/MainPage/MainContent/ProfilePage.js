@@ -120,6 +120,11 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
     getProfileUser();
   }, [profileName]);
 
+  // need to get data on currentUser change, so that the new profile picture updates without refresh
+  useEffect(() => {
+    getProfileUser();
+  }, [currentUser]);
+
   // need profile user id before we can get the posts by that user
   useEffect(() => {
     if (profileUser !== null) {
@@ -225,11 +230,12 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
             getPost={getProfilePosts}
           />
           <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
-          <ProfilePictureModal />
+          <ProfilePictureModal setCurrentUser={setCurrentUser} />
           <div className="profile-header-container">
             <div className="cover-photo-container">
               <div className="user-image-container">
                 <img
+                  className={profileUser._id === currentUser._id ? 'profile-img-fade' : ''}
                   src={process.env.REACT_APP_BASE_URL + profileUser.profilePic}
                   alt="profile pic"
                 />

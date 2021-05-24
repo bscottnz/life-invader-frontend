@@ -21,13 +21,32 @@
     align-items: center;
     justify-content: center;
     border-radius: 100px;
+    background-color: $color-background-medium;
+
+    overflow: hidden;
 
     & img {
       border: 3px solid $color-background-medium;
     }
 
     &:hover .profile-pic-btn {
-      display: block;
+      display: flex;
+    }
+  }
+
+  .profile-pic-btn {
+    background-color: rgba(255, 255, 255, 0);
+    height: 126px;
+    width: 126px;
+
+    border-radius: 50%;
+
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
     }
   }
 
@@ -153,6 +172,17 @@
   border: none;
   cursor: pointer;
   font-size: 65px;
-  color: rgba(0, 0, 0, 0.75);
-  display: none;
+  color: rgba(0, 0, 0, 0.85);
+  display: flex;
+
+  &:hover svg {
+    color: rgba(0, 0, 0, 0.85);
+    transform: translateY(0);
+  }
+
+  & svg {
+    color: rgba(0, 0, 0, 0);
+    transform: translateY(-80px);
+    transition: all 0.3s;
+  }
 }

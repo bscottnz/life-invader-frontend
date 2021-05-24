@@ -17,8 +17,8 @@ export const getCroppedImg = async (imageSrc, crop) => {
 
   /* setting canvas width & height allows us to 
     resize from the original image resolution */
-  canvas.width = 250;
-  canvas.height = 250;
+  canvas.width = 150;
+  canvas.height = 150;
 
   ctx.drawImage(image, crop.x, crop.y, crop.width, crop.height, 0, 0, canvas.width, canvas.height);
 
