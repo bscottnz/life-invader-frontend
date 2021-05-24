@@ -434,3 +434,87 @@ textarea::placeholder {
     color: $color-background-medium;
   }
 }
+
+// // file upload button
+// input#file-upload-button {
+//   font-size: 20px;
+// }
+
+input[type='file'] {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 20px;
+
+  &::file-selector-button {
+    border: 1px solid $color-blue;
+    color: $color-blue;
+    padding: 8px 14px;
+    border-radius: 50px;
+    background-color: transparent;
+    outline: none;
+    margin-right: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+      color: $color-background-medium;
+      background-color: $color-blue;
+    }
+  }
+
+  &::-webkit-file-upload-button {
+    border: 1px solid $color-blue;
+    color: $color-blue;
+    padding: 8px 14px;
+    border-radius: 50px;
+    background-color: transparent;
+    outline: none;
+    margin-right: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+      color: $color-background-medium;
+      background-color: $color-blue;
+    }
+  }
+}
+
+// container around cropper
+
+.cropper {
+  position: relative;
+  height: 391px;
+  border-radius: 15px;
+  overflow: hidden;
+
+  @media (max-width: 500px) {
+    height: 331px;
+  }
+}
+
+// submit btn for image
+
+.image-submit-btn {
+  display: block;
+  margin-top: 20px;
+  border: 1px solid $color-blue;
+  color: $color-background-medium;
+  background-color: $color-blue;
+  padding: 8px 14px;
+  border-radius: 50px;
+
+  outline: none;
+
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.crop-instructions {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
