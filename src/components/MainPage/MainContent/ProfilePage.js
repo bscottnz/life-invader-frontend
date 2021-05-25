@@ -5,6 +5,7 @@ import Post from './Post';
 import DeletePostModal from '../../Modals/DeletePostModal';
 import ReplyModal from '../../Modals/ReplyModal';
 import ProfilePictureModal from '../../Modals/ProfilePictureModal';
+import CoverPhotoModal from '../../Modals/CoverPhotoModal';
 import { ModalContext } from '../../Modals/ModalContext';
 
 import axios from 'axios';
@@ -17,7 +18,7 @@ import { FaCameraRetro } from 'react-icons/fa';
 import deletePostRequest from '../../../utils/deletePostRequest';
 
 const ProfilePage = ({ currentUser, setCurrentUser }) => {
-  const { setProfilePicModalIsOpen } = useContext(ModalContext);
+  const { setProfilePicModalIsOpen, setCoverPhotoModalIsOpen } = useContext(ModalContext);
 
   const profileName = useParams().username;
 
@@ -231,14 +232,12 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
           />
           <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
           <ProfilePictureModal setCurrentUser={setCurrentUser} />
+          <CoverPhotoModal setCurrentUser={setCurrentUser} />
           <div className="profile-header-container">
             <div className="cover-photo-container">
               <div className="cover-photo-img-container">
                 {profileUser && profileUser._id === currentUser._id && (
-                  <button
-                    className="cover-pic-btn"
-                    // onClick={(e) => setProfilePicModalIsOpen(true)} */
-                  >
+                  <button className="cover-pic-btn" onClick={(e) => setCoverPhotoModalIsOpen(true)}>
                     <FaCameraRetro />
                   </button>
                 )}

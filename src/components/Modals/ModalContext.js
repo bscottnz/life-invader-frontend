@@ -16,6 +16,9 @@ export const ModalProvider = (props) => {
   // modal controls for profile pic modal
   const [profilePicModalIsOpen, setProfilePicModalIsOpen] = useState(false);
 
+  // modal controls for cover pic modal
+  const [coverPhotoModalIsOpen, setCoverPhotoModalIsOpen] = useState(false);
+
   return (
     <ModalContext.Provider
       value={{
@@ -25,6 +28,8 @@ export const ModalProvider = (props) => {
         setModalIsOpen,
         profilePicModalIsOpen,
         setProfilePicModalIsOpen,
+        coverPhotoModalIsOpen,
+        setCoverPhotoModalIsOpen,
       }}
     >
       {props.children}
