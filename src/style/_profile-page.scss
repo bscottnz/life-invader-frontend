@@ -43,7 +43,7 @@
 
     justify-content: center;
     align-items: center;
-    transition: all 0.3s;
+    transition: all 0.4s;
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.2);
@@ -183,6 +183,50 @@
   & svg {
     color: rgba(0, 0, 0, 0);
     transform: translateY(-80px);
-    transition: all 0.3s;
+    transition: all 0.4s;
   }
+}
+
+// cover photo button
+.cover-pic-btn {
+  position: absolute;
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 65px;
+  color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0);
+  transition: all 0.4s;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  &:hover svg {
+    color: rgba(0, 0, 0, 0.85);
+    transform: translateY(0);
+  }
+
+  & svg {
+    color: rgba(0, 0, 0, 0);
+    transform: translateY(-80px);
+    transition: all 0.4s;
+  }
+}
+
+.cover-photo-img-container {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

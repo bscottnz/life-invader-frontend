@@ -199,7 +199,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
   // special gold name styling just for my profile
   const displayNameStyle = {};
   if (profileUser && profileUser.goldenName) {
-    displayNameStyle.color = 'goldenrod';
+    displayNameStyle.color = 'rgb(240, 173, 1)';
   }
 
   let replyHeading = '';
@@ -233,6 +233,16 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
           <ProfilePictureModal setCurrentUser={setCurrentUser} />
           <div className="profile-header-container">
             <div className="cover-photo-container">
+              <div className="cover-photo-img-container">
+                {profileUser && profileUser._id === currentUser._id && (
+                  <button
+                    className="cover-pic-btn"
+                    // onClick={(e) => setProfilePicModalIsOpen(true)} */
+                  >
+                    <FaCameraRetro />
+                  </button>
+                )}
+              </div>
               <div className="user-image-container">
                 <img
                   className={profileUser._id === currentUser._id ? 'profile-img-fade' : ''}

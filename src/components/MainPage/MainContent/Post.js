@@ -151,7 +151,7 @@ const Post = ({
   // special gold name styling just for my profile
   const displayNameStyle = {};
   if (postData.author.goldenName) {
-    displayNameStyle.color = 'goldenrod';
+    displayNameStyle.color = 'rgb(240, 173, 1)';
   }
 
   return (
