@@ -234,8 +234,15 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
           <ProfilePictureModal setCurrentUser={setCurrentUser} />
           <CoverPhotoModal setCurrentUser={setCurrentUser} />
           <div className="profile-header-container">
-            <div className="cover-photo-container">
+            <div
+              className={`cover-photo-container ${
+                profileUser && profileUser.coverPhoto ? '' : 'blue'
+              }`}
+            >
               <div className="cover-photo-img-container">
+                {profileUser && profileUser.coverPhoto && (
+                  <img src={process.env.REACT_APP_BASE_URL + profileUser.coverPhoto} />
+                )}
                 {profileUser && profileUser._id === currentUser._id && (
                   <button className="cover-pic-btn" onClick={(e) => setCoverPhotoModalIsOpen(true)}>
                     <FaCameraRetro />

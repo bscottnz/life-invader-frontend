@@ -9,7 +9,7 @@ const ImageUpload = ({ setCurrentUser, options }) => {
   const [blob, setBlob] = useState(null);
   const [inputImg, setInputImg] = useState('');
 
-  const { setProfilePicModalIsOpen } = useContext(ModalContext);
+  const { setProfilePicModalIsOpen, setCoverPhotoModalIsOpen } = useContext(ModalContext);
 
   const getBlob = (blob) => {
     // pass blob up from the ImageCropper component
@@ -56,6 +56,28 @@ const ImageUpload = ({ setCurrentUser, options }) => {
           // set current user to be the updated user with new picture
           setCurrentUser(res.data);
           setProfilePicModalIsOpen(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if (options.type === 'cover-img') {
+      const formData = new FormData();
+      formData.append('coverPic', blob);
+
+      axios({
+        method: 'post',
+        data: formData,
+        withCredentials: true,
+        url: `${process.env.REACT_APP_BASE_URL}/api/users/coverPhoto`,
+        headers: {
+          contentType: false,
+          processData: false,
+        },
+      })
+        .then((res) => {
+          // set current user to be the updated user with new picture
+          setCurrentUser(res.data);
+          setCoverPhotoModalIsOpen(false);
         })
         .catch((err) => {
           console.log(err);

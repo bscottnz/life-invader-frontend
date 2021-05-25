@@ -2,13 +2,17 @@
   & .cover-photo-container {
     height: 180px;
     width: calc(100% + 40px);
-    background-color: $color-blue;
+
     position: relative;
     transform: translateX(-20px);
     margin-top: -20px;
 
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+
+    &.blue {
+      background-color: $color-blue;
+    }
   }
 
   & .user-image-container {
@@ -230,4 +234,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }

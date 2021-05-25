@@ -11,6 +11,15 @@ import modalStyle from './modalStyle';
 const CoverPhotoModal = ({ setCurrentUser }) => {
   // get delete modal state from context
   const { coverPhotoModalIsOpen, setCoverPhotoModalIsOpen } = useContext(ModalContext);
+
+  // photo cropping / uploading options
+  const options = {
+    x: 600,
+    y: 180,
+    type: 'cover-img',
+    aspect: 10 / 3,
+  };
+
   return (
     <Modal
       style={modalStyle}
@@ -27,7 +36,7 @@ const CoverPhotoModal = ({ setCurrentUser }) => {
           />
         </div>
 
-        <ImageUpload setCurrentUser={setCurrentUser} />
+        <ImageUpload setCurrentUser={setCurrentUser} options={options} />
       </div>
     </Modal>
   );
