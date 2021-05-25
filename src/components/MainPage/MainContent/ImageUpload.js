@@ -5,7 +5,7 @@ import ImageCropper from './ImageCropper';
 
 import axios from 'axios';
 
-const ImageUpload = ({ setCurrentUser }) => {
+const ImageUpload = ({ setCurrentUser, options }) => {
   const [blob, setBlob] = useState(null);
   const [inputImg, setInputImg] = useState('');
 
@@ -36,34 +36,38 @@ const ImageUpload = ({ setCurrentUser }) => {
 
   const handleSubmitImage = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('profilePic', blob);
 
-    axios({
-      method: 'post',
-      data: formData,
-      withCredentials: true,
-      url: `${process.env.REACT_APP_BASE_URL}/api/users/profilePicture`,
-      headers: {
-        contentType: false,
-        processData: false,
-      },
-    })
-      .then((res) => {
-        // set current user to be the updated user with new picture
-        setCurrentUser(res.data);
-        setProfilePicModalIsOpen(false);
+    // different routing for different images
+    if (options.type === 'user-img') {
+      const formData = new FormData();
+      formData.append('profilePic', blob);
+
+      axios({
+        method: 'post',
+        data: formData,
+        withCredentials: true,
+        url: `${process.env.REACT_APP_BASE_URL}/api/users/profilePicture`,
+        headers: {
+          contentType: false,
+          processData: false,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          // set current user to be the updated user with new picture
+          setCurrentUser(res.data);
+          setProfilePicModalIsOpen(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
     <form onSubmit={handleSubmitImage}>
       <input type="file" accept="image/*" onChange={onInputChange} />
       <p className="crop-instructions">Select image file then drag and zoom to crop</p>
-      {inputImg && <ImageCropper getBlob={getBlob} inputImg={inputImg} />}
+      {inputImg && <ImageCropper getBlob={getBlob} inputImg={inputImg} options={options} />}
       <button
         type="submit"
         className="image-submit-btn"

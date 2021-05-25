@@ -11,6 +11,14 @@ import modalStyle from './modalStyle';
 const ProfilePictureModal = ({ setCurrentUser }) => {
   // get delete modal state from context
   const { profilePicModalIsOpen, setProfilePicModalIsOpen } = useContext(ModalContext);
+
+  // photo cropping / uploading options
+  const options = {
+    x: 150,
+    y: 150,
+    type: 'user-img',
+    aspect: 1,
+  };
   return (
     <Modal
       style={modalStyle}
@@ -27,7 +35,7 @@ const ProfilePictureModal = ({ setCurrentUser }) => {
           />
         </div>
 
-        <ImageUpload setCurrentUser={setCurrentUser} />
+        <ImageUpload setCurrentUser={setCurrentUser} options={options} />
       </div>
     </Modal>
   );
