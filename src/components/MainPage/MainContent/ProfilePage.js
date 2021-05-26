@@ -32,6 +32,9 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
   // profile user reply data
   const [replies, setReplies] = useState([]);
 
+  // profile pinned post
+  const [pinnedPost, setPinnedPost] = useState([]);
+
   // if the logged in user is following the profile we are viewing
   const [isFollowing, setIsFollowing] = useState(false);
 
@@ -100,9 +103,11 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
 
         const profilePagePosts = res.data.filter((post) => post.replyTo === undefined);
         const profilePageReplies = res.data.filter((post) => post.replyTo !== undefined);
+        const profilePagePinnedPost = res.data.filter((post) => post.pinned === true);
 
         setPosts(profilePagePosts);
         setReplies(profilePageReplies);
+        setPinnedPost(profilePagePinnedPost);
       })
       .catch((err) => {
         console.log(err);
@@ -196,6 +201,18 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
       forceUpdate={getProfilePosts}
       setReplyComment={setReplyComment}
       setDeleteComment={setDeleteComment}
+    />
+  ));
+
+  const pinnedPostItem = pinnedPost.map((post) => (
+    <Post
+      postData={post}
+      currentUser={currentUser}
+      key={uuidv4()}
+      forceUpdate={getProfilePosts}
+      setReplyComment={setReplyComment}
+      setDeleteComment={setDeleteComment}
+      showPin={profileName === currentUser.username ? true : false}
     />
   ));
 
@@ -315,6 +332,11 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
               Replies
             </div>
           </div>
+          {pinnedPost.length > 0 && activeTab === 'Posts' && (
+            <div className="posts-container" style={{ borderBottom: '6px solid #3a3a3a' }}>
+              {activeTab == 'Posts' ? pinnedPostItem : ''}
+            </div>
+          )}
           <div className="posts-container">{activeTab == 'Posts' ? postItems : replyItems}</div>
         </>
       )}

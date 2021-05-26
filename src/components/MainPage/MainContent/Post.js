@@ -33,7 +33,7 @@ const Post = ({
 }) => {
   const { setDeleteModalIsOpen, setModalIsOpen, setPinModalIsOpen, setPinPostId } =
     useContext(ModalContext);
-
+  console.log(postData);
   // is the post written by the current user
   const isCurrentUsersPost = postData.author._id === currentUser._id;
 
@@ -127,6 +127,10 @@ const Post = ({
     e.stopPropagation();
     setPinPostId(postData._id);
     setPinModalIsOpen(true);
+  };
+
+  const unpin = () => {
+    alert('unpin');
   };
 
   const buttonIconStyle = {
@@ -226,7 +230,7 @@ const Post = ({
                 {showPin && (
                   <div className="delete-post-btn">
                     <AiOutlinePushpin
-                      onClick={openPinModal}
+                      onClick={postData.pinned === true ? unpin : openPinModal}
                       style={postData.pinned === true ? { color: 'rgb(226, 34, 94)' } : {}}
                     />
                   </div>
