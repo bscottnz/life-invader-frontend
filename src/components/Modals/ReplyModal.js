@@ -27,10 +27,12 @@ const ReplyModal = ({ currentUser, replyComment, replyHeading, replyTextPlacehol
       >
         <h2 className="main-content-heading">{replyHeading}</h2>
 
-        <AiOutlineCloseCircle
-          style={{ fontSize: '22px', cursor: 'pointer' }}
-          onClick={() => setModalIsOpen(false)}
-        />
+        <span className="close-modal-icon-wrapper">
+          <AiOutlineCloseCircle
+            style={{ fontSize: '22px', cursor: 'pointer' }}
+            onClick={() => setModalIsOpen(false)}
+          />
+        </span>
       </div>
 
       <Post

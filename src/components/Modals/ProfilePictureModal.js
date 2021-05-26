@@ -29,10 +29,12 @@ const ProfilePictureModal = ({ setCurrentUser }) => {
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <h2 className="main-content-heading">Upload profile picture</h2>
-          <AiOutlineCloseCircle
-            style={{ fontSize: '22px', cursor: 'pointer' }}
-            onClick={() => setProfilePicModalIsOpen(false)}
-          />
+          <span className="close-modal-icon-wrapper">
+            <AiOutlineCloseCircle
+              style={{ fontSize: '22px', cursor: 'pointer' }}
+              onClick={() => setProfilePicModalIsOpen(false)}
+            />
+          </span>
         </div>
 
         <ImageUpload setCurrentUser={setCurrentUser} options={options} />

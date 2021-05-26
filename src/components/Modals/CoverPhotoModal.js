@@ -30,10 +30,12 @@ const CoverPhotoModal = ({ setCurrentUser }) => {
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <h2 className="main-content-heading">Upload cover photo</h2>
-          <AiOutlineCloseCircle
-            style={{ fontSize: '22px', cursor: 'pointer' }}
-            onClick={() => setCoverPhotoModalIsOpen(false)}
-          />
+          <span className="close-modal-icon-wrapper">
+            <AiOutlineCloseCircle
+              style={{ fontSize: '22px', cursor: 'pointer' }}
+              onClick={() => setCoverPhotoModalIsOpen(false)}
+            />
+          </span>
         </div>
 
         <ImageUpload setCurrentUser={setCurrentUser} options={options} />

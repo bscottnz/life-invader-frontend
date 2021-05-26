@@ -89,7 +89,8 @@ const ViewPost = ({ currentUser }) => {
     getPost();
 
     return () => {
-      setPost([]);
+      // im not sure why i had this, i may need it for something
+      // setPost([]);
     };
 
     // need to update on id because the page doesnt refresh when

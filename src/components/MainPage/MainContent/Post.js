@@ -14,7 +14,7 @@ import { ModalContext } from '../../Modals/ModalContext';
 import { FaRegComment } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { AiOutlineDislike } from 'react-icons/ai';
-import { RiDeleteBin2Fill } from 'react-icons/ri';
+import { IoCloseOutline } from 'react-icons/io5';
 import { AiOutlinePushpin } from 'react-icons/ai';
 
 import relativeTime from '../../../utils/relativeTime';
@@ -51,7 +51,6 @@ const Post = ({
   const repostedBy = isRepost ? postData.author.username : null;
 
   // if post is a repost, set post data to be the data of the original post
-
   postData = isRepost ? postData.sharedPostData : postData;
 
   // if the current user dislikes the post or not
@@ -61,9 +60,7 @@ const Post = ({
   const isShared = postData.sharedBy.includes(currentUser._id);
 
   // if the current user has commented on the post
-  // let isCommentedOn = false;
   const isCommentedOn = postData.replies.some((reply) => reply.author === currentUser._id);
-  // const isCommentedOn = false;
 
   // url of the post author display picture
   const postImage = `${process.env.REACT_APP_BASE_URL}${postData.author.profilePic}`;
@@ -166,6 +163,7 @@ const Post = ({
 
   const deleteBtnStyle = {
     color: 'inherit',
+    fontSize: '18px',
   };
 
   // special gold name styling just for my profile
@@ -211,7 +209,7 @@ const Post = ({
         </div>
       )}
       {/* pinned post heading */}
-      {postData.pinned && !isRepost && (
+      {postData.pinned && !isRepost && showPin && (
         <div className="shared-by-heading">
           <AiOutlinePushpin style={{ marginRight: '4px', transform: 'translateY(1px)' }} />
           Pinned post
@@ -243,7 +241,7 @@ const Post = ({
                   </div>
                 )}
                 <div className="delete-post-btn" style={{ marginLeft: '10px' }}>
-                  <RiDeleteBin2Fill style={deleteBtnStyle} onClick={openDeleteModal} />{' '}
+                  <IoCloseOutline style={deleteBtnStyle} onClick={openDeleteModal} />{' '}
                 </div>
               </div>
             )}

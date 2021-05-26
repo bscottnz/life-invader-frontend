@@ -46,10 +46,12 @@ const PinModal = ({ getProfilePosts }) => {
         <h2 className="main-content-heading" style={{ marginRight: 'auto', marginBottom: '20px' }}>
           Pin post?
         </h2>
-        <AiOutlineCloseCircle
-          style={{ fontSize: '22px', cursor: 'pointer' }}
-          onClick={() => setPinModalIsOpen(false)}
-        />
+        <span className="close-modal-icon-wrapper">
+          <AiOutlineCloseCircle
+            style={{ fontSize: '22px', cursor: 'pointer' }}
+            onClick={() => setPinModalIsOpen(false)}
+          />
+        </span>
       </div>
       <p style={{ fontSize: '16px' }}>
         Your pinned post will appear at the top of your profile. You may have only one pinned post

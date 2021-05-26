@@ -103,7 +103,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
         }
 
         const profilePagePosts = res.data.filter(
-          (post) => post.replyTo === undefined && post.pinned === false
+          (post) => post.replyTo === undefined && post.pinned !== true
         );
         const profilePageReplies = res.data.filter((post) => post.replyTo !== undefined);
         const profilePagePinnedPost = res.data.filter((post) => post.pinned === true);
@@ -122,10 +122,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
   };
 
   useEffect(() => {
-    // need to clear posts, otherwise the previous profiles posts will still show until the new
-    // profile posts load when switching between profile pages
-    setPosts([]);
-    // same deal with the error
+    // clear error before switching to new profile page
     setShowError(false);
     getProfileUser();
   }, [profileName]);
@@ -138,6 +135,11 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
   // need profile user id before we can get the posts by that user
   useEffect(() => {
     if (profileUser !== null) {
+      // need to clear posts, otherwise the previous profiles posts will still show until the new
+      // profile posts load when switching between profile pages
+      setPosts([]);
+      setReplies([]);
+      setPinnedPost([]);
       getProfilePosts();
     }
   }, [profileUser]);

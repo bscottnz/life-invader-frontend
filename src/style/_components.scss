@@ -372,6 +372,12 @@ textarea::placeholder {
   background: transparent;
 }
 
+.close-modal-icon-wrapper {
+  & svg:hover {
+    color: rgb(226, 34, 94);
+  }
+}
+
 // buttons in delete modal
 .modal-delete-btn {
   background-color: $color-blue;

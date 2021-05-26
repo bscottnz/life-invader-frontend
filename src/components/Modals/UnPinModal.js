@@ -47,10 +47,12 @@ const UnPinModal = ({ getProfilePosts }) => {
         <h2 className="main-content-heading" style={{ marginRight: 'auto', marginBottom: '20px' }}>
           Unpin post?
         </h2>
-        <AiOutlineCloseCircle
-          style={{ fontSize: '22px', cursor: 'pointer' }}
-          onClick={() => setUnPinModalIsOpen(false)}
-        />
+        <span className="close-modal-icon-wrapper">
+          <AiOutlineCloseCircle
+            style={{ fontSize: '22px', cursor: 'pointer' }}
+            onClick={() => setUnPinModalIsOpen(false)}
+          />
+        </span>
       </div>
       <p style={{ fontSize: '16px' }}>
         Your pinned post will no longer appear at the top of your profile.
