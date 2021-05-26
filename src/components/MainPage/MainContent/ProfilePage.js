@@ -101,7 +101,9 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
           return alert('author data not populated ');
         }
 
-        const profilePagePosts = res.data.filter((post) => post.replyTo === undefined);
+        const profilePagePosts = res.data.filter(
+          (post) => post.replyTo === undefined && post.pinned === false
+        );
         const profilePageReplies = res.data.filter((post) => post.replyTo !== undefined);
         const profilePagePinnedPost = res.data.filter((post) => post.pinned === true);
 
