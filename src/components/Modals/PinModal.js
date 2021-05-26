@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Modal from 'react-modal';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
@@ -6,13 +7,31 @@ import { ModalContext } from './ModalContext';
 
 import modalStyle from './modalStyle';
 
-const PinModal = () => {
+import axios from 'axios';
+
+const PinModal = ({ getProfilePosts }) => {
   // get delete modal state from context
   const { pinModalIsOpen, setPinModalIsOpen, pinPostId, setPinPostId } = useContext(ModalContext);
+  const history = useHistory();
 
   const pinPostWrapper = () => {
-    // deletePost(id);
-    console.log(pinPostId);
+    if (pinPostId) {
+      axios({
+        method: 'put',
+        withCredentials: true,
+        url: `${process.env.REACT_APP_BASE_URL}/api/posts/${pinPostId}`,
+        data: { pinned: true },
+      })
+        .then((res) => {
+          setPinPostId(null);
+          // history.go(0);
+          getProfilePosts();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
     setPinModalIsOpen(false);
   };
 

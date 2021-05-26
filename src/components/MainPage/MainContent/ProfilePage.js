@@ -235,7 +235,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
           <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
           <ProfilePictureModal setCurrentUser={setCurrentUser} />
           <CoverPhotoModal setCurrentUser={setCurrentUser} />
-          <PinModal />
+          <PinModal getProfilePosts={getProfilePosts} />
           <div className="profile-header-container">
             <div
               className={`cover-photo-container ${

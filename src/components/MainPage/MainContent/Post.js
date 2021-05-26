@@ -199,6 +199,13 @@ const Post = ({
           Replying to DELETED POST{' '}
         </div>
       )}
+      {/* pinned post heading */}
+      {postData.pinned && !isRepost && (
+        <div className="shared-by-heading">
+          <AiOutlinePushpin style={{ marginRight: '4px', transform: 'translateY(1px)' }} />
+          Pinned post
+        </div>
+      )}
       <div className="main-content-container">
         <div className="user-image-container">
           <img src={postImage} alt="post author profile pic" />
@@ -218,7 +225,10 @@ const Post = ({
               <div style={{ marginLeft: 'auto', display: 'flex' }}>
                 {showPin && (
                   <div className="delete-post-btn">
-                    <AiOutlinePushpin onClick={openPinModal} />
+                    <AiOutlinePushpin
+                      onClick={openPinModal}
+                      style={postData.pinned === true ? { color: 'rgb(226, 34, 94)' } : {}}
+                    />
                   </div>
                 )}
                 <div className="delete-post-btn" style={{ marginLeft: '10px' }}>
