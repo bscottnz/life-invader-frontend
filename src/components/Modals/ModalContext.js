@@ -19,6 +19,12 @@ export const ModalProvider = (props) => {
   // modal controls for cover pic modal
   const [coverPhotoModalIsOpen, setCoverPhotoModalIsOpen] = useState(false);
 
+  // modal controls for pin post modal
+  const [pinModalIsOpen, setPinModalIsOpen] = useState(false);
+
+  // pinned post id
+  const [pinPostId, setPinPostId] = useState(null);
+
   return (
     <ModalContext.Provider
       value={{
@@ -30,6 +36,10 @@ export const ModalProvider = (props) => {
         setProfilePicModalIsOpen,
         coverPhotoModalIsOpen,
         setCoverPhotoModalIsOpen,
+        pinModalIsOpen,
+        setPinModalIsOpen,
+        pinPostId,
+        setPinPostId,
       }}
     >
       {props.children}

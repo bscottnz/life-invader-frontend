@@ -15,6 +15,7 @@ import { FaRegComment } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { AiOutlineDislike } from 'react-icons/ai';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
+import { AiOutlinePushpin } from 'react-icons/ai';
 
 import relativeTime from '../../../utils/relativeTime';
 import axios from 'axios';
@@ -28,8 +29,10 @@ const Post = ({
   allowComments,
   makeBig,
   isDeletable,
+  showPin,
 }) => {
-  const { setDeleteModalIsOpen, setModalIsOpen } = useContext(ModalContext);
+  const { setDeleteModalIsOpen, setModalIsOpen, setPinModalIsOpen, setPinPostId } =
+    useContext(ModalContext);
 
   // is the post written by the current user
   const isCurrentUsersPost = postData.author._id === currentUser._id;
@@ -120,6 +123,12 @@ const Post = ({
     setDeleteModalIsOpen(true);
   };
 
+  const openPinModal = (e) => {
+    e.stopPropagation();
+    setPinPostId(postData._id);
+    setPinModalIsOpen(true);
+  };
+
   const buttonIconStyle = {
     fontSize: makeBig ? '30px' : '22px',
   };
@@ -206,8 +215,15 @@ const Post = ({
             {/* only show delete if it is not a repost, since that would delete the original
             post as the repost data is copied over to the repost */}
             {isCurrentUsersPost && !isRepost && isDeletable && (
-              <div className="delete-post-btn">
-                <RiDeleteBin2Fill style={deleteBtnStyle} onClick={openDeleteModal} />{' '}
+              <div style={{ marginLeft: 'auto', display: 'flex' }}>
+                {showPin && (
+                  <div className="delete-post-btn">
+                    <AiOutlinePushpin onClick={openPinModal} />
+                  </div>
+                )}
+                <div className="delete-post-btn" style={{ marginLeft: '10px' }}>
+                  <RiDeleteBin2Fill style={deleteBtnStyle} onClick={openDeleteModal} />{' '}
+                </div>
               </div>
             )}
           </div>
@@ -267,6 +283,7 @@ Post.defaultProps = {
   allowComments: true, // i cant remember what this is for, but it is important. i think its to do with commenting from within a modal
   makeBig: false, // this is to make the text and buttons of a post bigger
   isDeletable: true, // this is to not allow deleting from within a modal. i could have multiple modals up but this is easier
+  showPin: false, // only show pin on profile page
 };
 
 export default Post;

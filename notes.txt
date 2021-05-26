@@ -8,6 +8,8 @@ toast message on successfull registration and reply?
 
 custom main scroll bar
 
+put mobile nav at bottom of screen
+
 
 admin user (me) can delete any post / account
 
@@ -18,15 +20,14 @@ get rid of side bar post button. this will be a nightmare to hook up with all th
 
 allow images on posts?
 
+have profile description on profile page
+
 
 // just finnished
 
-followers / following page
-only showing posts from user we are following
+uploading pics
 
-this introduced a bug where you cant see posts on a profile page unless you are following them
-and if you are following them you see all posts by everyone
-
+fixed bug that didnt show comment active style on replyto comment on view post page
 
 
 
@@ -54,7 +55,9 @@ and if you are following them you see all posts by everyone
 
 
 
-
+today i will get pin working and re do the pin / delete icon.
+search page
+profile description & profile add post area
 
 
 

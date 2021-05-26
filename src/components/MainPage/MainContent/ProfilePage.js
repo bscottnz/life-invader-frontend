@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 
 import Post from './Post';
 import DeletePostModal from '../../Modals/DeletePostModal';
+import PinModal from '../../Modals/PinModal';
 import ReplyModal from '../../Modals/ReplyModal';
 import ProfilePictureModal from '../../Modals/ProfilePictureModal';
 import CoverPhotoModal from '../../Modals/CoverPhotoModal';
@@ -183,6 +184,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
       forceUpdate={getProfilePosts}
       setReplyComment={setReplyComment}
       setDeleteComment={setDeleteComment}
+      showPin={profileName === currentUser.username ? true : false}
     />
   ));
 
@@ -233,6 +235,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
           <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
           <ProfilePictureModal setCurrentUser={setCurrentUser} />
           <CoverPhotoModal setCurrentUser={setCurrentUser} />
+          <PinModal />
           <div className="profile-header-container">
             <div
               className={`cover-photo-container ${
