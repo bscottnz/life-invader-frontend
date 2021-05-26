@@ -21,6 +21,7 @@ export const ModalProvider = (props) => {
 
   // modal controls for pin post modal
   const [pinModalIsOpen, setPinModalIsOpen] = useState(false);
+  const [unPinModalIsOpen, setUnPinModalIsOpen] = useState(false);
 
   // pinned post id
   const [pinPostId, setPinPostId] = useState(null);
@@ -38,6 +39,8 @@ export const ModalProvider = (props) => {
         setCoverPhotoModalIsOpen,
         pinModalIsOpen,
         setPinModalIsOpen,
+        unPinModalIsOpen,
+        setUnPinModalIsOpen,
         pinPostId,
         setPinPostId,
       }}

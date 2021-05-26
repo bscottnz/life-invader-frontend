@@ -31,9 +31,14 @@ const Post = ({
   isDeletable,
   showPin,
 }) => {
-  const { setDeleteModalIsOpen, setModalIsOpen, setPinModalIsOpen, setPinPostId } =
-    useContext(ModalContext);
-  console.log(postData);
+  const {
+    setDeleteModalIsOpen,
+    setModalIsOpen,
+    setPinModalIsOpen,
+    setUnPinModalIsOpen,
+    setPinPostId,
+  } = useContext(ModalContext);
+
   // is the post written by the current user
   const isCurrentUsersPost = postData.author._id === currentUser._id;
 
@@ -129,8 +134,10 @@ const Post = ({
     setPinModalIsOpen(true);
   };
 
-  const unpin = () => {
-    alert('unpin');
+  const unpin = (e) => {
+    e.stopPropagation();
+    setPinPostId(postData._id);
+    setUnPinModalIsOpen(true);
   };
 
   const buttonIconStyle = {

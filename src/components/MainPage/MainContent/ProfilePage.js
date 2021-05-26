@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import Post from './Post';
 import DeletePostModal from '../../Modals/DeletePostModal';
 import PinModal from '../../Modals/PinModal';
+import UnPinModal from '../../Modals/UnPinModal';
 import ReplyModal from '../../Modals/ReplyModal';
 import ProfilePictureModal from '../../Modals/ProfilePictureModal';
 import CoverPhotoModal from '../../Modals/CoverPhotoModal';
@@ -255,6 +256,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
           <ProfilePictureModal setCurrentUser={setCurrentUser} />
           <CoverPhotoModal setCurrentUser={setCurrentUser} />
           <PinModal getProfilePosts={getProfilePosts} />
+          <UnPinModal getProfilePosts={getProfilePosts} />
           <div className="profile-header-container">
             <div
               className={`cover-photo-container ${
