@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Post from './Post';
+import UserPreview from './UserPreview';
 import DeletePostModal from '../../Modals/DeletePostModal';
 import ReplyModal from '../../Modals/ReplyModal';
 
@@ -13,7 +14,7 @@ import axios from 'axios';
 
 import { v4 as uuidv4 } from 'uuid';
 
-const SearchPage = ({ currentUser }) => {
+const SearchPage = ({ currentUser, setCurrentUser }) => {
   // the active tab the user is viewing. eg posts or users
   const [activeTab, setActiveTab] = useState('Posts');
 
@@ -40,7 +41,7 @@ const SearchPage = ({ currentUser }) => {
     setActiveTab('Users');
   };
 
-  // make a search request 1.5s after searchText has stopped changing.
+  // make a search request 1.1s after searchText has stopped changing.
 
   // timer that keeps track of when to send search request to server
   let searchTimer;
@@ -49,7 +50,7 @@ const SearchPage = ({ currentUser }) => {
     if (searchText.trim() !== '') {
       searchTimer = setTimeout(() => {
         makeSearchRequest();
-      }, 1500);
+      }, 1100);
     }
 
     return () => {
@@ -57,8 +58,12 @@ const SearchPage = ({ currentUser }) => {
     };
   }, [searchText]);
 
-  const makeSearchRequest = () => {
-    setIsLoading(true);
+  // dont want to show loading spinner when we are just updating data after liking / following
+  // a search result
+  const makeSearchRequest = (showLoading = true) => {
+    if (showLoading) {
+      setIsLoading(true);
+    }
 
     axios({
       method: 'get',
@@ -69,6 +74,7 @@ const SearchPage = ({ currentUser }) => {
       .then((res) => {
         console.log(res.data);
         setPostResults(res.data.posts);
+        setUserResults(res.data.users);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -87,9 +93,19 @@ const SearchPage = ({ currentUser }) => {
       postData={post}
       currentUser={currentUser}
       key={uuidv4()}
-      forceUpdate={makeSearchRequest}
+      forceUpdate={() => makeSearchRequest(false)}
       setReplyComment={setReplyComment}
       setDeleteComment={setDeleteComment}
+    />
+  ));
+
+  const userList = userResults.map((user) => (
+    <UserPreview
+      currentUser={currentUser}
+      user={user}
+      key={uuidv4()}
+      setCurrentUser={setCurrentUser}
+      getUserData={() => makeSearchRequest(false)}
     />
   ));
 
@@ -125,6 +141,7 @@ const SearchPage = ({ currentUser }) => {
 
         <input
           autoComplete="off"
+          spellCheck="false"
           type="text"
           value={searchText}
           id="search-box"
@@ -141,6 +158,7 @@ const SearchPage = ({ currentUser }) => {
         </div>
       </div>
       {postResults.length > 0 && activeTab === 'Posts' && postList}
+      {userResults.length > 0 && activeTab === 'Users' && userList}
     </div>
   );
 };

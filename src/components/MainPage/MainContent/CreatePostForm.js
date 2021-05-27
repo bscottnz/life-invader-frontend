@@ -72,6 +72,7 @@ const CreatePostForm = ({
           onChange={(e) => setPostText(e.target.value)}
           maxLength="400"
           value={postText}
+          spellCheck="false"
         ></textarea>
         <div className="buttons-container">
           {/* only allow pressing of button if there is actually text in the textarea */}
