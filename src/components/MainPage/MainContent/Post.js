@@ -30,6 +30,7 @@ const Post = ({
   makeBig,
   isDeletable,
   showPin,
+  showPinHeading,
 }) => {
   const {
     setDeleteModalIsOpen,
@@ -209,7 +210,7 @@ const Post = ({
         </div>
       )}
       {/* pinned post heading */}
-      {postData.pinned && !isRepost && showPin && (
+      {postData.pinned && !isRepost && showPinHeading && (
         <div className="shared-by-heading">
           <AiOutlinePushpin style={{ marginRight: '4px', transform: 'translateY(1px)' }} />
           Pinned post
@@ -303,6 +304,7 @@ Post.defaultProps = {
   makeBig: false, // this is to make the text and buttons of a post bigger
   isDeletable: true, // this is to not allow deleting from within a modal. i could have multiple modals up but this is easier
   showPin: false, // only show pin on profile page
+  showPinHeading: false, // need a seperate flag for heading to be able to see the heading on other profiles
 };
 
 export default Post;

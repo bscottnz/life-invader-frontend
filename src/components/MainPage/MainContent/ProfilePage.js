@@ -218,6 +218,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
       setReplyComment={setReplyComment}
       setDeleteComment={setDeleteComment}
       showPin={profileName === currentUser.username ? true : false}
+      showPinHeading={true}
     />
   ));
 
