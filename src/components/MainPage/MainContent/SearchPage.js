@@ -76,9 +76,14 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
       params: { search: searchText.trim() },
     })
       .then((res) => {
-        console.log(res.data);
         setPostResults(res.data.posts);
-        setUserResults(res.data.users);
+        // order users alphabetically
+        setUserResults(
+          res.data.users.sort((a, b) =>
+            a.firstName + a.lastName > b.firstName + b.lastName ? 1 : -1
+          )
+        );
+
         setIsLoading(false);
 
         // set no results messages
@@ -143,7 +148,7 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
     }
   }
 
-  const noResultsStyle = { marginTop: '10px', fontSize: '16px' };
+  const noResultsStyle = { marginTop: '20px', fontSize: '18px' };
 
   return (
     <div>

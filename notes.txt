@@ -25,7 +25,7 @@ have profile description on profile page
 
 // just finnished
 
-pinning / un pinning
+search page
 
 
 
@@ -34,6 +34,10 @@ need to add add-post component to profile page
 need to add profile description section
 
 need to change up the design of posts / profile a little bit. 
+
+need to add shop / shop logic
+
+need to refactor db queries to use async.parallel
 
 
 
