@@ -40,7 +40,7 @@ const MainContent = ({ currentUser, setCurrentUser }) => {
           />
         </Route>
         <Route exact path="/search">
-          <SearchPage />
+          <SearchPage currentUser={currentUser} />
         </Route>
         <Route path="/">
           <Home currentUser={currentUser} />

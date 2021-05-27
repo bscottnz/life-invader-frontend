@@ -22,6 +22,7 @@
     padding: 0 10px;
     color: inherit;
     caret-color: $color-text-grey;
+    font-weight: 600;
 
     &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -43,5 +44,19 @@
   & svg {
     font-size: 20px;
     color: $color-text-grey;
+  }
+}
+
+// for loading icon
+.spinner {
+  animation: spin infinite 1.5s linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
