@@ -33,6 +33,10 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
   const [postResults, setPostResults] = useState([]);
   const [userResults, setUserResults] = useState([]);
 
+  // no results error/message
+  const [noPostResults, setNoPostResults] = useState(false);
+  const [noUserResults, setNoUserResults] = useState(false);
+
   const setActiveTabPosts = () => {
     setActiveTab('Posts');
   };
@@ -76,6 +80,20 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
         setPostResults(res.data.posts);
         setUserResults(res.data.users);
         setIsLoading(false);
+
+        // set no results messages
+
+        if (res.data.posts.length === 0) {
+          setNoPostResults(true);
+        } else {
+          setNoPostResults(false);
+        }
+
+        if (res.data.users.length === 0) {
+          setNoUserResults(true);
+        } else {
+          setNoUserResults(false);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -125,6 +143,8 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
     }
   }
 
+  const noResultsStyle = { marginTop: '10px', fontSize: '16px' };
+
   return (
     <div>
       <ReplyModal
@@ -159,6 +179,14 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
       </div>
       {postResults.length > 0 && activeTab === 'Posts' && postList}
       {userResults.length > 0 && activeTab === 'Users' && userList}
+
+      {noPostResults && activeTab === 'Posts' && searchText !== '' && !isLoading && (
+        <h2 style={noResultsStyle}>No posts found</h2>
+      )}
+
+      {noUserResults && activeTab === 'Users' && searchText !== '' && !isLoading && (
+        <h2 style={noResultsStyle}>No users found</h2>
+      )}
     </div>
   );
 };
