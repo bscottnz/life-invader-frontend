@@ -1,0 +1,47 @@
+// search page
+
+.search-container {
+  display: flex;
+  height: 36px;
+  align-items: center;
+  padding: 0 15px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+
+  border: 1px solid $color-background-light;
+
+  color: $color-text;
+
+  & input {
+    flex: 1;
+    align-self: stretch;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding: 0 10px;
+    color: inherit;
+    caret-color: $color-text-grey;
+
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: $color-text-grey;
+      opacity: 1; /* Firefox */
+    }
+
+    &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: $color-text-grey;
+    }
+
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: $color-text-grey;
+    }
+  }
+
+  & svg {
+    font-size: 20px;
+    color: $color-text-grey;
+  }
+}

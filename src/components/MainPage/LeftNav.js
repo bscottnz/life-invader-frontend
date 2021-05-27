@@ -28,6 +28,10 @@ const LeftNav = ({ logOut, currentUser }) => {
     history.push('/');
   };
 
+  const goToSearchPage = () => {
+    history.push('/search');
+  };
+
   return (
     <nav className="layout__left-container custom-scroll">
       <div className="layout__left-content custom-scroll">
@@ -51,7 +55,7 @@ const LeftNav = ({ logOut, currentUser }) => {
           <FiMail style={iconStyle} />
           <h2 className="left-nav-heading">Messages</h2>
         </div>
-        <div className="left-nav-group">
+        <div className="left-nav-group" onClick={goToSearchPage}>
           <BiSearch style={iconStyle} />
           <h2 className="left-nav-heading">Search</h2>
         </div>

@@ -24,13 +24,18 @@ const TopNav = ({ logOut, currentUser, toggleDropdown }) => {
     toggleDropdown();
   };
 
+  const goToSearchPage = () => {
+    history.push('/search');
+    toggleDropdown();
+  };
+
   return (
     <nav className="navbar navbar-dropdown">
       <div className="navbar-container">
         <div className="top-nav-group" onClick={goToProfilePage}>
           <BiUser style={iconStyles} />
         </div>
-        <div className="top-nav-group">
+        <div className="top-nav-group" onClick={goToSearchPage}>
           <BiSearch style={iconStyles} />
         </div>
         <div className="top-nav-group">
