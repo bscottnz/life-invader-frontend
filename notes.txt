@@ -25,9 +25,17 @@ have profile description on profile page
 
 // just finnished
 
-uploading pics
+pinning / un pinning
 
-fixed bug that didnt show comment active style on replyto comment on view post page
+
+
+need to add add-post component to profile page
+
+need to add profile description section
+
+need to change up the design of posts / profile a little bit. 
+
+
 
 
 

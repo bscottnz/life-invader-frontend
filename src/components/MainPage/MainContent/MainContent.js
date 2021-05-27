@@ -12,6 +12,7 @@ import Home from './Home';
 import ViewPost from './ViewPost';
 import ProfilePage from './ProfilePage';
 import FollowerPage from './FollowerPage';
+import SearchPage from './SearchPage';
 
 const MainContent = ({ currentUser, setCurrentUser }) => {
   const history = useHistory();
@@ -37,6 +38,9 @@ const MainContent = ({ currentUser, setCurrentUser }) => {
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
           />
+        </Route>
+        <Route exact path="/search">
+          <SearchPage />
         </Route>
         <Route path="/">
           <Home currentUser={currentUser} />
