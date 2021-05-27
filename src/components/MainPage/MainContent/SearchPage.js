@@ -45,7 +45,7 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
     setActiveTab('Users');
   };
 
-  // make a search request 1.1s after searchText has stopped changing.
+  // make a search request 0.9s after searchText has stopped changing.
 
   // timer that keeps track of when to send search request to server
   let searchTimer;
@@ -54,7 +54,7 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
     if (searchText.trim() !== '') {
       searchTimer = setTimeout(() => {
         makeSearchRequest();
-      }, 1100);
+      }, 900);
     }
 
     return () => {
@@ -148,7 +148,7 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
     }
   }
 
-  const noResultsStyle = { marginTop: '20px', fontSize: '18px' };
+  const noResultsStyle = { marginTop: '20px', fontSize: '16px' };
 
   return (
     <div>
