@@ -18,6 +18,7 @@ import { FiMail } from 'react-icons/fi';
 import { FaCameraRetro } from 'react-icons/fa';
 
 import deletePostRequest from '../../../utils/deletePostRequest';
+import { set } from 'nprogress';
 
 const ProfilePage = ({ currentUser, setCurrentUser }) => {
   const { setProfilePicModalIsOpen, setCoverPhotoModalIsOpen } = useContext(ModalContext);
@@ -121,13 +122,22 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
       });
   };
 
+  // this makes it so that it only clears the posts when changing between
+  // profile pages. before it would clear the posts every time you follow / unfollow
+  // someone on their page or update image, since that would change the current user, which would
+  // then in turn change the profile user, which would then reset the posts.
+
+  const [profileHasChanged, setProfileHasChanged] = useState(false);
+
   useEffect(() => {
     // clear error before switching to new profile page
     setShowError(false);
+    setProfileHasChanged(true);
     getProfileUser();
   }, [profileName]);
 
   // need to get data on currentUser change, so that the new profile picture updates without refresh
+  // this also updates following status on the profile page
   useEffect(() => {
     getProfileUser();
   }, [currentUser]);
@@ -137,9 +147,15 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
     if (profileUser !== null) {
       // need to clear posts, otherwise the previous profiles posts will still show until the new
       // profile posts load when switching between profile pages
-      setPosts([]);
-      setReplies([]);
-      setPinnedPost([]);
+
+      // only reset the posts when switching between profile pages
+      if (profileHasChanged) {
+        setPosts([]);
+        setReplies([]);
+        setPinnedPost([]);
+        setProfileHasChanged(false);
+      }
+
       getProfilePosts();
     }
   }, [profileUser]);

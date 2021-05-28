@@ -94,7 +94,7 @@ const ImageUpload = ({ setCurrentUser, options }) => {
         type="submit"
         className="image-submit-btn"
         disabled={blob === null ? true : false}
-        style={{ cursor: blob === null ? 'not-allowed' : 'default' }}
+        style={{ cursor: blob === null ? 'not-allowed' : 'pointer' }}
       >
         Submit
       </button>
