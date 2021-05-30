@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import Post from './Post';
+import ProfileDescription from './ProfileDescription';
 import DeletePostModal from '../../Modals/DeletePostModal';
 import PinModal from '../../Modals/PinModal';
 import UnPinModal from '../../Modals/UnPinModal';
@@ -126,7 +127,6 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
   // profile pages. before it would clear the posts every time you follow / unfollow
   // someone on their page or update image, since that would change the current user, which would
   // then in turn change the profile user, which would then reset the posts.
-
   const [profileHasChanged, setProfileHasChanged] = useState(false);
 
   useEffect(() => {
@@ -339,8 +339,14 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
                   <span>{`Stalker${numFollowers === 1 ? '' : 's'}`}</span>
                 </Link>
               </div>
+              <ProfileDescription
+                currentUser={currentUser}
+                profileUser={profileUser}
+                refreshProfileUser={getProfileUser}
+              />
             </div>
           </div>
+
           <div className="tabs-container">
             <div
               className={`tab ${activeTab === 'Posts' ? 'active' : ''}`}

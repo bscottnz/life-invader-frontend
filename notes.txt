@@ -31,7 +31,7 @@ search page
 
 need to add add-post component to profile page
 
-need to add profile description section
+need to add profile description section >> am currently workign on this 
 
 need to change up the design of posts / profile a little bit. 
 
@@ -46,7 +46,7 @@ need to refactor db queries to use async.parallel
 
 
 
-// todo
+// todo`
 
 
 

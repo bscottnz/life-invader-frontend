@@ -524,3 +524,52 @@ input[type='file'] {
   font-weight: bold;
   margin-bottom: 10px;
 }
+
+// edit description area on profile page
+
+.edit-btn {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: transparent;
+  outline: none;
+  border: 1px solid $color-blue;
+  border-radius: 100px;
+  color: $color-blue;
+  padding: 8px 16px;
+
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    color: $color-background-medium;
+    background-color: $color-blue;
+  }
+
+  &-container {
+    margin-top: 10px;
+  }
+}
+
+#profile-desc,
+#profile-desc-textarea {
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+}
+
+#profile-desc-textarea {
+  font-size: 16px;
+  width: 100%;
+  height: auto;
+  border: none;
+  resize: none;
+  font-family: inherit;
+  background-color: transparent;
+  color: inherit;
+
+  &:focus {
+    outline: none;
+  }
+}
