@@ -23,11 +23,15 @@ const EditDescriptionModal = ({ currentUser, setCurrentUser }) => {
     textarea.style.height = textarea.scrollHeight + 'px';
   };
 
+  // this is the only way i could resize the text area as the modal opens.
+  // otherwise textarea is null and the app crashes.
+  // before the text area would be the minimum size on modal open (causing scroll),
+  // and would only resize when editing the text
   useEffect(() => {
-    const textarea = document.querySelector('#edit-description-textarea');
-    if (textarea) {
-      textarea.style.height = 'auto';
-      textarea.style.height = textarea.scrollHeight + 'px';
+    if (editDescriptionModalIsOpen) {
+      setTimeout(() => {
+        resizeTextarea();
+      }, 0);
     }
   }, [editDescriptionModalIsOpen]);
 
@@ -75,6 +79,8 @@ const EditDescriptionModal = ({ currentUser, setCurrentUser }) => {
             value={textContent}
             onChange={(e) => setTextContent(e.target.value)}
             maxLength={'100'}
+            style={{ height: 'auto' }}
+            onLoad={(e) => console.log('load')}
           ></textarea>
           <div className="modal-buttons">
             <button
