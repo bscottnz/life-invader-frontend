@@ -19,6 +19,9 @@ export const ModalProvider = (props) => {
   // modal controls for cover pic modal
   const [coverPhotoModalIsOpen, setCoverPhotoModalIsOpen] = useState(false);
 
+  // modal controls for cover pic modal
+  const [editDescriptionModalIsOpen, setEditDescriptionModalIsOpen] = useState(false);
+
   // modal controls for pin post modal
   const [pinModalIsOpen, setPinModalIsOpen] = useState(false);
   const [unPinModalIsOpen, setUnPinModalIsOpen] = useState(false);
@@ -43,6 +46,8 @@ export const ModalProvider = (props) => {
         setUnPinModalIsOpen,
         pinPostId,
         setPinPostId,
+        editDescriptionModalIsOpen,
+        setEditDescriptionModalIsOpen,
       }}
     >
       {props.children}

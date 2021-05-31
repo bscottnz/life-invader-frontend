@@ -9,6 +9,7 @@ import UnPinModal from '../../Modals/UnPinModal';
 import ReplyModal from '../../Modals/ReplyModal';
 import ProfilePictureModal from '../../Modals/ProfilePictureModal';
 import CoverPhotoModal from '../../Modals/CoverPhotoModal';
+import EditDescriptionModal from '../../Modals/EditDescriptionModal';
 import { ModalContext } from '../../Modals/ModalContext';
 
 import axios from 'axios';
@@ -276,6 +277,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
           <CoverPhotoModal setCurrentUser={setCurrentUser} />
           <PinModal getProfilePosts={getProfilePosts} />
           <UnPinModal getProfilePosts={getProfilePosts} />
+          <EditDescriptionModal currentUser={currentUser} setCurrentUser={setCurrentUser} />
           <div className="profile-header-container">
             <div
               className={`cover-photo-container ${
@@ -339,11 +341,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
                   <span>{`Stalker${numFollowers === 1 ? '' : 's'}`}</span>
                 </Link>
               </div>
-              <ProfileDescription
-                currentUser={currentUser}
-                profileUser={profileUser}
-                refreshProfileUser={getProfileUser}
-              />
+              <ProfileDescription currentUser={currentUser} profileUser={profileUser} />
             </div>
           </div>
 

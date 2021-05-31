@@ -213,6 +213,7 @@ textarea::placeholder {
 
   &-body {
     margin-bottom: 20px;
+    word-break: break-all;
   }
 }
 
@@ -553,14 +554,23 @@ input[type='file'] {
   }
 }
 
-#profile-desc,
-#profile-desc-textarea {
+#profile-desc {
   margin-bottom: 10px;
+  margin-top: 20px;
   white-space: pre-wrap;
+  word-break: break-all;
 }
 
-#profile-desc-textarea {
+.edit-label {
+  color: $color-text-grey;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+#edit-description-textarea {
   font-size: 16px;
+  margin-bottom: 20px;
   width: 100%;
   height: auto;
   border: none;
