@@ -212,7 +212,7 @@ textarea::placeholder {
   }
 
   &-body {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     word-break: break-all;
   }
 }
@@ -237,10 +237,15 @@ textarea::placeholder {
   flex: 1;
 }
 
-.username,
-.date {
+.username {
   color: $color-text-grey;
   margin-left: 10px;
+}
+
+.date {
+  color: $color-text-grey;
+  margin-bottom: 15px;
+  font-size: 13px;
 }
 
 // styling the react router link

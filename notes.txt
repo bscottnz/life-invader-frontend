@@ -4,8 +4,6 @@
 allow 5 comments and then require lifeinvader premium or extra liveinvader coins ?
 
 
-toast message on successfull registration and reply?
-
 custom main scroll bar
 
 put mobile nav at bottom of screen
@@ -18,26 +16,21 @@ on empty news feed  (new account) have link to search page and a few recomended 
 get rid of side bar post button. this will be a nightmare to hook up with all the different post
   / get post functions of each page. instead have a make post area at top of profile page.
 
-allow images on posts?
 
-have profile description on profile page
 
 
 // just finnished
 
-search page
+profile descriptions + move post time stamp 
 
 
 
 need to add add-post component to profile page
 
-need to add profile description section >> am currently workign on this 
-
-need to change up the design of posts / profile a little bit. 
 
 need to add shop / shop logic
 
-need to refactor db queries to use async.parallel
+need to refactor db queries to use async.parallel (promise.all ?)
 
 
 
@@ -52,7 +45,7 @@ need to refactor db queries to use async.parallel
 
 
 
--- mayve change the bin icon to a cross
+-- pagination / infinite scroll
 
 -- maybe have a no posts to show message on empty feed ?
 

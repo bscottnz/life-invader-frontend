@@ -1,13 +1,6 @@
 import React from 'react';
-import { useState, useEffect, useContext } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  useHistory,
-} from 'react-router-dom';
+import { useContext } from 'react';
+import { BrowserRouter as Router, Link, useHistory } from 'react-router-dom';
 
 import { ModalContext } from '../../Modals/ModalContext';
 
@@ -228,7 +221,7 @@ const Post = ({
               </Link>
             </span>
             <span className="username">@{postData.author.username}</span>
-            <span className="date">{timestamp}</span>
+
             {/* only show delete if it is not a repost, since that would delete the original
             post as the repost data is copied over to the repost */}
             {isCurrentUsersPost && !isRepost && isDeletable && (
@@ -253,6 +246,7 @@ const Post = ({
           >
             {postData.content}
           </div>
+          <div className="date">{timestamp}</div>
           <div className="post-footer">
             <div className="post-button-container">
               <button
