@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import Post from './Post';
+import CreatePostForm from './CreatePostForm';
 import ProfileDescription from './ProfileDescription';
 import DeletePostModal from '../../Modals/DeletePostModal';
 import PinModal from '../../Modals/PinModal';
@@ -344,7 +345,11 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
               <ProfileDescription currentUser={currentUser} profileUser={profileUser} />
             </div>
           </div>
-
+          {currentUser._id === profileUser._id && (
+            <div className="post-form-profile-container">
+              <CreatePostForm currentUser={currentUser} forceUpdate={getProfilePosts} />
+            </div>
+          )}
           <div className="tabs-container">
             <div
               className={`tab ${activeTab === 'Posts' ? 'active' : ''}`}
