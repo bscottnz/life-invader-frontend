@@ -21,11 +21,11 @@ get rid of side bar post button. this will be a nightmare to hook up with all th
 
 // just finnished
 
-profile descriptions + move post time stamp 
+profile descriptions + move post time stamp + add post form to profile
 
 
 
-need to add add-post component to profile page
+
 
 
 need to add shop / shop logic
