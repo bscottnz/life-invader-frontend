@@ -29,6 +29,9 @@ export const ModalProvider = (props) => {
   // pinned post id
   const [pinPostId, setPinPostId] = useState(null);
 
+  // buy coins modal
+  const [buyNowModalIsOpen, setBuyNowModalIsOpen] = useState(false);
+
   return (
     <ModalContext.Provider
       value={{
@@ -48,6 +51,8 @@ export const ModalProvider = (props) => {
         setPinPostId,
         editDescriptionModalIsOpen,
         setEditDescriptionModalIsOpen,
+        buyNowModalIsOpen,
+        setBuyNowModalIsOpen,
       }}
     >
       {props.children}

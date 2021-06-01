@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { ModalContext } from '../../Modals/ModalContext';
+import BuyNowModal from '../../Modals/BuyNowModal';
 
 import coinImage from '../../../images/lifeinvadercoin.png';
 
 const Store = () => {
+  const { setBuyNowModalIsOpen } = useContext(ModalContext);
+
+  const buyCoins = () => {
+    setBuyNowModalIsOpen(true);
+  };
   return (
     <div>
+      <BuyNowModal />
       <h1 className="main-content-heading">lifeinvader store</h1>
       <div className="store-description">
         <h2>lifeinvader coins</h2>
@@ -13,7 +22,10 @@ const Store = () => {
           lifeinvader coin.
         </p>
         <p>You currently have 10 lifeinvader coins.</p>
-        <p className="disclaimer">Note: This is not a real store and is just for fun.</p>
+        <p className="disclaimer">
+          Note: This is not a real store and is just for fun. Clicking Buy now will add the coins to
+          your account.
+        </p>
       </div>
       <div className="shop-items-container">
         <div className="shop-item">
@@ -25,7 +37,9 @@ const Store = () => {
           </div>
           <div className="shop-item-description">
             <div className="shop-item-price">Only $8.99!</div>
-            <button className="btn btn-fill btn-buy">Buy now</button>
+            <button className="btn btn-fill btn-buy" onClick={buyCoins}>
+              Buy now
+            </button>
           </div>
         </div>
 
@@ -38,7 +52,9 @@ const Store = () => {
           </div>
           <div className="shop-item-description">
             <div className="shop-item-price">Only $42.99!</div>
-            <button className="btn btn-fill btn-buy">Buy now</button>
+            <button className="btn btn-fill btn-buy" onClick={buyCoins}>
+              Buy now
+            </button>
           </div>
         </div>
 
@@ -51,7 +67,9 @@ const Store = () => {
           </div>
           <div className="shop-item-description">
             <div className="shop-item-price">Only $199.99!</div>
-            <button className="btn btn-fill btn-buy">Buy now</button>
+            <button className="btn btn-fill btn-buy" onClick={buyCoins}>
+              Buy now
+            </button>
           </div>
         </div>
       </div>
