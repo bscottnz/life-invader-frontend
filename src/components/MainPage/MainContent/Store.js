@@ -1,15 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { ModalContext } from '../../Modals/ModalContext';
 import BuyNowModal from '../../Modals/BuyNowModal';
 
+import axios from 'axios';
+
 import coinImage from '../../../images/lifeinvadercoin.png';
 
-const Store = () => {
+const Store = ({ currentUser, setCurrentUser }) => {
   const { setBuyNowModalIsOpen } = useContext(ModalContext);
 
-  const buyCoins = () => {
+  // number of joins the current user has
+  const [userCoins, setUserCoins] = useState(currentUser.coins ? currentUser.coins : 0);
+
+  const buyCoins = (numCoins) => {
     setBuyNowModalIsOpen(true);
+    axios({
+      method: 'put',
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/api/users/shop/${userCoins + numCoins}`,
+      // send the amount of coins to update user data with
+    })
+      .then((res) => {
+        setCurrentUser(res.data);
+        setUserCoins((prevCoins) => prevCoins + numCoins);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div>
@@ -21,7 +39,7 @@ const Store = () => {
           Purchase lifeinvader coins to make posts and comments. Every post and comment costs 1
           lifeinvader coin.
         </p>
-        <p>You currently have 10 lifeinvader coins.</p>
+        <p>{`You currently have ${userCoins} lifeinvader coin${userCoins === 1 ? '' : 's'}.`}</p>
         <p className="disclaimer">
           Note: This is not a real store and is just for fun. Clicking Buy now will add the coins to
           your account.
@@ -37,7 +55,7 @@ const Store = () => {
           </div>
           <div className="shop-item-description">
             <div className="shop-item-price">Only $8.99!</div>
-            <button className="btn btn-fill btn-buy" onClick={buyCoins}>
+            <button className="btn btn-fill btn-buy" onClick={() => buyCoins(10)}>
               Buy now
             </button>
           </div>
@@ -52,7 +70,7 @@ const Store = () => {
           </div>
           <div className="shop-item-description">
             <div className="shop-item-price">Only $42.99!</div>
-            <button className="btn btn-fill btn-buy" onClick={buyCoins}>
+            <button className="btn btn-fill btn-buy" onClick={() => buyCoins(50)}>
               Buy now
             </button>
           </div>
@@ -67,7 +85,7 @@ const Store = () => {
           </div>
           <div className="shop-item-description">
             <div className="shop-item-price">Only $199.99!</div>
-            <button className="btn btn-fill btn-buy" onClick={buyCoins}>
+            <button className="btn btn-fill btn-buy" onClick={() => buyCoins(250)}>
               Buy now
             </button>
           </div>
