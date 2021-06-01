@@ -154,6 +154,7 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
     <div>
       <ReplyModal
         currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
         replyComment={replyComment}
         replyHeading={replyHeading}
         replyTextPlaceholder={replyTextPlaceholder}

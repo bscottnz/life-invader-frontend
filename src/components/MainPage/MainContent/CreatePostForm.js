@@ -1,10 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import axios from 'axios';
 
 const CreatePostForm = ({
   currentUser,
+  setCurrentUser,
   textPlaceholder,
   buttonText,
   setModalIsOpen,
@@ -14,6 +16,8 @@ const CreatePostForm = ({
 }) => {
   const [postText, setPostText] = useState('');
 
+  const history = useHistory();
+
   // resize post form text area to avoid text scroll
   const resizeTextarea = function (e) {
     const textarea = document.querySelector('#post-textarea');
@@ -22,38 +26,61 @@ const CreatePostForm = ({
   };
 
   const submitPost = () => {
-    const payload = {
-      content: postText,
-    };
+    // only allow posting if user has required coins
+    if (currentUser.coins && currentUser.coins > 0) {
+      const payload = {
+        content: postText,
+      };
 
-    if (isReply) {
-      payload.replyTo = replyComment._id;
-    }
+      if (isReply) {
+        payload.replyTo = replyComment._id;
+      }
 
-    axios({
-      method: 'post',
-      data: payload,
-      withCredentials: true,
-      url: `${process.env.REACT_APP_BASE_URL}/api/posts`,
-    })
-      .then((res) => {
-        // clear the text area
-        setPostText('');
-        // refresh posts
-        forceUpdate();
-
-        // this will close the reply modal when submitting a comment reply
-        if (isReply) {
-          setModalIsOpen(false);
-        }
+      axios({
+        method: 'post',
+        data: payload,
+        withCredentials: true,
+        url: `${process.env.REACT_APP_BASE_URL}/api/posts`,
       })
-      .catch((err) => {
-        console.log(err);
-        // user has been signed out. redirect to home page
-        if (err.response.status == 401) {
-          window.location.reload();
-        }
-      });
+        .then((res) => {
+          // clear the text area
+          setPostText('');
+          // refresh posts
+          forceUpdate();
+
+          // this will close the reply modal when submitting a comment reply
+          if (isReply) {
+            setModalIsOpen(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          // user has been signed out. redirect to home page
+          if (err.response.status == 401) {
+            window.location.reload();
+          }
+        });
+
+      const numCoins = currentUser.coins;
+
+      // update users coin balance
+      axios({
+        method: 'put',
+        withCredentials: true,
+        url: `${process.env.REACT_APP_BASE_URL}/api/users/shop/${numCoins - 1}`,
+        // send the amount of coins to update user data with
+      })
+        .then((res) => {
+          setCurrentUser(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      // user has insufficeint coins to make a post. redirect to store
+    } else {
+      history.push(`/store/nocoins`);
+    }
   };
 
   return (

@@ -14,7 +14,7 @@ import deletePostRequest from '../../../utils/deletePostRequest';
 
 Modal.setAppElement('#root');
 
-const Home = ({ currentUser }) => {
+const Home = ({ currentUser, setCurrentUser }) => {
   const [posts, setPosts] = useState([]);
 
   // keep track of which comment is being replied to
@@ -97,6 +97,7 @@ const Home = ({ currentUser }) => {
     <div>
       <ReplyModal
         currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
         replyComment={replyComment}
         replyHeading={replyHeading}
         replyTextPlaceholder={replyTextPlaceholder}
@@ -106,7 +107,11 @@ const Home = ({ currentUser }) => {
       <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
 
       <h1 className="main-content-heading">Home</h1>
-      <CreatePostForm currentUser={currentUser} forceUpdate={getPosts} />
+      <CreatePostForm
+        currentUser={currentUser}
+        forceUpdate={getPosts}
+        setCurrentUser={setCurrentUser}
+      />
       <div className="posts-container">{postItems}</div>
     </div>
   );

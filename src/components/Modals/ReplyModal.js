@@ -10,7 +10,14 @@ import CreatePostForm from '../MainPage/MainContent/CreatePostForm';
 import { v4 as uuidv4 } from 'uuid';
 import modalStyle from './modalStyle';
 
-const ReplyModal = ({ currentUser, replyComment, replyHeading, replyTextPlaceholder, getPost }) => {
+const ReplyModal = ({
+  currentUser,
+  replyComment,
+  replyHeading,
+  replyTextPlaceholder,
+  getPost,
+  setCurrentUser,
+}) => {
   // get delete modal state from context
   const { modalIsOpen, setModalIsOpen } = useContext(ModalContext);
 
@@ -47,6 +54,7 @@ const ReplyModal = ({ currentUser, replyComment, replyHeading, replyTextPlacehol
 
       <CreatePostForm
         currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
         textPlaceholder={replyTextPlaceholder}
         buttonText={'Reply'}
         setModalIsOpen={setModalIsOpen}

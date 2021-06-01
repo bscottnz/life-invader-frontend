@@ -268,6 +268,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
         <>
           <ReplyModal
             currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
             replyComment={replyComment}
             replyHeading={replyHeading}
             replyTextPlaceholder={replyTextPlaceholder}
@@ -347,7 +348,11 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
           </div>
           {currentUser._id === profileUser._id && (
             <div className="post-form-profile-container">
-              <CreatePostForm currentUser={currentUser} forceUpdate={getProfilePosts} />
+              <CreatePostForm
+                currentUser={currentUser}
+                forceUpdate={getProfilePosts}
+                setCurrentUser={setCurrentUser}
+              />
             </div>
           )}
           <div className="tabs-container">

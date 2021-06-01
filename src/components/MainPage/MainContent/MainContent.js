@@ -21,7 +21,7 @@ const MainContent = ({ currentUser, setCurrentUser }) => {
     <section className="layout__main">
       <Switch>
         <Route exact path="/post/:id">
-          <ViewPost currentUser={currentUser} />
+          <ViewPost currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
         <Route exact path="/profile/:username">
           <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />
@@ -46,8 +46,11 @@ const MainContent = ({ currentUser, setCurrentUser }) => {
         <Route exact path="/store">
           <Store currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
+        <Route exact path="/store/nocoins">
+          <Store currentUser={currentUser} setCurrentUser={setCurrentUser} popup={true} />
+        </Route>
         <Route path="/">
-          <Home currentUser={currentUser} />
+          <Home currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
       </Switch>
     </section>

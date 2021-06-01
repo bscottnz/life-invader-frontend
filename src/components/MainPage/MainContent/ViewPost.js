@@ -11,7 +11,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import deletePostRequest from '../../../utils/deletePostRequest';
 
-const ViewPost = ({ currentUser }) => {
+const ViewPost = ({ currentUser, setCurrentUser }) => {
   // this entire component needs to be re written, this feels like a hack to get it working rather
   // than a nice solution
   const id = useParams().id;
@@ -196,6 +196,7 @@ const ViewPost = ({ currentUser }) => {
     <div>
       <ReplyModal
         currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
         replyComment={replyComment}
         replyHeading={replyHeading}
         replyTextPlaceholder={replyTextPlaceholder}

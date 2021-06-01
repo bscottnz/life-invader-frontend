@@ -32,6 +32,9 @@ export const ModalProvider = (props) => {
   // buy coins modal
   const [buyNowModalIsOpen, setBuyNowModalIsOpen] = useState(false);
 
+  // no more coins modal
+  const [noCoinsModalIsOpen, setNoCoinsModalIsOpen] = useState(false);
+
   return (
     <ModalContext.Provider
       value={{
@@ -53,6 +56,8 @@ export const ModalProvider = (props) => {
         setEditDescriptionModalIsOpen,
         buyNowModalIsOpen,
         setBuyNowModalIsOpen,
+        noCoinsModalIsOpen,
+        setNoCoinsModalIsOpen,
       }}
     >
       {props.children}

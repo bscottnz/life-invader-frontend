@@ -1,17 +1,27 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import { ModalContext } from '../../Modals/ModalContext';
 import BuyNowModal from '../../Modals/BuyNowModal';
+import NoCoinsModal from '../../Modals/NoCoinsModal';
 
 import axios from 'axios';
 
 import coinImage from '../../../images/lifeinvadercoin.png';
 
-const Store = ({ currentUser, setCurrentUser }) => {
-  const { setBuyNowModalIsOpen } = useContext(ModalContext);
+const Store = ({ currentUser, setCurrentUser, popup }) => {
+  const { setBuyNowModalIsOpen, setNoCoinsModalIsOpen } = useContext(ModalContext);
 
   // number of joins the current user has
   const [userCoins, setUserCoins] = useState(currentUser.coins ? currentUser.coins : 0);
+
+  useEffect(() => {
+    // has been redirected from failed post. display popup explaining why
+    if (popup === true && userCoins === 0) {
+      setTimeout(() => {
+        setNoCoinsModalIsOpen(true);
+      }, 0);
+    }
+  }, []);
 
   const buyCoins = (numCoins) => {
     setBuyNowModalIsOpen(true);
@@ -32,6 +42,7 @@ const Store = ({ currentUser, setCurrentUser }) => {
   return (
     <div>
       <BuyNowModal />
+      <NoCoinsModal />
       <h1 className="main-content-heading">lifeinvader store</h1>
       <div className="store-description">
         <h2>lifeinvader coins</h2>
@@ -93,6 +104,10 @@ const Store = ({ currentUser, setCurrentUser }) => {
       </div>
     </div>
   );
+};
+
+Store.defaultProps = {
+  popup: false, // when redirecting to shop on failed post, display popup explaining why
 };
 
 export default Store;
