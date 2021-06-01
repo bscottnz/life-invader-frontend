@@ -29,6 +29,11 @@ const TopNav = ({ logOut, currentUser, toggleDropdown }) => {
     toggleDropdown();
   };
 
+  const goToStore = () => {
+    history.push('/store');
+    toggleDropdown();
+  };
+
   return (
     <nav className="navbar navbar-dropdown">
       <div className="navbar-container">
@@ -38,7 +43,7 @@ const TopNav = ({ logOut, currentUser, toggleDropdown }) => {
         <div className="top-nav-group" onClick={goToSearchPage}>
           <BiSearch style={iconStyles} />
         </div>
-        <div className="top-nav-group">
+        <div className="top-nav-group" onClick={goToStore}>
           <BiShoppingBag style={iconStyles} />
         </div>
         <div className="top-nav-group" onClick={logOut}>

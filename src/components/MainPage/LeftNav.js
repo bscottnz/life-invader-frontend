@@ -32,6 +32,10 @@ const LeftNav = ({ logOut, currentUser }) => {
     history.push('/search');
   };
 
+  const goToStore = () => {
+    history.push('/store');
+  };
+
   return (
     <nav className="layout__left-container custom-scroll">
       <div className="layout__left-content custom-scroll">
@@ -59,7 +63,7 @@ const LeftNav = ({ logOut, currentUser }) => {
           <BiSearch style={iconStyle} />
           <h2 className="left-nav-heading">Search</h2>
         </div>
-        <div className="left-nav-group">
+        <div className="left-nav-group" onClick={goToStore}>
           <BiShoppingBag style={iconStyle} />
           <h2 className="left-nav-heading">Store</h2>
         </div>

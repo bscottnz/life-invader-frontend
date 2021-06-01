@@ -1,0 +1,79 @@
+.shop-item-card {
+  border: 1px solid $color-background-light;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding-bottom: 40px;
+  border-radius: 15px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.coin-amount {
+  padding: 5px 0;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid $color-background-light;
+  width: 100%;
+  text-align: center;
+  background-color: $color-background-light;
+}
+
+.shop-item {
+  border-top: 1px solid $color-background-light;
+  padding: 20px;
+  display: flex;
+
+  &-description {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  &-price {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+}
+
+.btn-buy {
+  width: 235px;
+}
+
+.shop-items-container {
+  padding: 20px 0;
+}
+
+.shop-img-container {
+  width: 100px;
+  & img {
+    width: 100%;
+  }
+}
+
+.store-description {
+  & h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  & p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  & p.disclaimer {
+    font-size: 13px;
+    color: $color-text-grey;
+    margin-bottom: 0;
+  }
+}
