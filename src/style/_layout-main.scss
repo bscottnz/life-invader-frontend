@@ -213,3 +213,26 @@ $right-sidebar-width-sml: 250px;
     display: flex !important;
   }
 }
+
+// body scroll bars
+
+/* Works on Firefox */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: $color-background-medium transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: $color-background-light;
+  border-radius: 20px;
+  border: 3px solid transparent;
+}
