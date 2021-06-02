@@ -139,7 +139,7 @@ const Home = ({ currentUser, setCurrentUser }) => {
           search page.
         </span>
       </p>
-      <div className="image-wrapper" style={{ width: '70%', margin: '50px auto 0' }}>
+      <div className="image-wrapper" style={{ width: '60%', margin: '50px auto 0' }}>
         <img src={logoIcon} alt="logo" style={{ width: '100%' }} />
       </div>
     </div>

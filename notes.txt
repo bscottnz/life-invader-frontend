@@ -3,9 +3,7 @@
 
 
 
-custom main scroll bar
 
-admin user (me) can delete any post / account
 
 
 get rid of side bar post button. this will be a nightmare to hook up with all the different post
@@ -44,6 +42,9 @@ need to refactor db queries to use async.parallel (promise.all ?)
 
 
 -- pagination / infinite scroll
+
+custom main scroll bar
+
 
 
 

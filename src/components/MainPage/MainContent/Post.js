@@ -223,8 +223,9 @@ const Post = ({
             <span className="username">@{postData.author.username}</span>
 
             {/* only show delete if it is not a repost, since that would delete the original
-            post as the repost data is copied over to the repost */}
-            {isCurrentUsersPost && !isRepost && isDeletable && (
+            post as the repost data is copied over to the repost. also allow admin to delete
+            any post */}
+            {(isCurrentUsersPost || currentUser.admin) && !isRepost && isDeletable && (
               <div style={{ marginLeft: 'auto', display: 'flex' }}>
                 {showPin && (
                   <div className="delete-post-btn">
