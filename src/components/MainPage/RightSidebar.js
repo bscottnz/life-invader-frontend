@@ -49,7 +49,22 @@ const RightSidebar = ({ currentUser, setCurrentUser }) => {
   return (
     <section className="layout__right-sidebar-container">
       <div className="layout__right-sidebar custom-scroll">
+        <h1 className="main-content-heading">Stalk these users</h1>
         {followSuggestions.length > 0 && userList}
+        {followSuggestions.length === 0 && (
+          <p style={{ fontSize: '16px', marginBottom: '20px' }}>
+            You're already stalking everyone!{' '}
+          </p>
+        )}
+        <div className="ad-container">
+          <h1
+            className="main-content-heading"
+            style={{ borderTop: '1px solid #3a3a3a', paddingTop: '20px' }}
+          >
+            Special deals in the lifeinvader store waiting for you!
+          </h1>
+          <button className="btn btn-fill btn-block">Shop now!</button>
+        </div>
       </div>
     </section>
   );
