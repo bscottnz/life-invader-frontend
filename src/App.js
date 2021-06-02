@@ -104,9 +104,10 @@ function App() {
                 <RightSidebar currentUser={currentUser} setCurrentUser={setCurrentUser} />
               </main>
             </div>
-            <div className="new-post-btn-wrapper mobile-post-btn">
+            {/* I may want to add this mobile add-post button back at some point. */}
+            {/* <div className="new-post-btn-wrapper mobile-post-btn">
               <BiPlus style={{ fontSize: '32px' }} />
-            </div>
+            </div> */}
           </div>
         </Router>
       </FollowingProvider>

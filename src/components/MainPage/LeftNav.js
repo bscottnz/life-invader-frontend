@@ -67,14 +67,15 @@ const LeftNav = ({ logOut, currentUser }) => {
           <BiShoppingBag style={iconStyle} />
           <h2 className="left-nav-heading">Store</h2>
         </div>
-        <div className="left-nav-group" onClick={logOut}>
+        <div className="left-nav-group" onClick={logOut} style={{ marginBottom: '5px' }}>
           <FiLogOut style={iconStyle} />
           <h2 className="left-nav-heading">Logout</h2>
         </div>
-        <button className="btn btn-fill new-post">Invade</button>
+        {/* I may want to add this add post button back to the side bar at some point */}
+        {/* <button className="btn btn-fill new-post">Invade</button>
         <div className="new-post-btn-wrapper">
           <BiPlus style={{ ...iconStyle, fontSize: '32px' }} />
-        </div>
+        </div> */}
       </div>
     </nav>
   );
