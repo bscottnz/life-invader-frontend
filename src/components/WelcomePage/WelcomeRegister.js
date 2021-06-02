@@ -64,6 +64,8 @@ const WelcomeRegister = ({ setCurrentUser }) => {
 
     if (username.length === 0) {
       errors.push('Please enter a username.');
+    } else if (username.length > 16) {
+      errors.push('Username may not be longer than 16 characters.');
     } else if (!isValidUsername) {
       errors.push('Username must start with a letter.');
       errors.push('Username may only contain only contain letters and numbers.');

@@ -6,9 +6,6 @@ allow 5 comments and then require lifeinvader premium or extra liveinvader coins
 
 custom main scroll bar
 
-put mobile nav at bottom of screen
-
-
 admin user (me) can delete any post / account
 
 on empty news feed  (new account) have link to search page and a few recomended ppl to follow
@@ -21,16 +18,15 @@ get rid of side bar post button. this will be a nightmare to hook up with all th
 
 // just finnished
 
-profile descriptions + move post time stamp + add post form to profile
+store
 
 
 
 
 
 
-need to add shop / shop logic
 
-need to refactor db queries to use async.parallel (promise.all ?)
+
 
 
 
@@ -43,6 +39,7 @@ need to refactor db queries to use async.parallel (promise.all ?)
 
 
 
+need to refactor db queries to use async.parallel (promise.all ?)
 
 
 -- pagination / infinite scroll
@@ -53,20 +50,7 @@ need to refactor db queries to use async.parallel (promise.all ?)
 
 -- make loading page / component look better
 
-
-
-
-
-
-
-
-today i will get pin working and re do the pin / delete icon.
-search page
-profile description & profile add post area
-
-
-
-
+-- right sidebar(link to store  suggestions freinds) 
 
 
 

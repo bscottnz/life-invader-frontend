@@ -99,7 +99,7 @@ function App() {
             <main className="layout">
               <LeftNav logOut={logOut} currentUser={currentUser} />
               <MainContent currentUser={currentUser} setCurrentUser={setCurrentUser} />
-              <RightSidebar />
+              <RightSidebar currentUser={currentUser} setCurrentUser={setCurrentUser} />
             </main>
           </div>
           <div className="new-post-btn-wrapper mobile-post-btn">

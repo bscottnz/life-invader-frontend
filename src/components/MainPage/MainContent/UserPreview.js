@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 
-const UserPreview = ({ currentUser, user, showFollowBtn, setCurrentUser, getUserData }) => {
+const UserPreview = ({
+  currentUser,
+  user,
+  showFollowBtn,
+  setCurrentUser,
+  getUserData,
+  makeSmall,
+}) => {
   // if the logged in user is following the user in the preview
   const [isFollowing, setIsFollowing] = useState(currentUser.following.includes(user._id));
 
@@ -57,16 +64,22 @@ const UserPreview = ({ currentUser, user, showFollowBtn, setCurrentUser, getUser
 
   return (
     <div className="user-preview">
-      <div className="user-image-container">
-        <img src={process.env.REACT_APP_BASE_URL + user.profilePic} alt="user profile picture" />
-      </div>
-      <div className="user-details-container">
+      {!makeSmall && (
+        <div className="user-image-container">
+          <img src={process.env.REACT_APP_BASE_URL + user.profilePic} alt="user profile picture" />
+        </div>
+      )}
+      <div className="user-details-container" style={makeSmall ? { paddingLeft: '0' } : {}}>
         <div className="header">
           <Link
             to={`/profile/${user.username}`}
             style={displayNameStyle}
           >{`${user.firstName} ${user.lastName}`}</Link>
-          <span className="username">{`@${user.username}`}</span>
+          {makeSmall && <br></br>}
+          <span
+            className="username"
+            style={makeSmall ? { marginLeft: '0' } : {}}
+          >{`@${user.username}`}</span>
         </div>
       </div>
       {showFollowBtn && followBtn}
@@ -76,6 +89,7 @@ const UserPreview = ({ currentUser, user, showFollowBtn, setCurrentUser, getUser
 
 UserPreview.defaultProps = {
   showFollowBtn: true, // show a follow button or not
+  makeSmall: false, // show a condensed preview (no picture)
 };
 
 export default UserPreview;
