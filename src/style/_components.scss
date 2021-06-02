@@ -242,6 +242,12 @@ textarea::placeholder {
   margin-left: 10px;
 }
 
+.post-header .username {
+  @media (max-width: 780px) {
+    display: none;
+  }
+}
+
 .date {
   color: $color-text-grey;
   margin-bottom: 15px;
@@ -561,7 +567,7 @@ input[type='file'] {
 
 #profile-desc {
   margin-bottom: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
   white-space: pre-wrap;
   word-break: break-all;
 }

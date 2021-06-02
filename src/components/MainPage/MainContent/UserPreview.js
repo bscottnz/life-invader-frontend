@@ -100,7 +100,10 @@ const UserPreview = ({
           <img src={process.env.REACT_APP_BASE_URL + user.profilePic} alt="user profile picture" />
         </div>
       )}
-      <div className="user-details-container" style={makeSmall ? { paddingLeft: '0' } : {}}>
+      <div
+        className="user-details-container"
+        style={makeSmall ? { paddingLeft: '0', paddingRight: '0' } : {}}
+      >
         <div className="header">
           <Link
             to={`/profile/${user.username}`}
