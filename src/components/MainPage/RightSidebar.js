@@ -72,7 +72,7 @@ const RightSidebar = ({ currentUser, setCurrentUser }) => {
             className="main-content-heading"
             style={{ borderTop: '1px solid #3a3a3a', paddingTop: '20px' }}
           >
-            Special deals in the lifeinvader store waiting for you!
+            Special deals in the lifeinvader store are waiting for you!
           </h1>
           <button
             className="btn btn-fill btn-block"

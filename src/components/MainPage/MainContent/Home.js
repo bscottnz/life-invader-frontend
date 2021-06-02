@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
 
 import CreatePostForm from './CreatePostForm';
@@ -11,6 +12,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import deletePostRequest from '../../../utils/deletePostRequest';
+import logoIcon from '../../../images/logo-large.png';
 
 Modal.setAppElement('#root');
 
@@ -22,6 +24,12 @@ const Home = ({ currentUser, setCurrentUser }) => {
 
   // keep track of the id of which comment is being deleted
   const [deleteComment, setDeleteComment] = useState(null);
+
+  const [noPosts, setNoPosts] = useState(false);
+
+  const history = useHistory();
+
+  const isInitialMount = useRef(true);
 
   const getPosts = () => {
     axios({
@@ -57,14 +65,22 @@ const Home = ({ currentUser, setCurrentUser }) => {
     }
   }, [posts]);
 
-  // fetch posts on page load
+  // fetch posts on page load or if users are followed from the side bar
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [currentUser]);
 
   // delete post
   const deletePost = (id) => {
     deletePostRequest(id, getPosts);
+  };
+
+  const goToSearchPage = () => {
+    history.push('/search');
+  };
+
+  const goToBensPage = () => {
+    history.push('/profile/coolben');
   };
 
   const postItems = posts.map((post) => (
@@ -93,6 +109,42 @@ const Home = ({ currentUser, setCurrentUser }) => {
       replyTextPlaceholder = `Give ${replyComment.author.username} a piece of your mind..`;
     }
   }
+
+  // show the welcome message if there are no posts after loading
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      if (posts.length === 0) {
+        setNoPosts(true);
+      } else {
+        setNoPosts(false);
+      }
+    }
+  }, [posts]);
+
+  const noPostsToShow = (
+    <div style={{ marginTop: '20px' }}>
+      <h2 className="main-content-heading">Welcome to lifeinvader!</h2>
+      <p className="paragraph-text">
+        Stalk other lifeinvader users to see their posts here on the home page.
+      </p>
+      <p className="paragraph-text">
+        Check out{' '}
+        <span className="text-link" onClick={goToBensPage}>
+          Ben's profile here
+        </span>
+        , or search for users from the{' '}
+        <span className="text-link" onClick={goToSearchPage}>
+          search page.
+        </span>
+      </p>
+      <div className="image-wrapper" style={{ width: '70%', margin: '50px auto 0' }}>
+        <img src={logoIcon} alt="logo" style={{ width: '100%' }} />
+      </div>
+    </div>
+  );
+
   return (
     <div>
       <ReplyModal
@@ -114,6 +166,7 @@ const Home = ({ currentUser, setCurrentUser }) => {
         textPlaceholder={`Hey ${currentUser.firstName}, what's going on?`}
       />
       <div className="posts-container">{postItems}</div>
+      {noPosts && noPostsToShow}
     </div>
   );
 };
