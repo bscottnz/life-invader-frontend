@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import UserPreview from './MainContent/UserPreview';
+import { useHistory } from 'react-router-dom';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,6 +9,8 @@ import { v4 as uuidv4 } from 'uuid';
 const RightSidebar = ({ currentUser, setCurrentUser }) => {
   // array of suggested users to follow
   const [followSuggestions, setFollowSuggestions] = useState([]);
+
+  const history = useHistory();
 
   const getFollowSuggestions = () => {
     axios({
@@ -22,11 +25,19 @@ const RightSidebar = ({ currentUser, setCurrentUser }) => {
         if (followSuggestionResults.length > 3) {
           followSuggestionResults = followSuggestionResults.slice(0, 3);
         }
+
+        // sort users by number of followers
+        followSuggestionResults.sort((a, b) => (a.followers.length < b.followers.length ? 1 : -1));
+
         setFollowSuggestions(followSuggestionResults);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const goToStore = () => {
+    history.push('/store');
   };
 
   // get suggestions on page load
@@ -63,7 +74,9 @@ const RightSidebar = ({ currentUser, setCurrentUser }) => {
           >
             Special deals in the lifeinvader store waiting for you!
           </h1>
-          <button className="btn btn-fill btn-block">Shop now!</button>
+          <button className="btn btn-fill btn-block" onClick={goToStore}>
+            Shop now!
+          </button>
         </div>
       </div>
     </section>
