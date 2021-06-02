@@ -47,10 +47,9 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
 
   // make a search request 0.9s after searchText has stopped changing.
 
-  // timer that keeps track of when to send search request to server
-  let searchTimer;
-
   useEffect(() => {
+    // timer that keeps track of when to send search request to server
+    let searchTimer;
     if (searchText.trim() !== '') {
       searchTimer = setTimeout(() => {
         makeSearchRequest();
@@ -77,10 +76,13 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
     })
       .then((res) => {
         setPostResults(res.data.posts);
-        // order users alphabetically
+        // order users alphabetically case insenstitve
         setUserResults(
           res.data.users.sort((a, b) =>
-            a.firstName + a.lastName > b.firstName + b.lastName ? 1 : -1
+            a.firstName.toLowerCase() + a.lastName.toLowerCase() >
+            b.firstName.toLowerCase() + b.lastName.toLowerCase()
+              ? 1
+              : -1
           )
         );
 

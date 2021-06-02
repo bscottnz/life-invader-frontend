@@ -32,7 +32,7 @@ const RightSidebar = ({ currentUser, setCurrentUser }) => {
   // get suggestions on page load
   useEffect(() => {
     getFollowSuggestions();
-  }, []);
+  }, [currentUser]);
 
   const userList = followSuggestions.map((user) => (
     <UserPreview
@@ -42,6 +42,7 @@ const RightSidebar = ({ currentUser, setCurrentUser }) => {
       setCurrentUser={setCurrentUser}
       getUserData={() => 1} /* a do nothing function */
       makeSmall={true}
+      isSidebar={true}
     />
   ));
 

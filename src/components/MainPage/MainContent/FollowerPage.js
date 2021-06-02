@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import UserPreview from './UserPreview';
+import { FollowingContext } from '../../MainPage/FollowingContext';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,8 +16,9 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
   // array of users that is following the profile user
   const [usersFollowers, setUsersFollowers] = useState([]);
 
-  // array of users that the profile user is following
-  const [usersFollowing, setUsersFollowing] = useState([]);
+  // array of users that the profile user is following. reworked to use context so the sidebar has access
+  // const [usersFollowing, setUsersFollowing] = useState([]);
+  const { usersFollowing, setUsersFollowing } = useContext(FollowingContext);
 
   // when unfollowing someone from the followers or following tab, I want the user preview
   // to still show but with the follow button style changed, then when i click between tabs i want
@@ -41,15 +43,21 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
     })
       .then((res) => {
         // res.data is the entire profile user data.
-        // sort users alphabeticaly
+        // sort users alphabeticaly case insensitive
         setUsersFollowers(
           res.data.followers.sort((a, b) =>
-            a.firstName + a.lastName > b.firstName + b.lastName ? 1 : -1
+            a.firstName.toLowerCase() + a.lastName.toLowerCase() >
+            b.firstName.toLowerCase() + b.lastName.toLowerCase()
+              ? 1
+              : -1
           )
         );
         setUsersFollowing(
           res.data.following.sort((a, b) =>
-            a.firstName + a.lastName > b.firstName + b.lastName ? 1 : -1
+            a.firstName.toLowerCase() + a.lastName.toLowerCase() >
+            b.firstName.toLowerCase() + b.lastName.toLowerCase()
+              ? 1
+              : -1
           )
         );
         setUserData(res.data);
@@ -89,7 +97,10 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
     if (userData.following) {
       setUsersFollowing(
         userData.following.sort((a, b) =>
-          a.firstName + a.lastName > b.firstName + b.lastName ? 1 : -1
+          a.firstName.toLowerCase() + a.lastName.toLowerCase() >
+          b.firstName.toLowerCase() + b.lastName.toLowerCase()
+            ? 1
+            : -1
         )
       );
     } else {
@@ -100,6 +111,10 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
   useEffect(() => {
     getProfileData();
   }, []);
+
+  useEffect(() => {
+    getUserData();
+  }, [currentUser]);
 
   const followersList = usersFollowers.map((user) => (
     <UserPreview

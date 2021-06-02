@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 
 import Welcome from './components/WelcomePage/Welcome';
 import { ModalProvider } from './components/Modals/ModalContext';
+import { FollowingProvider } from './components/MainPage/FollowingContext';
 
 import Loading from './components/Loading';
 import TopNav from './components/MainPage/TopNav';
@@ -87,26 +88,28 @@ function App() {
   // user is logged in so render main app
   return (
     <ModalProvider>
-      <Router history={history}>
-        <div className="App">
-          <TopNav toggleDropdown={toggleDropdown} />
-          <TopNavDropdown
-            logOut={logOut}
-            currentUser={currentUser}
-            toggleDropdown={toggleDropdown}
-          />
-          <div className="main-wrapper">
-            <main className="layout">
-              <LeftNav logOut={logOut} currentUser={currentUser} />
-              <MainContent currentUser={currentUser} setCurrentUser={setCurrentUser} />
-              <RightSidebar currentUser={currentUser} setCurrentUser={setCurrentUser} />
-            </main>
+      <FollowingProvider>
+        <Router history={history}>
+          <div className="App">
+            <TopNav toggleDropdown={toggleDropdown} />
+            <TopNavDropdown
+              logOut={logOut}
+              currentUser={currentUser}
+              toggleDropdown={toggleDropdown}
+            />
+            <div className="main-wrapper">
+              <main className="layout">
+                <LeftNav logOut={logOut} currentUser={currentUser} />
+                <MainContent currentUser={currentUser} setCurrentUser={setCurrentUser} />
+                <RightSidebar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+              </main>
+            </div>
+            <div className="new-post-btn-wrapper mobile-post-btn">
+              <BiPlus style={{ fontSize: '32px' }} />
+            </div>
           </div>
-          <div className="new-post-btn-wrapper mobile-post-btn">
-            <BiPlus style={{ fontSize: '32px' }} />
-          </div>
-        </div>
-      </Router>
+        </Router>
+      </FollowingProvider>
     </ModalProvider>
   );
 }

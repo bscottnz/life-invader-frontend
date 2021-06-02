@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { FollowingContext } from '../../MainPage/FollowingContext';
 
 import axios from 'axios';
 
@@ -10,9 +12,12 @@ const UserPreview = ({
   setCurrentUser,
   getUserData,
   makeSmall,
+  isSidebar,
 }) => {
   // if the logged in user is following the user in the preview
   const [isFollowing, setIsFollowing] = useState(currentUser.following.includes(user._id));
+
+  const { usersFollowing, setUsersFollowing } = useContext(FollowingContext);
 
   const followUser = () => {
     axios({
@@ -28,7 +33,33 @@ const UserPreview = ({
 
         // this updates the intermediate user data varaible on the follower page.
         // then when i switch tabs this intermediate data overwrites the exsisting user data
+
+        // on the right sidebar it justs gets a new list of people to follow
         getUserData();
+
+        // this updates the main followers page correctly, when following someone
+        // via the side bar.
+        if (isSidebar) {
+          let updatedFollowingList = [...usersFollowing];
+          updatedFollowingList.push(user);
+          updatedFollowingList.sort((a, b) =>
+            a.firstName.toLowerCase() + a.lastName.toLowerCase() >
+            b.firstName.toLowerCase() + b.lastName.toLowerCase()
+              ? 1
+              : -1
+          );
+          // since i still show users immediatly after they have been unfollowed in the following page,
+          // there can be duplicates if adding that user back in via the side bar.
+
+          const seen = new Set();
+          updatedFollowingList = updatedFollowingList.filter((el) => {
+            const duplicate = seen.has(el._id);
+            seen.add(el._id);
+            return !duplicate;
+          });
+
+          setUsersFollowing(updatedFollowingList);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -90,6 +121,7 @@ const UserPreview = ({
 UserPreview.defaultProps = {
   showFollowBtn: true, // show a follow button or not
   makeSmall: false, // show a condensed preview (no picture)
+  isSidebar: false, // different behaviour for the sidebar user previews
 };
 
 export default UserPreview;
