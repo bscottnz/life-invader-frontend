@@ -18,7 +18,7 @@ get rid of side bar post button. this will be a nightmare to hook up with all th
 
 // just finnished
 
-store
+right side bar. (store link + follow suggestions). few ui tweaks.
 
 
 
@@ -50,7 +50,7 @@ need to refactor db queries to use async.parallel (promise.all ?)
 
 -- make loading page / component look better
 
--- right sidebar(link to store  suggestions freinds) 
+
 
 
 

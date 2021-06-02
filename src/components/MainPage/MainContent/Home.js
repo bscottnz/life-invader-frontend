@@ -111,6 +111,7 @@ const Home = ({ currentUser, setCurrentUser }) => {
         currentUser={currentUser}
         forceUpdate={getPosts}
         setCurrentUser={setCurrentUser}
+        textPlaceholder={`Hey ${currentUser.firstName}, what's going on?`}
       />
       <div className="posts-container">{postItems}</div>
     </div>

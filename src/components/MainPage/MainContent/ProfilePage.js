@@ -352,6 +352,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
                 currentUser={currentUser}
                 forceUpdate={getProfilePosts}
                 setCurrentUser={setCurrentUser}
+                textPlaceholder={`Hey ${currentUser.firstName}, what's going on?`}
               />
             </div>
           )}

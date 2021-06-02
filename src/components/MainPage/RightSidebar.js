@@ -74,7 +74,11 @@ const RightSidebar = ({ currentUser, setCurrentUser }) => {
           >
             Special deals in the lifeinvader store waiting for you!
           </h1>
-          <button className="btn btn-fill btn-block" onClick={goToStore}>
+          <button
+            className="btn btn-fill btn-block"
+            onClick={goToStore}
+            style={{ marginBottom: '10px' }}
+          >
             Shop now!
           </button>
         </div>
