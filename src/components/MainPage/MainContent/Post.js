@@ -79,7 +79,7 @@ const Post = ({
   // both of these states have been refactored to use local storage. this is to save isTruncated
   // state between refreshes/ since liking a comment etc will refresh that component, collapsing the
   // comment if it was previously expanded. this is probably (definitely) a terrible solution, especially for a lot of posts,
-  // but it works
+  // but it works. the local storage is cleared on log out
 
   const myPostElement = useRef(null);
 
@@ -176,6 +176,7 @@ const Post = ({
       // post-body has more height than we want to show. Add button to
       // tell the user than the post has been truncated and that they can view more
       setTruncatePost('true');
+      console.log('tytyt');
     }
   }, []);
 

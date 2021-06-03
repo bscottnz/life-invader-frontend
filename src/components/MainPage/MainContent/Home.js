@@ -70,6 +70,12 @@ const Home = ({ currentUser, setCurrentUser }) => {
     getPosts();
   }, [currentUser]);
 
+  // need to get posts twice on initial load otherwise the local storage data isnt read for some reason.
+  // one day ill find out why. will i really? maybe...
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   // delete post
   const deletePost = (id) => {
     deletePostRequest(id, getPosts);

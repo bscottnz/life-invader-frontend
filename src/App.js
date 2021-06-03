@@ -72,6 +72,9 @@ function App() {
       url: `${process.env.REACT_APP_BASE_URL}/logout`,
     }).then((res) => {
       setCurrentUser(null);
+      // remove local storage post data. it is only needed when liking posts that have been expanded
+      // and going between pages
+      localStorage.clear();
     });
   };
 
