@@ -76,9 +76,10 @@ const Post = ({
   // flash the false message first before changng to the true message.
   // const [isTruncated, setIsTruncated] = useState(true);
 
-  // both of these states have been refactored to use local storage. this is to save is truncated
+  // both of these states have been refactored to use local storage. this is to save isTruncated
   // state between refreshes/ since liking a comment etc will refresh that component, collapsing the
-  // comment if it was previously expanded
+  // comment if it was previously expanded. this is probably (definitely) a terrible solution, especially for a lot of posts,
+  // but it works
 
   const myPostElement = useRef(null);
 

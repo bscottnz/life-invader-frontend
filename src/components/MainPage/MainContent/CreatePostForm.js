@@ -45,6 +45,8 @@ const CreatePostForm = ({
         .then((res) => {
           // clear the text area
           setPostText('');
+          // resize the text area back to normal
+          document.querySelector('#post-textarea').style.height = 'auto';
           // refresh posts
           forceUpdate();
 
