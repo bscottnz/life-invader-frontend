@@ -104,3 +104,9 @@
     }
   }
 }
+
+.truncate-message {
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -214,6 +214,14 @@ textarea::placeholder {
   &-body {
     margin-bottom: 10px;
     word-break: break-all;
+    position: relative;
+
+    &-truncated {
+      // max-height: 80px;
+      max-height: 4.8em;
+      line-height: 1.2em;
+      overflow: hidden;
+    }
   }
 }
 

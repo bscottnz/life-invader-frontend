@@ -3,15 +3,6 @@
 
 
 
-
-
-
-get rid of side bar post button. this will be a nightmare to hook up with all the different post
-  / get post functions of each page. instead have a make post area at top of profile page.
-
-
-
-
 // just finnished
 
 right side bar. (store link + follow suggestions). few ui tweaks.
@@ -20,41 +11,15 @@ welcome message on empty feed
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // todo`
 
-
-
-need to refactor db queries to use async.parallel (promise.all ?)
-
+-- refactor db queries to use async.parallel (promise.all ?)
 
 -- pagination / infinite scroll
-
-custom main scroll bar
-
 
 
 
 -- limit post length in news feed. make them view the full comment if th post is too long
-
-
-
-
-
-
 
 
 
@@ -64,5 +29,7 @@ custom main scroll bar
 - fully mobile responsive
 - client and server side validation
 - seperate rest api
+- admin can delete any post
+- store
 
 

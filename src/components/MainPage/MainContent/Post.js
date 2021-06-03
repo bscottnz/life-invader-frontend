@@ -1,5 +1,5 @@
 import React from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { BrowserRouter as Router, Link, useHistory } from 'react-router-dom';
 
 import { ModalContext } from '../../Modals/ModalContext';
@@ -65,7 +65,36 @@ const Post = ({
   // convert the post date to a relative time, eg '2 hours ago'
   const timestamp = relativeTime(new Date(), new Date(postData.createdAt));
 
+  // truncate the post and add a view more button if post is too long.
+  // default to false then calculate whether or not to show the button.
+  // const [truncatePost, setTruncatePost] = useState(false);
+
+  // if the post is currently truncated. default to true. this just
+  // determines what message to display under a truncated post. if a post is determined to
+  // not be truncated then this state is irrelevent, as it only changes by clicking that button
+  // under a truncated post. it defualts to true becuase otherwise sometimes the button will
+  // flash the false message first before changng to the true message.
+  // const [isTruncated, setIsTruncated] = useState(true);
+
+  // both of these states have been refactored to use local storage. this is to save is truncated
+  // state between refreshes/ since liking a comment etc will refresh that component, collapsing the
+  // comment if it was previously expanded
+
+  const myPostElement = useRef(null);
+
   const history = useHistory();
+
+  function usePersistedState(key, defaultValue) {
+    const [state, setState] = React.useState(() => localStorage.getItem(key) || defaultValue);
+    useEffect(() => {
+      localStorage.setItem(key, state);
+    }, [key, state]);
+    return [state, setState];
+  }
+
+  const [truncatePost, setTruncatePost] = usePersistedState(postData._id, false);
+
+  const [isTruncated, setIsTruncated] = usePersistedState(`${postData._id}2`, true);
 
   const dislikePost = (e) => {
     e.stopPropagation();
@@ -112,6 +141,42 @@ const Post = ({
       history.push(`/post/${postData._id}`);
     }
   };
+
+  // useEffect(() => {
+  //   if (isTruncated == 'false') {
+  //     myPostElement.current.classList.toggle('post-body-truncated');
+  //   }
+  // }, []);
+
+  const toggleTruncatedPost = (e) => {
+    e.stopPropagation();
+    myPostElement.current.classList.toggle('post-body-truncated');
+    // setIsTruncated((prevState) => !prevState);
+    if (isTruncated == 'true') {
+      setIsTruncated('false');
+    } else {
+      setIsTruncated('true');
+    }
+
+    console.log(postData._id);
+  };
+
+  // this will calculate which posts have been truncated, and add a view more button
+  // to those long posts.
+  useEffect(() => {
+    // get the post-body font size. it will be different if it is viewed on the view post page
+    // so need to get it here
+    const elementFontSize = parseInt(myPostElement.current.style.fontSize);
+
+    // set the max scroll height to be be font size * line height * number of lines to show
+    const maxScrollHeight = elementFontSize * 1.2 * 4;
+
+    if (myPostElement.current.scrollHeight > maxScrollHeight) {
+      // post-body has more height than we want to show. Add button to
+      // tell the user than the post has been truncated and that they can view more
+      setTruncatePost('true');
+    }
+  }, []);
 
   const openDeleteModal = (e) => {
     e.stopPropagation();
@@ -242,11 +307,32 @@ const Post = ({
             )}
           </div>
           <div
-            className="post-body"
+            className={`post-body ${isTruncated == 'false' ? '' : 'post-body-truncated'}`}
             style={{ whiteSpace: 'pre-wrap', fontSize: makeBig ? '24px' : '16px' }}
+            ref={myPostElement}
           >
             {postData.content}
           </div>
+
+          {truncatePost == 'true' && isTruncated == 'true' && (
+            <p
+              className="date truncate-message"
+              style={{ marginBottom: '10px' }}
+              onClick={toggleTruncatedPost}
+            >
+              Post collapsed. View more...
+            </p>
+          )}
+          {truncatePost == 'true' && isTruncated == 'false' && (
+            <p
+              className="date truncate-message"
+              style={{ marginBottom: '10px' }}
+              onClick={toggleTruncatedPost}
+            >
+              Collapse post
+            </p>
+          )}
+
           <div className="date">{timestamp}</div>
           <div className="post-footer">
             <div className="post-button-container">
