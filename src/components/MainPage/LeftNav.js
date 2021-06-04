@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 
 import { BiHomeAlt } from 'react-icons/bi';
 import { BiUser } from 'react-icons/bi';
@@ -13,10 +13,47 @@ import { BiShoppingBag } from 'react-icons/bi';
 
 import logoIcon from '../../images/logo-small.png';
 
-const LeftNav = ({ logOut, currentUser, location }) => {
+const LeftNav = ({ logOut, currentUser }) => {
   const iconStyle = {
     fontSize: '28px',
   };
+
+  const location = useLocation();
+
+  // checks what page you are on, and gives the relevant side bar link active styling
+  useEffect(() => {
+    console.log(location.pathname);
+    const currentPage = location.pathname;
+
+    // first remove all sidebare active classes
+    const sideBarElements = document.querySelectorAll('.left-nav-group');
+    sideBarElements.forEach((el) => {
+      el.classList.remove('left-nav-group__active');
+    });
+
+    // check current url against possible sidebar link matches and apply active styling
+    const homeLink = document.querySelector('#left-nav-home');
+    const profileLink = document.querySelector('#left-nav-profile');
+    const notificationsLink = document.querySelector('#left-nav-notifications');
+    const messagesLink = document.querySelector('#left-nav-messages');
+    const searchLink = document.querySelector('#left-nav-search');
+    const storeLink = document.querySelector('#left-nav-store');
+
+    if (currentPage === '/' || currentPage === '/login') {
+      //right after logging in, currentPage is still '/login'
+      homeLink.classList.add('left-nav-group__active');
+    } else if (currentPage.includes('/profile')) {
+      profileLink.classList.add('left-nav-group__active');
+    } else if (currentPage.includes('/notifications')) {
+      notificationsLink.classList.add('left-nav-group__active');
+    } else if (currentPage.includes('/messages')) {
+      messagesLink.classList.add('left-nav-group__active');
+    } else if (currentPage.includes('/search')) {
+      searchLink.classList.add('left-nav-group__active');
+    } else if (currentPage.includes('/store')) {
+      storeLink.classList.add('left-nav-group__active');
+    }
+  }, [location]);
 
   const history = useHistory();
 
@@ -36,8 +73,6 @@ const LeftNav = ({ logOut, currentUser, location }) => {
     history.push('/store');
   };
 
-  console.log(location);
-
   return (
     <nav className="layout__left-container custom-scroll">
       <div className="layout__left-content custom-scroll">
@@ -45,27 +80,27 @@ const LeftNav = ({ logOut, currentUser, location }) => {
           <img src={logoIcon} alt="" />
         </div>
 
-        <div className="left-nav-group" onClick={goToHomePage}>
+        <div className="left-nav-group" id="left-nav-home" onClick={goToHomePage}>
           <BiHomeAlt style={iconStyle} />
           <h2 className="left-nav-heading">Home</h2>
         </div>
-        <div className="left-nav-group" onClick={goToProfilePage}>
+        <div className="left-nav-group" id="left-nav-profile" onClick={goToProfilePage}>
           <BiUser style={iconStyle} />
           <h2 className="left-nav-heading">Profile</h2>
         </div>
-        <div className="left-nav-group">
+        <div className="left-nav-group" id="left-nav-notifications">
           <BiBell style={{ ...iconStyle }} />
           <h2 className="left-nav-heading">Notifications</h2>
         </div>
-        <div className="left-nav-group">
+        <div className="left-nav-group" id="left-nav-messages">
           <FiMail style={iconStyle} />
           <h2 className="left-nav-heading">Messages</h2>
         </div>
-        <div className="left-nav-group" onClick={goToSearchPage}>
+        <div className="left-nav-group" id="left-nav-search" onClick={goToSearchPage}>
           <BiSearch style={iconStyle} />
           <h2 className="left-nav-heading">Search</h2>
         </div>
-        <div className="left-nav-group" onClick={goToStore}>
+        <div className="left-nav-group" id="left-nav-store" onClick={goToStore}>
           <BiShoppingBag style={iconStyle} />
           <h2 className="left-nav-heading">Store</h2>
         </div>
