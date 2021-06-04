@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { BiHomeAlt } from 'react-icons/bi';
 import { BiUser } from 'react-icons/bi';
@@ -13,7 +13,7 @@ import { BiShoppingBag } from 'react-icons/bi';
 
 import logoIcon from '../../images/logo-small.png';
 
-const LeftNav = ({ logOut, currentUser }) => {
+const LeftNav = ({ logOut, currentUser, location }) => {
   const iconStyle = {
     fontSize: '28px',
   };
@@ -35,6 +35,8 @@ const LeftNav = ({ logOut, currentUser }) => {
   const goToStore = () => {
     history.push('/store');
   };
+
+  console.log(location);
 
   return (
     <nav className="layout__left-container custom-scroll">

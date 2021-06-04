@@ -176,7 +176,6 @@ const Post = ({
       // post-body has more height than we want to show. Add button to
       // tell the user than the post has been truncated and that they can view more
       setTruncatePost('true');
-      console.log('tytyt');
     }
   }, []);
 

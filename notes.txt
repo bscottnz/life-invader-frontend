@@ -8,6 +8,7 @@
 right side bar. (store link + follow suggestions). few ui tweaks.
 loading page spinner
 welcome message on empty feed
+collapsable post
 
 
 
@@ -17,9 +18,9 @@ welcome message on empty feed
 
 -- pagination / infinite scroll
 
+-- give active styleing to the side bar menu link (maybe use router.params in the side bar component
+and check whatit is and apply styling based on that)
 
-
--- limit post length in news feed. make them view the full comment if th post is too long
 
 
 
@@ -31,5 +32,9 @@ welcome message on empty feed
 - seperate rest api
 - admin can delete any post
 - store
+- collapseable posts
+- create,delete, comment on, share and like posts
+- pin posts to top of profile page
+
 
 
