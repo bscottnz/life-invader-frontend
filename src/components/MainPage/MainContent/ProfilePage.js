@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import Post from './Post';
 import CreatePostForm from './CreatePostForm';
@@ -60,6 +61,9 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
 
   // the number of people the profile is following
   const [numFollowing, setNumFollowing] = useState(0);
+
+  // keep track of the number of 'pages' of posts to display in infininite scroll.
+  const [numPages, setNumPages] = useState(1);
 
   const getProfileUser = () => {
     axios({
@@ -204,28 +208,52 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
     deletePostRequest(id, getProfilePosts);
   };
 
-  const postItems = posts.map((post) => (
-    <Post
-      postData={post}
-      currentUser={currentUser}
-      key={uuidv4()}
-      forceUpdate={getProfilePosts}
-      setReplyComment={setReplyComment}
-      setDeleteComment={setDeleteComment}
-      showPin={profileName === currentUser.username ? true : false}
-    />
-  ));
+  // infinite scroll
+  const showAnotherPage = () => {
+    setNumPages((x) => x + 1);
+  };
 
-  const replyItems = replies.map((post) => (
-    <Post
-      postData={post}
-      currentUser={currentUser}
-      key={uuidv4()}
-      forceUpdate={getProfilePosts}
-      setReplyComment={setReplyComment}
-      setDeleteComment={setDeleteComment}
-    />
-  ));
+  const postItems = posts
+    .slice(0, 20 * numPages)
+    .map((post) => (
+      <Post
+        postData={post}
+        currentUser={currentUser}
+        key={uuidv4()}
+        forceUpdate={getProfilePosts}
+        setReplyComment={setReplyComment}
+        setDeleteComment={setDeleteComment}
+        showPin={profileName === currentUser.username ? true : false}
+      />
+    ));
+
+  // only show 20 posts per 'page' of infinate scroll.
+  // as you scroll down to bottom the number of pages to show increases
+  // const postItems = posts
+  //   .slice(0, 20 * numPages)
+  //   .map((post) => (
+  //     <Post
+  //       postData={post}
+  //       currentUser={currentUser}
+  //       key={uuidv4()}
+  //       forceUpdate={getPosts}
+  //       setReplyComment={setReplyComment}
+  //       setDeleteComment={setDeleteComment}
+  //     />
+  //   ));
+
+  const replyItems = replies
+    .slice(0, 20 * numPages)
+    .map((post) => (
+      <Post
+        postData={post}
+        currentUser={currentUser}
+        key={uuidv4()}
+        forceUpdate={getProfilePosts}
+        setReplyComment={setReplyComment}
+        setDeleteComment={setDeleteComment}
+      />
+    ));
 
   const pinnedPostItem = pinnedPost.map((post) => (
     <Post
@@ -375,7 +403,27 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
               {activeTab == 'Posts' ? pinnedPostItem : ''}
             </div>
           )}
-          <div className="posts-container">{activeTab == 'Posts' ? postItems : replyItems}</div>
+          <div className="posts-container">
+            {activeTab == 'Posts' ? (
+              <InfiniteScroll
+                dataLength={20 * numPages}
+                next={showAnotherPage}
+                hasMore={posts.length > numPages * 20}
+                scrollThreshold={0.9}
+              >
+                {postItems}
+              </InfiniteScroll>
+            ) : (
+              <InfiniteScroll
+                dataLength={20 * numPages}
+                next={showAnotherPage}
+                hasMore={replies.length > numPages * 20}
+                scrollThreshold={0.9}
+              >
+                {replyItems}
+              </InfiniteScroll>
+            )}
+          </div>
         </>
       )}
       {showError && (

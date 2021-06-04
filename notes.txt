@@ -9,14 +9,13 @@ right side bar. (store link + follow suggestions). few ui tweaks.
 loading page spinner
 welcome message on empty feed
 collapsable post
+infinitate scroll
 
 
 
 // todo`
 
 -- refactor db queries to use async.parallel (promise.all ?)
-
--- pagination / infinite scroll
 
 -- give active styleing to the side bar menu link (maybe use router.params in the side bar component
 and check whatit is and apply styling based on that)
@@ -35,6 +34,7 @@ and check whatit is and apply styling based on that)
 - collapseable posts
 - create,delete, comment on, share and like posts
 - pin posts to top of profile page
+- infinite scroll 
 
 
 

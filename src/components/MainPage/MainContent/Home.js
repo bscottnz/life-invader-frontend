@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect, useContext, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import CreatePostForm from './CreatePostForm';
 import Post from './Post';
@@ -17,6 +18,7 @@ import logoIcon from '../../../images/logo-large.png';
 Modal.setAppElement('#root');
 
 const Home = ({ currentUser, setCurrentUser }) => {
+  // all posts
   const [posts, setPosts] = useState([]);
 
   // keep track of which comment is being replied to
@@ -30,6 +32,9 @@ const Home = ({ currentUser, setCurrentUser }) => {
   const history = useHistory();
 
   const isInitialMount = useRef(true);
+
+  // keep track of the number of 'pages' of posts to display in infininite scroll.
+  const [numPages, setNumPages] = useState(1);
 
   const getPosts = () => {
     axios({
@@ -89,16 +94,24 @@ const Home = ({ currentUser, setCurrentUser }) => {
     history.push('/profile/coolben');
   };
 
-  const postItems = posts.map((post) => (
-    <Post
-      postData={post}
-      currentUser={currentUser}
-      key={uuidv4()}
-      forceUpdate={getPosts}
-      setReplyComment={setReplyComment}
-      setDeleteComment={setDeleteComment}
-    />
-  ));
+  const showAnotherPage = () => {
+    setNumPages((x) => x + 1);
+  };
+
+  // only show 20 posts per 'page' of infinate scroll.
+  // as you scroll down to bottom the number of pages to show increases
+  const postItems = posts
+    .slice(0, 20 * numPages)
+    .map((post) => (
+      <Post
+        postData={post}
+        currentUser={currentUser}
+        key={uuidv4()}
+        forceUpdate={getPosts}
+        setReplyComment={setReplyComment}
+        setDeleteComment={setDeleteComment}
+      />
+    ));
 
   let replyHeading = '';
   let replyTextPlaceholder = '';
@@ -171,7 +184,17 @@ const Home = ({ currentUser, setCurrentUser }) => {
         setCurrentUser={setCurrentUser}
         textPlaceholder={`Hey ${currentUser.firstName}, what's going on?`}
       />
-      <div className="posts-container">{postItems}</div>
+      <div className="posts-container">
+        {/* {postItems} */}
+        <InfiniteScroll
+          dataLength={20 * numPages}
+          next={showAnotherPage}
+          hasMore={posts.length > numPages * 20}
+          scrollThreshold={0.9}
+        >
+          {postItems}
+        </InfiniteScroll>
+      </div>
       {noPosts && noPostsToShow}
     </div>
   );

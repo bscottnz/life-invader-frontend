@@ -1,12 +1,5 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  useHistory,
-} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 
 import Home from './Home';
 import ViewPost from './ViewPost';
@@ -16,7 +9,13 @@ import SearchPage from './SearchPage';
 import Store from './Store';
 
 const MainContent = ({ currentUser, setCurrentUser }) => {
-  const history = useHistory();
+  const location = useLocation();
+
+  // scrolls back to the top if you click on sidebar link for the page you are already on.
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location]);
+
   return (
     <section className="layout__main">
       <Switch>

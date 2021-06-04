@@ -158,8 +158,6 @@ const Post = ({
     } else {
       setIsTruncated('true');
     }
-
-    console.log(postData._id);
   };
 
   // this will calculate which posts have been truncated, and add a view more button
