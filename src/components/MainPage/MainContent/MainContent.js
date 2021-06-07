@@ -7,6 +7,8 @@ import ProfilePage from './ProfilePage';
 import FollowerPage from './FollowerPage';
 import SearchPage from './SearchPage';
 import Store from './Store';
+import Inbox from './Messages/Inbox';
+import NewMessage from './Messages/NewMessage';
 
 const MainContent = ({ currentUser, setCurrentUser }) => {
   const location = useLocation();
@@ -47,6 +49,12 @@ const MainContent = ({ currentUser, setCurrentUser }) => {
         </Route>
         <Route exact path="/store/nocoins">
           <Store currentUser={currentUser} setCurrentUser={setCurrentUser} popup={true} />
+        </Route>
+        <Route exact path="/messages">
+          <Inbox currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        </Route>
+        <Route exact path="/messages/new">
+          <NewMessage currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
         <Route path="/">
           <Home currentUser={currentUser} setCurrentUser={setCurrentUser} />

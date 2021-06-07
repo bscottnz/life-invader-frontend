@@ -22,10 +22,9 @@ const LeftNav = ({ logOut, currentUser }) => {
 
   // checks what page you are on, and gives the relevant side bar link active styling
   useEffect(() => {
-    console.log(location.pathname);
     const currentPage = location.pathname;
 
-    // first remove all sidebare active classes
+    // first remove all sidebar active classes
     const sideBarElements = document.querySelectorAll('.left-nav-group');
     sideBarElements.forEach((el) => {
       el.classList.remove('left-nav-group__active');
@@ -73,6 +72,10 @@ const LeftNav = ({ logOut, currentUser }) => {
     history.push('/store');
   };
 
+  const goToMessages = () => {
+    history.push('/messages');
+  };
+
   return (
     <nav className="layout__left-container custom-scroll">
       <div className="layout__left-content custom-scroll">
@@ -92,7 +95,7 @@ const LeftNav = ({ logOut, currentUser }) => {
           <BiBell style={{ ...iconStyle }} />
           <h2 className="left-nav-heading">Notifications</h2>
         </div>
-        <div className="left-nav-group" id="left-nav-messages">
+        <div className="left-nav-group" id="left-nav-messages" onClick={goToMessages}>
           <FiMail style={iconStyle} />
           <h2 className="left-nav-heading">Messages</h2>
         </div>

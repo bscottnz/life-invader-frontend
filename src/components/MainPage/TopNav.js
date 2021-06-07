@@ -22,6 +22,11 @@ const TopNav = ({ toggleDropdown }) => {
     history.push(`/`);
     toggleDropdown(true);
   };
+
+  const goToMessages = () => {
+    history.push('/messages');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -31,7 +36,7 @@ const TopNav = ({ toggleDropdown }) => {
         <div className="top-nav-group">
           <BiBell style={iconStyles} />
         </div>
-        <div className="top-nav-group">
+        <div className="top-nav-group" onClick={goToMessages}>
           <FiMail style={iconStyles} />
         </div>
         <div className="top-nav-group">

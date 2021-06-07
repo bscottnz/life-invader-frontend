@@ -26,7 +26,7 @@ const Welcome = ({ setCurrentUser }) => {
               <img src={logoIcon} alt="Life invader logo icon - small" />
             </div>
             <h2 className="welcome-heading-large">
-              It's not just an app,
+              It's not technology,
               <br />
               It's your life
             </h2>

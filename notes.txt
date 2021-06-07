@@ -10,6 +10,7 @@ loading page spinner
 welcome message on empty feed
 collapsable post
 infinitate scroll
+active sidebar link styles
 
 
 
@@ -17,8 +18,7 @@ infinitate scroll
 
 -- refactor db queries to use async.parallel (promise.all ?)
 
--- give active styleing to the side bar menu link (maybe use router.params in the side bar component
-and check whatit is and apply styling based on that)
+
 
 
 

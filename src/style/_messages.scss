@@ -1,0 +1,66 @@
+// new message page -------------------------------------------------------
+
+.chat-page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  font-size: 16px;
+}
+
+.chat-title-bar {
+  border-top: 1px solid $color-background-light;
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  padding: 10px;
+
+  & label {
+    margin-right: 10px;
+  }
+}
+
+#user-search-textbox {
+  border: none;
+  flex: 1;
+  font-weight: 200;
+  min-width: 310px;
+  font-size: inherit;
+  background-color: transparent;
+  color: $color-text;
+}
+
+#user-search-textbox::-webkit-input-placeholder {
+  color: $color-text-grey;
+}
+
+#user-search-textbox:-moz-placeholder {
+  /* Firefox 18- */
+  color: $color-text-grey;
+}
+
+#user-search-textbox::-moz-placeholder {
+  /* Firefox 19+ */
+  color: $color-text-grey;
+}
+
+#user-search-textbox:-ms-input-placeholder {
+  color: $color-text-grey;
+}
+
+#user-search-textbox::placeholder {
+  color: $color-text-grey;
+}
+
+.results-container {
+  border-top: 1px solid $color-background-light;
+}
+
+#create-chat-btn {
+  margin: 20px auto;
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $color-blue;
+    background-color: transparent;
+  }
+}
