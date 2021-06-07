@@ -116,10 +116,17 @@ const UserPreview = ({
         style={makeSmall ? { paddingLeft: '0', paddingRight: '0' } : {}}
       >
         <div className="header">
-          <Link
-            to={`/profile/${user.username}`}
-            style={displayNameStyle}
-          >{`${user.firstName} ${user.lastName}`}</Link>
+          {addToChat === null && (
+            <Link
+              to={`/profile/${user.username}`}
+              style={displayNameStyle}
+            >{`${user.firstName} ${user.lastName}`}</Link>
+          )}
+          {addToChat !== null && (
+            <Link style={displayNameStyle}>{`${user.firstName} ${user.lastName}`}</Link>
+            // <span style={displayNameStyle}>{`${user.firstName} ${user.lastName}`}</span>
+          )}
+
           {makeSmall && <br></br>}
           <span
             className="username"
