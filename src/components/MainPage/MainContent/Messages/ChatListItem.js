@@ -1,8 +1,11 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 const ChatListItem = ({ chat, currentUser }) => {
+  const history = useHistory();
+
   const goToChat = (id) => {
-    alert(id);
+    history.push(`/messages/${id}`);
   };
 
   const getChatName = () => {

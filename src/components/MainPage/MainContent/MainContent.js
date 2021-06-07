@@ -9,6 +9,7 @@ import SearchPage from './SearchPage';
 import Store from './Store';
 import Inbox from './Messages/Inbox';
 import NewMessage from './Messages/NewMessage';
+import ChatPage from './Messages/ChatPage';
 
 const MainContent = ({ currentUser, setCurrentUser }) => {
   const location = useLocation();
@@ -55,6 +56,9 @@ const MainContent = ({ currentUser, setCurrentUser }) => {
         </Route>
         <Route exact path="/messages/new">
           <NewMessage currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        </Route>
+        <Route exact path="/messages/:id">
+          <ChatPage currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
         <Route path="/">
           <Home currentUser={currentUser} setCurrentUser={setCurrentUser} />
