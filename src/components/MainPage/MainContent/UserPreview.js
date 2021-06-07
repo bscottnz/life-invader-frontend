@@ -13,6 +13,7 @@ const UserPreview = ({
   getUserData,
   makeSmall,
   isSidebar,
+  addToChat,
 }) => {
   // if the logged in user is following the user in the preview
   const [isFollowing, setIsFollowing] = useState(currentUser.following.includes(user._id));
@@ -66,6 +67,12 @@ const UserPreview = ({
       });
   };
 
+  const addUser = () => {
+    if (addToChat !== null) {
+      addToChat(user);
+    }
+  };
+
   // this fixes a memory leak
   useEffect(() => {
     return () => {
@@ -94,7 +101,11 @@ const UserPreview = ({
   }
 
   return (
-    <div className="user-preview">
+    <div
+      className="user-preview"
+      onClick={addUser}
+      style={{ cursor: addToChat !== null ? 'pointer' : 'auto' }}
+    >
       {!makeSmall && (
         <div className="user-image-container">
           <img src={process.env.REACT_APP_BASE_URL + user.profilePic} alt="user profile picture" />
@@ -125,6 +136,7 @@ UserPreview.defaultProps = {
   showFollowBtn: true, // show a follow button or not
   makeSmall: false, // show a condensed preview (no picture)
   isSidebar: false, // different behaviour for the sidebar user previews
+  addToChat: null, // different behaviour for add to chat preview
 };
 
 export default UserPreview;

@@ -54,6 +54,10 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
       searchTimer = setTimeout(() => {
         makeSearchRequest();
       }, 900);
+    } else {
+      // clear results container
+      setUserResults([]);
+      setPostResults([]);
     }
 
     return () => {
