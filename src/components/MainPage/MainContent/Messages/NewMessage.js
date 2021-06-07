@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import UserPreview from '../UserPreview';
 
@@ -18,6 +19,8 @@ const NewMessage = ({ currentUser, setCurrentUser }) => {
 
   // users that have been added to chat
   const [selectedUsers, setSelectedUsers] = useState([]);
+
+  const history = useHistory();
 
   const makeSearchRequest = (showLoading = true) => {
     if (showLoading) {
@@ -69,7 +72,6 @@ const NewMessage = ({ currentUser, setCurrentUser }) => {
   }, [text]);
 
   const addUserToMessage = (user) => {
-    // console.log(user);
     setSelectedUsers((prevUsersArray) => [...prevUsersArray, user]);
     setText('');
     document.getElementById('user-search-textbox').focus();
@@ -79,11 +81,27 @@ const NewMessage = ({ currentUser, setCurrentUser }) => {
     let users = [...selectedUsers];
     // console.log(users);
     users = users.filter((user) => {
-      console.log(user._id);
       return user._id !== userId;
     });
     setSelectedUsers(users);
-    // console.log(userId);
+  };
+
+  const createNewChat = () => {
+    const data = JSON.stringify(selectedUsers);
+
+    axios({
+      method: 'post',
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/api/chats`,
+      data: { users: data },
+    })
+      .then((res) => {
+        // res.data is the newly created chat. redirect to this chat page.
+        history.push(`/messages/${res.data._id}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   // only show users that isnt the current user and arent in the chat already
@@ -110,6 +128,7 @@ const NewMessage = ({ currentUser, setCurrentUser }) => {
     <p
       className="user-added-to-chat"
       onClick={(e) => removeUserFromMessage(user._id)}
+      key={uuidv4()}
     >{`${user.firstName} ${user.lastName}`}</p>
   ));
 
@@ -136,7 +155,12 @@ const NewMessage = ({ currentUser, setCurrentUser }) => {
           <div style={{ marginBottom: '20px' }}>{selectedUsersLabels}</div>
         )}
         <div className="results-container">{userResults.length > 0 && userList}</div>
-        <button id="create-chat-btn" className="follow-btn" disabled={selectedUsers.length === 0}>
+        <button
+          id="create-chat-btn"
+          className="follow-btn"
+          disabled={selectedUsers.length === 0}
+          onClick={createNewChat}
+        >
           Create new chat
         </button>
       </div>

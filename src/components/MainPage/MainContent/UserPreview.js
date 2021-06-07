@@ -123,7 +123,10 @@ const UserPreview = ({
             >{`${user.firstName} ${user.lastName}`}</Link>
           )}
           {addToChat !== null && (
-            <Link style={displayNameStyle}>{`${user.firstName} ${user.lastName}`}</Link>
+            <Link
+              to="/messages/new"
+              style={displayNameStyle}
+            >{`${user.firstName} ${user.lastName}`}</Link>
             // <span style={displayNameStyle}>{`${user.firstName} ${user.lastName}`}</span>
           )}
 
