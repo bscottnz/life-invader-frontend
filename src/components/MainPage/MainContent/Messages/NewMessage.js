@@ -16,6 +16,9 @@ const NewMessage = ({ currentUser, setCurrentUser }) => {
   // search results
   const [userResults, setUserResults] = useState([]);
 
+  // users that have been added to chat
+  const [selectedUsers, setSelectedUsers] = useState([]);
+
   const makeSearchRequest = (showLoading = true) => {
     if (showLoading) {
       setIsLoading(true);
@@ -66,13 +69,30 @@ const NewMessage = ({ currentUser, setCurrentUser }) => {
   }, [text]);
 
   const addUserToMessage = (user) => {
-    console.log(user);
+    // console.log(user);
+    setSelectedUsers((prevUsersArray) => [...prevUsersArray, user]);
+    setText('');
+    document.getElementById('user-search-textbox').focus();
+  };
+
+  const removeUserFromMessage = (userId) => {
+    let users = [...selectedUsers];
+    // console.log(users);
+    users = users.filter((user) => {
+      console.log(user._id);
+      return user._id !== userId;
+    });
+    setSelectedUsers(users);
+    // console.log(userId);
   };
 
   // only show users that isnt the current user and arent in the chat already
   const userList = userResults
     .filter((user) => {
       return user._id !== currentUser._id;
+    })
+    .filter((user) => {
+      return !selectedUsers.some((u) => u._id === user._id);
     })
     .map((user) => (
       <UserPreview
@@ -86,6 +106,13 @@ const NewMessage = ({ currentUser, setCurrentUser }) => {
       />
     ));
 
+  const selectedUsersLabels = selectedUsers.map((user) => (
+    <p
+      className="user-added-to-chat"
+      onClick={(e) => removeUserFromMessage(user._id)}
+    >{`${user.firstName} ${user.lastName}`}</p>
+  ));
+
   return (
     <div>
       <h1 className="main-content-heading">New Message</h1>
@@ -95,6 +122,7 @@ const NewMessage = ({ currentUser, setCurrentUser }) => {
           {isLoading && <VscLoading className="spinner" style={{ marginRight: '16px' }} />}
           <div id="selected-users">
             <input
+              autoComplete="off"
               type="text"
               placeholder="Enter message recipients"
               id="user-search-textbox"
@@ -104,8 +132,11 @@ const NewMessage = ({ currentUser, setCurrentUser }) => {
             />
           </div>
         </div>
+        {selectedUsers.length > 0 && (
+          <div style={{ marginBottom: '20px' }}>{selectedUsersLabels}</div>
+        )}
         <div className="results-container">{userResults.length > 0 && userList}</div>
-        <button id="create-chat-btn" className="follow-btn" disabled={text.length === 0}>
+        <button id="create-chat-btn" className="follow-btn" disabled={selectedUsers.length === 0}>
           Create new chat
         </button>
       </div>

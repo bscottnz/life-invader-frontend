@@ -64,3 +64,35 @@
     background-color: transparent;
   }
 }
+
+// label for selected users added to chat
+.user-added-to-chat {
+  display: inline-block;
+  width: fit-content;
+  border: 1px solid $color-blue;
+  border-radius: 23232px;
+  padding: 5px 10px;
+  font-weight: 200;
+  color: $color-blue;
+  cursor: pointer;
+
+  position: relative;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  &::after {
+    content: 'Remove';
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    display: none;
+  }
+
+  &:hover::after {
+    display: block;
+  }
+}
