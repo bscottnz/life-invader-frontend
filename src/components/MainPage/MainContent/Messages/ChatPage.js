@@ -40,7 +40,7 @@ const ChatPage = () => {
   };
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <h1 className="main-content-heading">chat page</h1>
       {noChatFound === true && <p style={{ fontSize: '16px' }}>No chat found</p>}
       {noChatFound === false && (
@@ -50,6 +50,7 @@ const ChatPage = () => {
           </div>
           <div className="main-content-container">
             <div className="chat-container">
+              <div className="chat-messages"></div>
               <div className="footer">
                 <textarea
                   className="custom-scroll"
@@ -58,6 +59,7 @@ const ChatPage = () => {
                   placeholder="Enter message..."
                   spellCheck={false}
                   onInput={resizeTextarea}
+                  maxLength={500}
                 ></textarea>
                 <button className="send-msg-btn">
                   <FaPaperPlane />
