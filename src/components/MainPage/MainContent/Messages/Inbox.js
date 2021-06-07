@@ -25,7 +25,7 @@ const Inbox = ({ currentUser }) => {
     })
       .then((res) => {
         setChats(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log(err);

@@ -12,8 +12,6 @@ import { v4 as uuidv4 } from 'uuid';
 import deletePostRequest from '../../../utils/deletePostRequest';
 
 const ViewPost = ({ currentUser, setCurrentUser }) => {
-  // this entire component needs to be re written, this feels like a hack to get it working rather
-  // than a nice solution
   const id = useParams().id;
 
   // the post we are currently viewing
