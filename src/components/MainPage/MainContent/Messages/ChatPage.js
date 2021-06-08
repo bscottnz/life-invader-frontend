@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 const ChatPage = ({ currentUser }) => {
   const id = useParams().id;
 
-  const { setEditChatNameModalIsOpen, editChatNameModalIsOpen } = useContext(ModalContext);
+  const { setEditChatNameModalIsOpen } = useContext(ModalContext);
 
   // error message for no chat found. initialse as null so it doesnt flash false status before
   // rendering true status.
@@ -128,6 +128,7 @@ const ChatPage = ({ currentUser }) => {
         })
         .catch((err) => {
           console.log(err);
+          alert('Could not send message. Please try again.');
         });
     }
   };
@@ -157,7 +158,7 @@ const ChatPage = ({ currentUser }) => {
     );
   };
 
-  // watch for enter press s ocan send message. shift + enter will
+  // watch for enter press so can send message. shift + enter will
   // create a new line instead
   const watchTextBox = (e) => {
     if (e.keyCode == 13 && !e.shiftKey) {

@@ -253,7 +253,7 @@
   display: flex;
   overflow-y: auto;
   flex-direction: column;
-  padding: 20px;
+  padding: 20px 0;
   border-top: 1px solid $color-background-light;
 }
 
@@ -317,5 +317,38 @@
   &::-ms-input-placeholder {
     /* Microsoft Edge */
     color: $color-text-grey;
+  }
+}
+
+.chat-messages {
+  .message {
+    padding-bottom: 2px;
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+    -webkit-flex: 0;
+
+    &.own-msg {
+      flex-direction: row-reverse;
+
+      & .message-body {
+        background-color: $color-blue;
+      }
+    }
+
+    & .message-container {
+      display: flex;
+      flex-direction: column;
+      //  TODO
+      // need to change this max width for mobile view
+      max-width: 55%;
+    }
+
+    & .message-body {
+      background-color: #f1f1f0;
+      padding: 6px 12px;
+      border-radius: 18px;
+      font-size: 14px;
+    }
   }
 }

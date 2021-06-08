@@ -4,6 +4,17 @@ import { useHistory } from 'react-router-dom';
 const ChatListItem = ({ chat, currentUser }) => {
   const history = useHistory();
 
+  // if the chat has a latest ,essage to display or not
+  const isMessage = chat.lastMessage != undefined;
+
+  console.log(chat);
+
+  let displayLatestMessage = 'New chat';
+
+  if (isMessage) {
+    displayLatestMessage = `${chat.lastMessage.sender.firstName} ${chat.lastMessage.sender.lastName}: ${chat.lastMessage.content}`;
+  }
+
   const goToChat = (id) => {
     history.push(`/messages/${id}`);
   };
@@ -64,7 +75,7 @@ const ChatListItem = ({ chat, currentUser }) => {
       {getChatImages()}
       <div className="chat-list-item-details ellipsis">
         <span className="heading ellipsis">{getChatName()}</span>
-        <span className="subtext ellipsis">latest message</span>
+        <span className="subtext ellipsis">{displayLatestMessage}</span>
       </div>
     </div>
   );
