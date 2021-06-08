@@ -18,10 +18,13 @@ const ChatPage = ({ currentUser }) => {
   // rendering true status.
   const [noChatFound, setNoChatFound] = useState(null);
 
-  // chat data
+  // chat meta data
   const [chatData, setChatData] = useState(null);
 
-  // currently types message
+  // chat messages data
+  const [chatMessagesData, setChatMessagesData] = useState([]);
+
+  // currently typed message
   const [currentMessage, setCurrentMessage] = useState('');
 
   useEffect(() => {
@@ -120,7 +123,7 @@ const ChatPage = ({ currentUser }) => {
         data: { content: currentMessage.trim(), chatId: id },
       })
         .then((res) => {
-          console.log(res.data);
+          setChatMessagesData((prevData) => [...prevData, res.data]);
           setCurrentMessage('');
         })
         .catch((err) => {
@@ -129,6 +132,33 @@ const ChatPage = ({ currentUser }) => {
     }
   };
 
+  // useEffect(() => {
+  //   console.log(messagesList);
+  // }, [chatMessagesData]);
+
+  const addNewMessage = (message) => {
+    if (!message || !message._id) {
+      return console.log('cannot display invalid message');
+    }
+    const newMessage = createMessage(message);
+
+    return newMessage;
+  };
+
+  const createMessage = (message) => {
+    const isOwnMessage = message.sender._id === currentUser._id;
+
+    return (
+      <li className={isOwnMessage ? 'message own-msg' : 'message not-own-msg'} key={uuidv4()}>
+        <div className="message-container">
+          <span className="message-body">{message.content}</span>
+        </div>
+      </li>
+    );
+  };
+
+  // watch for enter press s ocan send message. shift + enter will
+  // create a new line instead
   const watchTextBox = (e) => {
     if (e.keyCode == 13 && !e.shiftKey) {
       sendMessage();
@@ -136,6 +166,8 @@ const ChatPage = ({ currentUser }) => {
       e.preventDefault();
     }
   };
+
+  const messagesList = chatMessagesData.map((msg) => addNewMessage(msg));
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -152,7 +184,7 @@ const ChatPage = ({ currentUser }) => {
           </div>
           <div className="main-content-container">
             <div className="chat-container">
-              <div className="chat-messages"></div>
+              <ul className="chat-messages">{chatMessagesData.length > 0 && messagesList}</ul>
               <div className="footer">
                 <textarea
                   className="custom-scroll"
