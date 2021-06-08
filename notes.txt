@@ -18,6 +18,10 @@ active sidebar link styles
 
 -- refactor db queries to use async.parallel (promise.all ?)
 
+-- make pressing enter send a message
+
+-- focus text box on pupups
+
 
 
 

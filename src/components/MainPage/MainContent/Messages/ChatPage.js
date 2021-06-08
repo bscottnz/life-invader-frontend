@@ -80,14 +80,37 @@ const ChatPage = ({ currentUser }) => {
     );
   };
 
+  const getChatName = () => {
+    if (chatData.chatName) {
+      return chatData.chatName;
+    } else {
+      // return 'Chat Name ';
+      const chatUsers = getChatUsers(chatData.users);
+      const chatNames = chatUsers.map((user) => {
+        return `${user.firstName} ${user.lastName}`;
+      });
+
+      const chatName = chatNames.join(', ');
+      return chatName;
+    }
+  };
+
+  const getChatUsers = (users) => {
+    // chat with self
+    if (users.length === 1) return users;
+
+    return users.filter((user) => {
+      return user._id !== currentUser._id;
+    });
+  };
+
   const editChatName = () => {
-    console.log(8);
     setEditChatNameModalIsOpen(true);
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <EditChatNameModal />
+      <EditChatNameModal chatId={id} refresh={getChat} />
       <h1 className="main-content-heading">chat page</h1>
       {noChatFound === true && <p style={{ fontSize: '16px' }}>No chat found</p>}
       {noChatFound === false && (
@@ -95,7 +118,7 @@ const ChatPage = ({ currentUser }) => {
           <div className="chat-title-container">
             {chatData != null && chatImage(chatData, currentUser)}
             <span id="chat-name" onClick={() => editChatName()}>
-              This is the chat
+              {getChatName()}
             </span>
           </div>
           <div className="main-content-container">
