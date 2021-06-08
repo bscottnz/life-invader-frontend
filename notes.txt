@@ -22,6 +22,8 @@ active sidebar link styles
 
 -- focus text box on pupups
 
+-- escape all messages text. chat names msgs etc
+
 
 
 

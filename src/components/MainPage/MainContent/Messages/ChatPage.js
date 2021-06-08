@@ -21,6 +21,9 @@ const ChatPage = ({ currentUser }) => {
   // chat data
   const [chatData, setChatData] = useState(null);
 
+  // currently types message
+  const [currentMessage, setCurrentMessage] = useState('');
+
   useEffect(() => {
     getChat();
   }, []);
@@ -108,6 +111,32 @@ const ChatPage = ({ currentUser }) => {
     setEditChatNameModalIsOpen(true);
   };
 
+  const sendMessage = () => {
+    if (currentMessage.trim().length > 0) {
+      axios({
+        method: 'post',
+        withCredentials: true,
+        url: `${process.env.REACT_APP_BASE_URL}/api/messages/`,
+        data: { content: currentMessage.trim(), chatId: id },
+      })
+        .then((res) => {
+          console.log(res.data);
+          setCurrentMessage('');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const watchTextBox = (e) => {
+    if (e.keyCode == 13 && !e.shiftKey) {
+      sendMessage();
+      // prevent enter from making a new line
+      e.preventDefault();
+    }
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <EditChatNameModal chatId={id} refresh={getChat} />
@@ -132,9 +161,12 @@ const ChatPage = ({ currentUser }) => {
                   placeholder="Enter message..."
                   spellCheck={false}
                   onInput={resizeTextarea}
+                  onChange={(e) => setCurrentMessage(e.target.value)}
                   maxLength={500}
+                  onKeyDown={watchTextBox}
+                  value={currentMessage}
                 ></textarea>
-                <button className="send-msg-btn">
+                <button className="send-msg-btn" onClick={sendMessage}>
                   <FaPaperPlane />
                 </button>
               </div>
