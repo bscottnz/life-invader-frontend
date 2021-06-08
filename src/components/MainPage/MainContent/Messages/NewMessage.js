@@ -151,9 +151,7 @@ const NewMessage = ({ currentUser, setCurrentUser }) => {
             />
           </div>
         </div>
-        {selectedUsers.length > 0 && (
-          <div style={{ marginBottom: '20px' }}>{selectedUsersLabels}</div>
-        )}
+        {selectedUsers.length > 0 && <div>{selectedUsersLabels}</div>}
         <div className="results-container">{userResults.length > 0 && userList}</div>
         <button
           id="create-chat-btn"

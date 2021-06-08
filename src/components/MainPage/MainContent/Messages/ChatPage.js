@@ -4,13 +4,17 @@ import { useParams } from 'react-router-dom';
 import { FaPaperPlane } from 'react-icons/fa';
 
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
-const ChatPage = () => {
+const ChatPage = ({ currentUser }) => {
   const id = useParams().id;
 
   // error message for no chat found. initialse as null so it doesnt flash false status before
   // rendering true status.
   const [noChatFound, setNoChatFound] = useState(null);
+
+  // chat data
+  const [chatData, setChatData] = useState(null);
 
   useEffect(() => {
     getChat();
@@ -23,7 +27,8 @@ const ChatPage = () => {
       url: `${process.env.REACT_APP_BASE_URL}/api/chats/${id}`,
     })
       .then((res) => {
-        console.log(res.data);
+        setChatData(res.data.chat);
+
         setNoChatFound(false);
       })
       .catch((err) => {
@@ -39,6 +44,37 @@ const ChatPage = () => {
     textarea.style.height = textarea.scrollHeight + 'px';
   };
 
+  const chatImage = (chatData, currentUser) => {
+    if (!chatData) {
+      return;
+    }
+
+    // filter out current user
+    let chatDataUsers = chatData.users.filter((user) => {
+      return user._id !== currentUser._id;
+    });
+
+    // only show a maximum of 3 user photos, then have a '+2' for the remaining users
+    const maxUsersToShow = 3;
+
+    const remainingUsers = chatDataUsers.length - maxUsersToShow;
+
+    // take first 3 users to show picture of only
+    chatDataUsers = chatDataUsers.slice(0, 3);
+
+    // need this funky spread and reverse to disply the images correctly with row reverse
+    return (
+      <div className="chat-images-container">
+        {remainingUsers > 0 && (
+          <span className="chat-user-extra-count">{`+${remainingUsers}`}</span>
+        )}
+        {[...chatDataUsers].reverse().map((user) => (
+          <img src={process.env.REACT_APP_BASE_URL + user.profilePic} key={uuidv4()}></img>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <h1 className="main-content-heading">chat page</h1>
@@ -46,6 +82,7 @@ const ChatPage = () => {
       {noChatFound === false && (
         <div className="chat-page-container">
           <div className="chat-title-container">
+            {chatData != null && chatImage(chatData, currentUser)}
             <span id="chat-name">This is the chat</span>
           </div>
           <div className="main-content-container">

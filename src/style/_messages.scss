@@ -76,6 +76,7 @@
   font-weight: bold;
   color: $color-blue;
   cursor: pointer;
+  margin-bottom: 20px;
 
   position: relative;
 
@@ -253,4 +254,38 @@
   overflow-y: auto;
   flex-direction: column;
   padding: 20px;
+}
+
+.chat-images-container {
+  display: flex;
+  flex-direction: row-reverse;
+  height: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  & img {
+    width: 40px;
+    height: 40px;
+    border: 2px solid $color-background-medium;
+    border-radius: 50%;
+    margin-left: -10px;
+    z-index: 2;
+  }
+}
+
+.chat-user-extra-count {
+  font-size: 14px;
+  color: rgb(118, 118, 118);
+  height: 37px;
+  width: 37px;
+  transform: translateY(2px);
+  z-index: -0;
+  // background-color: #fff;
+  border: 1px solid rgb(118, 118, 118);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -10px;
+  font-weight: bold;
 }
