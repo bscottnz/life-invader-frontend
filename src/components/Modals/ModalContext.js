@@ -35,6 +35,9 @@ export const ModalProvider = (props) => {
   // no more coins modal
   const [noCoinsModalIsOpen, setNoCoinsModalIsOpen] = useState(false);
 
+  // edit chat name modal
+  const [editChatNameModalIsOpen, setEditChatNameModalIsOpen] = useState(false);
+
   return (
     <ModalContext.Provider
       value={{
@@ -58,6 +61,8 @@ export const ModalProvider = (props) => {
         setBuyNowModalIsOpen,
         noCoinsModalIsOpen,
         setNoCoinsModalIsOpen,
+        editChatNameModalIsOpen,
+        setEditChatNameModalIsOpen,
       }}
     >
       {props.children}

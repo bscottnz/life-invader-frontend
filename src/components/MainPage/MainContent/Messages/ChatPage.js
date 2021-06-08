@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+
+import EditChatNameModal from '../../../Modals/EditChatNameModal';
+import { ModalContext } from '../../../Modals/ModalContext';
 
 import { FaPaperPlane } from 'react-icons/fa';
 
@@ -8,6 +11,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 const ChatPage = ({ currentUser }) => {
   const id = useParams().id;
+
+  const { setEditChatNameModalIsOpen, editChatNameModalIsOpen } = useContext(ModalContext);
 
   // error message for no chat found. initialse as null so it doesnt flash false status before
   // rendering true status.
@@ -75,15 +80,23 @@ const ChatPage = ({ currentUser }) => {
     );
   };
 
+  const editChatName = () => {
+    console.log(8);
+    setEditChatNameModalIsOpen(true);
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <EditChatNameModal />
       <h1 className="main-content-heading">chat page</h1>
       {noChatFound === true && <p style={{ fontSize: '16px' }}>No chat found</p>}
       {noChatFound === false && (
         <div className="chat-page-container">
           <div className="chat-title-container">
             {chatData != null && chatImage(chatData, currentUser)}
-            <span id="chat-name">This is the chat</span>
+            <span id="chat-name" onClick={() => editChatName()}>
+              This is the chat
+            </span>
           </div>
           <div className="main-content-container">
             <div className="chat-container">

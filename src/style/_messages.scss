@@ -289,3 +289,32 @@
   margin-left: -10px;
   font-weight: bold;
 }
+
+#change-chat-name-textbox {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 8px 14px;
+  border-radius: 50px;
+  outline: none;
+  border: 1px solid $color-background-light;
+  background-color: transparent;
+  color: white;
+
+  &::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $color-text-grey;
+    opacity: 1; /* Firefox */
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $color-text-grey;
+  }
+
+  &::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $color-text-grey;
+  }
+}
