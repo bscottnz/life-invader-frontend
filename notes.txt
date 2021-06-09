@@ -18,11 +18,13 @@ active sidebar link styles
 
 -- refactor db queries to use async.parallel (promise.all ?)
 
--- make pressing enter send a message
-
 -- focus text box on pupups
 
 -- escape all messages text. chat names msgs etc
+
+-- make message width on chat page adjust for mobile.
+
+-- proper pagination + pagination for chats ?
 
 
 

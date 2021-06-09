@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import EditChatNameModal from '../../../Modals/EditChatNameModal';
 import { ModalContext } from '../../../Modals/ModalContext';
 
 import { FaPaperPlane } from 'react-icons/fa';
+import { VscLoading } from 'react-icons/vsc';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,6 +14,9 @@ const ChatPage = ({ currentUser }) => {
   let id = useParams().id;
 
   const { setEditChatNameModalIsOpen } = useContext(ModalContext);
+
+  // display loading spinner while fetching chats
+  const [isChatLoading, setIsChatLoading] = useState(false);
 
   // error message for no chat found. initialse as null so it doesnt flash false status before
   // rendering true status.
@@ -26,6 +30,8 @@ const ChatPage = ({ currentUser }) => {
 
   // currently typed message
   const [currentMessage, setCurrentMessage] = useState('');
+
+  const initialLoad = useRef(true);
 
   useEffect(() => {
     //get chat meta data
@@ -57,6 +63,7 @@ const ChatPage = ({ currentUser }) => {
   }, [chatData]);
 
   const getChatMessages = () => {
+    setIsChatLoading(true);
     axios({
       method: 'get',
       withCredentials: true,
@@ -65,9 +72,11 @@ const ChatPage = ({ currentUser }) => {
       .then((res) => {
         // console.log(res.data);
         setChatMessagesData(res.data);
+        setIsChatLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setIsChatLoading(false);
       });
   };
 
@@ -233,9 +242,31 @@ const ChatPage = ({ currentUser }) => {
   const messagesList = chatMessagesData.map((msg, index) =>
     addNewMessage(msg, index, lastMessageSenderId)
   );
-  // need to yuse
-  // const messagesList = [];
-  // chatMessagesData.forEach((msg) => messagesList.push(addNewMessage(msg)));
+
+  // scroll chat to bottom
+  const scrollToBottom = (animate = false) => {
+    const container = document.querySelector('.chat-messages');
+    const scrollHeight = container.scrollHeight;
+
+    if (animate) {
+      // when adding a new message, smooth scroll to bottom of container
+      container.scrollTo({ top: scrollHeight, behavior: 'smooth' });
+    } else {
+      // on initial load, imediatly scroll to bottom of container
+      container.scrollTo({ top: scrollHeight, behavior: 'auto' });
+    }
+  };
+
+  // useEffect(() => {
+  //   if (chatMessagesData.length > 0) {
+  //     if (initialLoad.current) {
+  //       scrollToBottom();
+  //       initialLoad.current = false;
+  //     } else {
+  //       scrollToBottom(true);
+  //     }
+  //   }
+  // }, [chatMessagesData]);
 
   const cantEditChatStyle = {
     border: '1px solid transparent',
@@ -259,9 +290,24 @@ const ChatPage = ({ currentUser }) => {
               {getChatName()}
             </span>
           </div>
-          <div className="main-content-container">
+          <div className="main-content-container main-content-container-chat">
             <div className="chat-container">
-              <ul className="chat-messages">{chatMessagesData.length > 0 && messagesList}</ul>
+              {isChatLoading && (
+                <div
+                  style={{
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderTop: '1px solid #3a3a3a',
+                  }}
+                >
+                  <VscLoading className="spinner" style={{ fontSize: '40px', color: '#1da1f2' }} />
+                </div>
+              )}
+              {!isChatLoading && (
+                <ul className="chat-messages">{chatMessagesData.length > 0 && messagesList}</ul>
+              )}
               <div className="footer">
                 <textarea
                   className="custom-scroll"

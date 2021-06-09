@@ -6,6 +6,39 @@
   min-height: 0;
   font-size: 16px;
   flex: 1;
+  flex-basis: 0;
+}
+
+.main-content-container-chat {
+  overflow-y: hidden;
+
+  /* Works on Firefox */
+
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+
+  /* Works on Chrome, Edge, and Safari */
+  & ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  & ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  & ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 20px;
+    border: 3px solid transparent;
+  }
+
+  &:hover {
+    scrollbar-color: $color-background-light transparent;
+
+    & ::-webkit-scrollbar-thumb {
+      background-color: $color-background-light;
+    }
+  }
 }
 
 .chat-title-bar {
@@ -255,6 +288,9 @@
   overflow-y: auto;
   flex-direction: column;
   padding: 20px 0;
+  padding-right: 5px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
   border-top: 1px solid $color-background-light;
 }
 
@@ -351,6 +387,7 @@
       padding: 7px 14px;
       border-radius: 18px;
       font-size: 14px;
+      white-space: pre-wrap;
     }
   }
 }
@@ -409,6 +446,7 @@
   height: 24px;
   width: 24px;
   margin-right: 8px;
+  margin-bottom: 3px;
 
   & img {
     width: 100%;
