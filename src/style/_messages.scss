@@ -354,6 +354,14 @@
   }
 }
 
+.chat-messages .message.own-msg .message-container {
+  align-items: flex-end;
+}
+
+.chat-messages .message.not-own-msg .message-container {
+  align-items: flex-start;
+}
+
 // border radius for current user messages
 .chat-messages .message.own-msg.first-msg .message-body {
   border-bottom-right-radius: 2px;
@@ -388,4 +396,25 @@
 
 .chat-messages .message.not-own-msg:not(.first-msg).last-msg .message-body {
   border-top-left-radius: 2px;
+}
+
+.sender-name {
+  color: $color-text-grey;
+  font-size: 11px;
+  margin-left: 12px;
+}
+
+.chat-messages .img-container {
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
+
+  & img {
+    width: 100%;
+    border-radius: 50%;
+  }
+}
+
+.chat-messages .message.last-msg {
+  margin-bottom: 5px;
 }

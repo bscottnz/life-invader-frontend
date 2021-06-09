@@ -174,7 +174,7 @@ const ChatPage = ({ currentUser }) => {
 
     // variables to conditionally render message border radius
     const sender = message.sender;
-    const senderName = sender.firstName + ' ' + sender.lastName;
+    const senderName = sender.firstName;
 
     const currentSenderId = sender._id;
     const nextSenderId = nextMessage != null ? nextMessage.sender._id : '';
@@ -182,19 +182,34 @@ const ChatPage = ({ currentUser }) => {
     const isFirst = lastMsgId !== currentSenderId;
     const isLast = nextSenderId !== currentSenderId;
 
+    let messageName = null;
+
     let messageClassName = isOwnMessage ? 'message own-msg' : 'message not-own-msg';
 
     if (isFirst) {
       messageClassName += ' first-msg';
+
+      if (!isOwnMessage) {
+        messageName = <span className="sender-name">{senderName}</span>;
+      }
     }
 
+    let profileImg = null;
     if (isLast) {
       messageClassName += ' last-msg';
+      profileImg = <img src={process.env.REACT_APP_BASE_URL + sender.profilePic} alt="x" />;
+    }
+
+    let imgContainer = null;
+    if (!isOwnMessage) {
+      imgContainer = <div className="img-container">{profileImg}</div>;
     }
 
     return (
       <li className={messageClassName} key={uuidv4()}>
+        {imgContainer}
         <div className="message-container">
+          {messageName !== null && messageName}
           <span className="message-body">{message.content}</span>
         </div>
       </li>
