@@ -7,9 +7,7 @@ const ChatListItem = ({ chat, currentUser }) => {
   // if the chat has a latest ,essage to display or not
   const isMessage = chat.lastMessage != undefined;
 
-  console.log(chat);
-
-  let displayLatestMessage = 'New chat';
+  let displayLatestMessage = 'New conversation';
 
   if (isMessage) {
     displayLatestMessage = `${chat.lastMessage.sender.firstName} ${chat.lastMessage.sender.lastName}: ${chat.lastMessage.content}`;

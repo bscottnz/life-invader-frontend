@@ -171,7 +171,7 @@
 }
 
 .chat-title-container {
-  border-top: 1px solid $color-background-light;
+  // border-top: 1px solid $color-background-light;
   display: flex;
   align-items: center;
   padding: 20px 0;
@@ -322,7 +322,7 @@
 
 .chat-messages {
   .message {
-    padding-bottom: 2px;
+    padding-bottom: 4px;
     display: flex;
     align-items: flex-end;
     flex-shrink: 0;
@@ -345,10 +345,47 @@
     }
 
     & .message-body {
-      background-color: #f1f1f0;
-      padding: 6px 12px;
+      background-color: $color-background-light;
+
+      padding: 7px 14px;
       border-radius: 18px;
       font-size: 14px;
     }
   }
+}
+
+// border radius for current user messages
+.chat-messages .message.own-msg.first-msg .message-body {
+  border-bottom-right-radius: 2px;
+}
+
+.chat-messages .message.own-msg:not(.first-msg):not(.last-msg) .message-body {
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.chat-messages .message.own-msg.last-msg .message-body {
+  border-bottom-right-radius: 18px;
+}
+
+.chat-messages .message.own-msg:not(.first-msg).last-msg .message-body {
+  border-top-right-radius: 2px;
+}
+
+// border radius for other user messages
+.chat-messages .message.not-own-msg.first-msg .message-body {
+  border-bottom-left-radius: 2px;
+}
+
+.chat-messages .message.not-own-msg:not(.first-msg):not(.last-msg) .message-body {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+
+.chat-messages .message.not-own-msg.last-msg .message-body {
+  border-bottom-left-radius: 18px;
+}
+
+.chat-messages .message.not-own-msg:not(.first-msg).last-msg .message-body {
+  border-top-left-radius: 2px;
 }

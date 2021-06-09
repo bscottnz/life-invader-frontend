@@ -28,6 +28,7 @@ const ChatPage = ({ currentUser }) => {
   const [currentMessage, setCurrentMessage] = useState('');
 
   useEffect(() => {
+    //get chat meta data
     getChat();
   }, []);
 
@@ -41,10 +42,28 @@ const ChatPage = ({ currentUser }) => {
         setChatData(res.data.chat);
 
         setNoChatFound(false);
+
+        // get chat messages data
+        getChatMessages();
       })
       .catch((err) => {
         console.log(err);
         setNoChatFound(true);
+      });
+  };
+
+  const getChatMessages = () => {
+    axios({
+      method: 'get',
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/api/chats/${id}/messages`,
+    })
+      .then((res) => {
+        // console.log(res.data);
+        setChatMessagesData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -111,7 +130,10 @@ const ChatPage = ({ currentUser }) => {
   };
 
   const editChatName = () => {
-    setEditChatNameModalIsOpen(true);
+    //only allow renaming of group chats
+    if (chatData.isGroupChat) {
+      setEditChatNameModalIsOpen(true);
+    }
   };
 
   const sendMessage = () => {
@@ -133,24 +155,45 @@ const ChatPage = ({ currentUser }) => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(messagesList);
-  // }, [chatMessagesData]);
+  // to apply the correct border radius styling on messages, need to keep track
+  // of the last message rendered
+  let lastMessageSenderId = '';
 
-  const addNewMessage = (message) => {
+  const addNewMessage = (message, index, lastMsgId) => {
     if (!message || !message._id) {
       return console.log('cannot display invalid message');
     }
-    const newMessage = createMessage(message);
+    const newMessage = createMessage(message, chatMessagesData[index + 1], lastMsgId);
+    lastMessageSenderId = message.sender._id;
 
     return newMessage;
   };
 
-  const createMessage = (message) => {
+  const createMessage = (message, nextMessage, lastMsgId) => {
     const isOwnMessage = message.sender._id === currentUser._id;
 
+    // variables to conditionally render message border radius
+    const sender = message.sender;
+    const senderName = sender.firstName + ' ' + sender.lastName;
+
+    const currentSenderId = sender._id;
+    const nextSenderId = nextMessage != null ? nextMessage.sender._id : '';
+
+    const isFirst = lastMsgId !== currentSenderId;
+    const isLast = nextSenderId !== currentSenderId;
+
+    let messageClassName = isOwnMessage ? 'message own-msg' : 'message not-own-msg';
+
+    if (isFirst) {
+      messageClassName += ' first-msg';
+    }
+
+    if (isLast) {
+      messageClassName += ' last-msg';
+    }
+
     return (
-      <li className={isOwnMessage ? 'message own-msg' : 'message not-own-msg'} key={uuidv4()}>
+      <li className={messageClassName} key={uuidv4()}>
         <div className="message-container">
           <span className="message-body">{message.content}</span>
         </div>
@@ -168,18 +211,32 @@ const ChatPage = ({ currentUser }) => {
     }
   };
 
-  const messagesList = chatMessagesData.map((msg) => addNewMessage(msg));
+  const messagesList = chatMessagesData.map((msg, index) =>
+    addNewMessage(msg, index, lastMessageSenderId)
+  );
+  // need to yuse
+  // const messagesList = [];
+  // chatMessagesData.forEach((msg) => messagesList.push(addNewMessage(msg)));
+
+  const cantEditChatStyle = {
+    border: '1px solid transparent',
+    cursor: 'auto',
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <EditChatNameModal chatId={id} refresh={getChat} />
-      <h1 className="main-content-heading">chat page</h1>
+      {/* <h1 className="main-content-heading">chat page</h1> */}
       {noChatFound === true && <p style={{ fontSize: '16px' }}>No chat found</p>}
       {noChatFound === false && (
         <div className="chat-page-container">
           <div className="chat-title-container">
             {chatData != null && chatImage(chatData, currentUser)}
-            <span id="chat-name" onClick={() => editChatName()}>
+            <span
+              id="chat-name"
+              onClick={() => editChatName()}
+              style={chatData.isGroupChat ? {} : cantEditChatStyle}
+            >
               {getChatName()}
             </span>
           </div>
