@@ -71,8 +71,8 @@ const ChatPage = ({ currentUser }) => {
     })
       .then((res) => {
         // console.log(res.data);
-        setChatMessagesData(res.data);
         setIsChatLoading(false);
+        setChatMessagesData(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -160,6 +160,8 @@ const ChatPage = ({ currentUser }) => {
         .then((res) => {
           setChatMessagesData((prevData) => [...prevData, res.data]);
           setCurrentMessage('');
+
+          resizeTextarea();
         })
         .catch((err) => {
           console.log(err);
@@ -257,16 +259,16 @@ const ChatPage = ({ currentUser }) => {
     }
   };
 
-  // useEffect(() => {
-  //   if (chatMessagesData.length > 0) {
-  //     if (initialLoad.current) {
-  //       scrollToBottom();
-  //       initialLoad.current = false;
-  //     } else {
-  //       scrollToBottom(true);
-  //     }
-  //   }
-  // }, [chatMessagesData]);
+  useEffect(() => {
+    if (chatMessagesData.length > 0) {
+      if (initialLoad.current) {
+        scrollToBottom();
+        initialLoad.current = false;
+      } else {
+        scrollToBottom(true);
+      }
+    }
+  }, [chatMessagesData]);
 
   const cantEditChatStyle = {
     border: '1px solid transparent',

@@ -11,6 +11,7 @@ welcome message on empty feed
 collapsable post
 infinitate scroll
 active sidebar link styles
+chat page
 
 
 
@@ -18,7 +19,7 @@ active sidebar link styles
 
 -- refactor db queries to use async.parallel (promise.all ?)
 
--- focus text box on pupups
+-- focus text box on popups
 
 -- escape all messages text. chat names msgs etc
 
