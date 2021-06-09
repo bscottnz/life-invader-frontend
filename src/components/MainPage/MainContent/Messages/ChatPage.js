@@ -10,7 +10,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 const ChatPage = ({ currentUser }) => {
-  const id = useParams().id;
+  let id = useParams().id;
 
   const { setEditChatNameModalIsOpen } = useContext(ModalContext);
 
@@ -42,9 +42,6 @@ const ChatPage = ({ currentUser }) => {
         setChatData(res.data.chat);
 
         setNoChatFound(false);
-
-        // get chat messages data
-        getChatMessages();
       })
       .catch((err) => {
         console.log(err);
@@ -52,11 +49,18 @@ const ChatPage = ({ currentUser }) => {
       });
   };
 
+  useEffect(() => {
+    if (chatData) {
+      // get chat messages data
+      getChatMessages();
+    }
+  }, [chatData]);
+
   const getChatMessages = () => {
     axios({
       method: 'get',
       withCredentials: true,
-      url: `${process.env.REACT_APP_BASE_URL}/api/chats/${id}/messages`,
+      url: `${process.env.REACT_APP_BASE_URL}/api/chats/${chatData._id}/messages`,
     })
       .then((res) => {
         // console.log(res.data);
@@ -142,7 +146,7 @@ const ChatPage = ({ currentUser }) => {
         method: 'post',
         withCredentials: true,
         url: `${process.env.REACT_APP_BASE_URL}/api/messages/`,
-        data: { content: currentMessage.trim(), chatId: id },
+        data: { content: currentMessage.trim(), chatId: chatData._id },
       })
         .then((res) => {
           setChatMessagesData((prevData) => [...prevData, res.data]);
@@ -209,7 +213,7 @@ const ChatPage = ({ currentUser }) => {
       <li className={messageClassName} key={uuidv4()}>
         {imgContainer}
         <div className="message-container">
-          {messageName !== null && messageName}
+          {messageName !== null && chatData.isGroupChat && messageName}
           <span className="message-body">{message.content}</span>
         </div>
       </li>
