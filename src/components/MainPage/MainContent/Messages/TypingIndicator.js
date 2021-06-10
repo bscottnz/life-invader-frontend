@@ -2,8 +2,8 @@ import React from 'react';
 
 const TypingIndicator = () => {
   return (
-    <div class="typing-indicator-container">
-      <div class="typing-indicator">
+    <div className="typing-indicator-container">
+      <div className="typing-indicator">
         <span></span>
         <span></span>
         <span></span>

@@ -34,6 +34,12 @@ const ChatPage = ({ currentUser }) => {
   // currently typed message
   const [currentMessage, setCurrentMessage] = useState('');
 
+  // // is the user typing
+  // const [isTyping, setIsTyping] = useState(false);
+
+  // // last typing time
+  // const [lastTypingTime, setLastTypingTime] = useState(null);
+
   const initialLoad = useRef(true);
 
   useEffect(() => {
@@ -47,9 +53,13 @@ const ChatPage = ({ currentUser }) => {
       sockets.socket.emit('join room', chatData._id);
 
       sockets.socket.on('typing', () => {
-        console.log('typing...');
         // turn on typing indicator
         document.querySelector('.typing-indicator').style.display = 'flex';
+      });
+
+      sockets.socket.on('stop typing', () => {
+        // turn off typing indicator
+        document.querySelector('.typing-indicator').style.display = 'none';
       });
     }
   }, [chatData]);
@@ -263,8 +273,34 @@ const ChatPage = ({ currentUser }) => {
   };
 
   // send typing indicator via sockets
+  let isTyping = false;
+  let lastTypingTime;
+  let timer;
   const updateTyping = () => {
-    sockets.socket.emit('typing', chatData._id);
+    if (!sockets.connected) {
+      return;
+    }
+
+    if (!isTyping) {
+      isTyping = true;
+      sockets.socket.emit('typing', chatData._id);
+    }
+
+    lastTypingTime = new Date().getTime();
+
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+      const currentTime = new Date().getTime();
+      const timeDif = currentTime - lastTypingTime;
+
+      if (timeDif >= 4000 && isTyping) {
+        sockets.socket.emit('stop typing', chatData._id);
+        isTyping = false;
+      }
+    }, 4000);
   };
 
   const messagesList = chatMessagesData.map((msg, index) =>

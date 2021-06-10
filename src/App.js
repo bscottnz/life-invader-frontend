@@ -33,9 +33,6 @@ function App() {
   const [isLoading, setisLoading] = useState(true);
   const history = useHistory();
 
-  // socket connection
-  const [connected, setConnected] = useState(false);
-
   // mobile nav
   const toggleDropdown = (close = false) => {
     const dropDownMenu = document.querySelector('.navbar-dropdown');
@@ -93,8 +90,7 @@ function App() {
       sockets.socket.emit('setup', currentUser);
 
       sockets.socket.on('connected', () => {
-        console.log('connected');
-        setConnected(true);
+        sockets.connected = true;
       });
     }
   }, [currentUser]);
