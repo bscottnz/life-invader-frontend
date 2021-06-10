@@ -54,12 +54,20 @@ const ChatPage = ({ currentUser }) => {
 
       sockets.socket.on('typing', () => {
         // turn on typing indicator
-        document.querySelector('.typing-indicator').style.display = 'flex';
+        try {
+          document.querySelector('.typing-indicator').style.display = 'flex';
+        } catch {
+          // need this for if we change page while the typing indicator is active
+        }
       });
 
       sockets.socket.on('stop typing', () => {
         // turn off typing indicator
-        document.querySelector('.typing-indicator').style.display = 'none';
+        try {
+          document.querySelector('.typing-indicator').style.display = 'none';
+        } catch {
+          // need this for if we change page while the typing indicator is active
+        }
       });
     }
   }, [chatData]);
@@ -186,13 +194,19 @@ const ChatPage = ({ currentUser }) => {
         .then((res) => {
           setChatMessagesData((prevData) => [...prevData, res.data]);
           setCurrentMessage('');
-
           resizeTextarea();
+
+          if (sockets.connected) {
+            sockets.socket.emit('new message', res.data);
+          }
         })
         .catch((err) => {
           console.log(err);
           alert('Could not send message. Please try again.');
         });
+
+      sockets.socket.emit('stop typing', chatData._id);
+      isTyping = false;
     }
   };
 
@@ -276,7 +290,9 @@ const ChatPage = ({ currentUser }) => {
   let timer;
 
   useEffect(() => {
-    if (!initialLoad.current) {
+    // the currentMessage != '' is to stop it running again after sending a message. as
+    // sending resets currentMessage to ''
+    if (!initialLoad.current && currentMessage != '') {
       updateTyping();
       return () => {
         clearTimeout(timer);

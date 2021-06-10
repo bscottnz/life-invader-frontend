@@ -1,12 +1,5 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  useHistory,
-} from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, useLocation, useHistory } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
 
 import Welcome from './components/WelcomePage/Welcome';
 import { ModalProvider } from './components/Modals/ModalContext';
@@ -18,7 +11,6 @@ import TopNavDropdown from './components/MainPage/TopNavDropdown';
 import LeftNav from './components/MainPage/LeftNav';
 import MainContent from './components/MainPage/MainContent/MainContent';
 import RightSidebar from './components/MainPage/RightSidebar';
-import { BiPlus } from 'react-icons/bi';
 
 import axios from 'axios';
 import nprogress from 'nprogress';
@@ -32,6 +24,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setisLoading] = useState(true);
   const history = useHistory();
+  const location = useLocation();
 
   // mobile nav
   const toggleDropdown = (close = false) => {
@@ -84,14 +77,22 @@ function App() {
   // socket connection. maybe make this run on initial log in only, then disconet in logout function
   useEffect(() => {
     if (currentUser) {
-      sockets.socket = openSocket(`${process.env.REACT_APP_BASE_URL}`, {
-        transports: ['websocket'],
-      });
+      if (!sockets.socket) {
+        sockets.socket = openSocket(`${process.env.REACT_APP_BASE_URL}`, {
+          transports: ['websocket'],
+        });
+      }
       sockets.socket.emit('setup', currentUser);
 
       sockets.socket.on('connected', () => {
         sockets.connected = true;
       });
+
+      sockets.socket.on('message recieved', (newMessage) => {
+        sockets.messageReceived(newMessage, location.pathname);
+      });
+
+      // sockets.messageReceived(5, location.pathname);
     }
   }, [currentUser]);
 
