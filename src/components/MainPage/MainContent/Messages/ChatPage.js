@@ -3,12 +3,15 @@ import { useParams } from 'react-router-dom';
 
 import EditChatNameModal from '../../../Modals/EditChatNameModal';
 import { ModalContext } from '../../../Modals/ModalContext';
+import TypingIndicator from './TypingIndicator';
 
 import { FaPaperPlane } from 'react-icons/fa';
 import { VscLoading } from 'react-icons/vsc';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import socketIOClient, { Socket } from 'socket.io-client';
+import sockets from '../../../../sockets';
 
 const ChatPage = ({ currentUser }) => {
   let id = useParams().id;
@@ -37,6 +40,19 @@ const ChatPage = ({ currentUser }) => {
     //get chat meta data
     getChat();
   }, []);
+
+  // socket join. make this only join on initial fetch?
+  useEffect(() => {
+    if (chatData) {
+      sockets.socket.emit('join room', chatData._id);
+
+      sockets.socket.on('typing', () => {
+        console.log('typing...');
+        // turn on typing indicator
+        document.querySelector('.typing-indicator').style.display = 'flex';
+      });
+    }
+  }, [chatData]);
 
   const getChat = () => {
     axios({
@@ -199,6 +215,9 @@ const ChatPage = ({ currentUser }) => {
 
     let messageName = null;
 
+    // dont want the bottom margin for the very last message
+    const veryLastMessage = nextMessage ? '' : 'very-last-msg';
+
     let messageClassName = isOwnMessage ? 'message own-msg' : 'message not-own-msg';
 
     if (isFirst) {
@@ -221,7 +240,7 @@ const ChatPage = ({ currentUser }) => {
     }
 
     return (
-      <li className={messageClassName} key={uuidv4()}>
+      <li className={`${messageClassName} ${veryLastMessage}`} key={uuidv4()}>
         {imgContainer}
         <div className="message-container">
           {messageName !== null && chatData.isGroupChat && messageName}
@@ -239,6 +258,13 @@ const ChatPage = ({ currentUser }) => {
       // prevent enter from making a new line
       e.preventDefault();
     }
+
+    updateTyping();
+  };
+
+  // send typing indicator via sockets
+  const updateTyping = () => {
+    sockets.socket.emit('typing', chatData._id);
   };
 
   const messagesList = chatMessagesData.map((msg, index) =>
@@ -310,6 +336,7 @@ const ChatPage = ({ currentUser }) => {
               {!isChatLoading && (
                 <ul className="chat-messages">{chatMessagesData.length > 0 && messagesList}</ul>
               )}
+              <TypingIndicator />
               <div className="footer">
                 <textarea
                   className="custom-scroll"

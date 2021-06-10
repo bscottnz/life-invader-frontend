@@ -1,0 +1,45 @@
+// typing imessage indicator
+
+.typing-indicator {
+  $ti-color-bg: #3a3a3a;
+  background-color: $ti-color-bg;
+  position: absolute;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 32px;
+
+  height: 30px;
+  width: 55px;
+  // display: none;
+
+  transform: translateY(-17px);
+
+  span {
+    height: 7px;
+    width: 7px;
+    float: left;
+    margin: 0 2px;
+    background-color: #9e9ea1;
+    display: block;
+    border-radius: 50%;
+    opacity: 0.4;
+    @for $i from 1 through 3 {
+      &:nth-of-type(#{$i}) {
+        animation: 1s blink infinite ($i * 0.3333s);
+      }
+    }
+  }
+
+  &-container {
+    position: relative;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 1;
+  }
+}

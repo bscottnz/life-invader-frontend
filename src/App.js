@@ -23,12 +23,18 @@ import { BiPlus } from 'react-icons/bi';
 import axios from 'axios';
 import nprogress from 'nprogress';
 import './style/main.scss';
+// import socketIOClient from 'socket.io-client';
+import sockets from './sockets';
+import openSocket from 'socket.io-client';
 
 function App() {
   // const [name, setName] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setisLoading] = useState(true);
   const history = useHistory();
+
+  // socket connection
+  const [connected, setConnected] = useState(false);
 
   // mobile nav
   const toggleDropdown = (close = false) => {
@@ -77,6 +83,21 @@ function App() {
       localStorage.clear();
     });
   };
+
+  // socket connection. maybe make this run on initial log in only, then disconet in logout function
+  useEffect(() => {
+    if (currentUser) {
+      sockets.socket = openSocket(`${process.env.REACT_APP_BASE_URL}`, {
+        transports: ['websocket'],
+      });
+      sockets.socket.emit('setup', currentUser);
+
+      sockets.socket.on('connected', () => {
+        console.log('connected');
+        setConnected(true);
+      });
+    }
+  }, [currentUser]);
 
   // display loading screen while user data is being fetched
   if (isLoading) {

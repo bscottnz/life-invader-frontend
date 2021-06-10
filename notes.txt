@@ -27,6 +27,7 @@ chat page
 
 -- proper pagination + pagination for chats ?
 
+-- dont show name of author on last not group chat mesage ?
 
 
 
@@ -45,5 +46,9 @@ chat page
 - pin posts to top of profile page
 - infinite scroll 
 
+
+
+
+killall -9 node
 
 
