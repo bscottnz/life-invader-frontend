@@ -268,14 +268,22 @@ const ChatPage = ({ currentUser }) => {
       // prevent enter from making a new line
       e.preventDefault();
     }
-
-    updateTyping();
   };
 
   // send typing indicator via sockets
   let isTyping = false;
   let lastTypingTime;
   let timer;
+
+  useEffect(() => {
+    if (!initialLoad.current) {
+      updateTyping();
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [currentMessage]);
+
   const updateTyping = () => {
     if (!sockets.connected) {
       return;
@@ -287,20 +295,18 @@ const ChatPage = ({ currentUser }) => {
     }
 
     lastTypingTime = new Date().getTime();
-
-    if (timer) {
-      clearTimeout(timer);
-    }
+    // how long after stop typing to remove indicator - in ms
+    const typingIndicatorTimeout = 3000;
 
     timer = setTimeout(() => {
       const currentTime = new Date().getTime();
       const timeDif = currentTime - lastTypingTime;
 
-      if (timeDif >= 4000 && isTyping) {
+      if (timeDif >= typingIndicatorTimeout && isTyping) {
         sockets.socket.emit('stop typing', chatData._id);
         isTyping = false;
       }
-    }, 4000);
+    }, typingIndicatorTimeout);
   };
 
   const messagesList = chatMessagesData.map((msg, index) =>
