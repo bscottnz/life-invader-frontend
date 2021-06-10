@@ -15,7 +15,7 @@
 .navbar {
   padding-left: 35px;
   padding-right: 35px;
-  z-index: 2;
+  z-index: 65;
   @media (max-width: 660px) {
     padding-left: 20px;
     padding-right: 20px;
@@ -29,7 +29,7 @@
   // dropdown nav for mobile
   &-dropdown {
     transition: all 0.2s;
-    z-index: 1;
+    z-index: 33;
   }
 }
 

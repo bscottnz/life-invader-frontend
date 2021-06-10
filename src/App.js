@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, useLocation, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, useHistory } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 
 import Welcome from './components/WelcomePage/Welcome';
@@ -24,7 +24,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setisLoading] = useState(true);
   const history = useHistory();
-  const location = useLocation();
 
   // mobile nav
   const toggleDropdown = (close = false) => {
@@ -89,7 +88,11 @@ function App() {
       });
 
       sockets.socket.on('message recieved', (newMessage) => {
-        sockets.messageReceived(newMessage, location.pathname);
+        const messageSocketResponse = sockets.messageReceived(newMessage);
+        if (messageSocketResponse && !messageSocketResponse.onChatPage) {
+          // handle notification
+          console.log('yo you got a message');
+        }
       });
 
       // sockets.messageReceived(5, location.pathname);

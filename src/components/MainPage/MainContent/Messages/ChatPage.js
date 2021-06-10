@@ -12,6 +12,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import socketIOClient, { Socket } from 'socket.io-client';
 import sockets from '../../../../sockets';
+import { set } from 'nprogress';
 
 const ChatPage = ({ currentUser }) => {
   let id = useParams().id;
@@ -34,11 +35,7 @@ const ChatPage = ({ currentUser }) => {
   // currently typed message
   const [currentMessage, setCurrentMessage] = useState('');
 
-  // // is the user typing
-  // const [isTyping, setIsTyping] = useState(false);
-
-  // // last typing time
-  // const [lastTypingTime, setLastTypingTime] = useState(null);
+  const [newMessageFromSockets, setNewMessageFromSockets] = useState(null);
 
   const initialLoad = useRef(true);
 
@@ -69,8 +66,22 @@ const ChatPage = ({ currentUser }) => {
           // need this for if we change page while the typing indicator is active
         }
       });
+
+      sockets.socket.on('message recieved', (newMessage) => {
+        const messageSocketResponse = sockets.messageReceived(newMessage);
+        if (messageSocketResponse && messageSocketResponse.onChatPage) {
+          setNewMessageFromSockets(messageSocketResponse.newMessage);
+        }
+      });
     }
   }, [chatData]);
+
+  // update chat data when a new socket message has been recieved
+  useEffect(() => {
+    if (!initialLoad.current) {
+      setChatMessagesData((prevState) => [...prevState, newMessageFromSockets]);
+    }
+  }, [newMessageFromSockets]);
 
   const getChat = () => {
     axios({
@@ -113,6 +124,11 @@ const ChatPage = ({ currentUser }) => {
         setIsChatLoading(false);
       });
   };
+
+  // useEffect(() => {
+  //   if (!initialLoad.current) {
+  //   }
+  // }, [chatMessagesData]);
 
   // resize post form text area to avoid text scroll
   const resizeTextarea = function (e) {
