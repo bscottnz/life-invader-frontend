@@ -11,6 +11,9 @@ const ChatListItem = ({ chat, currentUser }) => {
 
   if (isMessage) {
     displayLatestMessage = `${chat.lastMessage.sender.firstName} ${chat.lastMessage.sender.lastName}: ${chat.lastMessage.content}`;
+    if (chat.lastMessage.sender._id === currentUser._id) {
+      displayLatestMessage = `You: ${chat.lastMessage.content}`;
+    }
   }
 
   const goToChat = (id) => {

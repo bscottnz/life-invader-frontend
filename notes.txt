@@ -16,9 +16,7 @@ messages update with socket
 
 
 
-// todo`
-
--- make inbox update with socket
+// todo
 
 -- refactor db queries to use async.parallel (promise.all ?)
 
@@ -30,7 +28,6 @@ messages update with socket
 
 -- proper pagination + pagination for chats ?
 
--- dont show name of author on last not group chat mesage ?
 
 
 
