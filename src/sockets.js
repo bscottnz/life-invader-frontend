@@ -22,13 +22,23 @@ const sockets = {
     // and we are on that profile page
     const definitelyOnChatPage = !page.includes('profile');
 
+    const urlSplit = page.split('/');
+
     if (isCorrectChatPage && definitelyOnChatPage) {
-      console.log(newMessage);
       return {
         onChatPage: true,
         newMessage: newMessage,
       };
       // not on the chat page. return chat data so can display a notification
+
+      // check if on the inbox page so we can update inbox messages.
+      // checks if the url ends with /messages, as this is the inbox page
+    } else if (urlSplit[urlSplit.length - 1] === 'messages') {
+      return {
+        onChatPage: true,
+        newMessage: newMessage,
+        onInboxPage: true,
+      };
     } else
       return {
         onChatPage: false,

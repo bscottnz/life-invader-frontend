@@ -5,6 +5,7 @@ import ChatListItem from './ChatListItem';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import sockets from '../../../../sockets';
 
 import { BiMessageAdd } from 'react-icons/bi';
 
@@ -34,6 +35,16 @@ const Inbox = ({ currentUser }) => {
 
   useEffect(() => {
     getChats();
+  }, []);
+
+  useEffect(() => {
+    // update inbox list when a new message is received
+    sockets.socket.on('message recieved', (newMessage) => {
+      const messageSocketResponse = sockets.messageReceived(newMessage);
+      if (messageSocketResponse && messageSocketResponse.onInboxPage) {
+        getChats();
+      }
+    });
   }, []);
 
   const chatList = chats.map((chat) => (

@@ -12,10 +12,13 @@ collapsable post
 infinitate scroll
 active sidebar link styles
 chat page
+messages update with socket 
 
 
 
 // todo`
+
+-- make inbox update with socket
 
 -- refactor db queries to use async.parallel (promise.all ?)
 
