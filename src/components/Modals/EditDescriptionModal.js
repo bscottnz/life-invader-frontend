@@ -35,6 +35,18 @@ const EditDescriptionModal = ({ currentUser, setCurrentUser }) => {
     }
   }, [editDescriptionModalIsOpen]);
 
+  // focus text box on popup
+  useEffect(() => {
+    if (editDescriptionModalIsOpen) {
+      setTimeout(() => {
+        const textbox = document.querySelector('#edit-description-textarea');
+        textbox.focus();
+        // set cursor at end of textarea
+        textbox.setSelectionRange(textbox.value.length, textbox.value.length);
+      }, 0);
+    }
+  }, [editDescriptionModalIsOpen]);
+
   const updateDescription = () => {
     const newDescription = textContent.trim();
 

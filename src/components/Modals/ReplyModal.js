@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import Modal from 'react-modal';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
@@ -20,6 +20,15 @@ const ReplyModal = ({
 }) => {
   // get delete modal state from context
   const { modalIsOpen, setModalIsOpen } = useContext(ModalContext);
+
+  // focus text box on popup
+  useEffect(() => {
+    if (modalIsOpen) {
+      setTimeout(() => {
+        document.querySelector('.ReactModal__Content #post-textarea').focus();
+      }, 0);
+    }
+  }, [modalIsOpen]);
 
   return (
     <Modal
