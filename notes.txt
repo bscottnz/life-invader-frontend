@@ -13,20 +13,17 @@ infinitate scroll
 active sidebar link styles
 chat page
 messages update with socket 
+inbox updates with socket
 
 
 
 // todo
 
 -- refactor db queries to use async.parallel (promise.all ?)
+-- upside down pagination on chats
 
--- focus text box on popups
-
--- escape all messages text. chat names msgs etc
-
--- make message width on chat page adjust for mobile.
-
--- proper pagination + pagination for chats ?
+-- generaly mobile freindlyness
+-- make message width on chat page adjust for mobile. (serach css for TODO)
 
 
 

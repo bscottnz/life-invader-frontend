@@ -27,13 +27,17 @@ const TopNav = ({ toggleDropdown }) => {
     history.push('/messages');
   };
 
+  const goToNotifications = () => {
+    history.push('/notifications');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="top-nav-group">
           <BiHomeAlt style={iconStyles} onClick={goToHomePage} />
         </div>
-        <div className="top-nav-group">
+        <div className="top-nav-group" onClick={goToNotifications}>
           <BiBell style={iconStyles} />
         </div>
         <div className="top-nav-group" onClick={goToMessages}>

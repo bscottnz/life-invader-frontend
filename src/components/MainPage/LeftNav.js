@@ -76,6 +76,10 @@ const LeftNav = ({ logOut, currentUser }) => {
     history.push('/messages');
   };
 
+  const goToNotifications = () => {
+    history.push('/notifications');
+  };
+
   return (
     <nav className="layout__left-container custom-scroll">
       <div className="layout__left-content custom-scroll">
@@ -91,7 +95,7 @@ const LeftNav = ({ logOut, currentUser }) => {
           <BiUser style={iconStyle} />
           <h2 className="left-nav-heading">Profile</h2>
         </div>
-        <div className="left-nav-group" id="left-nav-notifications">
+        <div className="left-nav-group" id="left-nav-notifications" onClick={goToNotifications}>
           <BiBell style={{ ...iconStyle }} />
           <h2 className="left-nav-heading">Notifications</h2>
         </div>
