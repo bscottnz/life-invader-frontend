@@ -465,3 +465,9 @@ ul {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
 }
+
+.chat-list-item.active {
+  // background-color: rgba($color-blue, 0.1);
+  border-left: 3px solid $color-blue;
+  // padding-left: 4px;
+}

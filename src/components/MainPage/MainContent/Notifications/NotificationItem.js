@@ -1,6 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
+import notificationsController from '../../../../notifications';
+
 const NotificationItem = ({ notification }) => {
   const userFrom = notification.userFrom;
   const history = useHistory();
@@ -80,11 +82,24 @@ const NotificationItem = ({ notification }) => {
   };
 
   const goToNotificationSubject = () => {
+    markAsRead();
     history.push(getNotificationLink(notification));
   };
 
+  const markAsRead = () => {
+    if (!notification.read) {
+      notificationsController.markAsRead(notification._id);
+    }
+  };
+
+  // special styling from un-opned notifications
+  const notificationClass = notification.read ? '' : 'active';
+
   return (
-    <div className="chat-list-item notification" onClick={goToNotificationSubject}>
+    <div
+      className={`chat-list-item notification ${notificationClass}`}
+      onClick={goToNotificationSubject}
+    >
       <div className="results-image-container">
         <img src={process.env.REACT_APP_BASE_URL + userFrom.profilePic} alt="pic" />
       </div>
