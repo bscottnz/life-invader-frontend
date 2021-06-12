@@ -471,3 +471,8 @@ ul {
   border-left: 3px solid $color-blue;
   // padding-left: 4px;
 }
+
+.notifications-heading-btns-container {
+  display: flex;
+  align-items: flex-start;
+}

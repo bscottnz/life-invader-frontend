@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { MdPlaylistAddCheck } from 'react-icons/md';
+import { RiDeleteBinLine } from 'react-icons/ri';
 
 import NotificationItem from './NotificationItem';
 
@@ -39,6 +40,16 @@ const NotificationsPage = () => {
     });
   };
 
+  const deleteNotifications = () => {
+    axios({
+      method: 'delete',
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/api/notifications/`,
+    })
+      .then((res) => setNotificationsData([]))
+      .catch((err) => console.log(err));
+  };
+
   const notificationsList = notificationsData.map((notification) => (
     <NotificationItem notification={notification} key={uuidv4()} />
   ));
@@ -47,11 +58,18 @@ const NotificationsPage = () => {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h1 className="main-content-heading">Notifications</h1>
-        <MdPlaylistAddCheck
-          className="blue-on-hover"
-          style={{ fontSize: '24px', cursor: 'pointer' }}
-          onClick={markAllAsRead}
-        />
+        <div className="notifications-heading-btns-container">
+          <MdPlaylistAddCheck
+            className="blue-on-hover"
+            style={{ fontSize: '24px', cursor: 'pointer' }}
+            onClick={markAllAsRead}
+          />
+          <RiDeleteBinLine
+            className="blue-on-hover"
+            style={{ fontSize: '22px', cursor: 'pointer', marginLeft: '16px' }}
+            onClick={deleteNotifications}
+          />
+        </div>
       </div>
       {notificationsData.length > 0 && notificationsList}
     </div>
