@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { BrowserRouter as Switch, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 
 import Home from './Home';
 import ViewPost from './ViewPost';
@@ -12,6 +12,7 @@ import NewMessage from './Messages/NewMessage';
 import ChatPage from './Messages/ChatPage';
 import NotificationsPage from './Notifications/NotificationsPage';
 import { ModalContext } from '../../Modals/ModalContext';
+import { set } from 'nprogress';
 
 const MainContent = ({ currentUser, setCurrentUser }) => {
   const location = useLocation();
@@ -47,6 +48,7 @@ const MainContent = ({ currentUser, setCurrentUser }) => {
     setEditDescriptionModalIsOpen(false);
     setBuyNowModalIsOpen(false);
     setNoCoinsModalIsOpen(false);
+    console.log(location);
   }, [location]);
 
   return (

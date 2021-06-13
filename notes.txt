@@ -22,7 +22,7 @@ inbox updates with socket
 -- refactor db queries to use async.parallel (promise.all ?)
 -- upside down pagination on chats
 
--- close all modals between pages
+
 -- no notifications to show message
 
 -- generaly mobile freindlyness

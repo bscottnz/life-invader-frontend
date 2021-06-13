@@ -24,55 +24,69 @@ const ReplyModal = ({
   // focus text box on popup
   useEffect(() => {
     if (modalIsOpen) {
+      // some pages will crash when clicking browser back arrow with open modal
+
       setTimeout(() => {
-        document.querySelector('.ReactModal__Content #post-textarea').focus();
+        try {
+          document.querySelector('.ReactModal__Content #post-textarea').focus();
+        } catch {
+          setModalIsOpen(false);
+        }
       }, 0);
     }
   }, [modalIsOpen]);
 
-  return (
-    <Modal
-      style={modalStyle}
-      isOpen={modalIsOpen}
-      closeTimeoutMS={300}
-      onRequestClose={() => setModalIsOpen(false)}
-    >
-      <div
-        className="heading-container"
-        style={{ display: 'flex', justifyContent: 'space-between' }}
+  // handle error when pressing back arrow with open modal
+  try {
+    return (
+      <Modal
+        style={modalStyle}
+        isOpen={modalIsOpen}
+        closeTimeoutMS={300}
+        onRequestClose={() => setModalIsOpen(false)}
       >
-        <h2 className="main-content-heading">{replyHeading}</h2>
+        <div
+          className="heading-container"
+          style={{ display: 'flex', justifyContent: 'space-between' }}
+        >
+          <h2 className="main-content-heading">{replyHeading}</h2>
 
-        <span className="close-modal-icon-wrapper">
-          <AiOutlineCloseCircle
-            style={{ fontSize: '22px', cursor: 'pointer' }}
-            onClick={() => setModalIsOpen(false)}
+          <span className="close-modal-icon-wrapper">
+            <AiOutlineCloseCircle
+              style={{ fontSize: '22px', cursor: 'pointer' }}
+              onClick={() => setModalIsOpen(false)}
+            />
+          </span>
+        </div>
+
+        {/* handle error when pressing back arrow with open modal */}
+        {modalIsOpen && (
+          <Post
+            postData={replyComment}
+            currentUser={currentUser}
+            key={uuidv4()}
+            forceUpdate={getPost}
+            setModalIsOpen={setModalIsOpen}
+            allowComments={false}
+            isDeletable={false}
           />
-        </span>
-      </div>
+        )}
 
-      <Post
-        postData={replyComment}
-        currentUser={currentUser}
-        key={uuidv4()}
-        forceUpdate={getPost}
-        setModalIsOpen={setModalIsOpen}
-        allowComments={false}
-        isDeletable={false}
-      />
-
-      <CreatePostForm
-        currentUser={currentUser}
-        setCurrentUser={setCurrentUser}
-        textPlaceholder={replyTextPlaceholder}
-        buttonText={'Reply'}
-        setModalIsOpen={setModalIsOpen}
-        isReply={true}
-        replyComment={replyComment}
-        forceUpdate={getPost}
-      />
-    </Modal>
-  );
+        <CreatePostForm
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+          textPlaceholder={replyTextPlaceholder}
+          buttonText={'Reply'}
+          setModalIsOpen={setModalIsOpen}
+          isReply={true}
+          replyComment={replyComment}
+          forceUpdate={getPost}
+        />
+      </Modal>
+    );
+  } catch {
+    return <div></div>;
+  }
 };
 
 export default ReplyModal;
