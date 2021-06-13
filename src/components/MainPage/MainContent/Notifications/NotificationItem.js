@@ -58,6 +58,22 @@ const NotificationItem = ({ notification }) => {
       text = `${userFromName} is stalking you`;
     }
 
+    // text for disliking or sharing own post
+
+    if (
+      notification.notificationType === 'like' &&
+      notification.userTo._id === notification.userFrom._id
+    ) {
+      text = 'Congratulations, you disliked your own post';
+    }
+
+    if (
+      notification.notificationType === 'share' &&
+      notification.userTo._id === notification.userFrom._id
+    ) {
+      text = 'Congratulations, you shared your own post';
+    }
+
     if (text) {
       return text;
     } else return 'Notification';
