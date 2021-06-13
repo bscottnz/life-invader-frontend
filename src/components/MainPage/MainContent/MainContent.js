@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
+import React, { useEffect, useContext } from 'react';
+import { BrowserRouter as Switch, Route, useLocation } from 'react-router-dom';
 
 import Home from './Home';
 import ViewPost from './ViewPost';
@@ -11,13 +11,42 @@ import Inbox from './Messages/Inbox';
 import NewMessage from './Messages/NewMessage';
 import ChatPage from './Messages/ChatPage';
 import NotificationsPage from './Notifications/NotificationsPage';
+import { ModalContext } from '../../Modals/ModalContext';
 
 const MainContent = ({ currentUser, setCurrentUser }) => {
   const location = useLocation();
 
+  const {
+    setDeleteModalIsOpen,
+    setModalIsOpen,
+    setProfilePicModalIsOpen,
+    setCoverPhotoModalIsOpen,
+    setPinModalIsOpen,
+    setUnPinModalIsOpen,
+    setEditDescriptionModalIsOpen,
+    setBuyNowModalIsOpen,
+    setNoCoinsModalIsOpen,
+    setEditChatNameModalIsOpen,
+  } = useContext(ModalContext);
+
   // scrolls back to the top if you click on sidebar link for the page you are already on.
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location]);
+
+  // close all modals when changing pages. this stops the app crashing when you have an open modal,
+  // click the browser back arrow and then the forward arrow
+  useEffect(() => {
+    setDeleteModalIsOpen(false);
+    setModalIsOpen(false);
+    setProfilePicModalIsOpen(false);
+    setCoverPhotoModalIsOpen(false);
+    setPinModalIsOpen(false);
+    setUnPinModalIsOpen(false);
+    setEditChatNameModalIsOpen(false);
+    setEditDescriptionModalIsOpen(false);
+    setBuyNowModalIsOpen(false);
+    setNoCoinsModalIsOpen(false);
   }, [location]);
 
   return (
