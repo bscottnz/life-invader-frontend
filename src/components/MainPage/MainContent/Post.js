@@ -13,6 +13,8 @@ import { AiOutlinePushpin } from 'react-icons/ai';
 import relativeTime from '../../../utils/relativeTime';
 import axios from 'axios';
 
+import sockets from '../../../sockets';
+
 const Post = ({
   postData,
   currentUser,
@@ -105,6 +107,9 @@ const Post = ({
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${postData._id}/dislike`,
     }).then((res) => {
+      // send follow notification
+      sockets.emitNotification(postData.author._id, currentUser._id);
+
       //rerender posts
       forceUpdate();
     });
@@ -117,10 +122,16 @@ const Post = ({
 
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${postData._id}/share`,
-    }).then((res) => {
-      // rerender posts
-      forceUpdate();
-    });
+    })
+      .then((res) => {
+        // send follow notification
+        sockets.emitNotification(postData.author._id, currentUser._id);
+        // rerender posts
+        forceUpdate();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const openReplyModal = (postData) => {

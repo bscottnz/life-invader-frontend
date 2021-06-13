@@ -22,7 +22,7 @@ import { FiMail } from 'react-icons/fi';
 import { FaCameraRetro } from 'react-icons/fa';
 
 import deletePostRequest from '../../../utils/deletePostRequest';
-import { set } from 'nprogress';
+import sockets from '../../../sockets';
 
 const ProfilePage = ({ currentUser, setCurrentUser }) => {
   const { setProfilePicModalIsOpen, setCoverPhotoModalIsOpen } = useContext(ModalContext);
@@ -191,6 +191,8 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
           // we are now following
           setIsFollowing(true);
           setNumFollowers((numFollowers) => numFollowers + 1);
+          // emit notification
+          sockets.emitNotification(profileUser._id, currentUser._id);
         } else {
           // we are now unfollowing
           setIsFollowing(false);
@@ -212,7 +214,8 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
   const showAnotherPage = () => {
     setNumPages((x) => x + 1);
   };
-
+  // only show 20 posts per 'page' of infinate scroll.
+  // as you scroll down to bottom the number of pages to show increases
   const postItems = posts
     .slice(0, 20 * numPages)
     .map((post) => (
@@ -226,21 +229,6 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
         showPin={profileName === currentUser.username ? true : false}
       />
     ));
-
-  // only show 20 posts per 'page' of infinate scroll.
-  // as you scroll down to bottom the number of pages to show increases
-  // const postItems = posts
-  //   .slice(0, 20 * numPages)
-  //   .map((post) => (
-  //     <Post
-  //       postData={post}
-  //       currentUser={currentUser}
-  //       key={uuidv4()}
-  //       forceUpdate={getPosts}
-  //       setReplyComment={setReplyComment}
-  //       setDeleteComment={setDeleteComment}
-  //     />
-  //   ));
 
   const replyItems = replies
     .slice(0, 20 * numPages)

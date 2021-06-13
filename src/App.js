@@ -93,6 +93,7 @@ function App() {
         sockets.connected = true;
       });
 
+      // real time messages (also there is logic for this in the chat component)
       sockets.socket.on('message recieved', (newMessage) => {
         const messageSocketResponse = sockets.messageReceived(newMessage);
         if (messageSocketResponse && !messageSocketResponse.onChatPage) {
@@ -102,7 +103,18 @@ function App() {
         }
       });
 
-      // sockets.messageReceived(5, location.pathname);
+      // real time notifications
+      sockets.socket.on('notification received', (newNotification) => {
+        console.log('you got a notifications yo!!');
+      });
+
+      // create emit notification function on sockets object
+      sockets.emitNotification = function (userId, currentUserId) {
+        if (userId === currentUserId) {
+          return;
+        }
+        sockets.socket.emit('notification received', userId);
+      };
     }
   }, [currentUser]);
 

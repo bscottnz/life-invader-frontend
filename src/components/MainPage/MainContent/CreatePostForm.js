@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 
 import axios from 'axios';
 
+import sockets from '../../../sockets';
+
 const CreatePostForm = ({
   currentUser,
   setCurrentUser,
@@ -53,6 +55,8 @@ const CreatePostForm = ({
           // this will close the reply modal when submitting a comment reply
           if (isReply) {
             setModalIsOpen(false);
+            // send follow notification
+            sockets.emitNotification(replyComment.author._id, currentUser._id);
           }
         })
         .catch((err) => {
