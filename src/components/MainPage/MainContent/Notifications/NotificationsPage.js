@@ -13,6 +13,8 @@ import { v4 as uuidv4 } from 'uuid';
 const NotificationsPage = () => {
   const [notificationsData, setNotificationsData] = useState([]);
 
+  const [noNotifications, setNoNotifications] = useState(null);
+
   useEffect(() => {
     getNotifications();
   }, []);
@@ -25,6 +27,11 @@ const NotificationsPage = () => {
     })
       .then((res) => {
         setNotificationsData(res.data);
+        if (res.data.length === 0) {
+          setNoNotifications(true);
+        } else {
+          setNoNotifications(false);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -46,7 +53,10 @@ const NotificationsPage = () => {
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/notifications/`,
     })
-      .then((res) => setNotificationsData([]))
+      .then((res) => {
+        setNotificationsData([]);
+        setNoNotifications(true);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -72,6 +82,11 @@ const NotificationsPage = () => {
         </div>
       </div>
       {notificationsData.length > 0 && notificationsList}
+      {noNotifications && (
+        <div>
+          <p style={{ fontSize: '16px' }}>No notifications</p>
+        </div>
+      )}
     </div>
   );
 };

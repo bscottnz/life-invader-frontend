@@ -48,7 +48,6 @@ const MainContent = ({ currentUser, setCurrentUser }) => {
     setEditDescriptionModalIsOpen(false);
     setBuyNowModalIsOpen(false);
     setNoCoinsModalIsOpen(false);
-    console.log(location);
   }, [location]);
 
   return (

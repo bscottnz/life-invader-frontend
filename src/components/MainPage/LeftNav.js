@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useHistory, useParams, useLocation } from 'react-router-dom';
 
@@ -11,9 +11,19 @@ import { FiLogOut } from 'react-icons/fi';
 import { BiPlus } from 'react-icons/bi';
 import { BiShoppingBag } from 'react-icons/bi';
 
+import getNumMessages from '../../utils/getNumMessages';
+import getNumNotifications from '../../utils/getNumNotifications';
+
 import logoIcon from '../../images/logo-small.png';
 
-const LeftNav = ({ logOut, currentUser }) => {
+const LeftNav = ({
+  logOut,
+  currentUser,
+  numMessages,
+  setNumMessages,
+  numNotifications,
+  setNumNotifications,
+}) => {
   const iconStyle = {
     fontSize: '28px',
   };
@@ -80,6 +90,11 @@ const LeftNav = ({ logOut, currentUser }) => {
     history.push('/notifications');
   };
 
+  useEffect(() => {
+    getNumMessages(setNumMessages);
+    getNumNotifications(setNumNotifications);
+  }, []);
+
   return (
     <nav className="layout__left-container custom-scroll">
       <div className="layout__left-content custom-scroll">
@@ -96,11 +111,21 @@ const LeftNav = ({ logOut, currentUser }) => {
           <h2 className="left-nav-heading">Profile</h2>
         </div>
         <div className="left-nav-group" id="left-nav-notifications" onClick={goToNotifications}>
-          <BiBell style={{ ...iconStyle }} />
+          <div className="badge-wrapper">
+            <BiBell style={{ ...iconStyle }} />
+            <span id="notification-badge" className={numNotifications > 0 ? 'active' : ''}>
+              {numNotifications}
+            </span>
+          </div>
           <h2 className="left-nav-heading">Notifications</h2>
         </div>
         <div className="left-nav-group" id="left-nav-messages" onClick={goToMessages}>
-          <FiMail style={iconStyle} />
+          <div className="badge-wrapper">
+            <FiMail style={iconStyle} />
+            <span id="messages-badge" className={numMessages > 0 ? 'active' : ''}>
+              {numMessages}
+            </span>
+          </div>
           <h2 className="left-nav-heading">Messages</h2>
         </div>
         <div className="left-nav-group" id="left-nav-search" onClick={goToSearchPage}>

@@ -17,6 +17,9 @@ import nprogress from 'nprogress';
 import './style/main.scss';
 // import socketIOClient from 'socket.io-client';
 import sockets from './sockets';
+import getNumMessages from './utils/getNumMessages';
+import getNumNotifications from './utils/getNumNotifications';
+
 import openSocket from 'socket.io-client';
 
 function App() {
@@ -24,6 +27,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setisLoading] = useState(true);
   const history = useHistory();
+
+  const [numMessages, setNumMessages] = useState(0);
+  const [numNotifications, setNumNotifications] = useState(0);
 
   // mobile nav
   const toggleDropdown = (close = false) => {
@@ -92,6 +98,7 @@ function App() {
         if (messageSocketResponse && !messageSocketResponse.onChatPage) {
           // handle notification
           console.log('yo you got a message');
+          getNumMessages(setNumMessages);
         }
       });
 
@@ -123,7 +130,14 @@ function App() {
             />
             <div className="main-wrapper">
               <main className="layout">
-                <LeftNav logOut={logOut} currentUser={currentUser} />
+                <LeftNav
+                  logOut={logOut}
+                  currentUser={currentUser}
+                  numMessages={numMessages}
+                  setNumMessages={setNumMessages}
+                  numNotifications={numNotifications}
+                  setNumNotifications={setNumNotifications}
+                />
                 <MainContent currentUser={currentUser} setCurrentUser={setCurrentUser} />
                 <RightSidebar currentUser={currentUser} setCurrentUser={setCurrentUser} />
               </main>
