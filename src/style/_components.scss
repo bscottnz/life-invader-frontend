@@ -602,3 +602,27 @@ input[type='file'] {
     outline: none;
   }
 }
+
+// notification popup
+.notification-popup {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  height: 80px;
+  width: 350px;
+  background-color: rgb(33, 36, 40);
+  border: 1px solid $color-background-light;
+  border: none;
+  border-radius: 15px;
+  transition: all 0.4s;
+
+  opacity: 0;
+
+  &:hover {
+    background-color: rgb(33, 36, 40);
+  }
+
+  &.fade-in {
+    opacity: 1;
+  }
+}

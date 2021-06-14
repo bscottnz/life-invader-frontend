@@ -19,6 +19,7 @@ import './style/main.scss';
 import sockets from './sockets';
 import getNumMessages from './utils/getNumMessages';
 import getNumNotifications from './utils/getNumNotifications';
+import createNewNotificationPopup from './utils/newNotification';
 
 import openSocket from 'socket.io-client';
 
@@ -43,6 +44,8 @@ function App() {
 
   // get user session on page load
   useEffect(() => {
+    // createNewNotificationPopup();
+
     // while fetiching user data, display loading page
     setisLoading(true);
     // loading bar start
@@ -111,6 +114,7 @@ function App() {
           withCredentials: true,
           url: `${process.env.REACT_APP_BASE_URL}/api/notifications/latest`,
         }).then((res) => {
+          createNewNotificationPopup(res.data);
           getNumNotifications(setNumNotifications);
         });
       });
