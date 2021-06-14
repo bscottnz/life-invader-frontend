@@ -6,7 +6,7 @@ import { NotificationsContext } from '../../NotificationsContext';
 import notificationsController from '../../../../notifications';
 import getNumNotifications from '../../../../utils/getNumNotifications';
 
-const NotificationItem = ({ notification }) => {
+const NotificationItem = ({ notification, isPopup }) => {
   const userFrom = notification.userFrom;
   const history = useHistory();
 
@@ -120,10 +120,11 @@ const NotificationItem = ({ notification }) => {
 
   // special styling from un-opned notifications
   const notificationClass = notification.read ? '' : 'active';
+  const popupClass = isPopup ? 'notification-item-popup' : ``;
 
   return (
     <div
-      className={`chat-list-item notification ${notificationClass}`}
+      className={`chat-list-item notification ${notificationClass} ${popupClass}`}
       onClick={goToNotificationSubject}
     >
       <div className="results-image-container">
@@ -134,6 +135,10 @@ const NotificationItem = ({ notification }) => {
       </div>
     </div>
   );
+};
+
+NotificationItem.defaultProps = {
+  isPopup: false, // special styling for when this component is used to render a new notifcation as a popup
 };
 
 export default NotificationItem;

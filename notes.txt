@@ -28,7 +28,7 @@ inbox updates with socket
 
 
 
--- add new notif when on notif page
+
 
 -- mobile nav notification badge
 

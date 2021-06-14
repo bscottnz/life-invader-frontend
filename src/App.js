@@ -7,6 +7,7 @@ import { FollowingProvider } from './components/MainPage/FollowingContext';
 
 import { NotificationsProvider } from './components/MainPage/NotificationsContext';
 import { NotificationsContext } from './components/MainPage/NotificationsContext';
+import { NotificationsPopupContext } from './components/MainPage/NotificationsPopupContext';
 
 import Loading from './components/Loading';
 import TopNav from './components/MainPage/TopNav';
@@ -26,6 +27,7 @@ import createNewNotificationPopup from './utils/newNotification';
 import createNewMessagePopup from './utils/newMessage';
 
 import openSocket from 'socket.io-client';
+import NotificationPopup from './components/NotificationPopup';
 
 function App() {
   // const [name, setName] = useState('');
@@ -35,6 +37,8 @@ function App() {
 
   const { numMessages, setNumMessages, numNotifications, setNumNotifications } =
     useContext(NotificationsContext);
+
+  const { setCurrentNotification } = useContext(NotificationsPopupContext);
 
   // const [numMessages, setNumMessages] = useState(0);
   // const [numNotifications, setNumNotifications] = useState(0);
@@ -123,7 +127,11 @@ function App() {
           withCredentials: true,
           url: `${process.env.REACT_APP_BASE_URL}/api/notifications/latest`,
         }).then((res) => {
-          createNewNotificationPopup(res.data);
+          // this is old way of creating popup
+          // createNewNotificationPopup(res.data);
+          // this is react way
+          setCurrentNotification(res.data);
+
           getNumNotifications(setNumNotifications);
         });
       });
@@ -165,6 +173,7 @@ function App() {
                 <LeftNav logOut={logOut} currentUser={currentUser} />
                 <MainContent currentUser={currentUser} setCurrentUser={setCurrentUser} />
                 <RightSidebar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+                <NotificationPopup />
               </main>
             </div>
             {/* I may want to add this mobile add-post button back at some point. */}

@@ -637,3 +637,28 @@ input[type='file'] {
   font-size: 16px !important;
   color: white !important;
 }
+
+// react notification popup
+
+#notification-popup {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  width: 300px;
+  height: 100px;
+  border: 1px solid red;
+}
+
+.notification-item-popup {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  background-color: rgb(33, 36, 40);
+  border-top: none;
+  padding-right: 20px;
+  border-radius: 2px;
+
+  &:hover {
+    background-color: rgb(33, 36, 40);
+  }
+}
