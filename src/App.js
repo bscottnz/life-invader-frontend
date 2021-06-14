@@ -103,9 +103,16 @@ function App() {
         }
       });
 
-      // real time notifications
+      // real time notifications handler
       sockets.socket.on('notification received', (newNotification) => {
-        console.log('you got a notifications yo!!');
+        // gets the latest notification for the Current User
+        axios({
+          method: 'get',
+          withCredentials: true,
+          url: `${process.env.REACT_APP_BASE_URL}/api/notifications/latest`,
+        }).then((res) => {
+          getNumNotifications(setNumNotifications);
+        });
       });
 
       // create emit notification function on sockets object

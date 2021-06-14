@@ -23,7 +23,8 @@ inbox updates with socket
 -- upside down pagination on chats
 
 -- notifs dont update unless refresh
-
+-- notification socket sends on unlike
+-- mobile nav notification badge
 
 -- generaly mobile freindlyness
 -- make message width on chat page adjust for mobile. (serach css for TODO)

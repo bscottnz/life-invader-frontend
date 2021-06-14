@@ -107,6 +107,9 @@ const Post = ({
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${postData._id}/dislike`,
     }).then((res) => {
+      // TODO
+      // check if we are liking the post. dont emit notif if we are unliking
+
       // send follow notification
       sockets.emitNotification(postData.author._id, currentUser._id);
 
