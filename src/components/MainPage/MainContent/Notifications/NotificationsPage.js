@@ -13,6 +13,8 @@ import getNumNotifications from '../../../../utils/getNumNotifications';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
+import sockets from '../../../../sockets';
+
 const NotificationsPage = () => {
   const [notificationsData, setNotificationsData] = useState([]);
 
@@ -22,6 +24,13 @@ const NotificationsPage = () => {
 
   useEffect(() => {
     getNotifications();
+  }, []);
+
+  // update new notification if user is on notifications page
+  useEffect(() => {
+    sockets.socket.on('notification received', () => {
+      getNotifications();
+    });
   }, []);
 
   const getNotifications = () => {

@@ -54,9 +54,13 @@ const NotificationItem = ({ notification }) => {
     let text;
 
     if (notification.notificationType === 'share') {
-      text = `${userFromName} shared your ${getGoodAdjective()} post`;
+      // text = `${userFromName} shared your ${getGoodAdjective()} post`;
+      // until i find a good way to not create a new adjective on component refresh,
+      // (when updating notifications page on new notification) just show the same message
+      text = `${userFromName} shared your post`;
     } else if (notification.notificationType === 'like') {
-      text = `${userFromName} disliked your ${getBadAdjective()} post`;
+      // text = `${userFromName} disliked your ${getBadAdjective()} post`;
+      text = `${userFromName} disliked your post`;
     } else if (notification.notificationType === 'reply') {
       text = `${userFromName} replied to your post`;
     } else if (notification.notificationType === 'follow') {
