@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import EditChatNameModal from '../../../Modals/EditChatNameModal';
 import { ModalContext } from '../../../Modals/ModalContext';
 import TypingIndicator from './TypingIndicator';
+import { NotificationsContext } from '../../NotificationsContext';
 
 import { FaPaperPlane } from 'react-icons/fa';
 import { VscLoading } from 'react-icons/vsc';
@@ -14,8 +15,12 @@ import socketIOClient, { Socket } from 'socket.io-client';
 import sockets from '../../../../sockets';
 import { set } from 'nprogress';
 
+import getNumMessages from '../../../../utils/getNumMessages';
+
 const ChatPage = ({ currentUser }) => {
   let id = useParams().id;
+
+  const { setNumMessages } = useContext(NotificationsContext);
 
   const { setEditChatNameModalIsOpen } = useContext(ModalContext);
 
@@ -42,6 +47,7 @@ const ChatPage = ({ currentUser }) => {
   useEffect(() => {
     //get chat meta data
     getChat();
+    markAllMessagesAsRead();
   }, []);
 
   // socket join. make this only join on initial fetch?
@@ -369,6 +375,20 @@ const ChatPage = ({ currentUser }) => {
       }
     }
   }, [chatMessagesData]);
+
+  const markAllMessagesAsRead = () => {
+    axios({
+      method: 'put',
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/api/chats/${id}/messages/read`,
+    })
+      .then((res) => {
+        getNumMessages(setNumMessages);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const cantEditChatStyle = {
     border: '1px solid transparent',

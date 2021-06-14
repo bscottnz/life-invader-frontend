@@ -1,9 +1,12 @@
 import { BrowserRouter as Router, useHistory } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 
 import Welcome from './components/WelcomePage/Welcome';
 import { ModalProvider } from './components/Modals/ModalContext';
 import { FollowingProvider } from './components/MainPage/FollowingContext';
+
+import { NotificationsProvider } from './components/MainPage/NotificationsContext';
+import { NotificationsContext } from './components/MainPage/NotificationsContext';
 
 import Loading from './components/Loading';
 import TopNav from './components/MainPage/TopNav';
@@ -30,8 +33,11 @@ function App() {
   const [isLoading, setisLoading] = useState(true);
   const history = useHistory();
 
-  const [numMessages, setNumMessages] = useState(0);
-  const [numNotifications, setNumNotifications] = useState(0);
+  const { numMessages, setNumMessages, numNotifications, setNumNotifications } =
+    useContext(NotificationsContext);
+
+  // const [numMessages, setNumMessages] = useState(0);
+  // const [numNotifications, setNumNotifications] = useState(0);
 
   // mobile nav
   const toggleDropdown = (close = false) => {
@@ -156,14 +162,7 @@ function App() {
             />
             <div className="main-wrapper">
               <main className="layout">
-                <LeftNav
-                  logOut={logOut}
-                  currentUser={currentUser}
-                  numMessages={numMessages}
-                  setNumMessages={setNumMessages}
-                  numNotifications={numNotifications}
-                  setNumNotifications={setNumNotifications}
-                />
+                <LeftNav logOut={logOut} currentUser={currentUser} />
                 <MainContent currentUser={currentUser} setCurrentUser={setCurrentUser} />
                 <RightSidebar currentUser={currentUser} setCurrentUser={setCurrentUser} />
               </main>

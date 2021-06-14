@@ -71,8 +71,11 @@ const ChatListItem = ({ chat, currentUser }) => {
     return <img src={process.env.REACT_APP_BASE_URL + user.profilePic} alt="pic"></img>;
   };
 
+  const activeClass =
+    !chat.lastMessage || chat.lastMessage.seenBy.includes(currentUser._id) ? '' : 'active';
+
   return (
-    <div className="chat-list-item" onClick={(e) => goToChat(chat._id)}>
+    <div className={`chat-list-item ${activeClass}`} onClick={(e) => goToChat(chat._id)}>
       {getChatImages()}
       <div className="chat-list-item-details ellipsis">
         <span className="heading ellipsis">{getChatName()}</span>

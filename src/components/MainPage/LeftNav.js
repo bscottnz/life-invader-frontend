@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import { useHistory, useParams, useLocation } from 'react-router-dom';
 
@@ -11,24 +11,22 @@ import { FiLogOut } from 'react-icons/fi';
 import { BiPlus } from 'react-icons/bi';
 import { BiShoppingBag } from 'react-icons/bi';
 
+import { NotificationsContext } from './NotificationsContext';
+
 import getNumMessages from '../../utils/getNumMessages';
 import getNumNotifications from '../../utils/getNumNotifications';
 
 import logoIcon from '../../images/logo-small.png';
 
-const LeftNav = ({
-  logOut,
-  currentUser,
-  numMessages,
-  setNumMessages,
-  numNotifications,
-  setNumNotifications,
-}) => {
+const LeftNav = ({ logOut, currentUser }) => {
   const iconStyle = {
     fontSize: '28px',
   };
 
   const location = useLocation();
+
+  const { numMessages, setNumMessages, numNotifications, setNumNotifications } =
+    useContext(NotificationsContext);
 
   // checks what page you are on, and gives the relevant side bar link active styling
   useEffect(() => {

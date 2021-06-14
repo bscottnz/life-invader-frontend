@@ -1,11 +1,7 @@
 const createNewNotificationPopup = (data, currentUserId) => {
   const imgURL = `${process.env.REACT_APP_BASE_URL}/${data.sender.profilePic}`;
 
-  let displayLatestMessage = 'New conversation';
-  const isMessage = data.chat.lastMessage != undefined;
-  if (isMessage) {
-    displayLatestMessage = `${data.sender.firstName} ${data.sender.lastName}: ${data.content}`;
-  }
+  let displayLatestMessage = `${data.sender.firstName} ${data.sender.lastName}: ${data.content}`;
 
   const body = document.createElement('div');
   body.classList.add('notification-popup');
