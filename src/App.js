@@ -20,6 +20,7 @@ import sockets from './sockets';
 import getNumMessages from './utils/getNumMessages';
 import getNumNotifications from './utils/getNumNotifications';
 import createNewNotificationPopup from './utils/newNotification';
+import createNewMessagePopup from './utils/newMessage';
 
 import openSocket from 'socket.io-client';
 
@@ -101,7 +102,9 @@ function App() {
         const messageSocketResponse = sockets.messageReceived(newMessage);
         if (messageSocketResponse && !messageSocketResponse.onChatPage) {
           // handle notification
-          console.log('yo you got a message');
+          console.log(newMessage);
+
+          createNewMessagePopup(newMessage, currentUser._id);
           getNumMessages(setNumMessages);
         }
       });
