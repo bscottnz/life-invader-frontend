@@ -77,6 +77,7 @@ const ChatPage = ({ currentUser }) => {
         const messageSocketResponse = sockets.messageReceived(newMessage);
         if (messageSocketResponse && messageSocketResponse.onChatPage) {
           setNewMessageFromSockets(messageSocketResponse.newMessage);
+          markAllMessagesAsRead();
         }
       });
     }
