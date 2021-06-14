@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import { MdPlaylistAddCheck } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri';
 
 import NotificationItem from './NotificationItem';
 
+import { NotificationsContext } from '../../NotificationsContext';
+
 import notificationsController from '../../../../notifications';
+import getNumNotifications from '../../../../utils/getNumNotifications';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -14,6 +17,8 @@ const NotificationsPage = () => {
   const [notificationsData, setNotificationsData] = useState([]);
 
   const [noNotifications, setNoNotifications] = useState(null);
+
+  const { setNumNotifications } = useContext(NotificationsContext);
 
   useEffect(() => {
     getNotifications();
@@ -39,12 +44,22 @@ const NotificationsPage = () => {
   };
 
   const markAllAsRead = () => {
-    notificationsController.markAsRead();
+    const unMarkActive = () => {
+      const notifications = document.querySelectorAll('.notification.active');
+      notifications.forEach((notif) => {
+        // notif.classList.remove('active');
+        // need to do inline stlying or it doesnt persist for some reason.
+        notif.style.borderLeft = 'none';
+      });
+    };
 
-    const notifications = document.querySelectorAll('.notification.active');
-    notifications.forEach((notif) => {
-      notif.classList.remove('active');
-    });
+    notificationsController.markAsRead(null, unMarkActive);
+
+    getNumNotifications(setNumNotifications);
+    setTimeout(() => {
+      // sometimes it wont clear the notifiaction from the side bar without this
+      getNumNotifications(setNumNotifications);
+    }, 0);
   };
 
   const deleteNotifications = () => {
@@ -56,6 +71,7 @@ const NotificationsPage = () => {
       .then((res) => {
         setNotificationsData([]);
         setNoNotifications(true);
+        getNumNotifications(setNumNotifications);
       })
       .catch((err) => console.log(err));
   };

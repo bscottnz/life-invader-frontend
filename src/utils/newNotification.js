@@ -1,3 +1,5 @@
+import notificationsController from '../notifications';
+
 const createNewNotificationPopup = (data) => {
   const imgURL = `${process.env.REACT_APP_BASE_URL}/${data.userFrom.profilePic}`;
 
@@ -23,6 +25,7 @@ const createNewNotificationPopup = (data) => {
   body.append(imageContainer);
   body.append(content);
   body.addEventListener('click', () => {
+    markAsRead(data);
     window.location = getNotificationLink(data);
   });
 
@@ -84,6 +87,12 @@ const getNotificationLink = (notification) => {
   if (url) {
     return url;
   } else return '/notifications';
+};
+
+const markAsRead = (notification) => {
+  if (!notification.read) {
+    notificationsController.markAsRead(notification._id);
+  }
 };
 
 export default createNewNotificationPopup;

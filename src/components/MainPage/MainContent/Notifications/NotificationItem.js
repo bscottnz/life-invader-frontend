@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { NotificationsContext } from '../../NotificationsContext';
+
 import notificationsController from '../../../../notifications';
+import getNumNotifications from '../../../../utils/getNumNotifications';
 
 const NotificationItem = ({ notification }) => {
   const userFrom = notification.userFrom;
   const history = useHistory();
+
+  const { setNumNotifications } = useContext(NotificationsContext);
 
   const getGoodAdjective = () => {
     const adjectives = [
@@ -106,6 +111,7 @@ const NotificationItem = ({ notification }) => {
     if (!notification.read) {
       notificationsController.markAsRead(notification._id);
     }
+    getNumNotifications(setNumNotifications);
   };
 
   // special styling from un-opned notifications

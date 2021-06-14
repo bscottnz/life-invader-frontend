@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const notificationsController = {
-  markAsRead: function (id = null) {
+  markAsRead: function (id = null, cb = null) {
     const url =
       id !== null
         ? `${process.env.REACT_APP_BASE_URL}/api/notifications/${id}/read`
@@ -11,7 +11,13 @@ const notificationsController = {
       method: 'put',
       withCredentials: true,
       url: url,
-    }).catch((err) => console.log(err));
+    })
+      .then((res) => {
+        if (cb !== null) {
+          cb();
+        }
+      })
+      .catch((err) => console.log(err));
   },
 };
 
