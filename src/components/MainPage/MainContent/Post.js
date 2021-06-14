@@ -107,11 +107,10 @@ const Post = ({
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${postData._id}/dislike`,
     }).then((res) => {
-      // TODO
-      // check if we are liking the post. dont emit notif if we are unliking
-
-      // send follow notification
-      sockets.emitNotification(postData.author._id, currentUser._id);
+      // send dislike notification only on dislike. not un dislike
+      if (res.data.dislikes.includes(currentUser._id)) {
+        sockets.emitNotification(postData.author._id, currentUser._id);
+      }
 
       //rerender posts
       forceUpdate();
@@ -127,8 +126,12 @@ const Post = ({
       url: `${process.env.REACT_APP_BASE_URL}/api/posts/${postData._id}/share`,
     })
       .then((res) => {
-        // send follow notification
-        sockets.emitNotification(postData.author._id, currentUser._id);
+        if (res.data.option === '$addToSet') {
+          // send share notification on share only. not unshare. $addToSet is the mongoDB operator
+          // that is run when sharing a post
+          sockets.emitNotification(postData.author._id, currentUser._id);
+        }
+
         // rerender posts
         forceUpdate();
       })

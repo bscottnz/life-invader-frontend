@@ -613,7 +613,8 @@ input[type='file'] {
   background-color: rgb(33, 36, 40);
   border: 1px solid $color-background-light;
   border: none;
-  border-radius: 15px;
+  border-left: 4px solid $color-blue;
+  border-radius: 3px;
   transition: all 0.4s;
 
   opacity: 0;
