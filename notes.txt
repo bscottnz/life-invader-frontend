@@ -27,7 +27,7 @@ inbox updates with socket
 // todo
 
 
--- notifs dont update unless refresh
+
 -- add new notif when on notif page
 
 -- mobile nav notification badge

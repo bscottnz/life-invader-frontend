@@ -46,7 +46,7 @@ const NotificationItem = ({ notification }) => {
 
   const getNotificationText = (notification) => {
     if (!userFrom.firstName) {
-      return alert('userFrom no populated ');
+      return console.log('userFrom not populated ');
     }
 
     const userFromName = userFrom.fullName;

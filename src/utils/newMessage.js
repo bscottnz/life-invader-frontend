@@ -36,7 +36,7 @@ const createNewNotificationPopup = (data, currentUserId) => {
   body.append(chat);
 
   body.addEventListener('click', () => {
-    window.location = `messages/${data.chat._id}`;
+    window.location = `/messages/${data.chat._id}`;
   });
 
   document.body.append(body);
