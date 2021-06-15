@@ -46,21 +46,34 @@ const ChatPage = ({ currentUser }) => {
 
   useEffect(() => {
     //get chat meta data
+    // need to set initial load to true on id change, as this
+    // indicates switching between message pages
+    initialLoad.current = true;
     getChat();
     markAllMessagesAsRead();
-  }, []);
+  }, [id]);
 
   // socket join. make this only join on initial fetch?
   useEffect(() => {
     if (chatData) {
       sockets.socket.emit('join room', chatData._id);
 
-      sockets.socket.on('typing', () => {
+      sockets.socket.on('typing', (room) => {
         // turn on typing indicator
-        try {
-          document.querySelector('.typing-indicator').style.display = 'flex';
-        } catch {
-          // need this for if we change page while the typing indicator is active
+        // console.log('room:', room);
+        // console.log('id', id);
+
+        // here i am trying to figure out why the typing indicator will persist when messaging
+        // the same user from a different chat.
+        // eg in a chat with someone, then go to a new gourp chat that has the same person in it,
+        // messaging that group chat will still show the typing indictor to the user in the previous chat
+        // console.log(room === chatData._id);
+        if (room === chatData._id) {
+          try {
+            document.querySelector('.typing-indicator').style.display = 'flex';
+          } catch {
+            // need this for if we change page while the typing indicator is active
+          }
         }
       });
 

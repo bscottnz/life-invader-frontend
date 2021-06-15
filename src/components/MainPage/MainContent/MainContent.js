@@ -12,7 +12,6 @@ import NewMessage from './Messages/NewMessage';
 import ChatPage from './Messages/ChatPage';
 import NotificationsPage from './Notifications/NotificationsPage';
 import { ModalContext } from '../../Modals/ModalContext';
-import { set } from 'nprogress';
 
 const MainContent = ({ currentUser, setCurrentUser }) => {
   const location = useLocation();
