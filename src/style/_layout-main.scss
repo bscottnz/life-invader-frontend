@@ -54,6 +54,7 @@ $right-sidebar-width-sml: 250px;
   margin: 0 auto;
 
   width: fit-content;
+  max-width: 100%;
 
   // reduce size of first column
   @media (max-width: 1430px) {
@@ -180,6 +181,12 @@ $right-sidebar-width-sml: 250px;
   background-color: $color-background-medium;
   border-radius: 15px;
   padding: $padding-sml;
+
+  max-width: 100%;
+
+  @media (max-width: 450px) {
+    padding: 10px;
+  }
 
   // make min height take up 100 vh - 2 * page padding,
   //  then - nav height too in mobile view

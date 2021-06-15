@@ -28,9 +28,9 @@ inbox updates with socket
 
 
 
+-- reply modal collapses on close
 
 
--- mobile nav notification badge
 
 -- generaly mobile freindlyness
 -- make message width on chat page adjust for mobile. (serach css for TODO)

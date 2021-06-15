@@ -21,6 +21,7 @@ html {
 
 body {
   min-height: 100vh;
+  max-width: 100%;
 
   background-color: $color-background;
 
@@ -34,4 +35,8 @@ li {
 
 a {
   word-break: break-word;
+}
+
+span {
+  display: inline-block;
 }

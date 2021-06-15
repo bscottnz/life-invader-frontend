@@ -119,6 +119,11 @@
   width: 50px;
   height: 50px;
 
+  @media (max-width: 450px) {
+    width: 35px;
+    height: 35px;
+  }
+
   & img {
     width: 100%;
     border-radius: 50%;
@@ -140,6 +145,10 @@
     color: inherit;
     min-height: 60px;
     margin-bottom: 20px;
+
+    @media (max-width: 450px) {
+      font-size: 16px;
+    }
 
     &:focus {
       outline: none;
@@ -256,6 +265,13 @@ textarea::placeholder {
   }
 }
 
+.post-header,
+.post-body {
+  @media (max-width: 450px) {
+    font-size: 14px !important;
+  }
+}
+
 .date {
   color: $color-text-grey;
   margin-bottom: 15px;
@@ -324,6 +340,10 @@ textarea::placeholder {
   font-size: 13px;
   color: $color-text-grey;
 
+  @media (max-width: 450px) {
+    margin-left: 54px;
+  }
+
   & a {
     text-decoration: none;
     color: inherit;
@@ -378,6 +398,10 @@ textarea::placeholder {
 
   @media (max-width: 1430px) {
     transform: translateY(-50%);
+  }
+
+  @media (max-width: 450px) {
+    padding: 10px !important;
   }
 }
 

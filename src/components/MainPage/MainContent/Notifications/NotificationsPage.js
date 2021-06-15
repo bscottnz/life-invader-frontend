@@ -91,7 +91,7 @@ const NotificationsPage = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '100%' }}>
         <h1 className="main-content-heading">Notifications</h1>
         <div className="notifications-heading-btns-container">
           <MdPlaylistAddCheck

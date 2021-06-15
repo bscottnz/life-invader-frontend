@@ -147,6 +147,24 @@ ul {
   flex-shrink: 0;
   border-top: 1px solid $color-background-light;
   cursor: pointer;
+  max-width: 100%;
+
+  @media (max-width: 565px) {
+    & span {
+      max-width: calc(100vw - 140px);
+    }
+  }
+
+  @media (max-width: 450px) {
+    font-size: 14px;
+    // overflow-x: hidden;
+    padding-left: 0;
+    padding-right: 0;
+
+    & span {
+      max-width: calc(100vw - 90px);
+    }
+  }
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.05);
