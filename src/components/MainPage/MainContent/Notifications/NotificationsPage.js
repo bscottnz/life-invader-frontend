@@ -53,16 +53,16 @@ const NotificationsPage = () => {
   };
 
   const markAllAsRead = () => {
-    const unMarkActive = () => {
-      const notifications = document.querySelectorAll('.notification.active');
-      notifications.forEach((notif) => {
-        // notif.classList.remove('active');
-        // need to do inline stlying or it doesnt persist for some reason.
-        notif.style.borderLeft = 'none';
-      });
-    };
+    // const unMarkActive = () => {
+    //   const notifications = document.querySelectorAll('.notification.active');
+    //   notifications.forEach((notif) => {
+    //     // notif.classList.remove('active');
+    //     // need to do inline stlying or it doesnt persist for some reason.
+    //     notif.style.borderLeft = 'none';
+    //   });
+    // };
 
-    notificationsController.markAsRead(null, unMarkActive);
+    notificationsController.markAsRead(null, getNotifications);
 
     getNumNotifications(setNumNotifications);
     setTimeout(() => {
