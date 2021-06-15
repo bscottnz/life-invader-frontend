@@ -58,7 +58,7 @@ const TopNav = ({ toggleDropdown }) => {
             </span>
           </div>
         </div>
-        <div className="top-nav-group" onClick={goToMessages}>
+        <div className="top-nav-group top-nav-group-mail" onClick={goToMessages}>
           <div className="badge-wrapper">
             <FiMail style={iconStyles} />
             <span id="messages-badge" className={numMessages > 0 ? 'active' : ''}>

@@ -11,6 +11,25 @@
   padding-right: 20px;
 
   margin: 0 auto;
+
+  @media (max-width: 450px) {
+    & svg {
+      width: 0.9em !important;
+      height: 0.9em !important;
+    }
+
+    & .top-nav-group-mail {
+      & svg {
+        stroke-width: 1.7;
+      }
+    }
+
+    // & .top-nav-group-shop {
+    //   & svg {
+    //     stroke-width: -1;
+    //   }
+    // }
+  }
 }
 
 .navbar {
@@ -31,6 +50,8 @@
   &-dropdown {
     transition: all 0.2s;
     z-index: 33;
+    border-top: 1px solid $color-background-light;
+    transform: translateY(-1px);
   }
 }
 

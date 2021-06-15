@@ -40,7 +40,7 @@ const TopNav = ({ logOut, currentUser }) => {
         <div className="top-nav-group" onClick={goToSearchPage}>
           <BiSearch style={iconStyles} />
         </div>
-        <div className="top-nav-group" onClick={goToStore}>
+        <div className="top-nav-group top-nav-group-shop" onClick={goToStore}>
           <BiShoppingBag style={iconStyles} />
         </div>
         <div className="top-nav-group" onClick={logOut}>
