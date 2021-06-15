@@ -41,9 +41,6 @@ function App() {
   const { setCurrentNotification, setCurrentChat, setNotificationIsOpen } =
     useContext(NotificationsPopupContext);
 
-  // const [numMessages, setNumMessages] = useState(0);
-  // const [numNotifications, setNumNotifications] = useState(0);
-
   // mobile nav
   const toggleDropdown = (close = false) => {
     const dropDownMenu = document.querySelector('.navbar-dropdown');

@@ -5,18 +5,14 @@ import { NotificationsPopupContext } from '../../NotificationsPopupContext';
 
 const ChatNotification = ({ notification }) => {
   const history = useHistory();
-  const isPopup = true;
-  const popupClass = isPopup ? 'notification-item-popup' : ``;
 
   const { setNotificationIsOpen } = useContext(NotificationsPopupContext);
 
   useEffect(() => {
-    if (isPopup) {
-      const popup = document.querySelector('.notification-item-popup');
+    const popup = document.querySelector('.notification-item-popup');
 
-      if (popup) {
-        popup.classList.add('notification-item-popup-fade');
-      }
+    if (popup) {
+      popup.classList.add('notification-item-popup-fade');
     }
   }, []);
 
@@ -27,7 +23,7 @@ const ChatNotification = ({ notification }) => {
 
   let displayLatestMessage = `${notification.sender.firstName} ${notification.sender.lastName}: ${notification.content}`;
   return (
-    <div className={`chat-list-item notification ${popupClass}`} onClick={goToChat}>
+    <div className={'chat-list-item notification notification-item-popup'} onClick={goToChat}>
       <div className="results-image-container">
         <img src={`${process.env.REACT_APP_BASE_URL}/${notification.sender.profilePic}`} alt="" />
       </div>

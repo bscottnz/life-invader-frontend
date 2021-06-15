@@ -4,7 +4,7 @@ import NotificationItem from './MainPage/MainContent/Notifications/NotificationI
 import ChatNotification from './MainPage/MainContent/Notifications/ChatNotification';
 import { NotificationsPopupContext } from './MainPage/NotificationsPopupContext';
 
-const NotificationPopup = ({ currentUser, isChat }) => {
+const NotificationPopup = () => {
   const { currentNotification, currentChat, notificationIsOpen, setNotificationIsOpen } =
     useContext(NotificationsPopupContext);
 
@@ -52,14 +52,10 @@ const NotificationPopup = ({ currentUser, isChat }) => {
   }
 
   if (currentChat && notificationType === 'message') {
-    return <ChatNotification notification={currentChat} currentUser={currentUser} isPopup={true} />;
+    return <ChatNotification notification={currentChat} />;
   }
 
   return null;
-};
-
-NotificationPopup.defaultProps = {
-  isChat: null, // diferent rendering for chat notification
 };
 
 export default NotificationPopup;
