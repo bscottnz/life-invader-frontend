@@ -113,7 +113,12 @@ const NotificationItem = ({ notification, isPopup }) => {
     if (isPopup) {
       setNotificationIsOpen(false);
     }
-    history.push(getNotificationLink(notification));
+    // sometimes it wont mark as read when clicking on popup but this seems
+    // to help
+    setTimeout(() => {
+      markAsRead();
+      history.push(getNotificationLink(notification));
+    }, 0);
   };
 
   const markAsRead = () => {

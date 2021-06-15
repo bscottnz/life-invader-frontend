@@ -38,7 +38,8 @@ function App() {
   const { numMessages, setNumMessages, numNotifications, setNumNotifications } =
     useContext(NotificationsContext);
 
-  const { setCurrentNotification, setNotificationIsOpen } = useContext(NotificationsPopupContext);
+  const { setCurrentNotification, setCurrentChat, setNotificationIsOpen } =
+    useContext(NotificationsPopupContext);
 
   // const [numMessages, setNumMessages] = useState(0);
   // const [numNotifications, setNumNotifications] = useState(0);
@@ -112,10 +113,21 @@ function App() {
         const messageSocketResponse = sockets.messageReceived(newMessage);
         if (messageSocketResponse && !messageSocketResponse.onChatPage) {
           // handle notification
-          console.log(newMessage);
 
-          createNewMessagePopup(newMessage, currentUser._id);
-          getNumMessages(setNumMessages);
+          axios({
+            method: 'get',
+            withCredentials: true,
+            url: `${process.env.REACT_APP_BASE_URL}/api/notifications/latest`,
+          }).then((res) => {
+            // this is old way of creating popup
+            // createNewNotificationPopup(res.data);
+            // this is react way
+            setNotificationIsOpen(true);
+            setCurrentNotification(res.data);
+            setCurrentChat(newMessage);
+
+            getNumMessages(setNumMessages);
+          });
         }
       });
 
@@ -174,7 +186,7 @@ function App() {
                 <LeftNav logOut={logOut} currentUser={currentUser} />
                 <MainContent currentUser={currentUser} setCurrentUser={setCurrentUser} />
                 <RightSidebar currentUser={currentUser} setCurrentUser={setCurrentUser} />
-                <NotificationPopup />
+                <NotificationPopup currentUser={currentUser} />
               </main>
             </div>
             {/* I may want to add this mobile add-post button back at some point. */}

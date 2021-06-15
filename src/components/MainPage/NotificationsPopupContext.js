@@ -2,10 +2,9 @@ import react, { useState, createContext } from 'react';
 
 export const NotificationsPopupContext = createContext();
 
-// the number of unread messages and notifications
-
 export const NotificationsPopupProvider = (props) => {
   const [currentNotification, setCurrentNotification] = useState(null);
+  const [currentChat, setCurrentChat] = useState(null);
   const [notificationIsOpen, setNotificationIsOpen] = useState(false);
 
   return (
@@ -13,6 +12,8 @@ export const NotificationsPopupProvider = (props) => {
       value={{
         currentNotification,
         setCurrentNotification,
+        currentChat,
+        setCurrentChat,
         notificationIsOpen,
         setNotificationIsOpen,
       }}
