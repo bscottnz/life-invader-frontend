@@ -371,6 +371,10 @@ const ChatPage = ({ currentUser }) => {
       if (initialLoad.current) {
         scrollToBottom();
         initialLoad.current = false;
+        // there can be a quick flash of the top of the chats div before it is scrolled to botom.
+        // default the div to hidden, then change to visible after the scroll.
+        // no more flashing the top of chats div on load
+        document.querySelector('.chat-messages').style.visibility = 'visible';
       } else {
         scrollToBottom(true);
       }
