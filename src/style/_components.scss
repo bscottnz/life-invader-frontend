@@ -710,3 +710,11 @@ input[type='file'] {
     opacity: 1;
   }
 }
+
+.user-preview {
+  & .follow-btn {
+    @media (max-width: 450px) {
+      margin-left: 0;
+    }
+  }
+}
