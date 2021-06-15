@@ -217,6 +217,10 @@ $right-sidebar-width-sml: 250px;
   @media (max-width: 500px) {
     min-height: calc(100vh - (2 * 10px) - 60px);
   }
+
+  @media (max-width: 450px) {
+    min-height: calc(100vh - (2 * 10px) - 50px);
+  }
 }
 
 // fixed post position button that only appears on mobile

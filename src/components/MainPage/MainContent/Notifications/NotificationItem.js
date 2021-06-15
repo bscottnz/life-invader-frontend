@@ -150,8 +150,8 @@ const NotificationItem = ({ notification, isPopup }) => {
       <div className="results-image-container">
         <img src={process.env.REACT_APP_BASE_URL + userFrom.profilePic} alt="pic" />
       </div>
-      <div className="chat-list-item-details ellipsis">
-        <span className="ellipsis">{getNotificationText(notification)}</span>
+      <div className="chat-list-item-details">
+        <span style={{ wordBreak: 'break-word' }}>{getNotificationText(notification)}</span>
       </div>
     </div>
   );

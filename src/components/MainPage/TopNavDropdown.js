@@ -11,7 +11,7 @@ import { FiLogOut } from 'react-icons/fi';
 import { BiShoppingBag } from 'react-icons/bi';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 
-const TopNav = ({ logOut, currentUser, toggleDropdown }) => {
+const TopNav = ({ logOut, currentUser }) => {
   const iconStyles = {
     fontSize: '28px',
     cursor: 'pointer',
@@ -21,17 +21,14 @@ const TopNav = ({ logOut, currentUser, toggleDropdown }) => {
 
   const goToProfilePage = () => {
     history.push(`/profile/${currentUser.username}`);
-    // toggleDropdown();
   };
 
   const goToSearchPage = () => {
     history.push('/search');
-    // toggleDropdown();
   };
 
   const goToStore = () => {
     history.push('/store');
-    // toggleDropdown();
   };
 
   return (
