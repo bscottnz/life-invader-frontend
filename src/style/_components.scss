@@ -455,6 +455,10 @@ textarea::placeholder {
   & .user-details-container {
     flex: 1;
     padding: 0 20px;
+
+    @media (max-width: 450px) {
+      font-size: 14px;
+    }
   }
 }
 
@@ -473,6 +477,10 @@ textarea::placeholder {
   cursor: pointer;
   font-size: 16px;
   font-weight: 700;
+
+  @media (max-width: 450px) {
+    font-size: 14px;
+  }
 
   &:hover {
     background-color: $color-blue;

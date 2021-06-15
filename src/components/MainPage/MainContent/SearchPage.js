@@ -157,7 +157,7 @@ const SearchPage = ({ currentUser, setCurrentUser }) => {
   const noResultsStyle = { marginTop: '20px', fontSize: '16px' };
 
   return (
-    <div>
+    <div style={{ maxWidth: '100%' }}>
       <ReplyModal
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}

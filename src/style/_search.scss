@@ -7,6 +7,7 @@
   padding: 0 15px;
   border-radius: 30px;
   margin-bottom: 10px;
+  max-width: 100%;
 
   border: 1px solid $color-background-light;
 
@@ -23,6 +24,12 @@
     color: inherit;
     caret-color: $color-text-grey;
     font-weight: 600;
+
+    max-width: 100%;
+
+    @media (max-width: 340px) {
+      max-width: 200px;
+    }
 
     &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */

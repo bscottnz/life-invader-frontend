@@ -93,6 +93,10 @@
       font-size: 16px;
       font-weight: 700;
 
+      @media (max-width: 450px) {
+        font-size: 14px;
+      }
+
       &:hover {
         background-color: $color-blue;
         color: $color-background-medium;
@@ -116,6 +120,16 @@
       margin-top: 5px;
       margin-bottom: 5px;
     }
+  }
+}
+
+.user-preview {
+  & a {
+    margin-right: 10px !important;
+  }
+
+  & span {
+    margin-left: 0 !important;
   }
 }
 
