@@ -401,7 +401,11 @@ ul {
       flex-direction: column;
       //  TODO
       // need to change this max width for mobile view
-      max-width: 55%;
+      max-width: 60%;
+
+      @media (max-width: 550px) {
+        max-width: 70%;
+      }
     }
 
     & .message-body {
@@ -411,6 +415,7 @@ ul {
       border-radius: 18px;
       font-size: 14px;
       white-space: pre-wrap;
+      word-break: break-all;
     }
   }
 }

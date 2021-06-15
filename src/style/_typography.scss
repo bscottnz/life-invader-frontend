@@ -66,6 +66,11 @@
 .main-content-heading {
   font-size: 20px;
   margin-bottom: 20px;
+
+  @media (max-width: 450px) {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
 }
 
 .number-dislikes {

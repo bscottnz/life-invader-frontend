@@ -690,6 +690,10 @@ input[type='file'] {
   opacity: 0;
   transition: all 0.4s;
 
+  @media (max-width: 550px) {
+    display: none;
+  }
+
   &:hover {
     background-color: rgb(33, 36, 40);
   }
