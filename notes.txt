@@ -22,19 +22,29 @@ inbox updates with socket
 
 -- refactor db queries to use async.parallel (promise.all ?)
 -- upside down pagination on chats
+-- proper pagination/ infintie scroll
 
 
 // todo
 
+-- make like buttons smaller on mobile
+-- make mobile nav icons smaller
 
 
--- reply modal collapses on close
+-- reply modal collapses on close (fix this)
 -- guest account
+
+- liking own stuff gives notification badge on refresh
+
+-- mobile nav on bottom + maybe redo the drop down thing to look better ?
+  ( make it all one nav but on expand just make the hight more ?)
 
 
 
 -- generaly mobile freindlyness
--- make message width on chat page adjust for mobile. (serach css for TODO)
+
+
+
 
 
 

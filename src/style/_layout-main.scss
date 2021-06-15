@@ -22,7 +22,7 @@ $right-sidebar-width-sml: 250px;
 
   background-color: $color-background-medium;
   position: fixed;
-  top: 0;
+  bottom: 0;
   display: none !important;
 
   // show nav at top
@@ -94,7 +94,7 @@ $right-sidebar-width-sml: 250px;
 
   // make room for new top nav
   @media (max-width: 780px) {
-    margin-top: $nav-height;
+    margin-bottom: $nav-height;
   }
 
   // make width 100% of whatever current screen width
@@ -104,7 +104,7 @@ $right-sidebar-width-sml: 250px;
   }
 
   @media (max-width: 450px) {
-    margin-top: $nav-height-sml;
+    margin-bottom: $nav-height-sml;
   }
 }
 
