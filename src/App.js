@@ -38,7 +38,7 @@ function App() {
   const { numMessages, setNumMessages, numNotifications, setNumNotifications } =
     useContext(NotificationsContext);
 
-  const { setCurrentNotification } = useContext(NotificationsPopupContext);
+  const { setCurrentNotification, setNotificationIsOpen } = useContext(NotificationsPopupContext);
 
   // const [numMessages, setNumMessages] = useState(0);
   // const [numNotifications, setNumNotifications] = useState(0);
@@ -130,6 +130,7 @@ function App() {
           // this is old way of creating popup
           // createNewNotificationPopup(res.data);
           // this is react way
+          setNotificationIsOpen(true);
           setCurrentNotification(res.data);
 
           getNumNotifications(setNumNotifications);

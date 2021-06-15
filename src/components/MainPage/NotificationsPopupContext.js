@@ -6,12 +6,15 @@ export const NotificationsPopupContext = createContext();
 
 export const NotificationsPopupProvider = (props) => {
   const [currentNotification, setCurrentNotification] = useState(null);
+  const [notificationIsOpen, setNotificationIsOpen] = useState(false);
 
   return (
     <NotificationsPopupContext.Provider
       value={{
         currentNotification,
         setCurrentNotification,
+        notificationIsOpen,
+        setNotificationIsOpen,
       }}
     >
       {props.children}

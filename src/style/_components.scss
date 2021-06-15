@@ -657,8 +657,18 @@ input[type='file'] {
   border-top: none;
   padding-right: 20px;
   border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+
+  opacity: 0;
+  transition: all 0.4s;
 
   &:hover {
     background-color: rgb(33, 36, 40);
+  }
+
+  &-fade {
+    opacity: 1;
   }
 }

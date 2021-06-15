@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { NotificationsContext } from '../../NotificationsContext';
+import { NotificationsPopupContext } from '../../NotificationsPopupContext';
 
 import notificationsController from '../../../../notifications';
 import getNumNotifications from '../../../../utils/getNumNotifications';
@@ -11,6 +12,7 @@ const NotificationItem = ({ notification, isPopup }) => {
   const history = useHistory();
 
   const { setNumNotifications } = useContext(NotificationsContext);
+  const { setNotificationIsOpen } = useContext(NotificationsPopupContext);
 
   const getGoodAdjective = () => {
     const adjectives = [
@@ -108,6 +110,9 @@ const NotificationItem = ({ notification, isPopup }) => {
 
   const goToNotificationSubject = () => {
     markAsRead();
+    if (isPopup) {
+      setNotificationIsOpen(false);
+    }
     history.push(getNotificationLink(notification));
   };
 
@@ -121,6 +126,16 @@ const NotificationItem = ({ notification, isPopup }) => {
   // special styling from un-opned notifications
   const notificationClass = notification.read ? '' : 'active';
   const popupClass = isPopup ? 'notification-item-popup' : ``;
+
+  useEffect(() => {
+    if (isPopup) {
+      const popup = document.querySelector('.notification-item-popup');
+
+      if (popup) {
+        popup.classList.add('notification-item-popup-fade');
+      }
+    }
+  }, []);
 
   return (
     <div
