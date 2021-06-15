@@ -29,6 +29,13 @@
   padding: 20px;
   display: flex;
 
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    padding-bottom: 0;
+  }
+
   &-description {
     flex: 1;
     display: flex;
@@ -36,6 +43,10 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
+
+    @media (max-width: 600px) {
+      padding: 20px 5px;
+    }
   }
 
   &-price {
@@ -51,10 +62,18 @@
 
 .btn-buy {
   width: 235px;
+
+  @media (max-width: 600px) {
+    margin-bottom: 5px !important;
+  }
 }
 
 .shop-items-container {
   padding: 20px 0;
+
+  @media (max-width: 600px) {
+    padding-bottom: 0;
+  }
 }
 
 .shop-img-container {
@@ -68,11 +87,18 @@
   & h2 {
     font-size: 18px;
     margin-bottom: 10px;
+    @media (max-width: 450px) {
+      font-size: 16px;
+    }
   }
 
   & p {
     font-size: 16px;
     margin-bottom: 10px;
+
+    @media (max-width: 450px) {
+      font-size: 14px;
+    }
   }
 
   & p.disclaimer {
