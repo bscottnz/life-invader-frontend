@@ -21,17 +21,17 @@ const TopNav = ({ logOut, currentUser, toggleDropdown }) => {
 
   const goToProfilePage = () => {
     history.push(`/profile/${currentUser.username}`);
-    toggleDropdown();
+    // toggleDropdown();
   };
 
   const goToSearchPage = () => {
     history.push('/search');
-    toggleDropdown();
+    // toggleDropdown();
   };
 
   const goToStore = () => {
     history.push('/store');
-    toggleDropdown();
+    // toggleDropdown();
   };
 
   return (

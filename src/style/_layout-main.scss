@@ -4,6 +4,7 @@ $padding-med: 35px;
 $padding-sml: 20px;
 
 $nav-height: 60px;
+$nav-height-sml: 50px;
 
 $left-sidebar-width: 275px;
 $left-sidebar-width-small: 100px;
@@ -18,6 +19,7 @@ $right-sidebar-width-sml: 250px;
 .navbar {
   width: 100%;
   height: $nav-height;
+
   background-color: $color-background-medium;
   position: fixed;
   top: 0;
@@ -26,6 +28,10 @@ $right-sidebar-width-sml: 250px;
   // show nav at top
   @media (max-width: 780px) {
     display: flex !important;
+  }
+
+  @media (max-width: 450px) {
+    height: $nav-height-sml;
   }
 }
 
@@ -95,6 +101,10 @@ $right-sidebar-width-sml: 250px;
   @media (max-width: 660px) {
     width: 100%;
     grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 450px) {
+    margin-top: $nav-height-sml;
   }
 }
 

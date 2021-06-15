@@ -13,7 +13,7 @@ import ChatPage from './Messages/ChatPage';
 import NotificationsPage from './Notifications/NotificationsPage';
 import { ModalContext } from '../../Modals/ModalContext';
 
-const MainContent = ({ currentUser, setCurrentUser }) => {
+const MainContent = ({ currentUser, setCurrentUser, toggleDropdown }) => {
   const location = useLocation();
 
   const {
@@ -32,6 +32,9 @@ const MainContent = ({ currentUser, setCurrentUser }) => {
   // scrolls back to the top if you click on sidebar link for the page you are already on.
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // close drop down menu if it is active
+    toggleDropdown(true);
   }, [location]);
 
   // close all modals when changing pages. this stops the app crashing when you have an open modal,

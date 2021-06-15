@@ -257,6 +257,10 @@ ul {
     flex-shrink: 0;
     align-items: center;
 
+    @media (max-width: 450px) {
+      padding-bottom: 10px;
+    }
+
     & textarea {
       flex: 1;
       resize: none;

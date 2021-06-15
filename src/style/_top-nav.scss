@@ -36,4 +36,8 @@
 
 .dropdown-active {
   transform: translateY(60px);
+
+  @media (max-width: 450px) {
+    transform: translateY(50px);
+  }
 }

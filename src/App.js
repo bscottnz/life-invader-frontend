@@ -45,9 +45,13 @@ function App() {
   const toggleDropdown = (close = false) => {
     const dropDownMenu = document.querySelector('.navbar-dropdown');
     if (close) {
-      dropDownMenu.classList.remove('dropdown-active');
+      if (dropDownMenu) {
+        dropDownMenu.classList.remove('dropdown-active');
+      }
     } else {
-      dropDownMenu.classList.toggle('dropdown-active');
+      if (dropDownMenu) {
+        dropDownMenu.classList.toggle('dropdown-active');
+      }
     }
   };
 
@@ -181,7 +185,11 @@ function App() {
             <div className="main-wrapper">
               <main className="layout">
                 <LeftNav logOut={logOut} currentUser={currentUser} />
-                <MainContent currentUser={currentUser} setCurrentUser={setCurrentUser} />
+                <MainContent
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                  toggleDropdown={toggleDropdown}
+                />
                 <RightSidebar currentUser={currentUser} setCurrentUser={setCurrentUser} />
                 <NotificationPopup currentUser={currentUser} />
               </main>

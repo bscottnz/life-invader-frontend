@@ -94,6 +94,13 @@
   visibility: hidden;
   line-height: 1;
 
+  @media (max-width: 450px) {
+    height: 19px;
+    width: 19px;
+    font-size: 11px;
+    top: -5px;
+  }
+
   &.active {
     visibility: visible;
   }
