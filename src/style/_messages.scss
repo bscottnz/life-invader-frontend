@@ -61,7 +61,8 @@ ul {
   border: none;
   flex: 1;
 
-  min-width: 310px;
+  // min-width: 310px;
+  width: 100%;
   font-size: inherit;
   background-color: transparent;
   color: $color-text;
