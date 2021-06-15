@@ -23,7 +23,10 @@ const ChatNotification = ({ notification }) => {
 
   let displayLatestMessage = `${notification.sender.firstName} ${notification.sender.lastName}: ${notification.content}`;
   return (
-    <div className={'chat-list-item notification notification-item-popup'} onClick={goToChat}>
+    <div
+      className={'chat-list-item notification notification-item-popup active'}
+      onClick={goToChat}
+    >
       <div className="results-image-container">
         <img src={`${process.env.REACT_APP_BASE_URL}/${notification.sender.profilePic}`} alt="" />
       </div>
