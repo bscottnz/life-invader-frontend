@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { HiOutlineEmojiSad } from 'react-icons/hi';
 import DeletePostModal from '../../Modals/DeletePostModal';
 import ReplyModal from '../../Modals/ReplyModal';
+import LoadingSpinner from '../../LoadingSpinner';
 
 import Post from './Post';
 
@@ -32,8 +33,14 @@ const ViewPost = ({ currentUser, setCurrentUser }) => {
   // keep track of which comment is being deleted
   const [deleteComment, setDeleteComment] = useState(null);
 
+  // display loading spinner while fetching posts
+  const [isPostsLoading, setIsPostsLoading] = useState(false);
+  // dont show loading spinner when updating posts, just on initail page load
+  const isInitialPostFetch = useRef(true);
+
   // get specific post
   const getPost = () => {
+    setIsPostsLoading(true);
     axios({
       method: 'get',
       withCredentials: true,
@@ -64,6 +71,12 @@ const ViewPost = ({ currentUser, setCurrentUser }) => {
 
         // turn off the error
         setShowError(false);
+
+        if (isInitialPostFetch.current) {
+          isInitialPostFetch.current = false;
+        }
+
+        setIsPostsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -73,6 +86,7 @@ const ViewPost = ({ currentUser, setCurrentUser }) => {
         setPost([]);
         setReplyingTo(null);
         setPostReplies([]);
+        setIsPostsLoading(false);
 
         setShowError(true);
         // user has been signed out. redirect to home page
@@ -202,6 +216,7 @@ const ViewPost = ({ currentUser, setCurrentUser }) => {
       />
       <DeletePostModal deleteComment={deleteComment} deletePost={deletePost} />
       <h1 className="main-content-heading">View Post</h1>
+      {isPostsLoading && isInitialPostFetch.current && <LoadingSpinner />}
 
       <div className="posts-container">
         {replyToItem}

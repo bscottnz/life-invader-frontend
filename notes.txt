@@ -17,13 +17,6 @@ inbox updates with socket
 notifications
 
 
-its slow to make requests when hosted so need to
-
-
-
-
-- add loading spinner on followers page under tabs
-- add loading spinner on view post page
 
 
 

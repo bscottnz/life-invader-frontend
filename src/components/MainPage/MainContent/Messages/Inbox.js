@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { VscLoading } from 'react-icons/vsc';
-
 import ChatListItem from './ChatListItem';
 
 import axios from 'axios';
@@ -10,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import sockets from '../../../../sockets';
 
 import { BiMessageAdd } from 'react-icons/bi';
+import LoadingSpinner from '../../../LoadingSpinner';
 
 const Inbox = ({ currentUser }) => {
   const history = useHistory();
@@ -73,20 +72,7 @@ const Inbox = ({ currentUser }) => {
           onClick={goToNewMessagePage}
         />
       </div>
-      {isPostsLoading && isInitialPostFetch.current && (
-        <div
-          style={{
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderTop: '1px solid #3a3a3a',
-            paddingTop: '40px',
-          }}
-        >
-          <VscLoading className="spinner" style={{ fontSize: '40px', color: '#1da1f2' }} />
-        </div>
-      )}
+      {isPostsLoading && isInitialPostFetch.current && <LoadingSpinner />}
       {chats.length > 0 && chatList}
     </div>
   );

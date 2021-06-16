@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import UserPreview from './UserPreview';
@@ -6,6 +6,7 @@ import { FollowingContext } from '../../MainPage/FollowingContext';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import LoadingSpinner from '../../LoadingSpinner';
 
 const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
   const profileName = useParams().username;
@@ -27,6 +28,11 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
   // to this intermediate user variable.
   const [userData, setUserData] = useState([]);
 
+  // display loading spinner while fetching posts
+  const [isPostsLoading, setIsPostsLoading] = useState(false);
+  // dont show loading spinner when updating posts, just on initail page load
+  const isInitialPostFetch = useRef(true);
+
   const setActiveTabFollowing = () => {
     setActiveTab('Following');
   };
@@ -36,12 +42,14 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
   };
 
   const getProfileData = () => {
+    setIsPostsLoading(true);
     axios({
       method: 'get',
       withCredentials: true,
       url: `${process.env.REACT_APP_BASE_URL}/api/users/${profileName}/followers`,
     })
       .then((res) => {
+        setIsPostsLoading(false);
         // res.data is the entire profile user data.
         // sort users alphabeticaly case insensitive
         setUsersFollowers(
@@ -61,8 +69,14 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
           )
         );
         setUserData(res.data);
+
+        setIsPostsLoading(false);
+        if (isInitialPostFetch.current) {
+          isInitialPostFetch.current = false;
+        }
       })
       .catch((err) => {
+        setIsPostsLoading(false);
         console.log(err);
       });
   };
@@ -156,6 +170,7 @@ const FollowerPage = ({ currentUser, setCurrentUser, selectedTab }) => {
           Stalkers
         </div>
       </div>
+      {isPostsLoading && isInitialPostFetch.current && <LoadingSpinner />}
       {usersFollowers.length > 0 && activeTab === 'Followers' && followersList}
       {usersFollowing.length > 0 && activeTab === 'Following' && followingList}
     </div>

@@ -3,7 +3,6 @@ import { useState, useEffect, useContext, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { VscLoading } from 'react-icons/vsc';
 
 import CreatePostForm from './CreatePostForm';
 import Post from './Post';
@@ -16,6 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 import deletePostRequest from '../../../utils/deletePostRequest';
 import logoIcon from '../../../images/logo-large.png';
 import { set } from 'nprogress';
+import LoadingSpinner from '../../LoadingSpinner';
 
 Modal.setAppElement('#root');
 
@@ -198,20 +198,7 @@ const Home = ({ currentUser, setCurrentUser }) => {
         setCurrentUser={setCurrentUser}
         textPlaceholder={`Hey ${currentUser.firstName}, what's going on?`}
       />
-      {isPostsLoading && isInitialPostFetch.current && (
-        <div
-          style={{
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderTop: '1px solid #3a3a3a',
-            paddingTop: '40px',
-          }}
-        >
-          <VscLoading className="spinner" style={{ fontSize: '40px', color: '#1da1f2' }} />
-        </div>
-      )}
+      {isPostsLoading && isInitialPostFetch.current && <LoadingSpinner />}
 
       <div className="posts-container">
         {/* {postItems} */}

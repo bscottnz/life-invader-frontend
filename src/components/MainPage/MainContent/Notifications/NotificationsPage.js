@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 
 import { MdPlaylistAddCheck } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri';
-import { VscLoading } from 'react-icons/vsc';
 
 import NotificationItem from './NotificationItem';
 
@@ -15,6 +14,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 import sockets from '../../../../sockets';
+import LoadingSpinner from '../../../LoadingSpinner';
 
 const NotificationsPage = () => {
   const [notificationsData, setNotificationsData] = useState([]);
@@ -119,20 +119,7 @@ const NotificationsPage = () => {
           />
         </div>
       </div>
-      {isPostsLoading && isInitialPostFetch.current && (
-        <div
-          style={{
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderTop: '1px solid #3a3a3a',
-            paddingTop: '40px',
-          }}
-        >
-          <VscLoading className="spinner" style={{ fontSize: '40px', color: '#1da1f2' }} />
-        </div>
-      )}
+      {isPostsLoading && isInitialPostFetch.current && <LoadingSpinner />}
       {notificationsData.length > 0 && notificationsList}
       {noNotifications && (
         <div>

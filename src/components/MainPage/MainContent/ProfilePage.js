@@ -13,7 +13,6 @@ import ProfilePictureModal from '../../Modals/ProfilePictureModal';
 import CoverPhotoModal from '../../Modals/CoverPhotoModal';
 import EditDescriptionModal from '../../Modals/EditDescriptionModal';
 import { ModalContext } from '../../Modals/ModalContext';
-import { VscLoading } from 'react-icons/vsc';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -24,6 +23,7 @@ import { FaCameraRetro } from 'react-icons/fa';
 
 import deletePostRequest from '../../../utils/deletePostRequest';
 import sockets from '../../../sockets';
+import LoadingSpinner from '../../LoadingSpinner';
 
 const ProfilePage = ({ currentUser, setCurrentUser }) => {
   const { setProfilePicModalIsOpen, setCoverPhotoModalIsOpen } = useContext(ModalContext);
@@ -399,20 +399,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
               Replies
             </div>
           </div>
-          {isPostsLoading && isInitialPostFetch.current && (
-            <div
-              style={{
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderTop: '1px solid #3a3a3a',
-                paddingTop: '40px',
-              }}
-            >
-              <VscLoading className="spinner" style={{ fontSize: '40px', color: '#1da1f2' }} />
-            </div>
-          )}
+          {isPostsLoading && isInitialPostFetch.current && <LoadingSpinner />}
           {pinnedPost.length > 0 && activeTab === 'Posts' && (
             <div className="posts-container" style={{ borderBottom: '6px solid #3a3a3a' }}>
               {activeTab == 'Posts' ? pinnedPostItem : ''}
