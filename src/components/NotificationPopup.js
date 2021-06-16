@@ -46,7 +46,10 @@ const NotificationPopup = () => {
 
   if (
     currentNotification &&
-    (notificationType === 'like' || notificationType === 'share' || notificationType === 'reply')
+    (notificationType === 'like' ||
+      notificationType === 'share' ||
+      notificationType === 'reply' ||
+      notificationType === 'follow')
   ) {
     return <NotificationItem notification={currentNotification} isPopup={true} />;
   }
