@@ -160,6 +160,8 @@ function App() {
     }
   }, [currentUser]);
 
+  // return <Loading />;
+
   // display loading screen while user data is being fetched
   if (isLoading) {
     return <Loading />;

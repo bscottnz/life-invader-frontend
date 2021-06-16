@@ -1,6 +1,11 @@
 #nprogress {
   pointer-events: none;
 
+  & .spinner {
+    // get some crazy scroll bar shrinking / expanding without this
+    animation: none !important;
+  }
+
   .bar {
     background: var(--progressBar);
 
