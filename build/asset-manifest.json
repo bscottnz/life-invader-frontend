@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "./static/css/main.7d4ef32c.chunk.css",
+    "main.js": "./static/js/main.b51b6a18.chunk.js",
+    "main.js.map": "./static/js/main.b51b6a18.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.335e2f71.js",
+    "runtime-main.js.map": "./static/js/runtime-main.335e2f71.js.map",
+    "static/js/2.affedf6b.chunk.js": "./static/js/2.affedf6b.chunk.js",
+    "static/js/2.affedf6b.chunk.js.map": "./static/js/2.affedf6b.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.7d4ef32c.chunk.css.map": "./static/css/main.7d4ef32c.chunk.css.map",
+    "static/js/2.affedf6b.chunk.js.LICENSE.txt": "./static/js/2.affedf6b.chunk.js.LICENSE.txt",
+    "static/media/lifeinvadercoin.f4507299.png": "./static/media/lifeinvadercoin.f4507299.png",
+    "static/media/logo-small.dbd2ad15.png": "./static/media/logo-small.dbd2ad15.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.335e2f71.js",
+    "static/js/2.affedf6b.chunk.js",
+    "static/css/main.7d4ef32c.chunk.css",
+    "static/js/main.b51b6a18.chunk.js"
+  ]
+}
