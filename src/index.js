@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 // import './index.css';
 import App from './App';
@@ -8,13 +8,13 @@ import { NotificationsPopupProvider } from './components/MainPage/NotificationsP
 
 ReactDOM.render(
   <React.StrictMode>
-    <HashRouter>
+    <Router>
       <NotificationsProvider>
         <NotificationsPopupProvider>
           <App />
         </NotificationsPopupProvider>
       </NotificationsProvider>
-    </HashRouter>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
