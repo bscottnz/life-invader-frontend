@@ -61,10 +61,6 @@
 
   cursor: pointer;
 
-  &:active {
-    transform: translateY(1px);
-  }
-
   @media (max-width: 1430px) {
     display: flex;
   }

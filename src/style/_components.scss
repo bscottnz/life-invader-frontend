@@ -22,10 +22,6 @@
     outline: none;
   }
 
-  &:active {
-    transform: translateY(1px);
-  }
-
   &-fill {
     background-color: $color-blue;
     color: $color-text;
@@ -193,10 +189,6 @@ textarea::placeholder {
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-
-  &:active {
-    transform: translateY(1px);
-  }
 
   &:disabled {
     // background-color: $color-blue-light;
@@ -433,10 +425,6 @@ textarea::placeholder {
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-
-  &:active {
-    transform: translateY(1px);
-  }
 }
 
 // user preview component

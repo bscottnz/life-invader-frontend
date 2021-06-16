@@ -32,7 +32,7 @@ const Welcome = ({ setCurrentUser }) => {
             </h2>
             <Switch>
               <Route exact path="/welcome">
-                <WelcomeMain />
+                <WelcomeMain setCurrentUser={setCurrentUser} />
               </Route>
               <Route exact path="/login">
                 <WelcomeLogin setCurrentUser={setCurrentUser} />

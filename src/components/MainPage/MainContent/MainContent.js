@@ -11,6 +11,7 @@ import Inbox from './Messages/Inbox';
 import NewMessage from './Messages/NewMessage';
 import ChatPage from './Messages/ChatPage';
 import NotificationsPage from './Notifications/NotificationsPage';
+import GuestWelcome from './GuestWelcome';
 import { ModalContext } from '../../Modals/ModalContext';
 
 const MainContent = ({ currentUser, setCurrentUser, toggleDropdown }) => {
@@ -55,6 +56,9 @@ const MainContent = ({ currentUser, setCurrentUser, toggleDropdown }) => {
   return (
     <section className="layout__main">
       <Switch>
+        <Route exact path="/guest">
+          <GuestWelcome />
+        </Route>
         <Route exact path="/post/:id">
           <ViewPost currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
@@ -96,6 +100,7 @@ const MainContent = ({ currentUser, setCurrentUser, toggleDropdown }) => {
         <Route exact path="/notifications">
           <NotificationsPage currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
+
         <Route path="/">
           <Home currentUser={currentUser} setCurrentUser={setCurrentUser} />
         </Route>
