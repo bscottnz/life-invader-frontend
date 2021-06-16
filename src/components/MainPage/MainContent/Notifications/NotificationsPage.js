@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 
 import { MdPlaylistAddCheck } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import { VscLoading } from 'react-icons/vsc';
 
 import NotificationItem from './NotificationItem';
 
@@ -22,6 +23,9 @@ const NotificationsPage = () => {
 
   const { setNumNotifications } = useContext(NotificationsContext);
 
+  // display loading spinner while fetching posts
+  const [isPostsLoading, setIsPostsLoading] = useState(false);
+
   useEffect(() => {
     getNotifications();
   }, []);
@@ -34,6 +38,7 @@ const NotificationsPage = () => {
   }, []);
 
   const getNotifications = () => {
+    setIsPostsLoading(true);
     axios({
       method: 'get',
       withCredentials: true,
@@ -46,9 +51,11 @@ const NotificationsPage = () => {
         } else {
           setNoNotifications(false);
         }
+        setIsPostsLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setIsPostsLoading(false);
       });
   };
 
@@ -106,6 +113,20 @@ const NotificationsPage = () => {
           />
         </div>
       </div>
+      {isPostsLoading && (
+        <div
+          style={{
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderTop: '1px solid #3a3a3a',
+            paddingTop: '40px',
+          }}
+        >
+          <VscLoading className="spinner" style={{ fontSize: '40px', color: '#1da1f2' }} />
+        </div>
+      )}
       {notificationsData.length > 0 && notificationsList}
       {noNotifications && (
         <div>
