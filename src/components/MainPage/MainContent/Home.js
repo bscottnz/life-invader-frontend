@@ -3,6 +3,7 @@ import { useState, useEffect, useContext, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { VscLoading } from 'react-icons/vsc';
 
 import CreatePostForm from './CreatePostForm';
 import Post from './Post';
@@ -14,6 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import deletePostRequest from '../../../utils/deletePostRequest';
 import logoIcon from '../../../images/logo-large.png';
+import { set } from 'nprogress';
 
 Modal.setAppElement('#root');
 
@@ -27,6 +29,9 @@ const Home = ({ currentUser, setCurrentUser }) => {
   // keep track of the id of which comment is being deleted
   const [deleteComment, setDeleteComment] = useState(null);
 
+  // display loading spinner while fetching posts
+  const [isPostsLoading, setIsPostsLoading] = useState(false);
+
   const [noPosts, setNoPosts] = useState(false);
 
   const history = useHistory();
@@ -37,6 +42,7 @@ const Home = ({ currentUser, setCurrentUser }) => {
   const [numPages, setNumPages] = useState(1);
 
   const getPosts = () => {
+    setIsPostsLoading(true);
     axios({
       method: 'get',
       withCredentials: true,
@@ -50,8 +56,10 @@ const Home = ({ currentUser, setCurrentUser }) => {
         }
 
         setPosts(res.data);
+        setIsPostsLoading(false);
       })
       .catch((err) => {
+        setIsPostsLoading(false);
         console.log(err);
         // user has been signed out. redirect to home page
         if (err.response && err.response.status == 401) {
@@ -184,17 +192,33 @@ const Home = ({ currentUser, setCurrentUser }) => {
         setCurrentUser={setCurrentUser}
         textPlaceholder={`Hey ${currentUser.firstName}, what's going on?`}
       />
-      <div className="posts-container">
-        {/* {postItems} */}
-        <InfiniteScroll
-          dataLength={20 * numPages}
-          next={showAnotherPage}
-          hasMore={posts.length > numPages * 20}
-          scrollThreshold={0.9}
+      {isPostsLoading && (
+        <div
+          style={{
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderTop: '1px solid #3a3a3a',
+            paddingTop: '40px',
+          }}
         >
-          {postItems}
-        </InfiniteScroll>
-      </div>
+          <VscLoading className="spinner" style={{ fontSize: '40px', color: '#1da1f2' }} />
+        </div>
+      )}
+      {!isPostsLoading && (
+        <div className="posts-container">
+          {/* {postItems} */}
+          <InfiniteScroll
+            dataLength={20 * numPages}
+            next={showAnotherPage}
+            hasMore={posts.length > numPages * 20}
+            scrollThreshold={0.9}
+          >
+            {postItems}
+          </InfiniteScroll>
+        </div>
+      )}
       {noPosts && noPostsToShow}
     </div>
   );
