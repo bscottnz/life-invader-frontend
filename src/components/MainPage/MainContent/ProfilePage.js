@@ -13,6 +13,7 @@ import ProfilePictureModal from '../../Modals/ProfilePictureModal';
 import CoverPhotoModal from '../../Modals/CoverPhotoModal';
 import EditDescriptionModal from '../../Modals/EditDescriptionModal';
 import { ModalContext } from '../../Modals/ModalContext';
+import { VscLoading } from 'react-icons/vsc';
 
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
@@ -65,6 +66,9 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
   // keep track of the number of 'pages' of posts to display in infininite scroll.
   const [numPages, setNumPages] = useState(1);
 
+  // display loading spinner while fetching posts
+  const [isPostsLoading, setIsPostsLoading] = useState(false);
+
   const getProfileUser = () => {
     axios({
       method: 'get',
@@ -97,7 +101,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
   };
 
   const getProfilePosts = () => {
-    // console.log(profileUser);
+    setIsPostsLoading(true);
     axios({
       method: 'get',
       withCredentials: true,
@@ -119,9 +123,11 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
         setPosts(profilePagePosts);
         setReplies(profilePageReplies);
         setPinnedPost(profilePagePinnedPost);
+        setIsPostsLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setIsPostsLoading(false);
         // user has been signed out. redirect to home page
         if (err.response && err.response.status == 401) {
           window.location.reload();
@@ -386,6 +392,20 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
               Replies
             </div>
           </div>
+          {isPostsLoading && (
+            <div
+              style={{
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderTop: '1px solid #3a3a3a',
+                paddingTop: '40px',
+              }}
+            >
+              <VscLoading className="spinner" style={{ fontSize: '40px', color: '#1da1f2' }} />
+            </div>
+          )}
           {pinnedPost.length > 0 && activeTab === 'Posts' && (
             <div className="posts-container" style={{ borderBottom: '6px solid #3a3a3a' }}>
               {activeTab == 'Posts' ? pinnedPostItem : ''}
