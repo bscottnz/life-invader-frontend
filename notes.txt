@@ -27,17 +27,14 @@ inbox updates with socket
 
 // todo
 
--- make like buttons smaller on mobile
--- make mobile nav icons smaller
 
 
--- reply modal collapses on close (fix this)
+
+
 -- guest account
 
 - liking own stuff gives notification badge on refresh
 
--- mobile nav on bottom + maybe redo the drop down thing to look better ?
-  ( make it all one nav but on expand just make the hight more ?)
 
 
 

@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 
 import Modal from 'react-modal';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import ErrorBoundary from '../ErrorBoundary';
 
 import { ModalContext } from './ModalContext';
 import Post from '../MainPage/MainContent/Post';
@@ -59,8 +60,9 @@ const ReplyModal = ({
           </span>
         </div>
 
-        {/* handle error when pressing back arrow with open modal */}
-        {modalIsOpen && (
+        {/* when pressing the back arrow with open modal, the post component fails as
+        it no longer has the data required to render */}
+        <ErrorBoundary>
           <Post
             postData={replyComment}
             currentUser={currentUser}
@@ -70,7 +72,7 @@ const ReplyModal = ({
             allowComments={false}
             isDeletable={false}
           />
-        )}
+        </ErrorBoundary>
 
         <CreatePostForm
           currentUser={currentUser}
