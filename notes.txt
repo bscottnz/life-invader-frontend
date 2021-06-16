@@ -18,10 +18,10 @@ notifications
 
 
 its slow to make requests when hosted so need to
-- add loading spinner on home page under text area
-- add loading spinner on profile page under text area
-- add loading spinner on notifications page under heading
-- add loading spinner on chat page under heading
+
+
+
+
 - add loading spinner on followers page under tabs
 - add loading spinner on view post page
 

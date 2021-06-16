@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import { VscLoading } from 'react-icons/vsc';
 
 import ChatListItem from './ChatListItem';
 
@@ -14,11 +16,17 @@ const Inbox = ({ currentUser }) => {
 
   const [chats, setChats] = useState([]);
 
+  // display loading spinner while fetching posts
+  const [isPostsLoading, setIsPostsLoading] = useState(false);
+  // dont show loading spinner when updating posts, just on initail page load
+  const isInitialPostFetch = useRef(true);
+
   const goToNewMessagePage = () => {
     history.push('/messages/new');
   };
 
   const getChats = () => {
+    setIsPostsLoading(true);
     axios({
       method: 'get',
       withCredentials: true,
@@ -26,10 +34,14 @@ const Inbox = ({ currentUser }) => {
     })
       .then((res) => {
         setChats(res.data);
-        // console.log(res.data);
+        setIsPostsLoading(false);
+        if (isInitialPostFetch.current) {
+          isInitialPostFetch.current = false;
+        }
       })
       .catch((err) => {
         console.log(err);
+        setIsPostsLoading(false);
       });
   };
 
@@ -61,6 +73,20 @@ const Inbox = ({ currentUser }) => {
           onClick={goToNewMessagePage}
         />
       </div>
+      {isPostsLoading && isInitialPostFetch.current && (
+        <div
+          style={{
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderTop: '1px solid #3a3a3a',
+            paddingTop: '40px',
+          }}
+        >
+          <VscLoading className="spinner" style={{ fontSize: '40px', color: '#1da1f2' }} />
+        </div>
+      )}
       {chats.length > 0 && chatList}
     </div>
   );

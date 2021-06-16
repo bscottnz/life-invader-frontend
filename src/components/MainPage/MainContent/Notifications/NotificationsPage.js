@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 
 import { MdPlaylistAddCheck } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri';
@@ -25,6 +25,8 @@ const NotificationsPage = () => {
 
   // display loading spinner while fetching posts
   const [isPostsLoading, setIsPostsLoading] = useState(false);
+  // dont show loading spinner when updating posts, just on initail page load
+  const isInitialPostFetch = useRef(true);
 
   useEffect(() => {
     getNotifications();
@@ -52,6 +54,10 @@ const NotificationsPage = () => {
           setNoNotifications(false);
         }
         setIsPostsLoading(false);
+
+        if (isInitialPostFetch.current) {
+          isInitialPostFetch.current = false;
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -113,7 +119,7 @@ const NotificationsPage = () => {
           />
         </div>
       </div>
-      {isPostsLoading && (
+      {isPostsLoading && isInitialPostFetch.current && (
         <div
           style={{
             height: '100%',

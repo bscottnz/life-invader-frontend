@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -69,6 +69,9 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
   // display loading spinner while fetching posts
   const [isPostsLoading, setIsPostsLoading] = useState(false);
 
+  // dont show loading spinner when updating posts, just on initail page load
+  const isInitialPostFetch = useRef(true);
+
   const getProfileUser = () => {
     axios({
       method: 'get',
@@ -124,6 +127,10 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
         setReplies(profilePageReplies);
         setPinnedPost(profilePagePinnedPost);
         setIsPostsLoading(false);
+
+        if (isInitialPostFetch.current) {
+          isInitialPostFetch.current = false;
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -392,7 +399,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
               Replies
             </div>
           </div>
-          {isPostsLoading && (
+          {isPostsLoading && isInitialPostFetch.current && (
             <div
               style={{
                 height: '100%',

@@ -37,6 +37,8 @@ const Home = ({ currentUser, setCurrentUser }) => {
   const history = useHistory();
 
   const isInitialMount = useRef(true);
+  // dont show loading spinner when updating posts, just on initail page load
+  const isInitialPostFetch = useRef(true);
 
   // keep track of the number of 'pages' of posts to display in infininite scroll.
   const [numPages, setNumPages] = useState(1);
@@ -57,6 +59,10 @@ const Home = ({ currentUser, setCurrentUser }) => {
 
         setPosts(res.data);
         setIsPostsLoading(false);
+
+        if (isInitialPostFetch.current) {
+          isInitialPostFetch.current = false;
+        }
       })
       .catch((err) => {
         setIsPostsLoading(false);
@@ -192,7 +198,7 @@ const Home = ({ currentUser, setCurrentUser }) => {
         setCurrentUser={setCurrentUser}
         textPlaceholder={`Hey ${currentUser.firstName}, what's going on?`}
       />
-      {isPostsLoading && (
+      {isPostsLoading && isInitialPostFetch.current && (
         <div
           style={{
             height: '100%',
@@ -206,19 +212,19 @@ const Home = ({ currentUser, setCurrentUser }) => {
           <VscLoading className="spinner" style={{ fontSize: '40px', color: '#1da1f2' }} />
         </div>
       )}
-      {!isPostsLoading && (
-        <div className="posts-container">
-          {/* {postItems} */}
-          <InfiniteScroll
-            dataLength={20 * numPages}
-            next={showAnotherPage}
-            hasMore={posts.length > numPages * 20}
-            scrollThreshold={0.9}
-          >
-            {postItems}
-          </InfiniteScroll>
-        </div>
-      )}
+
+      <div className="posts-container">
+        {/* {postItems} */}
+        <InfiniteScroll
+          dataLength={20 * numPages}
+          next={showAnotherPage}
+          hasMore={posts.length > numPages * 20}
+          scrollThreshold={0.9}
+        >
+          {postItems}
+        </InfiniteScroll>
+      </div>
+
       {noPosts && noPostsToShow}
     </div>
   );
