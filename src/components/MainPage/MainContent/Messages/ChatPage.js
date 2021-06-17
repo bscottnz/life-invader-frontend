@@ -229,8 +229,6 @@ const ChatPage = ({ currentUser }) => {
       })
         .then((res) => {
           setChatMessagesData((prevData) => [...prevData, res.data]);
-          setCurrentMessage('');
-          resizeTextarea();
 
           if (sockets.connected) {
             sockets.socket.emit('new message', res.data);
@@ -240,6 +238,9 @@ const ChatPage = ({ currentUser }) => {
           console.log(err);
           alert('Could not send message. Please try again.');
         });
+
+      setCurrentMessage('');
+      resizeTextarea();
 
       sockets.socket.emit('stop typing', chatData._id);
       isTyping = false;
