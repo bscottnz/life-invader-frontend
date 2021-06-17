@@ -185,7 +185,9 @@ const Post = ({
     const elementFontSize = parseInt(myPostElement.current.style.fontSize);
 
     // set the max scroll height to be be font size * line height * number of lines to show
-    const maxScrollHeight = elementFontSize * 1.2 * 4;
+    // + 3 because for some reason when hosted (not on local server) it will give the truncate
+    // message even on a 4 line post
+    const maxScrollHeight = elementFontSize * 1.2 * 4 + 3;
 
     if (myPostElement.current.scrollHeight > maxScrollHeight) {
       // post-body has more height than we want to show. Add button to

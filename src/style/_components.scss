@@ -216,6 +216,7 @@ textarea::placeholder {
     margin-bottom: 10px;
     word-break: break-all;
     position: relative;
+    line-height: 1.2em;
 
     &-truncated {
       // max-height: 80px;

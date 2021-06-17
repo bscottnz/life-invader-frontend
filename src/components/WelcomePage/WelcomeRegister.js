@@ -32,16 +32,40 @@ const WelcomeRegister = ({ setCurrentUser }) => {
       url: `${process.env.REACT_APP_BASE_URL}/register`,
     }).then((res) => {
       // new user has successfully been created.
-      // remove any errors and redirect to login page.
+      // remove any errors and  log in.
       if (res.data.username !== undefined) {
         console.log(res.data);
 
         setValidationErrors([]);
-        history.push('/login');
+        // history.push('/login');
+        login();
 
         // email or username is already in use. display appropriate error
       } else {
         setValidationErrors([res.data]);
+      }
+    });
+  };
+
+  const login = () => {
+    axios({
+      method: 'post',
+      data: {
+        username,
+        password,
+      },
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/login`,
+    }).then((res) => {
+      // if a logged in user is returned, set current user.
+      // redirect to main app
+      if (res.data.username !== undefined) {
+        // console.log(res.data);
+        setCurrentUser(res.data);
+
+        history.push('/');
+      } else {
+        history.push('/login');
       }
     });
   };

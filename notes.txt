@@ -1,24 +1,3 @@
-// ideas
-
-
-
-
-// just finnished
-
-right side bar. (store link + follow suggestions). few ui tweaks.
-loading page spinner
-welcome message on empty feed
-collapsable post
-infinitate scroll
-active sidebar link styles
-chat page
-messages update with socket 
-inbox updates with socket
-notifications
-
-
-
-
 
 
 
