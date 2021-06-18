@@ -59,7 +59,7 @@ const Post = ({
   const isCommentedOn = postData.replies.some((reply) => reply.author === currentUser._id);
 
   // url of the post author display picture
-  const postImage = `${process.env.REACT_APP_BASE_URL}${postData.author.profilePic}`;
+  const postImage = `${postData.author.profilePic.url}`;
 
   // combine author names into full name
   const userFullName = `${postData.author.firstName} ${postData.author.lastName}`;

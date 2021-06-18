@@ -108,7 +108,7 @@ const UserPreview = ({
     >
       {!makeSmall && (
         <div className="user-image-container">
-          <img src={process.env.REACT_APP_BASE_URL + user.profilePic} alt="user profile picture" />
+          <img src={user.profilePic.url} alt="user profile picture" />
         </div>
       )}
       <div

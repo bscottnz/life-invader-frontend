@@ -148,7 +148,7 @@ const NotificationItem = ({ notification, isPopup }) => {
       onClick={goToNotificationSubject}
     >
       <div className="results-image-container">
-        <img src={process.env.REACT_APP_BASE_URL + userFrom.profilePic} alt="pic" />
+        <img src={userFrom.profilePic.url} alt="pic" />
       </div>
       <div className="chat-list-item-details">
         <span style={{ wordBreak: 'break-word' }}>{getNotificationText(notification)}</span>

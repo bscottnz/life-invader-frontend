@@ -1,7 +1,7 @@
 import notificationsController from '../notifications';
 
 const createNewNotificationPopup = (data) => {
-  const imgURL = `${process.env.REACT_APP_BASE_URL}/${data.userFrom.profilePic}`;
+  const imgURL = `${data.userFrom.profilePic.url}`;
 
   const body = document.createElement('div');
   body.classList.add('notification-popup');

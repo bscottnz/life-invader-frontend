@@ -182,7 +182,7 @@ const ChatPage = ({ currentUser }) => {
           <span className="chat-user-extra-count">{`+${remainingUsers}`}</span>
         )}
         {[...chatDataUsers].reverse().map((user) => (
-          <img src={process.env.REACT_APP_BASE_URL + user.profilePic} key={uuidv4()}></img>
+          <img src={user.profilePic.url} key={uuidv4()}></img>
         ))}
       </div>
     );
@@ -292,7 +292,7 @@ const ChatPage = ({ currentUser }) => {
     let profileImg = null;
     if (isLast) {
       messageClassName += ' last-msg';
-      profileImg = <img src={process.env.REACT_APP_BASE_URL + sender.profilePic} alt="x" />;
+      profileImg = <img src={sender.profilePic.url} alt="x" />;
     }
 
     let imgContainer = null;

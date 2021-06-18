@@ -28,7 +28,7 @@ const ChatNotification = ({ notification }) => {
       onClick={goToChat}
     >
       <div className="results-image-container">
-        <img src={`${process.env.REACT_APP_BASE_URL}/${notification.sender.profilePic}`} alt="" />
+        <img src={`${notification.sender.profilePic.url}`} alt="" />
       </div>
       <div className="chat-list-item-details ellipsis">
         <span className="heading ellipsis"></span>

@@ -40,7 +40,7 @@ const ImageUpload = ({ setCurrentUser, options }) => {
     // different routing for different images
     if (options.type === 'user-img') {
       const formData = new FormData();
-      formData.append('profilePic', blob);
+      formData.append('image', blob);
 
       axios({
         method: 'post',
@@ -62,7 +62,7 @@ const ImageUpload = ({ setCurrentUser, options }) => {
         });
     } else if (options.type === 'cover-img') {
       const formData = new FormData();
-      formData.append('coverPic', blob);
+      formData.append('image', blob);
 
       axios({
         method: 'post',

@@ -1,5 +1,5 @@
 const createNewNotificationPopup = (data, currentUserId) => {
-  const imgURL = `${process.env.REACT_APP_BASE_URL}/${data.sender.profilePic}`;
+  const imgURL = `${data.sender.profilePic.url}`;
 
   let displayLatestMessage = `${data.sender.firstName} ${data.sender.lastName}: ${data.content}`;
 

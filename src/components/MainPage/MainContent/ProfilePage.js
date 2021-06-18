@@ -316,9 +316,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
               }`}
             >
               <div className="cover-photo-img-container">
-                {profileUser && profileUser.coverPhoto && (
-                  <img src={process.env.REACT_APP_BASE_URL + profileUser.coverPhoto} />
-                )}
+                {profileUser && profileUser.coverPhoto && <img src={profileUser.coverPhoto.url} />}
                 {profileUser && profileUser._id === currentUser._id && (
                   <button className="cover-pic-btn" onClick={(e) => setCoverPhotoModalIsOpen(true)}>
                     <FaCameraRetro />
@@ -328,7 +326,7 @@ const ProfilePage = ({ currentUser, setCurrentUser }) => {
               <div className="user-image-container">
                 <img
                   className={profileUser._id === currentUser._id ? 'profile-img-fade' : ''}
-                  src={process.env.REACT_APP_BASE_URL + profileUser.profilePic}
+                  src={profileUser.profilePic.url}
                   alt="profile pic"
                 />
                 {profileUser && profileUser._id === currentUser._id && (

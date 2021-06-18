@@ -92,10 +92,7 @@ const CreatePostForm = ({
   return (
     <div className="post-form-container">
       <div className="user-image-container">
-        <img
-          src={`${process.env.REACT_APP_BASE_URL}${currentUser.profilePic}`}
-          alt="User profile picture"
-        />
+        <img src={`${currentUser.profilePic.url}`} alt="User profile picture" />
       </div>
       <div className="textarea-container">
         <textarea

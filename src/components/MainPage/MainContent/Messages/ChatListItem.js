@@ -64,11 +64,11 @@ const ChatListItem = ({ chat, currentUser }) => {
   };
 
   const getUserChatImage = (user) => {
-    if (!user || !user.profilePic) {
+    if (!user || !user.profilePic.url) {
       return console.log('no chat user image');
     }
 
-    return <img src={process.env.REACT_APP_BASE_URL + user.profilePic} alt="pic"></img>;
+    return <img src={user.profilePic.url} alt="pic"></img>;
   };
 
   const activeClass =
