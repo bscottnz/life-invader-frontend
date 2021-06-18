@@ -672,7 +672,7 @@ input[type='file'] {
 
 .notification-item-popup {
   position: fixed;
-  bottom: 30px;
+  bottom: -30px;
   left: 30px;
   background-color: rgb(33, 36, 40);
   border-top: none;
@@ -697,6 +697,7 @@ input[type='file'] {
 
   &-fade {
     opacity: 1;
+    bottom: 30px;
   }
 }
 
