@@ -15,29 +15,25 @@ const WelcomeMain = ({ setCurrentUser }) => {
   };
 
   const loginGuest = () => {
-    // axios({
-    //   method: 'post',
-    //   data: {
-    //     username: 'lifeinvaderguest',
-    //     password: 'lifeinvaderguest',
-    //   },
-    //   withCredentials: true,
-    //   url: `${process.env.REACT_APP_BASE_URL}/login`,
-    // }).then((res) => {
-    //   // if a logged in user is returned, set current user.
-    //   // redirect to main app
-    //   if (res.data.username !== undefined) {
-    //
+    axios({
+      method: 'post',
+      data: {
+        username: 'lifeinvaderguest',
+        password: 'lifeinvaderguest',
+      },
+      withCredentials: true,
+      url: `${process.env.REACT_APP_BASE_URL}/login`,
+    }).then((res) => {
+      // if a logged in user is returned, set current user.
+      // redirect to main app
+      if (res.data.username !== undefined) {
+        setCurrentUser(res.data);
 
-    //     setCurrentUser(res.data);
+        history.push('/');
+      }
+    });
 
-    //     history.push('/');
-
-    //
-    //   }
-    // });
-
-    alert('currently unavailable');
+    // alert('currently unavailable');
   };
 
   return (
