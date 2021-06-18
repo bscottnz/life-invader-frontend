@@ -321,7 +321,8 @@ ul {
   margin-bottom: 20px;
   border-top: 1px solid $color-background-light;
 
-  visibility: hidden;
+  // visibility: hidden;
+  opacity: 0;
 }
 
 .chat-images-container {
