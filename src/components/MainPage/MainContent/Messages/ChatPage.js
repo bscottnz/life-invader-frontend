@@ -415,7 +415,7 @@ const ChatPage = ({ currentUser }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', flexShrink: '0' }}>
       <EditChatNameModal chatId={id} refresh={getChat} />
       {/* <h1 className="main-content-heading">chat page</h1> */}
       {noChatFound === true && <p style={{ fontSize: '16px' }}>No chat found</p>}
