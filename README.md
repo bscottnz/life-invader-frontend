@@ -17,7 +17,7 @@ lifeinvader is a twitter inspired, fully responsive full stack social media appl
 - AWS S3
  
  Notable features include:
- - Fully responsive
+ - Fully responsive custom css
  - Create, pin, delete, reply to, share and dislike posts
  - Browse latest posts on the homepage, or navigate through post reply chains via a specific post page
  - Infinite scroll / pagination. Load more posts as you reach the bottom of the page
