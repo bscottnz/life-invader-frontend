@@ -1,6 +1,5 @@
 # lifeinvader 
-#### Go to live app
-#### Go to video demo
+#### Go to [live app](https://lifeinvadersocial.herokuapp.com/)
 #### Go to [backend repository](https://github.com/bscottnz/life-invader-backend)
 
 ---
@@ -30,3 +29,7 @@ lifeinvader is a twitter inspired, fully responsive full stack social media appl
  - Real time notifications
  - New message / notification preview popup
  - Upload & crop profile images
+
+## Demo
+
+![lifeinvader-demo](https://user-images.githubusercontent.com/24649589/122633458-eecb5000-d12c-11eb-9674-3ec9e8f4c864.gif)
