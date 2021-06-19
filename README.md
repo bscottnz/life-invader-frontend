@@ -1,5 +1,9 @@
 # lifeinvader 
+#### Go to live app
+#### Go to video demo
 #### Go to [backend repository](https://github.com/bscottnz/life-invader-backend)
+
+---
 
 
 lifeinvader is a twitter inspired, fully responsive full stack social media application built with the following technologies:
